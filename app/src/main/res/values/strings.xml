@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name">Fantasy Realms Scoring</string>
+    <string name="start_button">Start</string>
+    <string name="edit_button">Edit</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="delete_button">Delete</string>
+    <string name="settings_button">Settings</string>
+    <string name="add_player_button">Add player</string>
+    <string name="player_name_label">Player name :</string>
+    <string name="new_player_default_value">New player</string>
+    <string name="add_card_button">Add card</string>
+    <string name="scan_button">Scan</string>
+    <string name="effect_button">Effect</string>
+    <!-- Effects and Suits -->
+    <string name="effect_bonus">BONUS</string>
+    <string name="effect_clear">CLEAR</string>
+    <string name="effect_penalty">PENALTY</string>
+    <string name="effect_blank">BLANK</string>
+    <string name="suit_army">Army</string>
+    <string name="suit_artifact">Artifact</string>
+    <string name="suit_beast">Beast</string>
+    <string name="suit_flame">Flame</string>
+    <string name="suit_flood">Flood</string>
+    <string name="suit_land">Land</string>
+    <string name="suit_leader">Leader</string>
+    <string name="suit_weapon">Weapon</string>
+    <string name="suit_weather">Weather</string>
+    <string name="suit_wild">Wild</string>
+    <string name="suit_wizard">Wizard</string>
+    <!-- Card names -->
+    <string name="rangers">Rangers</string>
+    <string name="elven_archers">Elven Archers</string>
+    <string name="dwarvish_infantry">Dwarvish Infantry</string>
+    <string name="light_cavalry">Light Cavalry</string>
+    <string name="celestial_knights">Celestial Knights</string>
+    <string name="protection_rune">Protection Rune</string>
+    <string name="world_tree">World Tree</string>
+    <string name="book_of_changes">Book of Changes</string>
+    <string name="shield_of_keth">Shield of Keth</string>
+    <string name="gem_of_order">Gem of Order</string>
+    <string name="warhorse">Warhorse</string>
+    <string name="unicorn">Unicorn</string>
+    <string name="hydra">Hydra</string>
+    <string name="dragon">Dragon</string>
+    <string name="basilisk">Basilisk</string>
+    <string name="candle">Candle</string>
+    <string name="fire_elemental">Fire Elemental</string>
+    <string name="forge">Forge</string>
+    <string name="lightning">Lightning</string>
+    <string name="wildfire">Wildfire</string>
+    <string name="fountain_of_life">Fountain of Life</string>
+    <string name="water_elemental">Water Elemental</string>
+    <string name="island">Island</string>
+    <string name="swamp">Swamp</string>
+    <string name="great_flood">Great Flood</string>
+    <string name="earth_elemental">Earth Elemental</string>
+    <string name="underground_caverns">Underground Caverns</string>
+    <string name="forest">Forest</string>
+    <string name="bell_tower">Bell Tower</string>
+    <string name="mountain">Mountain</string>
+    <string name="princess">Princess</string>
+    <string name="warlord">Warlord</string>
+    <string name="queen">Queen</string>
+    <string name="king">King</string>
+    <string name="empress">Empress</string>
+    <string name="magic_wand">Magic Wand</string>
+    <string name="elven_longbow">Elven Longbow</string>
+    <string name="sword_of_keth">Sword of Keth</string>
+    <string name="warship">Warship</string>
+    <string name="war_dirigible">War Dirigible</string>
+    <string name="air_elemental">Air Elemental</string>
+    <string name="rainstorm">Rainstorm</string>
+    <string name="whirlwind">Whirlwind</string>
+    <string name="smoke">Smoke</string>
+    <string name="blizzard">Blizzard</string>
+    <string name="shapeshifter">Shapeshifter</string>
+    <string name="mirage">Mirage</string>
+    <string name="doppelganger">Doppelganger</string>
+    <string name="necromancer">Necromancer</string>
+    <string name="elemental_enchantress">Elemental Enchantress</string>
+    <string name="collector">Collector</string>
+    <string name="beastmaster">Beastmaster</string>
+    <string name="warlock_lord">Warlock Lord</string>
+    <!-- Card rules -->
+    <string name="rangers_rules">Bonus: +10 for each Land; Clears the word Army from Penalty section of all cards in
+        hand
+    </string>
+    <string name="elven_archers_rules">Bonus: +5 if no Weather in hand</string>
+    <string name="dwarvish_infantry_rules">Penalty: -2 for each other Army</string>
+    <string name="light_cavalry_rules">Penalty: -2 for each Land</string>
+    <string name="celestial_knights_rules">Penalty: -8 unless with at least one Leader</string>
+    <string name="protection_rune_rules">Clears the Penalty sections on all cards in hand</string>
+    <string name="world_tree_rules">Bonus: +50 if every active card in hand is a different suit</string>
+    <string name="book_of_changes_rules">Bonus: you may change the suit of one other card. Its name, bonuses and
+        penalties remain the same.
+    </string>
+    <string name="shield_of_keth_rules">Bonus: +15 with any one Leader, +40 with both Leader and Sword of Keth</string>
+    <string name="gem_of_order_rules">Bonus: +10 for 3-card run, +30 for 4-card run, +60 for 5-card run, +100 for 6-card
+        run, +150 for 7-card run
+    </string>
+    <string name="warhorse_rules">Bonus: +14 with any Leader or Wizard</string>
+    <string name="unicorn_rules">Bonus: +30 with Princess, +15 with Empress, Queen, or Elemental Enchantress</string>
+    <string name="hydra_rules">Bonus: +28 with Swamp</string>
+    <string name="dragon_rules">Penalty: -40 unless with at least one Wizard</string>
+    <string name="basilisk_rules">Penalty: Blanks all Armies, Leaders, and other Beasts</string>
+    <string name="candle_rules">Bonus: +100 with Book of Changes, Bell Tower, and any one Wizard</string>
+    <string name="fire_elemental_rules">Bonus: +15 for each other Flame</string>
+    <string name="forge_rules">Bonus: +9 for each Weapon and Artifact</string>
+    <string name="lightning_rules">Bonus: +30 with Rainstorm</string>
+    <string name="wildfire_rules">Blanks all cards except Flames, Weather, Wizards, Weapons, Artifacts, Great Flood,
+        Island, Mountain, Unicorn, Dragon
+    </string>
+    <string name="fountain_of_life_rules">Bonus: Add the base strength of any Weapon, Flood, Flame, Land, or Weather in
+        your hand
+    </string>
+    <string name="water_elemental_rules">Bonus: +15 for each other Flood</string>
+    <string name="island_rules">Clears the Penalty on any one Flood or Flame</string>
+    <string name="swamp_rules">"Penalty: -3 for each Army and Flame"</string>
+    <string name="great_flood_rules">Penalty: Blanks all Armies, all Land except Mountain, all Flames except Lightning
+    </string>
+    <string name="earth_elemental_rules">Bonus: +15 for each other Land</string>
+    <string name="underground_caverns_rules">Bonus: +25 with Dwarvish Infantry or Dragon; Clears the Penalty on all
+        Weather
+    </string>
+    <string name="forest_rules">Bonus: +12 for each Beast and Elven Archers</string>
+    <string name="bell_tower_rules">Bonus: +15 with any one Wizard</string>
+    <string name="mountain_rules">Bonus: +50 with both Smoke and Wildfire; Clears the Penalty on all Floods</string>
+    <string name="princess_rules">Bonus: +8 for each Army, Wizard, and other Leader</string>
+    <string name="warlord_rules">Bonus: Equal to the base strengths of all Armies in your hand</string>
+    <string name="queen_rules">Bonus: +5 for each Army, +20 for each Army if in the same hand with King</string>
+    <string name="king_rules">Bonus: +5 for each Army, +20 for each Army if in the same hand with Queen</string>
+    <string name="empress_rules">Bonus: +10 for each Army; Penalty: -5 for each other leader</string>
+    <string name="magic_wand_rules">Bonus: +25 with any one Wizard</string>
+    <string name="elven_longbow_rules">Bonus: +30 with Elven Archers or Warlord or Beastmaster</string>
+    <string name="sword_of_keth_rules">Bonus: +10 with any one Leader, +40 with both Leader and Shield of Keth</string>
+    <string name="warship_rules">Penalty: Blanked unless with at least one Flood; Clears the word Army from Penalty
+        section of all Floods
+    </string>
+    <string name="war_dirigible_rules">Penalty: Blanked unless with at least one Army, Blanked if hand contains any
+        weather
+    </string>
+    <string name="air_elemental_rules">Bonus: +15 for each other Weather</string>
+    <string name="rainstorm_rules">Bonus: +10 for each Flood; Penalty: Blanks all Flames except Lightning</string>
+    <string name="whirlwind_rules">Bonus: +40 with Rainstorm and either Blizzard or Great Flood</string>
+    <string name="smoke_rules">Penalty: This card is blanked unless with at least one Flame</string>
+    <string name="blizzard_rules">Penalty: Blanks all Floods, -5 for each Army, Leader, Beast, and Flame</string>
+    <string name="shapeshifter_rules">May take on the name and suit of any Artifact, Leader, Wizard, Weapon or Beast.
+        Does not take bonus or penalty.
+    </string>
+    <string name="mirage_rules">May take on the name and suit of any Army, Land, Weather, Flood or Flame. Does not take
+        bonus or penalty.
+    </string>
+    <string name="doppelganger_rules">May duplicate the name, suit, base strength, and penalty but not bonus of any one
+        other card in your hand
+    </string>
+    <string name="necromancer_rules">Bonus: At the end of the game, you may take one Army, Leader, Wizard, or Beast from
+        the discard pile and add it to your hand as an eighth card.
+    </string>
+    <string name="elemental_enchantress_rules">Bonus: +5 for each Land, Weather, Flood, and Flame</string>
+    <string name="collector_rules">Bonus: +10 if three different cards in same suit, +40 if four different cards, +100
+        if five different cards
+    </string>
+    <string name="beastmaster_rules">Bonus: +9 for each Beast; Clears the Penalty on all Beasts</string>
+    <string name="warlock_lord_rules">Penalty: -10 for each Leader and other Wizard</string>
+</resources>

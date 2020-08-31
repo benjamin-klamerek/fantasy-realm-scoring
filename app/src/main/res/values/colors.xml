@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorChipBackground">#D3D2D2</color>
+    <color name="colorButtonDisabled">#A1A1A1</color>
+    <color name="colorArmy">#373636</color>
+    <color name="colorFlame">#952618</color>
+    <color name="colorFlood">#2746A5</color>
+    <color name="colorBeast">#24611E</color>
+    <color name="colorArtefact">#D35C35</color>
+    <color name="colorWizard">#B231C1</color>
+    <color name="colorWild">#6C6C6C</color>
+    <color name="colorWeather">#3B8FD1</color>
+    <color name="colorWeapon">#404142</color>
+    <color name="colorLand">#533D2A</color>
+    <color name="colorLeader">#621FBF</color>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.klamerek.fantasyrealms">
+
+    <uses-feature android:name="android.hardware.camera.any"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <application
+            android:name=".App"
+            android:allowBackup="true"
+            android:icon="@drawable/ic_book"
+            android:label="@string/app_name"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <activity android:name=".screen.CardsSelectionActivity">
+        </activity>
+
+        <meta-data
+                android:name="com.google.mlkit.vision.DEPENDENCIES"
+                android:value="ocr"/>
+
+        <activity android:name=".screen.ScanActivity">
+        </activity>
+        <activity android:name=".screen.HandSelectionActivity">
+        </activity>
+        <activity android:name=".screen.PlayerSelectionActivity">
+        </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

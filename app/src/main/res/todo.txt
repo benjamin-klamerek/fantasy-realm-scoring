@@ -1,0 +1,10 @@
+
+- display hand limit (7 or 8). Don't limit hand so we can test unreal combination
+- add detail screen for each hand item (button already exists)
+- increase label size about player + score and when selecting cards for manual rules (title containing rules)
+- Icon made by Freepik from www.flaticon.com
+- Fix layer about card/suit selection on horizontal mode
+- Review main screen (color icon), fix layout on horizontal mode
+- In parameters, propose a testing screen for quick scanning
+- learn how to add UI testing in Android
+- code refactoring about scanning rules (to select the most close card)
