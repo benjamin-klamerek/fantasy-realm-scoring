@@ -6,12 +6,12 @@ Tested only on a Xiaomi red note 9.
 
 Icon made by Freepik from www.flaticon.com
 
-###Main features
+### Main features
 - helper to calculate score
 - handle french and english (but any language can be implemented by adding new strings.xml file)
 - card recognition through camera using [ML Kit](https://developers.google.com/ml-kit/vision/text-recognition/android). Only the title of the card used for recognition.
 
-###Next steps : 
+### Next steps : 
 - display hand size limit (7 or 8). Don't want to limit hand size (for testing)
 - add detail screen for each hand item (arrow button already exists)
 - increase label size about player/score and when selecting cards for manual rules (title containing rules)
