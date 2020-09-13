@@ -35,7 +35,7 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
 
     fun isOneOf(vararg suit: Suit) = suit.contains(this.suit())
 
-    fun name(): String = simulatedName ?: definition.name;
+    fun name(): String = simulatedName ?: definition.name();
 
     fun value(): Int = simulatedValue ?: definition.value
 

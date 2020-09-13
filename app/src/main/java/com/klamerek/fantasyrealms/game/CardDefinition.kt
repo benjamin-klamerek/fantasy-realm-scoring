@@ -46,17 +46,21 @@ enum class Suit(private val displayId : Int, val color: Int) : Tag {
  * Immutable definition of a card
  *
  * @property id         card id
- * @property name       card name
+ * @property name       key card name
  * @property value      base value for scoring
  * @property suit       card family
- * @property rule       explanation of the rule as explained on the physical card
+ * @property keyRule    key explanation of the rule as described on the physical card
  */
-class CardDefinition(val id: Int, val name: String, val value: Int, val suit: Suit, val rule: String) {
+class CardDefinition(val id: Int, private val keyName: Int, val value: Int, val suit: Suit, private val keyRule: Int) {
 
     fun isOneOf(vararg suit: Suit) = suit.contains(this.suit)
 
+    fun name() = Strings.get(keyName)
+
+    fun rule() = Strings.get(keyRule)
+
     override fun toString(): String {
-        return "$name $rule"
+        return name() + " " + rule()
     }
 
     override fun equals(other: Any?): Boolean {

@@ -18,5 +18,3 @@ Icon made by Freepik from www.flaticon.com
 - fix layout about card/suit selection on horizontal mode
 - Review main screen (color icon), fix layout on horizontal mode
 - In parameters menu, propose a testing screen for quick scanning
-- learn how to add UI testing in Android
-- code refactoring about scanning rules (to select the best card from title)

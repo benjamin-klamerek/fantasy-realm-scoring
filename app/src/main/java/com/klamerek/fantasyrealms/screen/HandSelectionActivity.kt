@@ -1,7 +1,6 @@
 package com.klamerek.fantasyrealms.screen
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -92,6 +91,15 @@ class HandSelectionActivity : AppCompatActivity() {
     }
 
     @Subscribe
+    fun removeAllCards(event : AllCardsDeletionEvent){
+        player.game.clear()
+        runOnUiThread {
+            adapter.notifyDataSetChanged()
+            refreshPlayerNameAndScore()
+        }
+    }
+
+    @Subscribe
     fun removeCard(event: CardDeletionEvent) {
         player.game.remove(player.game.cards().elementAt(event.index).definition)
         player.game.calculate()
@@ -107,7 +115,7 @@ class HandSelectionActivity : AppCompatActivity() {
         val handSelectionIntent = Intent(this, CardsSelectionActivity::class.java)
         val request = CardsSelectionExchange()
         request.cardInitiator = cardDefinition?.id
-        request.label = cardDefinition?.rule
+        request.label = cardDefinition?.rule()
         request.selectionMode = player.game.ruleEffectSelectionMode(cardDefinition)
         request.cardsSelected.addAll(player.game.ruleEffectCardSelectionAbout(cardDefinition).map { definition -> definition.id })
         request.suitsSelected.addAll(player.game.ruleEffectSuitSelectionAbout(cardDefinition).map { suit -> suit.name })
@@ -135,7 +143,7 @@ class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSe
         private var view: View = v
 
         fun bindCard(card: Card) {
-            view.cardNameLabel.text = card.definition.name
+            view.cardNameLabel.text = card.definition.name()
             view.cardNameLabel.setChipBackgroundColorResource(card.suit().color)
             view.scoreLabel.text = game.score(card.definition).toString()
             view.effectButton.visibility = if (game.hasManualEffect(card.definition)) View.VISIBLE else View.GONE
@@ -151,3 +159,5 @@ class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSe
 class CardDeletionEvent(val index: Int)
 
 class RequestCardEffectSelectionEvent(val cardDefinitionId: Int)
+
+class AllCardsDeletionEvent()

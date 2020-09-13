@@ -3,45 +3,49 @@ package com.klamerek.fantasyrealms.screen
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.TextRecognizer
 import com.klamerek.fantasyrealms.R
-import com.klamerek.fantasyrealms.game.*
+import com.klamerek.fantasyrealms.ocr.CardTitleRecognizer
 import kotlinx.android.synthetic.main.activity_scan.*
-import me.xdrop.fuzzywuzzy.FuzzySearch
-import me.xdrop.fuzzywuzzy.model.ExtractedResult
-import normalize
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlin.math.abs
 
+/**
+ * Activity using camera and text recognition (ML kit) to detect cards from titles<br>
+ * After scanning, activity is closed and result given back to the caller.
+ *
+ */
 class ScanActivity : AppCompatActivity() {
 
     private var imageCapture: ImageCapture? = null
-
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var recognizer: TextRecognizer
-    private lateinit var cardWithCleanedName: Map<String, CardDefinition>
+    private val recognizer = CardTitleRecognizer()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+        cameraExecutor.shutdown()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        EventBus.getDefault().register(this)
         setContentView(R.layout.activity_scan)
 
         manageCameraPermission()
 
         cameraExecutor = Executors.newSingleThreadExecutor()
-        recognizer = TextRecognition.getClient()
-        cardWithCleanedName = allDefinitions.map { cleanText(it.name) to it }.toMap()
         cameraCaptureButton.setOnClickListener {
             scanProgressBar.visibility = View.VISIBLE
             scanningLabel.visibility = View.VISIBLE
@@ -50,10 +54,16 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
-    private fun closeActivity(cardDetected: Set<CardDefinition>) {
+    class CardDetectedEvent(val indexes: List<Int>)
+
+    @Subscribe
+    fun closeActivity(cardDetected: CardDetectedEvent) {
+        scanProgressBar.visibility = View.GONE
+        scanningLabel.visibility = View.GONE
+        cameraPreview.visibility = View.VISIBLE
         val closingIntent = Intent()
         val answer = CardsSelectionExchange()
-        answer.cardsSelected.addAll(cardDetected.map { definition -> definition.id })
+        answer.cardsSelected.addAll(cardDetected.indexes)
         closingIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, answer)
         setResult(Constants.RESULT_OK, closingIntent)
         finish()
@@ -67,51 +77,27 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
-    private fun cleanText(input: String): String = input.toLowerCase().normalize().filter { it.isLetter() }
+    class MyImageCapturedCallback(private val recognizer: CardTitleRecognizer) : ImageCapture.OnImageCapturedCallback() {
 
-    private fun getBestMatching(input: String): Pair<CardDefinition, ExtractedResult> {
-        val extractedResult = FuzzySearch.extractOne(input, cardWithCleanedName.keys)
-        return Pair(cardWithCleanedName[extractedResult.string] ?: empty, extractedResult)
+        override fun onCaptureSuccess(imageProxy: ImageProxy) {
+            val mediaImage = imageProxy.image
+            if (mediaImage != null) {
+                val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                imageProxy.close()
+                recognizer.process(image).addOnSuccessListener {
+                    EventBus.getDefault().post(CardDetectedEvent(it))
+                }
+            }
+        }
+
+        override fun onError(exception: ImageCaptureException) {
+            Log.e(TAG, "Use case binding failed", exception)
+        }
     }
 
     private fun scan() {
         val imageCapture = imageCapture ?: return
-
-        imageCapture.takePicture(ContextCompat.getMainExecutor(this), object : ImageCapture.OnImageCapturedCallback() {
-
-            override fun onCaptureSuccess(imageProxy: ImageProxy) {
-                val mediaImage = imageProxy.image
-                if (mediaImage != null) {
-                    val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-
-                    recognizer.process(image).addOnSuccessListener { visionText ->
-                        val cardDetected = visionText.textBlocks
-                            .map { textBlock -> cleanText(textBlock.text) }
-                            .filter { test -> test.length > 2 }
-                            .map { text -> Pair(text, getBestMatching(text)) }
-                            .filter { pair -> abs(pair.first.length - pair.second.second.string.length) < 4 }
-                            .map { pair -> pair.second }
-                            .filter { matching -> matching.second.score > 75 && matching.first != empty }
-                            .map { matching -> matching.first }.toSet()
-                        imageProxy.close()
-
-                        scanProgressBar.visibility = View.GONE
-                        scanningLabel.visibility = View.GONE
-                        cameraPreview.visibility = View.VISIBLE
-                        closeActivity(cardDetected)
-
-                    }.addOnFailureListener { e ->
-                        Log.e(TAG, "Error to get text", e)
-                        imageProxy.close()
-                    }
-                }
-            }
-
-            override fun onError(exception: ImageCaptureException) {
-                Log.e(TAG, "Use case binding failed", exception)
-            }
-
-        })
+        imageCapture.takePicture(ContextCompat.getMainExecutor(this), MyImageCapturedCallback(recognizer))
     }
 
     private fun startCamera() {
@@ -149,11 +135,6 @@ class ScanActivity : AppCompatActivity() {
 
     private fun allPermissionsGranted() =
         REQUIRED_PERMISSIONS.all { ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        cameraExecutor.shutdown()
-    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {

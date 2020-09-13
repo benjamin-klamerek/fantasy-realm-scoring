@@ -2,9 +2,6 @@ package com.klamerek.fantasyrealms.game
 
 import com.klamerek.fantasyrealms.screen.Constants
 import java.lang.Integer.max
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 /**
  * List of cards (player hand) wth scoring calculation
@@ -71,8 +68,13 @@ class Game() {
 
     fun atLeastOne(suit: Suit) = countCard(suit) > 0
 
+    /**
+     * Remark : this method uses comparison by name to handle when a wild card simulate another card.
+     *
+     * @param cardExpected      list of cards expected in the game
+     */
     fun contains(vararg cardExpected: CardDefinition) = cardsNotBlanked()
-        .map { card -> card.definition }.containsAll(cardExpected.toList())
+        .map { it.name() }.containsAll(cardExpected.toList().map { it.name() })
 
     fun longestSuite(): Int {
         val sorted = cardsNotBlanked().sortedBy { card -> card.value() }
@@ -88,7 +90,7 @@ class Game() {
             maxCount = max(count, maxCount)
             previousValue = card.value()
         }
-        return count;
+        return maxCount
     }
 
     fun largestSuit(): Int {
@@ -198,7 +200,7 @@ class Game() {
         if (shapeShifterCandidates().contains(cardToCopy)) {
             cards.filter { card -> card.definition == shapeshifter }
                 .map { card ->
-                    card.name(cardToCopy.name)
+                    card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
                 }
         }
@@ -212,7 +214,7 @@ class Game() {
         if (mirageCandidates().contains(cardToCopy)) {
             cards.filter { card -> card.definition == mirage }
                 .map { card ->
-                    card.name(cardToCopy.name)
+                    card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
                 }
         }
@@ -225,7 +227,7 @@ class Game() {
         if (doppelgangerCandidates().contains(cardToCopy)) {
             cards.filter { card -> card.definition == doppelganger }
                 .map { card ->
-                    card.name(cardToCopy.name)
+                    card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
                     card.value(cardToCopy.value)
                     card.rules(AllRules.instance[cardToCopy].orEmpty().filter { rule -> rule.tags.contains(Effect.PENALTY) })

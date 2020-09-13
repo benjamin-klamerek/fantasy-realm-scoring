@@ -23,7 +23,10 @@ import kotlinx.android.synthetic.main.player_list_item.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
-
+/**
+ * Activity to add and remove players
+ *
+ */
 class PlayerSelectionActivity : AppCompatActivity() {
 
     private lateinit var adapter: PlayerSelectionAdapter
@@ -113,6 +116,14 @@ class PlayerSelectionActivity : AppCompatActivity() {
     }
 
     @Subscribe
+    fun removeAllPlayers(event: AllPlayersDeletionEvent) {
+        Players.instance.clear()
+        runOnUiThread {
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    @Subscribe
     fun editPlayer(event: PlayerEditEvent) {
         val handSelectionIntent = Intent(this, HandSelectionActivity::class.java)
         handSelectionIntent.putExtra(Constants.PLAYER_SESSION_ID, Players.instance.indexOf(event.player))
@@ -153,5 +164,7 @@ class PlayerSelectionAdapter(private val players: Collection<Player>) : Recycler
 class PlayerCreationEvent(val name: String)
 
 class PlayerDeletionEvent(val index: Int)
+
+class AllPlayersDeletionEvent()
 
 class PlayerEditEvent(val player: Player)
