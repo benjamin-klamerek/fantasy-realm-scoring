@@ -12,6 +12,5 @@ Icon made by Freepik from www.flaticon.com
 - card recognition through camera using [ML Kit](https://developers.google.com/ml-kit/vision/text-recognition/android). Only card titles required for recognition.
 
 ### Next steps : 
-- add detail screen for each hand item (arrow button already exists)
 - Review main screen (color icon), fix layout on horizontal mode
-- In parameters menu, propose a testing screen for quick scanning
+- In parameters menu, propose a testing screen for quick scanning + language option

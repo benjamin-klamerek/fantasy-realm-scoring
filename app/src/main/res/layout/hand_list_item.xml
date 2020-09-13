@@ -2,33 +2,125 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@id/mainLinearLayout">
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <LinearLayout
+            android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/linearLayout" android:gravity="center_vertical">
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/cardNameLabel"
-                    android:textColor="@color/design_default_color_on_primary"/>
-            <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:layout_weight="10"/>
-            <Button
-                    android:text="@string/effect_button"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content" android:id="@+id/effectButton"/>
-            <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content" android:id="@+id/scoreLabel"
-                    android:gravity="center"/>
-            <ImageButton
-                    android:layout_width="50dp"
+                android:layout_height="match_parent" android:id="@+id/mainConstraintlayout">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/mainLinearLayout"
+                    android:gravity="center_vertical"
+            >
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/cardNameLabel"
+                        android:textColor="@color/design_default_color_on_primary"/>
+                <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="10"/>
+                <Button
+                        android:text="@string/effect_button"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content" android:id="@+id/effectButton"/>
+                <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content" android:id="@+id/scoreLabel"
+                        android:gravity="center" android:textStyle="bold"/>
+                <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardDetailButton"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_36"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cardDetailButton"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_36"/>
-        </LinearLayout>
+                    android:id="@+id/detailLinearLayout" app:layout_constraintTop_toBottomOf="@+id/mainLinearLayout">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/detailBaseConstraintLayout">
+
+                    <TextView
+                            android:text="@string/base"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/baseLabel"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                            android:textStyle="bold" android:layout_marginStart="10dp"/>
+                    <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content" android:id="@+id/baseValueLabel"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginEnd="50dp" android:textAlignment="center"/>
+                    <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@+id/baseLabel"
+                            app:layout_constraintEnd_toStartOf="@+id/baseValueLabel"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/detailBonusConstraintLayout">
+
+                    <TextView
+                            android:text="@string/effect_bonus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/bonusLabel"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                            android:textStyle="bold" android:layout_marginStart="10dp"/>
+                    <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content" android:id="@+id/bonusValueLabel"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginEnd="50dp" android:textAlignment="center"
+                            android:textColor="@android:color/holo_green_dark"/>
+                    <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@+id/bonusLabel"
+                            app:layout_constraintEnd_toStartOf="@+id/bonusValueLabel"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailPenaltyConstraintLayout">
+
+                    <TextView
+                            android:text="@string/effect_penalty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/penaltyLabel"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                            android:textStyle="bold" android:layout_marginStart="10dp"/>
+                    <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content" android:id="@+id/penaltyValueLabel"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginEnd="50dp" android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"/>
+                    <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toEndOf="@+id/penaltyLabel"
+                            app:layout_constraintEnd_toStartOf="@+id/penaltyValueLabel"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

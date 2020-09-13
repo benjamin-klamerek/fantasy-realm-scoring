@@ -11,7 +11,8 @@ class Game() {
 
     private val defaultHandSize = 7
     private val cards = ArrayList<Card>()
-    private val scoreByCard = HashMap<CardDefinition, Int>()
+    private val bonusScoreByCard = HashMap<CardDefinition, Int>()
+    private val penaltyScoreByCard = HashMap<CardDefinition, Int>()
 
     var bookOfChangeSelection: Pair<CardDefinition?, Suit?>? = null
     var islandSelection: CardDefinition? = null
@@ -119,24 +120,39 @@ class Game() {
         blankedCardFirstLevel.forEach { card -> card.blanked = true }
         cardsNotBlanked().map { card -> identifyBlankedCards(card) }.flatten().forEach { card -> card.blanked = true }
 
-        scoreByCard.clear()
-        scoreByCard.putAll(cardsNotBlanked().map { card ->
+        bonusScoreByCard.clear()
+        penaltyScoreByCard.clear()
+        bonusScoreByCard.putAll(cardsNotBlanked().map { card ->
             card.definition to card.rules()
                 .asSequence()
                 .filter { rule -> card.isActivated(rule) }
                 .map { rule -> rule as? RuleAboutScore }
+                .filter { rule -> rule?.tags?.contains(Effect.BONUS) ?: false }
                 .map { rule -> rule?.logic?.invoke(this) }
-                .sumBy { any -> if (any is Int) any else 0 } + card.value()
+                .sumBy { any -> if (any is Int) any else 0 }
+        }.toMap())
+        penaltyScoreByCard.putAll(cardsNotBlanked().map { card ->
+            card.definition to card.rules()
+                .asSequence()
+                .filter { rule -> card.isActivated(rule) }
+                .map { rule -> rule as? RuleAboutScore }
+                .filter { rule -> rule?.tags?.contains(Effect.PENALTY) ?: false }
+                .map { rule -> rule?.logic?.invoke(this) }
+                .sumBy { any -> if (any is Int) any else 0 }
         }.toMap())
     }
 
-    fun score(): Int {
-        return scoreByCard.entries.sumBy { entry -> entry.value }
-    }
+    fun score(): Int = bonusScoreByCard.entries.sumBy { it.value } +
+            penaltyScoreByCard.entries.sumBy { it.value } +
+            cardsNotBlanked().sumBy { it.value() }
 
-    fun score(card: CardDefinition): Int {
-        return scoreByCard.getOrDefault(card, 0)
-    }
+    fun score(card: CardDefinition): Int = bonusScore(card) +
+            penaltyScore(card) +
+            cardsNotBlanked().filter { it.definition == card }.sumBy { it.value() }
+
+    fun bonusScore(card: CardDefinition): Int = bonusScoreByCard.getOrDefault(card, 0)
+
+    fun penaltyScore(card: CardDefinition): Int = penaltyScoreByCard.getOrDefault(card, 0)
 
     private fun identifyBlankedCards(card: Card): List<Card> =
         card.rules().filter { rule -> card.isActivated(rule) }

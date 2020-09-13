@@ -12,6 +12,7 @@
     <string name="add_card_button">Ajouter carte</string>
     <string name="scan_button">Scan</string>
     <string name="effect_button">Effet</string>
+    <string name="base">BASE</string>
     <!-- Effets et Familles -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">EFFACE</string>

@@ -92,7 +92,7 @@ class HandSelectionActivity : AppCompatActivity() {
     }
 
     @Subscribe
-    fun removeAllCards(event : AllCardsDeletionEvent){
+    fun removeAllCards(event: AllCardsDeletionEvent) {
         player.game.clear()
         runOnUiThread {
             adapter.notifyDataSetChanged()
@@ -144,6 +144,11 @@ class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSe
         private var view: View = v
 
         fun bindCard(card: Card) {
+            updateMainPart(card)
+            updateDetailPart(card)
+        }
+
+        private fun updateMainPart(card: Card) {
             view.cardNameLabel.text = card.definition.name()
             view.cardNameLabel.setChipBackgroundColorResource(card.suit().color)
             view.scoreLabel.text = game.score(card.definition).toString()
@@ -151,6 +156,25 @@ class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSe
             view.effectButton.setOnClickListener {
                 EventBus.getDefault().post(RequestCardEffectSelectionEvent(card.definition.id))
             }
+            view.cardDetailButton.setOnClickListener {
+                view.detailLinearLayout.visibility = if (view.detailLinearLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+                view.cardDetailButton.setImageResource(
+                    if (view.detailLinearLayout.visibility == View.GONE) R.drawable.ic_baseline_keyboard_arrow_down_36 else R.drawable.ic_baseline_keyboard_arrow_up_36
+                )
+            }
+        }
+
+        private fun updateDetailPart(card: Card) {
+            view.detailLinearLayout.visibility = View.GONE
+            view.baseValueLabel.text = card.value().toString()
+
+            val bonus = game.bonusScore(card.definition)
+            view.bonusValueLabel.text = "+$bonus"
+            view.detailBonusConstraintLayout.visibility = if (bonus > 0) View.VISIBLE else View.GONE
+
+            val penalty = game.penaltyScore(card.definition)
+            view.penaltyValueLabel.text = "$penalty"
+            view.detailPenaltyConstraintLayout.visibility = if (penalty < 0) View.VISIBLE else View.GONE
         }
 
     }
@@ -161,4 +185,4 @@ class CardDeletionEvent(val index: Int)
 
 class RequestCardEffectSelectionEvent(val cardDefinitionId: Int)
 
-class AllCardsDeletionEvent()
+class AllCardsDeletionEvent
