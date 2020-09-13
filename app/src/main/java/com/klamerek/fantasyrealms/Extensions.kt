@@ -6,12 +6,12 @@ import java.text.Normalizer
 
 /**
  * Extension method to implement then condition like "if" case
- *
+ * TODO : remove this prefer classic if/else
  * @param T
  * @param action
  * @return
  */
-infix fun <T>Boolean.then(action : () -> T): T? {
+infix fun <T> Boolean.then(action: () -> T): T? {
     return if (this)
         action.invoke()
     else null

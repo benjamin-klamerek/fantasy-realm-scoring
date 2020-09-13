@@ -63,6 +63,18 @@ class ScoringTest {
         Assertions.assertEquals(225, game.score())
     }
 
+    @DisplayName("Unicorn and princess")
+    @Test
+    fun unicorn_with_princess() {
+        val game = Game()
+        game.add(unicorn)
+        game.add(princess)
+        game.add(queen)
+
+        game.calculate()
+        Assertions.assertEquals(9 + 2 + 6 + 8 + 30, game.score())
+    }
+
     @DisplayName("mirage combo with shapeshifter")
     @Test
     fun mirage_combo_with_shapeshifter() {

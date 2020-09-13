@@ -14,3 +14,4 @@ Icon made by Freepik from www.flaticon.com
 ### Next steps : 
 - Review main screen (color icon), fix layout on horizontal mode
 - In parameters menu, propose a testing screen for quick scanning + language option
+- remove "then" usage bad idea

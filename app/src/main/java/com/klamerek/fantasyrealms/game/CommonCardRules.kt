@@ -67,9 +67,8 @@ class AllRules {
                 RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.LEADER) + it.countCard(Suit.WIZARD) > 1) then { 14 } ?: 0 }
             ),
             unicorn to listOf(
-                RuleAboutScore(listOf(Effect.BONUS)) { (it.contains(princess)) then { 30 } ?: 0 },
                 RuleAboutScore(listOf(Effect.BONUS)) {
-                    (it.contains(empress) || it.contains(queen) || it.contains(elementalEnchantress)) then { 15 } ?: 0
+                    if (it.contains(princess)) 30 else if (it.contains(empress) || it.contains(queen) || it.contains(elementalEnchantress)) 15 else 0
                 }
             ),
             hydra to listOf(
