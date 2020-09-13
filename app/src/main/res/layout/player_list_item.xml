@@ -6,8 +6,10 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/playerNameField" android:layout_weight="7"
+            android:textSize="18sp" android:textStyle="bold"
     />
     <TextView
+            android:textSize="18sp" android:textStyle="bold"
             android:layout_width="70dp"
             android:layout_height="wrap_content" android:id="@+id/scoreLabel"
             android:gravity="center_horizontal|center_vertical"/>

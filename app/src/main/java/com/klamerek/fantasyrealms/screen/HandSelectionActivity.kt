@@ -35,7 +35,7 @@ class HandSelectionActivity : AppCompatActivity() {
 
         player = Players.instance[intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)]
 
-        refreshPlayerNameAndScore()
+        refreshPlayerLabels()
 
         addCardsButton.setOnClickListener {
             val handSelectionIntent = Intent(this, CardsSelectionActivity::class.java)
@@ -61,8 +61,9 @@ class HandSelectionActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(handView)
     }
 
-    private fun refreshPlayerNameAndScore() {
+    private fun refreshPlayerLabels() {
         playerNameLabel.text = player.name + " - Score : " + player.game.score()
+        handSizeLabel.text = player.game.actualHandSize().toString() + "/" + player.game.handSizeExpected()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -85,7 +86,7 @@ class HandSelectionActivity : AppCompatActivity() {
         }
         player.game.calculate()
         runOnUiThread {
-            refreshPlayerNameAndScore()
+            refreshPlayerLabels()
             adapter.notifyDataSetChanged()
         }
     }
@@ -95,7 +96,7 @@ class HandSelectionActivity : AppCompatActivity() {
         player.game.clear()
         runOnUiThread {
             adapter.notifyDataSetChanged()
-            refreshPlayerNameAndScore()
+            refreshPlayerLabels()
         }
     }
 
@@ -105,7 +106,7 @@ class HandSelectionActivity : AppCompatActivity() {
         player.game.calculate()
         runOnUiThread {
             adapter.notifyDataSetChanged()
-            refreshPlayerNameAndScore()
+            refreshPlayerLabels()
         }
     }
 

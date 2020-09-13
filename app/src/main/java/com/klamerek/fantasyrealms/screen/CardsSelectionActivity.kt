@@ -49,7 +49,7 @@ class CardsSelectionActivity : AppCompatActivity() {
 
     private fun adaptSuitListDisplay() {
         val suitActivated = input.selectionMode == Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
-        suitChipGroup.visibility = if (suitActivated) View.VISIBLE else View.GONE
+        suitScrollView.visibility = if (suitActivated) View.VISIBLE else View.GONE
         divider.visibility = if (suitActivated) View.VISIBLE else View.GONE
         suitChips().forEach { chip -> chip.setOnClickListener(onlyOneSuitSelected()) }
     }
