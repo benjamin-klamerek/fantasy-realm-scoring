@@ -12,7 +12,7 @@ import java.io.Serializable
 
 class CardsSelectionActivity : AppCompatActivity() {
 
-    private lateinit var input : CardsSelectionExchange
+    private lateinit var input: CardsSelectionExchange
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class CardsSelectionActivity : AppCompatActivity() {
     }
 
     private fun updateMainLabel() {
-        selectionLabel.text = input.label.orEmpty()
+        selectionLabel.text = colorSuitsAndBoldCardNames(applicationContext, input.label.orEmpty())
     }
 
     private fun onlyOneSuitSelected(): View.OnClickListener? {

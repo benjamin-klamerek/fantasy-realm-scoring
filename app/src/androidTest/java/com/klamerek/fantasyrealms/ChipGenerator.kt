@@ -25,7 +25,9 @@ class ChipGenerator {
                         "                android:checkable=\"true\"\n" +
                         "                android:tag=\"" + definition.id +
                         "\" app:chipBackgroundColor=\"@color/chip_background_" + suitCleaned + "\" \n" +
-                        "                android:textColor=\"@color/chip_revert_color_activated\"/>"
+                        "                android:textColor=\"@color/chip_revert_color_activated\" \n " +
+                        "       app:chipStrokeColor=\"@color/color" + definition.suit.display() +"\"\n" +
+                        "       app:chipStrokeWidth=\"1dp\"/>"
             )
         }
     }

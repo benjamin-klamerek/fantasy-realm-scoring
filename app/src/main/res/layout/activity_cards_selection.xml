@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/selectionLabel"
             android:layout_marginTop="30dp"
-            android:textSize="18sp" android:textStyle="bold"
+            android:textSize="18sp"
     />
     <ScrollView
             android:layout_width="match_parent"
@@ -27,364 +27,459 @@
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chiprangers"
-                    android:text="@string/rangers"
+                    android:layout_height="wrap_content" android:id="@+id/chiprangers" android:text="@string/rangers"
                     android:checkable="true"
                     android:tag="1" app:chipBackgroundColor="@color/chip_background_army"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArmy"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipelven_archers"
                     android:text="@string/elven_archers"
                     android:checkable="true"
                     android:tag="2" app:chipBackgroundColor="@color/chip_background_army"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArmy"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipdwarvish_infantry"
                     android:text="@string/dwarvish_infantry"
                     android:checkable="true"
                     android:tag="3" app:chipBackgroundColor="@color/chip_background_army"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArmy"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chiplight_cavalry"
                     android:text="@string/light_cavalry"
                     android:checkable="true"
                     android:tag="4" app:chipBackgroundColor="@color/chip_background_army"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArmy"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipcelestial_knights"
+                    android:layout_height="wrap_content" android:id="@+id/chipknights"
                     android:text="@string/celestial_knights"
                     android:checkable="true"
                     android:tag="5" app:chipBackgroundColor="@color/chip_background_army"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArmy"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipprotection_rune"
                     android:text="@string/protection_rune"
                     android:checkable="true"
                     android:tag="6" app:chipBackgroundColor="@color/chip_background_artifact"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArtifact"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipworld_tree"
                     android:text="@string/world_tree"
                     android:checkable="true"
                     android:tag="7" app:chipBackgroundColor="@color/chip_background_artifact"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArtifact"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipbook_of_changes"
                     android:text="@string/book_of_changes"
                     android:checkable="true"
                     android:tag="8" app:chipBackgroundColor="@color/chip_background_artifact"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArtifact"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipshield_of_keth"
                     android:text="@string/shield_of_keth"
                     android:checkable="true"
                     android:tag="9" app:chipBackgroundColor="@color/chip_background_artifact"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArtifact"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipgem_of_order"
                     android:text="@string/gem_of_order"
                     android:checkable="true"
                     android:tag="10" app:chipBackgroundColor="@color/chip_background_artifact"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArtifact"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipwarhorse"
-                    android:text="@string/warhorse"
+                    android:layout_height="wrap_content" android:id="@+id/chipwarhorse" android:text="@string/warhorse"
                     android:checkable="true"
                     android:tag="11" app:chipBackgroundColor="@color/chip_background_beast"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorBeast"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipunicorn"
-                    android:text="@string/unicorn"
+                    android:layout_height="wrap_content" android:id="@+id/chipunicorn" android:text="@string/unicorn"
                     android:checkable="true"
                     android:tag="12" app:chipBackgroundColor="@color/chip_background_beast"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chiphydra" android:text="@string/hydra"
-                    android:checkable="true"
-                    android:tag="13" app:chipBackgroundColor="@color/chip_background_beast"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipdragon" android:text="@string/dragon"
-                    android:checkable="true"
-                    android:tag="14" app:chipBackgroundColor="@color/chip_background_beast"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipbasilisk"
-                    android:text="@string/basilisk"
-                    android:checkable="true"
-                    android:tag="15" app:chipBackgroundColor="@color/chip_background_beast"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipcandle" android:text="@string/candle"
-                    android:checkable="true"
-                    android:tag="16" app:chipBackgroundColor="@color/chip_background_flame"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipfire_elemental"
-                    android:text="@string/fire_elemental"
-                    android:checkable="true"
-                    android:tag="17" app:chipBackgroundColor="@color/chip_background_flame"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipforge" android:text="@string/forge"
-                    android:checkable="true"
-                    android:tag="18" app:chipBackgroundColor="@color/chip_background_flame"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chiplightning"
-                    android:text="@string/lightning"
-                    android:checkable="true"
-                    android:tag="19" app:chipBackgroundColor="@color/chip_background_flame"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipwildfire"
-                    android:text="@string/wildfire"
-                    android:checkable="true"
-                    android:tag="20" app:chipBackgroundColor="@color/chip_background_flame"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipfountain_of_life"
-                    android:text="@string/fountain_of_life"
-                    android:checkable="true"
-                    android:tag="21" app:chipBackgroundColor="@color/chip_background_flood"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipwater_elemental"
-                    android:text="@string/water_elemental"
-                    android:checkable="true"
-                    android:tag="22" app:chipBackgroundColor="@color/chip_background_flood"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipisland" android:text="@string/island"
-                    android:checkable="true"
-                    android:tag="23" app:chipBackgroundColor="@color/chip_background_flood"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipswamp" android:text="@string/swamp"
-                    android:checkable="true"
-                    android:tag="24" app:chipBackgroundColor="@color/chip_background_flood"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipgreat_flood"
-                    android:text="@string/great_flood"
-                    android:checkable="true"
-                    android:tag="25" app:chipBackgroundColor="@color/chip_background_flood"
-                    android:textColor="@color/chip_revert_color_activated"/>
-            <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipearth_elemental"
-                    android:text="@string/earth_elemental"
-                    android:checkable="true"
-                    android:tag="26" app:chipBackgroundColor="@color/chip_background_land"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorBeast"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipunderground_caverns"
                     android:text="@string/underground_caverns"
                     android:checkable="true"
                     android:tag="27" app:chipBackgroundColor="@color/chip_background_land"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLand"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chiphydra" android:text="@string/hydra"
+                    android:checkable="true"
+                    android:tag="13" app:chipBackgroundColor="@color/chip_background_beast"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorBeast"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipdragon" android:text="@string/dragon"
+                    android:checkable="true"
+                    android:tag="14" app:chipBackgroundColor="@color/chip_background_beast"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorBeast"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipbasilisk" android:text="@string/basilisk"
+                    android:checkable="true"
+                    android:tag="15" app:chipBackgroundColor="@color/chip_background_beast"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorBeast"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipcandle" android:text="@string/candle"
+                    android:checkable="true"
+                    android:tag="16" app:chipBackgroundColor="@color/chip_background_flame"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlame"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipfire_elemental"
+                    android:text="@string/fire_elemental"
+                    android:checkable="true"
+                    android:tag="17" app:chipBackgroundColor="@color/chip_background_flame"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlame"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipforge" android:text="@string/forge"
+                    android:checkable="true"
+                    android:tag="18" app:chipBackgroundColor="@color/chip_background_flame"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlame"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chiplightning"
+                    android:text="@string/lightning"
+                    android:checkable="true"
+                    android:tag="19" app:chipBackgroundColor="@color/chip_background_flame"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlame"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipwildfire" android:text="@string/wildfire"
+                    android:checkable="true"
+                    android:tag="20" app:chipBackgroundColor="@color/chip_background_flame"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlame"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipfountain_of_life"
+                    android:text="@string/fountain_of_life"
+                    android:checkable="true"
+                    android:tag="21" app:chipBackgroundColor="@color/chip_background_flood"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlood"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipwater_elemental"
+                    android:text="@string/water_elemental"
+                    android:checkable="true"
+                    android:tag="22" app:chipBackgroundColor="@color/chip_background_flood"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlood"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipisland" android:text="@string/island"
+                    android:checkable="true"
+                    android:tag="23" app:chipBackgroundColor="@color/chip_background_flood"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlood"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipswamp" android:text="@string/swamp"
+                    android:checkable="true"
+                    android:tag="24" app:chipBackgroundColor="@color/chip_background_flood"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlood"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipgreat_flood"
+                    android:text="@string/great_flood"
+                    android:checkable="true"
+                    android:tag="25" app:chipBackgroundColor="@color/chip_background_flood"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlood"
+                    app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/chipearth_elemental"
+                    android:text="@string/earth_elemental"
+                    android:checkable="true"
+                    android:tag="26" app:chipBackgroundColor="@color/chip_background_land"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLand"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipforest" android:text="@string/forest"
                     android:checkable="true"
                     android:tag="28" app:chipBackgroundColor="@color/chip_background_land"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLand"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipbell_tower"
                     android:text="@string/bell_tower"
                     android:checkable="true"
                     android:tag="29" app:chipBackgroundColor="@color/chip_background_land"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLand"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipmountain"
-                    android:text="@string/mountain"
+                    android:layout_height="wrap_content" android:id="@+id/chipmountain" android:text="@string/mountain"
                     android:checkable="true"
                     android:tag="30" app:chipBackgroundColor="@color/chip_background_land"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLand"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipprincess"
-                    android:text="@string/princess"
+                    android:layout_height="wrap_content" android:id="@+id/chipprincess" android:text="@string/princess"
                     android:checkable="true"
                     android:tag="31" app:chipBackgroundColor="@color/chip_background_leader"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLeader"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipwarlord"
-                    android:text="@string/warlord"
+                    android:layout_height="wrap_content" android:id="@+id/chipwarlord" android:text="@string/warlord"
                     android:checkable="true"
                     android:tag="32" app:chipBackgroundColor="@color/chip_background_leader"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLeader"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipqueen" android:text="@string/queen"
                     android:checkable="true"
                     android:tag="33" app:chipBackgroundColor="@color/chip_background_leader"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLeader"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipking" android:text="@string/king"
                     android:checkable="true"
                     android:tag="34" app:chipBackgroundColor="@color/chip_background_leader"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLeader"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipempress"
-                    android:text="@string/empress"
+                    android:layout_height="wrap_content" android:id="@+id/chipempress" android:text="@string/empress"
                     android:checkable="true"
                     android:tag="35" app:chipBackgroundColor="@color/chip_background_leader"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLeader"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipmagic_wand"
                     android:text="@string/magic_wand"
                     android:checkable="true"
                     android:tag="36" app:chipBackgroundColor="@color/chip_background_weapon"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeapon"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipelven_longbow"
                     android:text="@string/elven_longbow"
                     android:checkable="true"
                     android:tag="37" app:chipBackgroundColor="@color/chip_background_weapon"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeapon"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipsword_of_keth"
                     android:text="@string/sword_of_keth"
                     android:checkable="true"
                     android:tag="38" app:chipBackgroundColor="@color/chip_background_weapon"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeapon"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipwarship"
-                    android:text="@string/warship"
+                    android:layout_height="wrap_content" android:id="@+id/chipwarship" android:text="@string/warship"
                     android:checkable="true"
                     android:tag="39" app:chipBackgroundColor="@color/chip_background_weapon"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeapon"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipwar_dirigible"
                     android:text="@string/war_dirigible"
                     android:checkable="true"
                     android:tag="40" app:chipBackgroundColor="@color/chip_background_weapon"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeapon"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipair_elemental"
                     android:text="@string/air_elemental"
                     android:checkable="true"
                     android:tag="41" app:chipBackgroundColor="@color/chip_background_weather"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeather"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chiprainstorm"
                     android:text="@string/rainstorm"
                     android:checkable="true"
                     android:tag="42" app:chipBackgroundColor="@color/chip_background_weather"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeather"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipwhirlwind"
                     android:text="@string/whirlwind"
                     android:checkable="true"
                     android:tag="43" app:chipBackgroundColor="@color/chip_background_weather"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeather"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipsmoke" android:text="@string/smoke"
                     android:checkable="true"
                     android:tag="44" app:chipBackgroundColor="@color/chip_background_weather"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeather"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/chipblizzard"
-                    android:text="@string/blizzard"
+                    android:layout_height="wrap_content" android:id="@+id/chipblizzard" android:text="@string/blizzard"
                     android:checkable="true"
                     android:tag="45" app:chipBackgroundColor="@color/chip_background_weather"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeather"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipshapeshifter"
                     android:text="@string/shapeshifter"
                     android:checkable="true"
                     android:tag="46" app:chipBackgroundColor="@color/chip_background_wild"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWild"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipmirage" android:text="@string/mirage"
                     android:checkable="true"
                     android:tag="47" app:chipBackgroundColor="@color/chip_background_wild"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWild"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipdoppelganger"
                     android:text="@string/doppelganger"
                     android:checkable="true"
                     android:tag="48" app:chipBackgroundColor="@color/chip_background_wild"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWild"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipnecromancer"
                     android:text="@string/necromancer"
                     android:checkable="true"
                     android:tag="49" app:chipBackgroundColor="@color/chip_background_wizard"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWizard"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipelemental_enchantress"
                     android:text="@string/elemental_enchantress"
                     android:checkable="true"
                     android:tag="50" app:chipBackgroundColor="@color/chip_background_wizard"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWizard"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipcollector"
                     android:text="@string/collector"
                     android:checkable="true"
                     android:tag="51" app:chipBackgroundColor="@color/chip_background_wizard"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWizard"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipbeastmaster"
                     android:text="@string/beastmaster"
                     android:checkable="true"
                     android:tag="52" app:chipBackgroundColor="@color/chip_background_wizard"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWizard"
+                    app:chipStrokeWidth="2dp"/>
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/chipwarlock_lord"
                     android:text="@string/warlock_lord"
                     android:checkable="true"
                     android:tag="53" app:chipBackgroundColor="@color/chip_background_wizard"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWizard"
+                    app:chipStrokeWidth="2dp"/>
 
 
         </com.google.android.material.chip.ChipGroup>
@@ -410,7 +505,10 @@
                     android:text="@string/suit_army"
                     android:checkable="true"
                     android:tag="ARMY" app:chipBackgroundColor="@color/chip_background_army"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArmy"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -418,7 +516,10 @@
                     android:text="@string/suit_artifact"
                     android:checkable="true"
                     android:tag="ARTIFACT" app:chipBackgroundColor="@color/chip_background_artifact"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorArtifact"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -426,7 +527,10 @@
                     android:text="@string/suit_beast"
                     android:checkable="true"
                     android:tag="BEAST" app:chipBackgroundColor="@color/chip_background_beast"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorBeast"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -434,7 +538,10 @@
                     android:text="@string/suit_flame"
                     android:checkable="true"
                     android:tag="FLAME" app:chipBackgroundColor="@color/chip_background_flame"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlame"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -442,7 +549,10 @@
                     android:text="@string/suit_flood"
                     android:checkable="true"
                     android:tag="FLOOD" app:chipBackgroundColor="@color/chip_background_flood"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorFlood"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -450,7 +560,10 @@
                     android:text="@string/suit_land"
                     android:checkable="true"
                     android:tag="LAND" app:chipBackgroundColor="@color/chip_background_land"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLand"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -458,7 +571,10 @@
                     android:text="@string/suit_leader"
                     android:checkable="true"
                     android:tag="LEADER" app:chipBackgroundColor="@color/chip_background_leader"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorLeader"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -466,7 +582,10 @@
                     android:text="@string/suit_weapon"
                     android:checkable="true"
                     android:tag="WEAPON" app:chipBackgroundColor="@color/chip_background_weapon"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeapon"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -474,7 +593,10 @@
                     android:text="@string/suit_weather"
                     android:checkable="true"
                     android:tag="WEATHER" app:chipBackgroundColor="@color/chip_background_weather"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWeather"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -482,7 +604,10 @@
                     android:text="@string/suit_wild"
                     android:checkable="true"
                     android:tag="WILD" app:chipBackgroundColor="@color/chip_background_wild"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWild"
+                    app:chipStrokeWidth="2dp"
+            />
 
             <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
@@ -490,7 +615,10 @@
                     android:text="@string/suit_wizard"
                     android:checkable="true"
                     android:tag="WIZARD" app:chipBackgroundColor="@color/chip_background_wizard"
-                    android:textColor="@color/chip_revert_color_activated"/>
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWizard"
+                    app:chipStrokeWidth="2dp"
+            />
 
         </com.google.android.material.chip.ChipGroup>
     </ScrollView>
