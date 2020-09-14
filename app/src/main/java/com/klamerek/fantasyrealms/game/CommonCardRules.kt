@@ -249,7 +249,7 @@ class AllRules {
                 RuleAboutRule(listOf(Effect.CLEAR)) { it.identifyClearedPenalty { card -> card.isOneOf(Suit.BEAST) } }
             ),
             warlockLord to listOf(
-                RuleAboutScore(listOf(Effect.PENALTY)) { (it.countCard(Suit.WIZARD) + max(it.countCard(Suit.LEADER) - 1, 0)) * -10 }
+                RuleAboutScore(listOf(Effect.PENALTY)) { (it.countCard(Suit.LEADER) + max(it.countCard(Suit.WIZARD) - 1, 0)) * -10 }
             )
         )
     }

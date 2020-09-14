@@ -75,6 +75,18 @@ class ScoringTest {
         Assertions.assertEquals(9 + 2 + 6 + 8 + 30, game.score())
     }
 
+    @DisplayName("WarlockLord rule")
+    @Test
+    fun warlockLord_rule() {
+        val game = Game()
+        game.add(warlockLord)
+        game.add(beastmaster)
+        game.add(elementalEnchantress)
+
+        game.calculate()
+        Assertions.assertEquals(5 + 9 + 5, game.score())
+    }
+
     @DisplayName("mirage combo with shapeshifter")
     @Test
     fun mirage_combo_with_shapeshifter() {
