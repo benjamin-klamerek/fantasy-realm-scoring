@@ -1,6 +1,7 @@
 package com.klamerek.fantasyrealms
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.klamerek.fantasyrealms.screen.PlayerSelectionActivity
@@ -16,5 +17,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(playerSelectionIntent)
         }
 
+        val animationDrawable = mainActConstraintLayout.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
     }
 }

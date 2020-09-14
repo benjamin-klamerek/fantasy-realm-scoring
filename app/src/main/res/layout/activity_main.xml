@@ -5,21 +5,29 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:background="@drawable/gradient_list"
+        tools:context=".MainActivity" android:id="@+id/mainActConstraintLayout">
     <Button
             android:text="@string/start_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/startButton"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            android:layout_marginTop="284dp"/>
+            app:layout_constraintBottom_toTopOf="@+id/space2" android:layout_marginBottom="20dp"/>
     <Button
             android:text="@string/settings_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/settingsButton"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintTop_toBottomOf="@+id/startButton" app:layout_constraintVertical_bias="0.145"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintTop_toBottomOf="@+id/space2" android:layout_marginTop="20dp"/>
+    <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/space2" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
