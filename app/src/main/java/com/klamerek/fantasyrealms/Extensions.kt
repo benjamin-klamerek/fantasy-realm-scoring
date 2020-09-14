@@ -4,19 +4,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import java.text.Normalizer
 
-/**
- * Extension method to implement then condition like "if" case
- * TODO : remove this prefer classic if/else
- * @param T
- * @param action
- * @return
- */
-infix fun <T> Boolean.then(action: () -> T): T? {
-    return if (this)
-        action.invoke()
-    else null
-}
-
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
