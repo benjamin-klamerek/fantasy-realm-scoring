@@ -15,3 +15,19 @@ Icon made by Freepik from www.flaticon.com
 - In parameters menu, propose a testing screen for quick scanning + language option
 - Decorate main activity
 - add button to clear all hands ?
+
+### About development
+- During unit tests, if you encounter exception about version of Google service you have to :
+    * Update manually ```Google play Service``` in your emulator
+    * If ```Play Store``` is not available in your emulator, the only solution that I found is to manually update config.ini
+    
+``` 
+For Windows, config.ini file can be found in : C:\Users\**YOURUSER**\.android\avd\**YOURDEVICE**.avd
+
+Replace : 
+ - "google_apis" by "google_apis_playstore" in the line starting by "image.sysdir.1=system-images..."
+ - "PlayStore.enabled=false" by "PlayStore.enabled=true"
+ - "tag.id=google_apis" by "tag.id=google_apis_playstore"
+
+Open "AVD manager" in IDE and redownload...
+```

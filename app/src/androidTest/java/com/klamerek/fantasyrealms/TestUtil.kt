@@ -35,3 +35,11 @@ fun isGooglePlayServicesUpToDate(activity: Context): Boolean {
     val apkVersion = googleApiAvailability.getApkVersion(activity);
     return status == ConnectionResult.SUCCESS && apkVersion > 203000000
 }
+
+fun ensureThatGooglePlayServicesUpToDate(activity: Context){
+    if (!isGooglePlayServicesUpToDate(activity)) {
+        throw UnsupportedOperationException("Device requires newer version of Google service (to use ML kit), " +
+                "please check readme if you have trouble to update it")
+    }
+}
+

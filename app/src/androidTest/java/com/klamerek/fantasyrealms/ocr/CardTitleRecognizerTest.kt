@@ -5,9 +5,9 @@ import androidx.test.filters.MediumTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.common.InputImage
+import com.klamerek.fantasyrealms.ensureThatGooglePlayServicesUpToDate
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.getBitmapFromTestAssets
-import com.klamerek.fantasyrealms.isGooglePlayServicesUpToDate
 import com.klamerek.fantasyrealms.setLocale
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
@@ -21,9 +21,7 @@ class CardTitleRecognizerTest {
     @BeforeEach
     fun beforeEach() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        if (!isGooglePlayServicesUpToDate(appContext)) {
-            throw UnsupportedOperationException("Device requires newer version of Google service (ML kit)")
-        }
+        ensureThatGooglePlayServicesUpToDate(appContext)
     }
 
     @DisplayName("Empty image")

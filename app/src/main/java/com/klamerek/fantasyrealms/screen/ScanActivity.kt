@@ -79,6 +79,7 @@ class ScanActivity : AppCompatActivity() {
 
     class MyImageCapturedCallback(private val recognizer: CardTitleRecognizer) : ImageCapture.OnImageCapturedCallback() {
 
+        @ExperimentalGetImage
         override fun onCaptureSuccess(imageProxy: ImageProxy) {
             val mediaImage = imageProxy.image
             if (mediaImage != null) {
@@ -111,7 +112,7 @@ class ScanActivity : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(cameraPreview.createSurfaceProvider())
+                    it.setSurfaceProvider(cameraPreview.surfaceProvider)
                 }
 
             imageCapture = ImageCapture.Builder().build()

@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.klamerek.fantasyrealms.R
-import com.klamerek.fantasyrealms.isGooglePlayServicesUpToDate
+import com.klamerek.fantasyrealms.ensureThatGooglePlayServicesUpToDate
 import org.hamcrest.core.AllOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -28,9 +28,7 @@ class ScanActivityTest {
     @BeforeEach
     fun before() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        if (!isGooglePlayServicesUpToDate(appContext)) {
-            throw UnsupportedOperationException("Device requires newer version of Google service (ML kit)")
-        }
+        ensureThatGooglePlayServicesUpToDate(appContext)
         scenario = ActivityScenario.launch(ScanActivity::class.java)
         Intents.init()
     }
