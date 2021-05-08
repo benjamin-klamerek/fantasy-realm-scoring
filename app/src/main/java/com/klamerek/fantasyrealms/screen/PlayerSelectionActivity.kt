@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
@@ -14,12 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.klamerek.fantasyrealms.R
+import com.klamerek.fantasyrealms.databinding.ActivityPlayerSelectionBinding
+import com.klamerek.fantasyrealms.databinding.PlayerListItemBinding
 import com.klamerek.fantasyrealms.game.Game
 import com.klamerek.fantasyrealms.game.Player
 import com.klamerek.fantasyrealms.game.Players
-import inflate
-import kotlinx.android.synthetic.main.activity_player_selection.*
-import kotlinx.android.synthetic.main.player_list_item.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -30,6 +30,7 @@ import org.greenrobot.eventbus.Subscribe
 class PlayerSelectionActivity : AppCompatActivity() {
 
     private lateinit var adapter: PlayerSelectionAdapter
+    private lateinit var binding: ActivityPlayerSelectionBinding
 
     override fun onResume() {
         super.onResume()
@@ -44,28 +45,29 @@ class PlayerSelectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
-
-        setContentView(R.layout.activity_player_selection)
+        binding = ActivityPlayerSelectionBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         installDialog()
 
         val linearLayoutManager = LinearLayoutManager(this)
-        playersView.addItemDecoration(DividerItemDecoration(playersView.context, DividerItemDecoration.VERTICAL))
-        playersView.layoutManager = linearLayoutManager
+        binding.playersView.addItemDecoration(DividerItemDecoration(binding.playersView.context, DividerItemDecoration.VERTICAL))
+        binding.playersView.layoutManager = linearLayoutManager
         adapter = PlayerSelectionAdapter(Players.instance)
-        playersView.adapter = adapter
+        binding.playersView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(
-            playersView.context, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            binding.playersView.context, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) { position: Int -> EventBus.getDefault().post(PlayerDeletionEvent(position)) })
-        itemTouchHelper.attachToRecyclerView(playersView)
+        itemTouchHelper.attachToRecyclerView(binding.playersView)
     }
 
     private fun installDialog() {
         val dialogView: View = this.layoutInflater.inflate(R.layout.dialog_new_player, null)
         val field: TextInputEditText? = dialogView.findViewWithTag("playerNameEditText")
         val dialog = initDialog(dialogView, field)
-        addPlayerButton.setOnClickListener {
+        binding.addPlayerButton.setOnClickListener {
             field?.text?.clear()
             dialog.show()
         }
@@ -135,8 +137,8 @@ class PlayerSelectionActivity : AppCompatActivity() {
 class PlayerSelectionAdapter(private val players: Collection<Player>) : RecyclerView.Adapter<PlayerSelectionAdapter.PlayerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerHolder {
-        val inflatedView = parent.inflate(R.layout.player_list_item, false)
-        return PlayerHolder(inflatedView)
+        val itemBinding = PlayerListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlayerHolder(itemBinding)
     }
 
     override fun getItemCount(): Int = players.size
@@ -145,9 +147,9 @@ class PlayerSelectionAdapter(private val players: Collection<Player>) : Recycler
         holder.bindPlayer(players.elementAt(position))
     }
 
-    class PlayerHolder(v: View) : RecyclerView.ViewHolder(v) {
+    class PlayerHolder(v: PlayerListItemBinding) : RecyclerView.ViewHolder(v.root) {
 
-        private var view: View = v
+        private var view: PlayerListItemBinding = v
 
         fun bindPlayer(player: Player) {
             view.playerNameField.text = player.name

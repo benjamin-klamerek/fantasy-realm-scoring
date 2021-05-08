@@ -13,9 +13,8 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.common.InputImage
-import com.klamerek.fantasyrealms.R
+import com.klamerek.fantasyrealms.databinding.ActivityScanBinding
 import com.klamerek.fantasyrealms.ocr.CardTitleRecognizer
-import kotlinx.android.synthetic.main.activity_scan.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.concurrent.ExecutorService
@@ -31,6 +30,7 @@ class ScanActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
     private val recognizer = CardTitleRecognizer()
+    private lateinit var binding: ActivityScanBinding
 
     override fun onDestroy() {
         super.onDestroy()
@@ -41,15 +41,17 @@ class ScanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
-        setContentView(R.layout.activity_scan)
+        binding = ActivityScanBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         manageCameraPermission()
 
         cameraExecutor = Executors.newSingleThreadExecutor()
-        cameraCaptureButton.setOnClickListener {
-            scanProgressBar.visibility = View.VISIBLE
-            scanningLabel.visibility = View.VISIBLE
-            cameraPreview.visibility = View.GONE
+        binding.cameraCaptureButton.setOnClickListener {
+            binding.scanProgressBar.visibility = View.VISIBLE
+            binding.scanningLabel.visibility = View.VISIBLE
+            binding.cameraPreview.visibility = View.GONE
             scan()
         }
     }
@@ -58,9 +60,9 @@ class ScanActivity : AppCompatActivity() {
 
     @Subscribe
     fun closeActivity(cardDetected: CardDetectedEvent) {
-        scanProgressBar.visibility = View.GONE
-        scanningLabel.visibility = View.GONE
-        cameraPreview.visibility = View.VISIBLE
+        binding.scanProgressBar.visibility = View.GONE
+        binding.scanningLabel.visibility = View.GONE
+        binding.cameraPreview.visibility = View.VISIBLE
         val closingIntent = Intent()
         val answer = CardsSelectionExchange()
         answer.cardsSelected.addAll(cardDetected.indexes)
@@ -112,7 +114,7 @@ class ScanActivity : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(cameraPreview.surfaceProvider)
+                    it.setSurfaceProvider(binding.cameraPreview.surfaceProvider)
                 }
 
             imageCapture = ImageCapture.Builder().build()

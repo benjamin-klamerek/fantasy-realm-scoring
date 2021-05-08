@@ -2,6 +2,7 @@ package com.klamerek.fantasyrealms.screen
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +11,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.klamerek.fantasyrealms.R
+import com.klamerek.fantasyrealms.databinding.ActivityHandSelectionBinding
+import com.klamerek.fantasyrealms.databinding.HandListItemBinding
 import com.klamerek.fantasyrealms.game.*
-import inflate
-import kotlinx.android.synthetic.main.activity_hand_selection.*
-import kotlinx.android.synthetic.main.hand_list_item.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -22,6 +22,7 @@ class HandSelectionActivity : AppCompatActivity() {
 
     private lateinit var adapter: HandSelectionAdapter
     private lateinit var player: Player
+    private lateinit var binding: ActivityHandSelectionBinding
 
     override fun onDestroy() {
         super.onDestroy()
@@ -31,39 +32,41 @@ class HandSelectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
-        setContentView(R.layout.activity_hand_selection)
+        binding = ActivityHandSelectionBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         player = Players.instance[intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)]
 
         refreshPlayerLabels()
 
-        addCardsButton.setOnClickListener {
+        binding.addCardsButton.setOnClickListener {
             val handSelectionIntent = Intent(this, CardsSelectionActivity::class.java)
             val request = CardsSelectionExchange()
             request.cardsSelected.addAll(player.game.cards().map { card -> card.definition.id })
             handSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, request)
             startActivityForResult(handSelectionIntent, Constants.SELECT_CARDS)
         }
-        scanButton.setOnClickListener {
+        binding.scanButton.setOnClickListener {
             val handSelectionIntent = Intent(this, ScanActivity::class.java)
             startActivityForResult(handSelectionIntent, Constants.SELECT_CARDS)
         }
 
         val linearLayoutManager = LinearLayoutManager(this)
-        handView.addItemDecoration(DividerItemDecoration(handView.context, DividerItemDecoration.VERTICAL))
-        handView.layoutManager = linearLayoutManager
+        binding.handView.addItemDecoration(DividerItemDecoration(binding.handView.context, DividerItemDecoration.VERTICAL))
+        binding.handView.layoutManager = linearLayoutManager
         adapter = HandSelectionAdapter(player.game)
-        handView.adapter = adapter
+        binding.handView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(
-            handView.context, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            binding.handView.context, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) { position: Int -> EventBus.getDefault().post(CardDeletionEvent(position)) })
-        itemTouchHelper.attachToRecyclerView(handView)
+        itemTouchHelper.attachToRecyclerView(binding.handView)
     }
 
     private fun refreshPlayerLabels() {
-        playerNameLabel.text = player.name + " - Score : " + player.game.score()
-        handSizeLabel.text = player.game.actualHandSize().toString() + "/" + player.game.handSizeExpected()
+        binding.playerNameLabel.text = player.name + " - Score : " + player.game.score()
+        binding.handSizeLabel.text = player.game.actualHandSize().toString() + "/" + player.game.handSizeExpected()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -129,8 +132,8 @@ class HandSelectionActivity : AppCompatActivity() {
 class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSelectionAdapter.HandHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HandHolder {
-        val inflatedView = parent.inflate(R.layout.hand_list_item, false)
-        return HandHolder(inflatedView, game)
+        val itemBinding = HandListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return HandHolder(itemBinding, game)
     }
 
     override fun getItemCount(): Int = game.actualHandSize()
@@ -139,9 +142,9 @@ class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSe
         holder.bindCard(game.cards().elementAt(position))
     }
 
-    class HandHolder(v: View, private val game: Game) : RecyclerView.ViewHolder(v) {
+    class HandHolder(v: HandListItemBinding, private val game: Game) : RecyclerView.ViewHolder(v.root) {
 
-        private var view: View = v
+        private var view: HandListItemBinding = v
 
         fun bindCard(card: Card) {
             updateMainPart(card)

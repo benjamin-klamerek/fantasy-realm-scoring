@@ -6,17 +6,19 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import com.google.android.material.chip.Chip
-import com.klamerek.fantasyrealms.R
-import kotlinx.android.synthetic.main.activity_cards_selection.*
+import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
 import java.io.Serializable
 
 class CardsSelectionActivity : AppCompatActivity() {
 
     private lateinit var input: CardsSelectionExchange
+    private lateinit var binding: ActivityCardsSelectionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cards_selection)
+        binding = ActivityCardsSelectionBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         input = intent.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as CardsSelectionExchange
 
@@ -28,7 +30,7 @@ class CardsSelectionActivity : AppCompatActivity() {
         adaptSuitListDisplay()
         updateMainButtonStatus()
 
-        addCardsButton.setOnClickListener {
+        binding.addCardsButton.setOnClickListener {
             val closingIntent = Intent()
             val answer = CardsSelectionExchange()
             answer.cardInitiator = input.cardInitiator
@@ -49,8 +51,8 @@ class CardsSelectionActivity : AppCompatActivity() {
 
     private fun adaptSuitListDisplay() {
         val suitActivated = input.selectionMode == Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
-        suitScrollView.visibility = if (suitActivated) View.VISIBLE else View.GONE
-        divider.visibility = if (suitActivated) View.VISIBLE else View.GONE
+        binding.suitScrollView.visibility = if (suitActivated) View.VISIBLE else View.GONE
+        binding.divider.visibility = if (suitActivated) View.VISIBLE else View.GONE
         suitChips().forEach { chip -> chip.setOnClickListener(onlyOneSuitSelected()) }
     }
 
@@ -62,7 +64,7 @@ class CardsSelectionActivity : AppCompatActivity() {
     }
 
     private fun updateMainLabel() {
-        selectionLabel.text = colorSuitsAndBoldCardNames(applicationContext, input.label.orEmpty())
+        binding.selectionLabel.text = colorSuitsAndBoldCardNames(applicationContext, input.label.orEmpty())
     }
 
     private fun onlyOneSuitSelected(): View.OnClickListener? {
@@ -81,11 +83,11 @@ class CardsSelectionActivity : AppCompatActivity() {
 
     private fun updateMainButtonStatus() {
         when (input.selectionMode) {
-            Constants.CARD_LIST_SELECTION_MODE_DEFAULT -> addCardsButton.isEnabled = true
+            Constants.CARD_LIST_SELECTION_MODE_DEFAULT -> binding.addCardsButton.isEnabled = true
             Constants.CARD_LIST_SELECTION_MODE_ONE_CARD ->
-                addCardsButton.isEnabled = cardChips().count { chip -> chip.isChecked } == 1
+                binding.addCardsButton.isEnabled = cardChips().count { chip -> chip.isChecked } == 1
             Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT ->
-                addCardsButton.isEnabled = cardChips().count { chip -> chip.isChecked } == 1 &&
+                binding.addCardsButton.isEnabled = cardChips().count { chip -> chip.isChecked } == 1 &&
                         suitChips().count { chip -> chip.isChecked } == 1
 
         }
@@ -101,9 +103,9 @@ class CardsSelectionActivity : AppCompatActivity() {
         cardChips().forEach { chip -> chip.isChecked = input.cardsSelected.contains(Integer.valueOf(chip.tag.toString())) }
     }
 
-    private fun cardChips() = chipGroup.children.filter { child -> child is Chip }.map { child -> child as Chip }
+    private fun cardChips() = binding.chipGroup.children.filter { child -> child is Chip }.map { child -> child as Chip }
 
-    private fun suitChips() = suitChipGroup.children.filter { child -> child is Chip }.map { child -> child as Chip }
+    private fun suitChips() = binding.suitChipGroup.children.filter { child -> child is Chip }.map { child -> child as Chip }
 }
 
 /**
