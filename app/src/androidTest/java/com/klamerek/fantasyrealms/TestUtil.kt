@@ -49,7 +49,6 @@ fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
     val scroll = UiScrollable(UiSelector().scrollable(true))
     if (scroll.exists()){
         scroll.scrollIntoView(selector)
-        Thread.sleep(3000)
     }
     return this.findObject(selector)
 }
@@ -133,10 +132,15 @@ private fun updateGooglePlayServices(device: UiDevice) {
 
 private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
+    Thread.sleep(3000)
     device.descriptionStartsWith("Open settings").clickAndWaitForNewWindow()
+    Thread.sleep(3000)
     device.clickableChildTextContains("Storage").clickAndWaitForNewWindow()
+    Thread.sleep(3000)
     device.clickableChildTextContains("Other apps").clickAndWaitForNewWindow()
+    Thread.sleep(3000)
     device.clickableChildTextContains("Google Play services").clickAndWaitForNewWindow()
+    Thread.sleep(3000)
     device.findObject(UiSelector().clickable(true).textContains("Clear cache")).clickAndWaitForNewWindow()
 }
 
