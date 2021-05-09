@@ -81,7 +81,7 @@ class Game() {
         val sorted = cardsNotBlanked().sortedBy { card -> card.value() }
         var maxCount = 1
         var count = 1
-        var previousValue = Int.MIN_VALUE;
+        var previousValue = Int.MIN_VALUE
         for (card in sorted) {
             if (card.value() == (previousValue + 1)) {
                 count += 1
@@ -95,7 +95,7 @@ class Game() {
     }
 
     fun largestSuit(): Int {
-        return cardsNotBlanked().groupBy { card -> card.suit() }.map { entry -> entry.value.size }.max() ?: 0
+        return cardsNotBlanked().groupBy { card -> card.suit() }.map { entry -> entry.value.size }.maxOrNull() ?: 0
     }
 
     fun calculate() {

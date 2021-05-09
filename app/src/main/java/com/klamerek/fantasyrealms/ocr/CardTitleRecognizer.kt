@@ -1,7 +1,9 @@
 package com.klamerek.fantasyrealms.ocr
 
+import android.os.Handler
+import android.os.Looper
 import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
+import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.klamerek.fantasyrealms.game.CardDefinition
@@ -11,6 +13,7 @@ import me.xdrop.fuzzywuzzy.FuzzySearch
 import normalize
 import java.util.*
 import kotlin.math.abs
+
 
 /**
  * Recognize title card from images and provide list of card (ids) identified
@@ -64,11 +67,12 @@ class CardTitleRecognizer {
      * @param inputImage        image containing card titles
      * @return                  task of card list identified (as ids)
      */
-    fun process(inputImage: InputImage): Task<List<Int>> {
-        return recognizer.process(inputImage).continueWithTask { recognizeTextTask ->
-            Tasks.call {
+    fun process(inputImage: InputImage): Task<List<Int>> =
+        recognizer.process(inputImage).continueWithTask { recognizeTextTask ->
+            val taskCompletionSource = TaskCompletionSource<List<Int>>()
+            Handler(Looper.getMainLooper()).post {
                 val text = recognizeTextTask.result
-                text?.textBlocks?.asSequence()
+                taskCompletionSource.setResult(text?.textBlocks?.asSequence()
                     ?.map { textBlock -> cleanText(textBlock.text) }
                     ?.filter { it.length > 2 }
                     ?.map { getMatchingResult(it) }
@@ -76,9 +80,9 @@ class CardTitleRecognizer {
                     ?.map { matching -> matching.bestCardResult }
                     ?.toSet()
                     ?.map { it.id }
-                    ?: emptyList()
+                    ?: emptyList())
             }
+            taskCompletionSource.task
         }
-    }
 
 }

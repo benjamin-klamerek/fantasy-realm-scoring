@@ -47,7 +47,7 @@ fun UiDevice.textStartsWith(criteria: String): UiObject =
 fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
     val selector = clickableChildTextContainsSelector(criteria)
     val scroll = UiScrollable(UiSelector().scrollable(true))
-    if (scroll.exists()){
+    if (scroll.exists()) {
         scroll.scrollIntoView(selector)
     }
     return this.findObject(selector)
@@ -73,7 +73,6 @@ fun clickableChildTextContainsSelector(criteria: String): UiSelector =
  *
  */
 fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
-
     if (!isGooglePlayServicesUpToDate(activity)) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         device.pressHome()
