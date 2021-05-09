@@ -53,6 +53,9 @@ fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
     return this.findObject(selector)
 }
 
+fun UiObject.clickAndWaitForNewWindowIfExists(): Boolean =
+    this.exists() && this.clickAndWaitForNewWindow()
+
 fun clickableChildTextContainsSelector(criteria: String): UiSelector =
     UiSelector().clickable(true).childSelector(UiSelector().textContains(criteria))
 
@@ -71,15 +74,15 @@ fun clickableChildTextContainsSelector(criteria: String): UiSelector =
  */
 fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
 
-    if (!isGooglePlayServicesUpToDate(activity)) {
+    //if (!isGooglePlayServicesUpToDate(activity)) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         device.pressHome()
-        updateGooglePlayServices(device)
+      //  updateGooglePlayServices(device)
         device.pressHome()
         clearGooglePlayServicesCache(device)
         device.pressHome()
         Thread.sleep(5000)
-    }
+    //}
 
     if (!isGooglePlayServicesUpToDate(activity)) {
         throw UnsupportedOperationException(
@@ -132,15 +135,11 @@ private fun updateGooglePlayServices(device: UiDevice) {
 
 private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
-    Thread.sleep(3000)
-    device.descriptionStartsWith("Open settings").clickAndWaitForNewWindow()
-    Thread.sleep(3000)
-    device.clickableChildTextContains("Storage").clickAndWaitForNewWindow()
-    Thread.sleep(3000)
-    device.clickableChildTextContains("Other apps").clickAndWaitForNewWindow()
-    Thread.sleep(3000)
-    device.clickableChildTextContains("Google Play services").clickAndWaitForNewWindow()
-    Thread.sleep(3000)
-    device.findObject(UiSelector().clickable(true).textContains("Clear cache")).clickAndWaitForNewWindow()
+    device.descriptionStartsWith("Open settings").clickAndWaitForNewWindowIfExists()
+    device.clickableChildTextContains("Storage").clickAndWaitForNewWindowIfExists()
+    device.clickableChildTextContains("Internal shared storage").clickAndWaitForNewWindowIfExists()
+    device.clickableChildTextContains("Other apps").clickAndWaitForNewWindowIfExists()
+    device.clickableChildTextContains("Google Play services").clickAndWaitForNewWindowIfExists()
+    device.findObject(UiSelector().clickable(true).textContains("Clear cache")).clickAndWaitForNewWindowIfExists()
 }
 
