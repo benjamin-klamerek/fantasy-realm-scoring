@@ -17,8 +17,7 @@ Icon made by Freepik from www.flaticon.com
 - add button to clear all hands ?
 
 ### About development
-- During unit tests, if you encounter exception about version of Google service you have to :
-    * Update manually ```Google play Service``` in your emulator
+- During unit tests, if you encounter exception about version of Google service you have to install Play store
     * If ```Play Store``` is not available in your emulator, the only solution that I found is to manually update config.ini
     
 ``` 

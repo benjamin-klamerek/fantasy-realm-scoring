@@ -70,8 +70,8 @@ class CardTitleRecognizer {
                 val text = recognizeTextTask.result
                 text?.textBlocks?.asSequence()
                     ?.map { textBlock -> cleanText(textBlock.text) }
-                    ?.filter { text -> text.length > 2 }
-                    ?.map { text -> getMatchingResult(text) }
+                    ?.filter { it.length > 2 }
+                    ?.map { getMatchingResult(it) }
                     ?.filter { matching -> matching.isAcceptable() }
                     ?.map { matching -> matching.bestCardResult }
                     ?.toSet()

@@ -19,5 +19,5 @@ jobs:
         uses: ReactiveCircus/android-emulator-runner@v2.16.0
         with:
           api-level: 29
-          #target: playstore
+          target: playstore
           script: ./gradlew connectedCheck

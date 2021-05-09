@@ -4,7 +4,7 @@ package com.klamerek.fantasyrealms.game
  * Mutable representation of a card in a player hand.<br>
  * handle the effective status of the card in the game (like blanked or partial activated)
  *
- * @property definition definition of teh card
+ * @property definition card definition
  * @property rules      rules assigned to this card
  */
 class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>>) {
