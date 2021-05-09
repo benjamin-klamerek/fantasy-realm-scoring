@@ -74,15 +74,15 @@ fun clickableChildTextContainsSelector(criteria: String): UiSelector =
  */
 fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
 
-    //if (!isGooglePlayServicesUpToDate(activity)) {
+    if (!isGooglePlayServicesUpToDate(activity)) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         device.pressHome()
-      //  updateGooglePlayServices(device)
+        updateGooglePlayServices(device)
         device.pressHome()
         clearGooglePlayServicesCache(device)
         device.pressHome()
         Thread.sleep(5000)
-    //}
+    }
 
     if (!isGooglePlayServicesUpToDate(activity)) {
         throw UnsupportedOperationException(
