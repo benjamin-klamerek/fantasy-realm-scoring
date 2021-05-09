@@ -49,6 +49,7 @@ fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
     val scroll = UiScrollable(UiSelector().scrollable(true))
     if (scroll.exists()){
         scroll.scrollIntoView(selector)
+        Thread.sleep(3000)
     }
     return this.findObject(selector)
 }
