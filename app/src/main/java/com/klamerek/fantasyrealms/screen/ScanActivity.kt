@@ -103,10 +103,11 @@ class ScanActivity : AppCompatActivity() {
         imageCapture.takePicture(ContextCompat.getMainExecutor(this), MyImageCapturedCallback(recognizer))
     }
 
+    @Suppress("TooGenericExceptionCaught")
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
-        cameraProviderFuture.addListener(Runnable {
+        cameraProviderFuture.addListener({
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
