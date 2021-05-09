@@ -11,8 +11,6 @@ formatting:
   ArgumentListWrapping:
     active: false
     autoCorrect: true
-    indentSize: 4
-    maxLineLength: 150
 
 complexity:
   active: true
