@@ -5,6 +5,7 @@ import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.klamerek.fantasyrealms.databinding.ActivityMainBinding
+import com.klamerek.fantasyrealms.screen.Constants
 import com.klamerek.fantasyrealms.screen.PlayerSelectionActivity
 
 class MainActivity : AppCompatActivity() {
@@ -23,8 +24,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         val animationDrawable = binding.mainActConstraintLayout.background as AnimationDrawable
-        animationDrawable.setEnterFadeDuration(2000)
-        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.setEnterFadeDuration(Constants.ANIMATION_ENTER_FADE_DURATION)
+        animationDrawable.setExitFadeDuration(Constants.ANIMATION_EXIT_FADE_DURATION)
         animationDrawable.start()
     }
 }

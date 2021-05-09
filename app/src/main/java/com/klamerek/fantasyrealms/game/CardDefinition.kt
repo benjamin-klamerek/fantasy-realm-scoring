@@ -17,7 +17,7 @@ interface Tag {
  *
  * @property displayId      value to display on screens
  */
-enum class Effect(private val displayId : Int) : Tag {
+enum class Effect(private val displayId: Int) : Tag {
     BONUS(R.string.effect_bonus),
     CLEAR(R.string.effect_clear),
     PENALTY(R.string.effect_penalty),
@@ -32,11 +32,18 @@ enum class Effect(private val displayId : Int) : Tag {
  *
  * @property displayId      value to display on screens
  */
-enum class Suit(private val displayId : Int, val color: Int) : Tag {
-    ARMY(R.string.suit_army, R.color.colorArmy), ARTIFACT(R.string.suit_artifact, R.color.colorArtifact), BEAST(R.string.suit_beast, R.color.colorBeast),
-    FLAME(R.string.suit_flame, R.color.colorFlame), FLOOD(R.string.suit_flood, R.color.colorFlood), LAND(R.string.suit_land, R.color.colorLand),
-    LEADER(R.string.suit_leader, R.color.colorLeader), WEAPON(R.string.suit_weapon, R.color.colorWeapon), WEATHER(R.string.suit_weather, R.color.colorWeather),
-    WILD(R.string.suit_wild, R.color.colorWild), WIZARD(R.string.suit_wizard, R.color.colorWizard);
+enum class Suit(private val displayId: Int, val color: Int) : Tag {
+    ARMY(R.string.suit_army, R.color.colorArmy),
+    ARTIFACT(R.string.suit_artifact, R.color.colorArtifact),
+    BEAST(R.string.suit_beast, R.color.colorBeast),
+    FLAME(R.string.suit_flame, R.color.colorFlame),
+    FLOOD(R.string.suit_flood, R.color.colorFlood),
+    LAND(R.string.suit_land, R.color.colorLand),
+    LEADER(R.string.suit_leader, R.color.colorLeader),
+    WEAPON(R.string.suit_weapon, R.color.colorWeapon),
+    WEATHER(R.string.suit_weather, R.color.colorWeather),
+    WILD(R.string.suit_wild, R.color.colorWild),
+    WIZARD(R.string.suit_wizard, R.color.colorWizard);
 
     override fun label(): String = this.name
     override fun display(): String = Strings.get(displayId)

@@ -2,6 +2,9 @@ package com.klamerek.fantasyrealms.screen
 
 object Constants {
 
+    const val ANIMATION_ENTER_FADE_DURATION = 2000
+    const val ANIMATION_EXIT_FADE_DURATION = 4000
+
     const val DIFFERENCE_LENGTH_IN_NAME_THRESHOLD = 4
     const val MATCHING_CARD_SCORE_THRESHOLD = 75
 
