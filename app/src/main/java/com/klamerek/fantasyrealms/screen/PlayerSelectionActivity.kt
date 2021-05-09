@@ -19,7 +19,6 @@ import com.klamerek.fantasyrealms.databinding.ActivityPlayerSelectionBinding
 import com.klamerek.fantasyrealms.databinding.PlayerListItemBinding
 import com.klamerek.fantasyrealms.game.Game
 import com.klamerek.fantasyrealms.game.Player
-import com.klamerek.fantasyrealms.game.Players
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -54,7 +53,7 @@ class PlayerSelectionActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         binding.playersView.addItemDecoration(DividerItemDecoration(binding.playersView.context, DividerItemDecoration.VERTICAL))
         binding.playersView.layoutManager = linearLayoutManager
-        adapter = PlayerSelectionAdapter(Players.instance)
+        adapter = PlayerSelectionAdapter(Player.all)
         binding.playersView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(
@@ -103,15 +102,15 @@ class PlayerSelectionActivity : AppCompatActivity() {
 
     @Subscribe
     fun addPlayer(event: PlayerCreationEvent) {
-        Players.instance.add(Player(event.name, Game()))
+        Player.all.add(Player(event.name, Game()))
         runOnUiThread {
-            adapter.notifyItemInserted(Players.instance.size - 1)
+            adapter.notifyItemInserted(Player.all.size - 1)
         }
     }
 
     @Subscribe
     fun removePlayer(event: PlayerDeletionEvent) {
-        Players.instance.removeAt(event.index)
+        Player.all.removeAt(event.index)
         runOnUiThread {
             adapter.notifyItemRemoved(event.index)
         }
@@ -119,7 +118,7 @@ class PlayerSelectionActivity : AppCompatActivity() {
 
     @Subscribe
     fun removeAllPlayers(event: AllPlayersDeletionEvent) {
-        Players.instance.clear()
+        Player.all.clear()
         runOnUiThread {
             adapter.notifyDataSetChanged()
         }
@@ -128,7 +127,7 @@ class PlayerSelectionActivity : AppCompatActivity() {
     @Subscribe
     fun editPlayer(event: PlayerEditEvent) {
         val handSelectionIntent = Intent(this, HandSelectionActivity::class.java)
-        handSelectionIntent.putExtra(Constants.PLAYER_SESSION_ID, Players.instance.indexOf(event.player))
+        handSelectionIntent.putExtra(Constants.PLAYER_SESSION_ID, Player.all.indexOf(event.player))
         startActivity(handSelectionIntent)
     }
 

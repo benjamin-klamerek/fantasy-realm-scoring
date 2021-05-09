@@ -10,7 +10,6 @@ import androidx.test.filters.LargeTest
 import com.klamerek.fantasyrealms.R
 import com.klamerek.fantasyrealms.game.Game
 import com.klamerek.fantasyrealms.game.Player
-import com.klamerek.fantasyrealms.game.Players
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -22,8 +21,8 @@ class HandSelectionActivityTest {
 
     @BeforeEach
     fun before() {
-        Players.instance.clear()
-        Players.instance.add(Player("TEST", Game()))
+        Player.all.clear()
+        Player.all.add(Player("TEST", Game()))
         scenario = ActivityScenario.launch(HandSelectionActivity::class.java)
         Intents.init()
         scenario.onActivity {

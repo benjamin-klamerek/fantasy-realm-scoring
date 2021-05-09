@@ -6,12 +6,9 @@ package com.klamerek.fantasyrealms.game
  * @property name
  * @property game
  */
-class Player(var name: String, val game: Game)
-
-class Players {
+class Player(var name: String, val game: Game) {
 
     companion object {
-       val instance : MutableList<Player> = ArrayList()
+        val all : MutableList<Player> = ArrayList()
     }
-
 }

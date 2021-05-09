@@ -36,7 +36,7 @@ class HandSelectionActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        player = Players.instance[intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)]
+        player = Player.all[intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)]
 
         refreshPlayerLabels()
 
@@ -162,7 +162,9 @@ class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSe
             view.cardDetailButton.setOnClickListener {
                 view.detailLinearLayout.visibility = if (view.detailLinearLayout.visibility == View.GONE) View.VISIBLE else View.GONE
                 view.cardDetailButton.setImageResource(
-                    if (view.detailLinearLayout.visibility == View.GONE) R.drawable.ic_baseline_keyboard_arrow_down_36 else R.drawable.ic_baseline_keyboard_arrow_up_36
+                    if (view.detailLinearLayout.visibility == View.GONE)
+                        R.drawable.ic_baseline_keyboard_arrow_down_36 else
+                        R.drawable.ic_baseline_keyboard_arrow_up_36
                 )
             }
         }

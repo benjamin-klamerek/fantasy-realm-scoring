@@ -9,6 +9,7 @@ import com.google.mlkit.vision.text.TextRecognition
 import com.klamerek.fantasyrealms.game.CardDefinition
 import com.klamerek.fantasyrealms.game.allDefinitions
 import com.klamerek.fantasyrealms.game.empty
+import com.klamerek.fantasyrealms.screen.Constants
 import me.xdrop.fuzzywuzzy.FuzzySearch
 import normalize
 import java.util.*
@@ -57,7 +58,9 @@ class CardTitleRecognizer {
          * <ul>
          *
          */
-        fun isAcceptable() = abs(input.length - matchingKey.length) < 4 && score > 75 && bestCardResult != empty
+        fun isAcceptable() = abs(input.length - matchingKey.length) < Constants.DIFFERENCE_LENGTH_IN_NAME_THRESHOLD &&
+                score > Constants.MATCHING_CARD_SCORE_THRESHOLD &&
+                bestCardResult != empty
 
     }
 
