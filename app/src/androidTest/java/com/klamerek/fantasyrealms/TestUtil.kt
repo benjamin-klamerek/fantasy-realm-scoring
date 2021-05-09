@@ -44,8 +44,17 @@ fun UiDevice.descriptionStartsWith(criteria: String): UiObject =
 fun UiDevice.textStartsWith(criteria: String): UiObject =
     this.findObject(UiSelector().textStartsWith(criteria))
 
-fun UiDevice.clickableChildTextContains(id: String): UiObject =
-    this.findObject(UiSelector().clickable(true).childSelector(UiSelector().textContains(id)))
+fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
+    val selector = clickableChildTextContainsSelector(criteria)
+    val scroll = UiScrollable(UiSelector().scrollable(true))
+    if (scroll.exists()){
+        scroll.scrollIntoView(selector)
+    }
+    return this.findObject(selector)
+}
+
+fun clickableChildTextContainsSelector(criteria: String): UiSelector =
+    UiSelector().clickable(true).childSelector(UiSelector().textContains(criteria))
 
 /**
  * Method to ensure that Google App Services is up to date. <br>
@@ -124,8 +133,6 @@ private fun updateGooglePlayServices(device: UiDevice) {
 private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
     device.descriptionStartsWith("Open settings").clickAndWaitForNewWindow()
-    UiScrollable(UiSelector().scrollable(true))
-        .scrollIntoView(UiSelector().clickable(true).childSelector(UiSelector().textContains("Storage")))
     device.clickableChildTextContains("Storage").clickAndWaitForNewWindow()
     device.clickableChildTextContains("Other apps").clickAndWaitForNewWindow()
     device.clickableChildTextContains("Google Play services").clickAndWaitForNewWindow()
