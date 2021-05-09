@@ -14,6 +14,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 /**
@@ -39,6 +40,7 @@ class ScanActivityTest {
         scenario.close()
     }
 
+    @Disabled
     @Test
     fun scan_button_close_activity() {
         onView(AllOf.allOf(withId(R.id.cameraCaptureButton))).perform(click())

@@ -62,15 +62,15 @@ fun UiDevice.clickableChildTextContains(id: String): UiObject =
  */
 fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
 
-    if (!isGooglePlayServicesUpToDate(activity)) {
+    //if (!isGooglePlayServicesUpToDate(activity)) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         device.pressHome()
-        updateGooglePlayServices(device)
+        //updateGooglePlayServices(device)
         device.pressHome()
         clearGooglePlayServicesCache(device)
         device.pressHome()
         Thread.sleep(5000)
-    }
+    //}
 
     if (!isGooglePlayServicesUpToDate(activity)) {
         throw UnsupportedOperationException(
@@ -124,6 +124,8 @@ private fun updateGooglePlayServices(device: UiDevice) {
 private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
     device.descriptionStartsWith("Open settings").clickAndWaitForNewWindow()
+    UiScrollable(UiSelector().scrollable(true))
+        .scrollIntoView(UiSelector().clickable(true).childSelector(UiSelector().textContains("Storage")))
     device.clickableChildTextContains("Storage").clickAndWaitForNewWindow()
     device.clickableChildTextContains("Other apps").clickAndWaitForNewWindow()
     device.clickableChildTextContains("Google Play services").clickAndWaitForNewWindow()
