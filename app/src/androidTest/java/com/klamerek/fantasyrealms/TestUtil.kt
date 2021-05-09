@@ -125,17 +125,19 @@ private fun updateGooglePlayServices(device: UiDevice) {
         googlePlayServiceUpdateButton.click()
         scrollBar.scrollToBeginning(100)
         while (device.textStartsWith("stop").exists() || device.textStartsWith("Installing").exists()) {
-            Log.d("Automatic updater", "Updating in progress (may take a long time)...")
+            Log.i("Automatic updater", "Updating in progress (may take a long time)...")
             Thread.sleep(5000)
         }
     } else {
-        Log.d("Automatic updater", "Application 'Google Play service' seems up to date")
+        Log.i("Automatic updater", "Application 'Google Play service' seems up to date")
     }
 }
 
 private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
+    Thread.sleep(3000)
     device.descriptionStartsWith("Open settings").clickAndWaitForNewWindowIfExists()
+    Thread.sleep(3000)
     device.clickableChildTextContains("Storage").clickAndWaitForNewWindowIfExists()
     device.clickableChildTextContains("Internal shared storage").clickAndWaitForNewWindowIfExists()
     device.clickableChildTextContains("Other apps").clickAndWaitForNewWindowIfExists()
