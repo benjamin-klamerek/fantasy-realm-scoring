@@ -22,7 +22,7 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
         blanked = false
     }
 
-    fun clearSimulation() {
+    private fun clearSimulation() {
         simulatedName = null
         simulatedValue = null
         simulatedSuit = null
@@ -35,11 +35,11 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
 
     fun isOneOf(vararg suit: Suit) = suit.contains(this.suit())
 
-    fun name(): String = simulatedName ?: definition.name();
+    fun name(): String = simulatedName ?: definition.name()
 
     fun value(): Int = simulatedValue ?: definition.value
 
-    fun suit(): Suit = simulatedSuit ?: definition.suit;
+    fun suit(): Suit = simulatedSuit ?: definition.suit
 
     fun rules(): List<Rule<out Any>> = simulatedRules ?: rules
 

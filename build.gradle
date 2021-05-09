@@ -4,7 +4,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-
+        gradlePluginPortal()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.0'
@@ -14,7 +14,12 @@ buildscript {
         // in the individual module build.gradle files
 
         classpath "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.16.0")
     }
+}
+
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.16.0"
 }
 
 allprojects {
