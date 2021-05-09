@@ -12,6 +12,11 @@ formatting:
     active: false
     autoCorrect: true
 
+style:
+  MaxLineLength:
+    active: true
+    maxLineLength: 120
+
 complexity:
   active: true
   TooManyFunctions:
