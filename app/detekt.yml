@@ -32,3 +32,8 @@ complexity:
     ignoreDeprecated: false
     ignorePrivate: false
     ignoreOverridden: false
+
+empty-blocks:
+  active: true
+  EmptyFunctionBlock:
+    active: false

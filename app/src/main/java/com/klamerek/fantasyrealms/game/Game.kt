@@ -7,9 +7,8 @@ import java.lang.Integer.max
  * List of cards (player hand) wth scoring calculation
  *
  */
-class Game() {
+class Game {
 
-    private val defaultHandSize = 7
     private val cards = ArrayList<Card>()
     private val bonusScoreByCard = HashMap<CardDefinition, Int>()
     private val penaltyScoreByCard = HashMap<CardDefinition, Int>()
@@ -101,11 +100,7 @@ class Game() {
     fun calculate() {
         cards.forEach { card -> card.clear() }
 
-        doppelgangerSelection?.let { cardDefinition -> applyDoppelganger(cardDefinition) }
-        mirageSelection?.let { cardDefinition -> applyMirage(cardDefinition) }
-        shapeShifterSelection?.let { cardDefinition -> applyShapeShifter(cardDefinition) }
-        bookOfChangeSelection?.let { pair -> applyBookOfChanges(pair.first, pair.second) }
-        islandSelection?.let { cardDefinition -> applyIsland(cardDefinition) }
+        applySpecificCardEffects()
 
         val penaltiesToDeactivate = cards.map { card -> identifyClearedRules(card) }.flatten()
         penaltiesToDeactivate.forEach { ruleToDeactivate ->
@@ -140,6 +135,14 @@ class Game() {
                 .map { rule -> rule?.logic?.invoke(this) }
                 .sumBy { any -> if (any is Int) any else 0 }
         }.toMap())
+    }
+
+    private fun applySpecificCardEffects() {
+        doppelgangerSelection?.let { cardDefinition -> applyDoppelganger(cardDefinition) }
+        mirageSelection?.let { cardDefinition -> applyMirage(cardDefinition) }
+        shapeShifterSelection?.let { cardDefinition -> applyShapeShifter(cardDefinition) }
+        bookOfChangeSelection?.let { pair -> applyBookOfChanges(pair.first, pair.second) }
+        islandSelection?.let { cardDefinition -> applyIsland(cardDefinition) }
     }
 
     fun score(): Int = bonusScoreByCard.entries.sumBy { it.value } +
@@ -252,7 +255,7 @@ class Game() {
     }
 
     fun handSizeExpected(): Int {
-        return defaultHandSize + cards.map { card -> card.definition }.filter { definition -> definition == necromancer }.count()
+        return Constants.DEFAULT_HAND_SIZE + cards.map { card -> card.definition }.filter { definition -> definition == necromancer }.count()
     }
 
     fun actualHandSize(): Int {

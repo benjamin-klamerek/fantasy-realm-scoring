@@ -86,11 +86,9 @@ class PlayerSelectionActivity : AppCompatActivity() {
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = false
         }
         field?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
+            override fun afterTextChanged(s: Editable?) {}
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = !s.isNullOrBlank()
@@ -116,6 +114,7 @@ class PlayerSelectionActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("UnusedPrivateMember")
     @Subscribe
     fun removeAllPlayers(event: AllPlayersDeletionEvent) {
         Player.all.clear()
@@ -166,6 +165,6 @@ class PlayerCreationEvent(val name: String)
 
 class PlayerDeletionEvent(val index: Int)
 
-class AllPlayersDeletionEvent()
+class AllPlayersDeletionEvent
 
 class PlayerEditEvent(val player: Player)

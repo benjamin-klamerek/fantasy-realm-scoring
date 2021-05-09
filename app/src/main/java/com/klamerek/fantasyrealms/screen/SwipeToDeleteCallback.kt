@@ -14,7 +14,8 @@ import com.klamerek.fantasyrealms.R
  * Generic Swipe implementation
  *
  * @property onSwipedAction     action to execute when an element is swapped
- * @constructor                 create a swiper by defining a context to load resources, directions of the swap movement and action when effectively swapped
+ * @constructor                 create a swiper by defining a context to load resources,
+ * directions of the swap movement and action when effectively swapped
  *
  * @param context               to load icon
  * @param swapDirections        direction of movement (ItemTouchHelper)
@@ -33,6 +34,7 @@ class SwipeToDeleteCallback(context: Context, swapDirections: Int, val onSwipedA
         onSwipedAction(viewHolder.adapterPosition)
     }
 
+    @Suppress("MagicNumber")
     override fun onChildDraw(
         c: Canvas,
         recyclerView: RecyclerView,

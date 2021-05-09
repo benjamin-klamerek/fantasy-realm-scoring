@@ -2,6 +2,8 @@ package com.klamerek.fantasyrealms.screen
 
 object Constants {
 
+    const val DEFAULT_HAND_SIZE = 7
+
     const val ANIMATION_ENTER_FADE_DURATION = 2000
     const val ANIMATION_EXIT_FADE_DURATION = 4000
 
