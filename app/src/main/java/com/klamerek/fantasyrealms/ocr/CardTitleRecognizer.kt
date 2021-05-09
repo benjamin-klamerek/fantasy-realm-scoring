@@ -39,7 +39,7 @@ class CardTitleRecognizer {
     }
 
     /**
-     * POTO when asking for best card title matching given input String
+     * Matching result rule
      *
      * @property input              entry text
      * @property bestCardResult     best card based on score

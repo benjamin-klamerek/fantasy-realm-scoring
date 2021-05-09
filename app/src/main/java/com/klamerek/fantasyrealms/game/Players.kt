@@ -11,7 +11,7 @@ class Player(var name: String, val game: Game)
 class Players {
 
     companion object {
-       val instance : MutableList<Player> = ArrayList();
+       val instance : MutableList<Player> = ArrayList()
     }
 
 }

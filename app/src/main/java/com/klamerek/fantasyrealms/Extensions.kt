@@ -20,3 +20,4 @@ fun String.normalize(): String {
     return REGEX_UNACCENT.replace(temp, "")
 }
 
+

@@ -143,4 +143,3 @@ private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.clickableChildTextContains("Google Play services").clickAndWaitForNewWindowIfExists()
     device.findObject(UiSelector().clickable(true).textContains("Clear cache")).clickAndWaitForNewWindowIfExists()
 }
-
