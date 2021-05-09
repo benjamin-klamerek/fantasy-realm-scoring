@@ -67,7 +67,7 @@ class CardsSelectionActivity : AppCompatActivity() {
         binding.selectionLabel.text = colorSuitsAndBoldCardNames(applicationContext, input.label.orEmpty())
     }
 
-    private fun onlyOneSuitSelected(): View.OnClickListener? {
+    private fun onlyOneSuitSelected(): View.OnClickListener {
         return View.OnClickListener {
             suitChips().filter { chip -> chip != it }.forEach { chip -> chip.isChecked = false }
             updateMainButtonStatus()
@@ -118,7 +118,7 @@ class CardsSelectionActivity : AppCompatActivity() {
  * @property suitsSelected               indicates which suits must already displayed as selected
  * @property cardsScope                 indicates which cards must be accessible for selection
  */
-class CardsSelectionExchange() : Serializable {
+class CardsSelectionExchange : Serializable {
     var selectionMode: Int = Constants.CARD_LIST_SELECTION_MODE_DEFAULT
     var label: String? = null
     var cardInitiator: Int? = null
