@@ -1,0 +1,8 @@
+{
+  "fixes": [
+      "/home/runner/work/fantasy-realm-scoring/fantasy-realm-scoring>/::"
+  ],
+  "codecov": {
+    "disable_default_path_fixes": true
+  }
+}
