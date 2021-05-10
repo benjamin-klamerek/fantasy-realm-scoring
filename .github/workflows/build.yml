@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    timeout-minutes: 30
+      env:
+      JAVA_TOOL_OPTIONS: -Xmx4g
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -21,6 +24,8 @@ jobs:
           api-level: 29
           target: playstore
           script: ./gradlew connectedCheck
+          profile: Nexus 6
+          cores: 4
 
       - name: generate report
         uses: actions/upload-artifact@v2
