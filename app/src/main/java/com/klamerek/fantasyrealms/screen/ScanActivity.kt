@@ -60,8 +60,8 @@ class ScanActivity : AppCompatActivity() {
 
     @Subscribe
     fun closeActivity(cardDetected: CardDetectedEvent) {
-        binding.scanProgressBar.visibility = View.GONE
-        binding.scanningLabel.visibility = View.GONE
+        binding.scanProgressBar.visibility = View.INVISIBLE
+        binding.scanningLabel.visibility = View.INVISIBLE
         binding.cameraPreview.visibility = View.VISIBLE
         val closingIntent = Intent()
         val answer = CardsSelectionExchange()

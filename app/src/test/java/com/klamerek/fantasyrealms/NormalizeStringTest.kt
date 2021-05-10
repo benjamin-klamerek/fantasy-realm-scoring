@@ -1,6 +1,5 @@
 package com.klamerek.fantasyrealms
 
-import normalize
 import org.junit.Assert
 import org.junit.jupiter.api.Test
 

@@ -11,7 +11,7 @@ import com.klamerek.fantasyrealms.game.allDefinitions
 import com.klamerek.fantasyrealms.game.empty
 import com.klamerek.fantasyrealms.screen.Constants
 import me.xdrop.fuzzywuzzy.FuzzySearch
-import normalize
+import com.klamerek.fantasyrealms.normalize
 import java.util.*
 import kotlin.math.abs
 
