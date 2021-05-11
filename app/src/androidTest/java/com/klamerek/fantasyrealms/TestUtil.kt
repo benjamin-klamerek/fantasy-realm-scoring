@@ -46,11 +46,15 @@ fun UiDevice.textStartsWith(criteria: String): UiObject =
 
 fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
     val selector = clickableChildTextContainsSelector(criteria)
-    val scroll = UiScrollable(UiSelector().scrollable(true))
-    if (scroll.exists()) {
-        scroll.scrollIntoView(selector)
+    var result = this.findObject(selector)
+    if (! result.exists()){
+        val scroll = UiScrollable(UiSelector().scrollable(true))
+        if (scroll.exists()) {
+            scroll.scrollIntoView(selector)
+            result = this.findObject(selector)
+        }
     }
-    return this.findObject(selector)
+    return result
 }
 
 fun UiObject.clickAndWaitForNewWindowIfExists(): Boolean =
@@ -110,7 +114,7 @@ private fun updateGooglePlayServices(device: UiDevice) {
     while (device.textStartsWith("Checking").exists()) {
         Thread.sleep(3000)
     }
-    Thread.sleep(3000)
+    Thread.sleep(5000)
     val scrollBar = UiScrollable(UiSelector().scrollable(true))
     scrollBar.scrollIntoView(UiSelector().textContains("Google Play services"))
 

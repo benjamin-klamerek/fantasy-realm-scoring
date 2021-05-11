@@ -23,7 +23,7 @@ jobs:
         with:
           api-level: 29
           target: playstore
-          script: ./gradlew connectedCheck --debug
+          script: ./gradlew connectedCheck --info
           profile: Nexus 6
           cores: 2
 
