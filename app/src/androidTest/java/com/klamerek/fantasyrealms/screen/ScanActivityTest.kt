@@ -8,7 +8,6 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.GrantPermissionRule
 import com.klamerek.fantasyrealms.R
 import com.klamerek.fantasyrealms.ensureThatGooglePlayServicesUpToDate
 import org.hamcrest.core.AllOf
@@ -26,7 +25,6 @@ class ScanActivityTest {
 
     @BeforeEach
     fun before() {
-        GrantPermissionRule.grant(android.Manifest.permission.CAMERA)
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         ensureThatGooglePlayServicesUpToDate(appContext)
         scenario = ActivityScenario.launch(ScanActivity::class.java)
