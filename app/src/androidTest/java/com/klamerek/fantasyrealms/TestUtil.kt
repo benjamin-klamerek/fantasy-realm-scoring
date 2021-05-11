@@ -48,20 +48,22 @@ fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
     val selector = clickableChildTextContainsSelector(criteria)
     var result = this.findObject(selector)
     if (! result.exists()){
-        val scroll = UiScrollable(UiSelector().scrollable(true))
+        val scroll = this.findObject(UiSelector().scrollable(true))
         if (scroll.exists()) {
-            scroll.scrollIntoView(selector)
+            UiScrollable(scroll.selector).scrollIntoView(selector)
             result = this.findObject(selector)
         }
     }
     return result
 }
 
+fun clickableChildTextContainsSelector(criteria: String): UiSelector =
+    UiSelector().clickable(true).childSelector(UiSelector().textContains(criteria))
+
 fun UiObject.clickAndWaitForNewWindowIfExists(): Boolean =
     this.exists() && this.clickAndWaitForNewWindow()
 
-fun clickableChildTextContainsSelector(criteria: String): UiSelector =
-    UiSelector().clickable(true).childSelector(UiSelector().textContains(criteria))
+
 
 /**
  * Method to ensure that Google App Services is up to date. <br>
@@ -84,7 +86,6 @@ fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
         device.pressHome()
         clearGooglePlayServicesCache(device)
         device.pressHome()
-        Thread.sleep(5000)
     }
 
     if (!isGooglePlayServicesUpToDate(activity)) {
@@ -102,13 +103,11 @@ private fun updateGooglePlayServices(device: UiDevice) {
             "Emulator need 'Play store', please use an image that have it."
         )
     }
-    Thread.sleep(5000)
     val playStoreButton = device.descriptionStartsWith(playStoreText)
     playStoreButton.clickAndWaitForNewWindow()
-    Thread.sleep(5000)
+    Thread.sleep(10000)
     if (device.descriptionStartsWith("Options").exists()) {
         device.descriptionStartsWith("Options").clickAndWaitForNewWindow()
-        Thread.sleep(5000)
         device.textStartsWith("Updates").clickAndWaitForNewWindow()
     }
     while (device.textStartsWith("Checking").exists()) {
@@ -129,7 +128,6 @@ private fun updateGooglePlayServices(device: UiDevice) {
         scrollBar.scrollToBeginning(100)
         while (device.textStartsWith("stop").exists() || device.textStartsWith("Installing").exists()) {
             Log.i("Automatic updater", "Updating in progress (may take a long time)...")
-            Thread.sleep(5000)
         }
     } else {
         Log.i("Automatic updater", "Application 'Google Play service' seems up to date")
@@ -138,9 +136,8 @@ private fun updateGooglePlayServices(device: UiDevice) {
 
 private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
-    Thread.sleep(3000)
+    Thread.sleep(10000)
     device.descriptionStartsWith("Open settings").clickAndWaitForNewWindowIfExists()
-    Thread.sleep(3000)
     device.clickableChildTextContains("Storage").clickAndWaitForNewWindowIfExists()
     device.clickableChildTextContains("Internal shared storage").clickAndWaitForNewWindowIfExists()
     device.clickableChildTextContains("Other apps").clickAndWaitForNewWindowIfExists()

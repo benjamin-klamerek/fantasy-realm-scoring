@@ -43,8 +43,6 @@ class ScanActivityTest {
     @Disabled
     @Test
     fun scan_button_close_activity() {
-        sleep(5000)
-
         onView(AllOf.allOf(withId(R.id.cameraCaptureButton))).perform(click())
 
         //Have to be sure that activity is finished, haven't found yet a better way to achieve this
