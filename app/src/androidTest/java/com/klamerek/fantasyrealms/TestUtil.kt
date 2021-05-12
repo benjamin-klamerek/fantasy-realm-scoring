@@ -61,7 +61,7 @@ fun UiDevice.childTextWith(criteria: String): UiObject {
     val selector = childTextWithSelector(criteria)
     var result = this.findObject(selector)
     if (!result.exists()) {
-        val scroll = UiScrollable(UiSelector().scrollable(true));
+        val scroll = UiScrollable(UiSelector().scrollable(true))
         if (scroll.exists()) {
             scroll.scrollIntoView(selector)
             result = this.findObject(selector)
