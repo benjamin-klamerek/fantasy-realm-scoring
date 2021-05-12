@@ -64,8 +64,13 @@ fun UiDevice.childTextWith(criteria: String): UiObject {
         val scrollAsObject = this.findObject(UiSelector().scrollable(true))
         if (scrollAsObject.exists()) {
             val scroll = UiScrollable(scrollAsObject.selector)
-            if (scroll.exists() && scroll.waitForExists(10)){
-                scroll.scrollIntoView(selector)
+            if (scroll.exists()){
+                //Not logic but can happen on CDI :-(
+                try {
+                    scroll.scrollIntoView(selector)
+                } catch(e: UiObjectNotFoundException){
+                    Log.e("Util", "Could not find scroll")
+                }
             }
             result = this.findObject(selector)
         }
