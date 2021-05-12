@@ -1,13 +1,18 @@
 package com.klamerek.fantasyrealms.ocr
 
 import android.graphics.Bitmap
+import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.intent.Intents
 import androidx.test.filters.MediumTest
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.GrantPermissionRule
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.common.InputImage
+import com.klamerek.fantasyrealms.MainActivity
 import com.klamerek.fantasyrealms.ensureThatGooglePlayServicesUpToDate
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.getBitmapFromTestAssets
+import com.klamerek.fantasyrealms.screen.HandSelectionActivity
 import com.klamerek.fantasyrealms.setLocale
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
@@ -20,8 +25,13 @@ class CardTitleRecognizerTest {
 
     @BeforeEach
     fun beforeEach() {
+        GrantPermissionRule.grant(android.Manifest.permission.CAMERA);
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         ensureThatGooglePlayServicesUpToDate(appContext)
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        Intents.init()
+        Intents.release()
+        scenario.close()
     }
 
     @DisplayName("Empty image")

@@ -35,19 +35,32 @@ fun isGooglePlayServicesUpToDate(activity: Context): Boolean {
     val googleApiAvailability = GoogleApiAvailability.getInstance()
     val status = googleApiAvailability.isGooglePlayServicesAvailable(activity)
     val apkVersion = googleApiAvailability.getApkVersion(activity)
+    Log.d("Google API", "$apkVersion")
     return status == ConnectionResult.SUCCESS && apkVersion > 203000000
 }
 
-fun UiDevice.descriptionStartsWith(criteria: String): UiObject =
-    this.findObject(UiSelector().descriptionStartsWith(criteria))
+fun UiDevice.name(criteria: String): UiObject = this.name(criteria, 5)
 
-fun UiDevice.textStartsWith(criteria: String): UiObject =
-    this.findObject(UiSelector().textStartsWith(criteria))
 
-fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
-    val selector = clickableChildTextContainsSelector(criteria)
+fun UiDevice.name(criteria: String, numberOfTries: Int): UiObject {
+    val timeout = 500L
+    var result: UiObject? = null
+    var numberOfTriesRemaining = numberOfTries
+    while ((result == null || !result.exists()) && numberOfTriesRemaining > 0) {
+        numberOfTriesRemaining--
+        result = this.findObject(UiSelector().description(criteria))
+            .takeIf { it.waitForExists(timeout) } ?: this.findObject(UiSelector().text(criteria))
+            .takeIf { it.waitForExists(timeout) } ?: this.childTextWith(criteria)
+            .takeIf { it.waitForExists(timeout) }
+    }
+    return result?: this.findObject(UiSelector().description(criteria))
+}
+
+
+fun UiDevice.childTextWith(criteria: String): UiObject {
+    val selector = childTextWithSelector(criteria)
     var result = this.findObject(selector)
-    if (! result.exists()){
+    if (!result.exists()) {
         val scroll = this.findObject(UiSelector().scrollable(true))
         if (scroll.exists()) {
             UiScrollable(scroll.selector).scrollIntoView(selector)
@@ -57,12 +70,11 @@ fun UiDevice.clickableChildTextContains(criteria: String): UiObject {
     return result
 }
 
-fun clickableChildTextContainsSelector(criteria: String): UiSelector =
-    UiSelector().clickable(true).childSelector(UiSelector().textContains(criteria))
+fun childTextWithSelector(criteria: String): UiSelector =
+    UiSelector().childSelector(UiSelector().text(criteria))
 
 fun UiObject.clickAndWaitForNewWindowIfExists(): Boolean =
     this.exists() && this.clickAndWaitForNewWindow()
-
 
 
 /**
@@ -84,7 +96,7 @@ fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
         device.pressHome()
         updateGooglePlayServices(device)
         device.pressHome()
-        clearGooglePlayServicesCache(device)
+        clearGooglePlayServicesAndAppplicationCache(device)
         device.pressHome()
     }
 
@@ -98,25 +110,17 @@ fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
 
 private fun updateGooglePlayServices(device: UiDevice) {
     val playStoreText = "Play Store"
-    if (!device.descriptionStartsWith(playStoreText).exists()) {
+    if (!device.name(playStoreText).exists()) {
         throw UnsupportedOperationException(
             "Emulator need 'Play store', please use an image that have it."
         )
     }
-    val playStoreButton = device.descriptionStartsWith(playStoreText)
-    playStoreButton.clickAndWaitForNewWindow()
-    Thread.sleep(10000)
-    if (device.descriptionStartsWith("Options").exists()) {
-        device.descriptionStartsWith("Options").clickAndWaitForNewWindow()
-        device.textStartsWith("Updates").clickAndWaitForNewWindow()
+    device.name(playStoreText).clickAndWaitForNewWindow()
+    if (device.name("Options").exists()) {
+        device.name("Options").clickAndWaitForNewWindow()
+        device.name("Updates").clickAndWaitForNewWindow()
     }
-    while (device.textStartsWith("Checking").exists()) {
-        Thread.sleep(3000)
-    }
-    Thread.sleep(5000)
-    val scrollBar = UiScrollable(UiSelector().scrollable(true))
-    scrollBar.scrollIntoView(UiSelector().textContains("Google Play services"))
-
+    device.name("Google Play services")
     val googlePlayServiceUpdateButton = device.findObjects(By.text("UPDATE"))
         .firstOrNull {
             it.parent.children
@@ -125,22 +129,29 @@ private fun updateGooglePlayServices(device: UiDevice) {
         }
     if (googlePlayServiceUpdateButton != null) {
         googlePlayServiceUpdateButton.click()
-        scrollBar.scrollToBeginning(100)
-        while (device.textStartsWith("stop").exists() || device.textStartsWith("Installing").exists()) {
-            Log.i("Automatic updater", "Updating in progress (may take a long time)...")
+        UiScrollable(UiSelector().scrollable(true)).scrollToBeginning(100)
+        while (device.name("STOP" ,1).exists()) {
+            Log.i("Automatic updater","Download in progress...")
         }
+        while (device.name("Installing...", 1).exists()) {
+            Log.i("Automatic updater","Installation in progress...")
+        }
+
     } else {
         Log.i("Automatic updater", "Application 'Google Play service' seems up to date")
     }
 }
 
-private fun clearGooglePlayServicesCache(device: UiDevice) {
+private fun clearGooglePlayServicesAndAppplicationCache(device: UiDevice) {
     device.openQuickSettings()
-    Thread.sleep(10000)
-    device.descriptionStartsWith("Open settings").clickAndWaitForNewWindowIfExists()
-    device.clickableChildTextContains("Storage").clickAndWaitForNewWindowIfExists()
-    device.clickableChildTextContains("Internal shared storage").clickAndWaitForNewWindowIfExists()
-    device.clickableChildTextContains("Other apps").clickAndWaitForNewWindowIfExists()
-    device.clickableChildTextContains("Google Play services").clickAndWaitForNewWindowIfExists()
+    device.name("Open settings.").clickAndWaitForNewWindowIfExists()
+    device.name("Storage").clickAndWaitForNewWindowIfExists()
+    device.name("Internal shared storage", 2).clickAndWaitForNewWindowIfExists()
+    device.name("Other apps").clickAndWaitForNewWindowIfExists()
+    device.name("Google Play services").clickAndWaitForNewWindowIfExists()
     device.findObject(UiSelector().clickable(true).textContains("Clear cache")).clickAndWaitForNewWindowIfExists()
+    device.pressBack()
+    device.name("Fantasy Realms Scoring").clickAndWaitForNewWindowIfExists()
+    device.findObject(UiSelector().clickable(true).textContains("Clear cache")).clickAndWaitForNewWindowIfExists()
+    device.pressHome()
 }
