@@ -43,7 +43,7 @@ fun UiDevice.name(criteria: String): UiObject = this.name(criteria, 5)
 
 
 fun UiDevice.name(criteria: String, numberOfTries: Int): UiObject {
-    val timeout = 500L
+    val timeout = 1000L
     var result: UiObject? = null
     var numberOfTriesRemaining = numberOfTries
     while ((result == null || !result.exists()) && numberOfTriesRemaining > 0) {
