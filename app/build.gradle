@@ -101,6 +101,7 @@ dependencies {
     androidTestImplementation "org.junit.jupiter:junit-jupiter-api:5.7.1"
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.2.2"
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    androidTestImplementation group: 'org.assertj', name: 'assertj-core', version: '3.6.1'
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.2.2"
 
 }
