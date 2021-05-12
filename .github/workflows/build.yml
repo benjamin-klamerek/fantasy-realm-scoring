@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       JAVA_TOOL_OPTIONS: -Xmx4g
     steps:
@@ -23,7 +23,7 @@ jobs:
         with:
           api-level: 29
           target: playstore
-          script: ./gradlew connectedCheck
+          script: ./gradlew connectedCheck --info
           profile: Nexus 5X
           cores: 2
 
@@ -32,7 +32,6 @@ jobs:
         with:
           name: report
           path: app/build/reports/coverage/debug
-
 
       - name: Download Test Reports Folder
         uses: actions/download-artifact@v2
