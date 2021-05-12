@@ -7,6 +7,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  CI: true
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false
+
 jobs:
   build:
     runs-on: macos-latest
@@ -16,8 +20,16 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-      ##- name: Build the app
-      ##  run: ./gradlew build
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ github.job }}-${{ matrix.module }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.job }}-
+
       - name: Run tests
         uses: ReactiveCircus/android-emulator-runner@v2.16.0
         with:
