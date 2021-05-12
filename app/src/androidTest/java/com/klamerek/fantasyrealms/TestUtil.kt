@@ -96,7 +96,7 @@ fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
         device.pressHome()
         updateGooglePlayServices(device)
         device.pressHome()
-        clearGooglePlayServicesAndAppplicationCache(device)
+        clearGooglePlayServicesAndApplicationCache(device)
         device.pressHome()
     }
 
@@ -142,16 +142,21 @@ private fun updateGooglePlayServices(device: UiDevice) {
     }
 }
 
-private fun clearGooglePlayServicesAndAppplicationCache(device: UiDevice) {
+private fun clearGooglePlayServicesAndApplicationCache(device: UiDevice) {
     device.openQuickSettings()
     device.name("Open settings.").clickAndWaitForNewWindowIfExists()
     device.name("Storage").clickAndWaitForNewWindowIfExists()
     device.name("Internal shared storage", 2).clickAndWaitForNewWindowIfExists()
     device.name("Other apps").clickAndWaitForNewWindowIfExists()
     device.name("Google Play services").clickAndWaitForNewWindowIfExists()
-    device.findObject(UiSelector().clickable(true).textContains("Clear cache")).clickAndWaitForNewWindowIfExists()
+    device.findObject(UiSelector().clickable(true).textContains("Clear storage")).clickAndWaitForNewWindowIfExists()
+    device.findObject(UiSelector().clickable(true).textContains("CLEAR ALL DATA")).clickAndWaitForNewWindowIfExists()
+    device.findObject(UiSelector().clickable(true).textContains("OK")).clickAndWaitForNewWindowIfExists()
     device.pressBack()
     device.name("Fantasy Realms Scoring").clickAndWaitForNewWindowIfExists()
-    device.findObject(UiSelector().clickable(true).textContains("Clear cache")).clickAndWaitForNewWindowIfExists()
+    device.findObject(UiSelector().clickable(true).textContains("Clear storage")).clickAndWaitForNewWindowIfExists()
+    device.findObject(UiSelector().clickable(true).textContains("Clear storage")).clickAndWaitForNewWindowIfExists()
+    device.findObject(UiSelector().clickable(true).textContains("OK")).clickAndWaitForNewWindowIfExists()
+
     device.pressHome()
 }
