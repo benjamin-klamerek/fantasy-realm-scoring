@@ -107,10 +107,18 @@ fun ensureThatGooglePlayServicesUpToDate(context: Context) {
         device.pressHome()
         clearGooglePlayServicesCache(device)
         device.pressHome()
-        while (!logcatSearch("StartOcr success")) {
-            TextRecognition.getClient()
-            sleep(10000)
-        }
+        TextRecognition.getClient()
+        sleep(10000)
+        TextRecognition.getClient()
+        sleep(10000)
+        TextRecognition.getClient()
+        sleep(10000)
+        TextRecognition.getClient()
+        sleep(10000)
+        TextRecognition.getClient()
+        sleep(10000)
+        TextRecognition.getClient()
+        sleep(10000)
         MODEL_RELOADED = true
     }
 
