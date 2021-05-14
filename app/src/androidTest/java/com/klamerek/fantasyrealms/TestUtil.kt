@@ -168,6 +168,7 @@ private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
     sleep(5000)
     device.name("Open settings.").clickAndWaitForNewWindowIfExists()
+    sleep(5000)
     device.name("Storage").clickAndWaitForNewWindowIfExists()
     device.name("Internal shared storage", 2).clickAndWaitForNewWindowIfExists()
     device.name("Other apps").clickAndWaitForNewWindowIfExists()
