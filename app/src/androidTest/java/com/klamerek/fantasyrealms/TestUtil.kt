@@ -8,10 +8,10 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.*
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 import com.google.mlkit.vision.text.TextRecognition
+import java.io.BufferedReader
 import java.io.InputStream
+import java.io.InputStreamReader
 import java.lang.Thread.sleep
 import java.util.*
 
@@ -33,13 +33,6 @@ fun getBitmapFromTestAssets(fileName: String?): Bitmap {
     return BitmapFactory.decodeStream(testInput)
 }
 
-fun isGooglePlayServicesUpToDate(context: Context): Boolean {
-    val googleApiAvailability = GoogleApiAvailability.getInstance()
-    val status = googleApiAvailability.isGooglePlayServicesAvailable(context)
-    val apkVersion = googleApiAvailability.getApkVersion(context)
-    Log.d("Google API", "$apkVersion")
-    return status == ConnectionResult.SUCCESS && apkVersion > 203000000
-}
 
 fun UiDevice.name(criteria: String): UiObject = this.name(criteria, 5)
 
@@ -85,6 +78,8 @@ fun UiObject.clickAndWaitForNewWindowIfExists(): Boolean =
     this.exists() && this.clickAndWaitForNewWindow()
 
 
+var MODEL_RELOADED = false
+
 /**
  *
  * Minimum requirement is that your emulator image must have Play store enabled.<br><br><br><br>
@@ -105,22 +100,34 @@ fun UiObject.clickAndWaitForNewWindowIfExists(): Boolean =
  *
  */
 fun ensureThatGooglePlayServicesUpToDate(context: Context) {
-    if (!isGooglePlayServicesUpToDate(context)) {
+    if (!MODEL_RELOADED) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         device.pressHome()
         updateGooglePlayServices(device)
         device.pressHome()
         clearGooglePlayServicesCache(device)
         device.pressHome()
-        retryDownloadOCRModel()
+        while (!logcatSearch("StartOcr success")) {
+            TextRecognition.getClient()
+            sleep(10000)
+        }
+        MODEL_RELOADED = true
     }
 
-    if (!isGooglePlayServicesUpToDate(context)) {
-        throw UnsupportedOperationException(
-            "Device requires newer version of Google service (to use ML kit), " +
-                    "please check readme if you have trouble to update it"
-        )
+}
+
+fun logcatSearch(search: String): Boolean {
+    var result = false
+    val command = arrayOf("logcat", "-d", "native:I")
+    val process = Runtime.getRuntime().exec(command)
+    val bufferedReader = BufferedReader(InputStreamReader(process.inputStream))
+    var line = bufferedReader.readLine()
+    while (line != null && !result) {
+        result = line.contains(search)
+        line = bufferedReader.readLine()
     }
+    process.destroy()
+    return result
 }
 
 private fun updateGooglePlayServices(device: UiDevice) {
@@ -159,6 +166,7 @@ private fun updateGooglePlayServices(device: UiDevice) {
 
 private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
+    sleep(5000)
     device.name("Open settings.").clickAndWaitForNewWindowIfExists()
     device.name("Storage").clickAndWaitForNewWindowIfExists()
     device.name("Internal shared storage", 2).clickAndWaitForNewWindowIfExists()
@@ -171,12 +179,3 @@ private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.pressHome()
 }
 
-/**
- * Trigger OCR model download.<br><br>
- * Sadly, I haven't found a proper way yet to do it (no API and I tried to check files bu without success)<br>
- * So current implementation is waiting 100 seconds
- */
-fun retryDownloadOCRModel() {
-    TextRecognition.getClient()
-    sleep(100000)
-}

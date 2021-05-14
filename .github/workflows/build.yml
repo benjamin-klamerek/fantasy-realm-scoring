@@ -36,7 +36,7 @@ jobs:
           api-level: 29
           target: playstore
           script: ./gradlew connectedCheck --stacktrace
-          profile: Nexus 5X
+          profile: Nexus 5
           cores: 2
 
       - name: generate report

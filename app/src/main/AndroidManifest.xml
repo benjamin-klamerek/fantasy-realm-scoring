@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.klamerek.fantasyrealms">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.klamerek.fantasyrealms">
 
     <uses-feature android:name="android.hardware.camera.any"/>
 
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_LOGS"
+            tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
             android:name=".App"

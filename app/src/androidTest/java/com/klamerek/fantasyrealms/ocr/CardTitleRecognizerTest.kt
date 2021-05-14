@@ -1,14 +1,11 @@
 package com.klamerek.fantasyrealms.ocr
 
 import android.graphics.Bitmap
-import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.intent.Intents
 import androidx.test.filters.MediumTest
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.common.InputImage
-import com.klamerek.fantasyrealms.MainActivity
 import com.klamerek.fantasyrealms.ensureThatGooglePlayServicesUpToDate
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.getBitmapFromTestAssets
