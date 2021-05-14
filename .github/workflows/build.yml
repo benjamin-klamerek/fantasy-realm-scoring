@@ -7,16 +7,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  CI: true
-  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false
-
 jobs:
   build:
     runs-on: macos-latest
     timeout-minutes: 60
-    env:
-      JAVA_TOOL_OPTIONS: -Xmx4g
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -35,7 +29,7 @@ jobs:
         with:
           api-level: 29
           target: playstore
-          script: ./gradlew connectedCheck --debug
+          script: ./gradlew connectedCheck --info
           profile: Nexus 5
           cores: 2
 
