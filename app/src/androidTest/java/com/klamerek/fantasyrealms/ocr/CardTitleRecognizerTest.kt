@@ -12,12 +12,10 @@ import com.klamerek.fantasyrealms.MainActivity
 import com.klamerek.fantasyrealms.ensureThatGooglePlayServicesUpToDate
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.getBitmapFromTestAssets
-import com.klamerek.fantasyrealms.screen.HandSelectionActivity
 import com.klamerek.fantasyrealms.setLocale
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -29,10 +27,6 @@ class CardTitleRecognizerTest {
         GrantPermissionRule.grant(android.Manifest.permission.CAMERA);
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         ensureThatGooglePlayServicesUpToDate(appContext)
-        val scenario = ActivityScenario.launch(MainActivity::class.java)
-        Intents.init()
-        Intents.release()
-        scenario.close()
     }
 
     @DisplayName("Empty image")

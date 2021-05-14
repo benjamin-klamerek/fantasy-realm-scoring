@@ -10,7 +10,9 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.mlkit.vision.text.TextRecognition
 import java.io.InputStream
+import java.lang.Thread.sleep
 import java.util.*
 
 
@@ -31,16 +33,15 @@ fun getBitmapFromTestAssets(fileName: String?): Bitmap {
     return BitmapFactory.decodeStream(testInput)
 }
 
-fun isGooglePlayServicesUpToDate(activity: Context): Boolean {
+fun isGooglePlayServicesUpToDate(context: Context): Boolean {
     val googleApiAvailability = GoogleApiAvailability.getInstance()
-    val status = googleApiAvailability.isGooglePlayServicesAvailable(activity)
-    val apkVersion = googleApiAvailability.getApkVersion(activity)
+    val status = googleApiAvailability.isGooglePlayServicesAvailable(context)
+    val apkVersion = googleApiAvailability.getApkVersion(context)
     Log.d("Google API", "$apkVersion")
     return status == ConnectionResult.SUCCESS && apkVersion > 203000000
 }
 
 fun UiDevice.name(criteria: String): UiObject = this.name(criteria, 5)
-
 
 fun UiDevice.name(criteria: String, numberOfTries: Int): UiObject {
     val timeout = 1000L
@@ -53,9 +54,8 @@ fun UiDevice.name(criteria: String, numberOfTries: Int): UiObject {
             .takeIf { it.waitForExists(timeout) } ?: this.childTextWith(criteria)
             .takeIf { it.waitForExists(timeout) }
     }
-    return result?: this.findObject(UiSelector().description(criteria))
+    return result ?: this.findObject(UiSelector().description(criteria))
 }
-
 
 fun UiDevice.childTextWith(criteria: String): UiObject {
     val selector = childTextWithSelector(criteria)
@@ -64,11 +64,11 @@ fun UiDevice.childTextWith(criteria: String): UiObject {
         val scrollAsObject = this.findObject(UiSelector().scrollable(true))
         if (scrollAsObject.exists()) {
             val scroll = UiScrollable(scrollAsObject.selector)
-            if (scroll.exists()){
+            if (scroll.exists()) {
                 //Not logic but can happen on CDI :-(
                 try {
                     scroll.scrollIntoView(selector)
-                } catch(e: UiObjectNotFoundException){
+                } catch (e: UiObjectNotFoundException) {
                     Log.e("Util", "Could not find scroll")
                 }
             }
@@ -86,29 +86,36 @@ fun UiObject.clickAndWaitForNewWindowIfExists(): Boolean =
 
 
 /**
- * Method to ensure that Google App Services is up to date. <br>
- * Try to install it automatically using UIAutomator<br><br>
- * (After installation, cache must be cleared as well)<br><br>
  *
- * Minimum requirement is that your image must have Play store enabled.<br><br><br><br>
+ * Minimum requirement is that your emulator image must have Play store enabled.<br><br><br><br>
  *
  * Using UIAutomator is not a perfect option (this code is highly fragile depending of Android screen)
- * but I haven't found a better solution yet...
+ * but I haven't found a better solution yet...<br><br>
  *
- * @property activity context
+ * <br><br>
+ *
+ * Step 1 : Update Google Play services<br>
+ * Step 2 : Clear Google Play services cache<br>
+ * Step 3 : Retry OCR model download<br>
+ *
+ * <br><br>
+ *
+ *
+ * @property context context
  *
  */
-fun ensureThatGooglePlayServicesUpToDate(activity: Context) {
-    if (!isGooglePlayServicesUpToDate(activity)) {
+fun ensureThatGooglePlayServicesUpToDate(context: Context) {
+    if (!isGooglePlayServicesUpToDate(context)) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         device.pressHome()
         updateGooglePlayServices(device)
         device.pressHome()
-        clearGooglePlayServicesAndApplicationCache(device)
+        clearGooglePlayServicesCache(device)
         device.pressHome()
+        retryDownloadOCRModel()
     }
 
-    if (!isGooglePlayServicesUpToDate(activity)) {
+    if (!isGooglePlayServicesUpToDate(context)) {
         throw UnsupportedOperationException(
             "Device requires newer version of Google service (to use ML kit), " +
                     "please check readme if you have trouble to update it"
@@ -138,11 +145,11 @@ private fun updateGooglePlayServices(device: UiDevice) {
     if (googlePlayServiceUpdateButton != null) {
         googlePlayServiceUpdateButton.click()
         UiScrollable(UiSelector().scrollable(true)).scrollToBeginning(100)
-        while (device.name("STOP" ,1).exists()) {
-            Log.i("Automatic updater","Download in progress...")
+        while (device.name("STOP", 1).exists()) {
+            Log.i("Automatic updater", "Download in progress...")
         }
         while (device.name("Installing...", 1).exists()) {
-            Log.i("Automatic updater","Installation in progress...")
+            Log.i("Automatic updater", "Installation in progress...")
         }
 
     } else {
@@ -150,21 +157,26 @@ private fun updateGooglePlayServices(device: UiDevice) {
     }
 }
 
-private fun clearGooglePlayServicesAndApplicationCache(device: UiDevice) {
+private fun clearGooglePlayServicesCache(device: UiDevice) {
     device.openQuickSettings()
     device.name("Open settings.").clickAndWaitForNewWindowIfExists()
     device.name("Storage").clickAndWaitForNewWindowIfExists()
     device.name("Internal shared storage", 2).clickAndWaitForNewWindowIfExists()
     device.name("Other apps").clickAndWaitForNewWindowIfExists()
     device.name("Google Play services").clickAndWaitForNewWindowIfExists()
-    device.findObject(UiSelector().clickable(true).textContains("Clear storage")).clickAndWaitForNewWindowIfExists()
-    device.findObject(UiSelector().clickable(true).textContains("CLEAR ALL DATA")).clickAndWaitForNewWindowIfExists()
-    device.findObject(UiSelector().clickable(true).textContains("OK")).clickAndWaitForNewWindowIfExists()
-    device.pressBack()
-    device.name("Fantasy Realms Scoring").clickAndWaitForNewWindowIfExists()
-    device.findObject(UiSelector().clickable(true).textContains("Clear storage")).clickAndWaitForNewWindowIfExists()
-    device.findObject(UiSelector().clickable(true).textContains("Clear storage")).clickAndWaitForNewWindowIfExists()
-    device.findObject(UiSelector().clickable(true).textContains("OK")).clickAndWaitForNewWindowIfExists()
+    device.name("Clear storage").clickAndWaitForNewWindowIfExists()
+    device.name("CLEAR ALL DATA").clickAndWaitForNewWindowIfExists()
+    device.name("OK").clickAndWaitForNewWindowIfExists()
 
     device.pressHome()
+}
+
+/**
+ * Trigger OCR model download.<br><br>
+ * Sadly, I haven't found a proper way yet to do it (no API and I tried to check files bu without success)<br>
+ * So current implementation is waiting 100 seconds
+ */
+fun retryDownloadOCRModel() {
+    TextRecognition.getClient()
+    sleep(100000)
 }
