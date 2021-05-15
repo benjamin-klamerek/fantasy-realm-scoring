@@ -47,10 +47,14 @@
             app:layout_constraintBottom_toTopOf="@+id/handView" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1" android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
+
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="24dp" android:id="@+id/playerNameLabel" android:layout_weight="1"
-                android:textSize="18sp" android:textStyle="bold"/>
+                android:layout_height="24dp"
+                android:id="@+id/playerNameLabel"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="24dp" android:id="@+id/handSizeLabel" android:layout_weight="2"

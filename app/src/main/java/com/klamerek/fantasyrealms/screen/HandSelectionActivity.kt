@@ -65,8 +65,8 @@ class HandSelectionActivity : AppCompatActivity() {
     }
 
     private fun refreshPlayerLabels() {
-        binding.playerNameLabel.text = player.name + " - Score : " + player.game.score()
-        binding.handSizeLabel.text = player.game.actualHandSize().toString() + "/" + player.game.handSizeExpected()
+        binding.playerNameLabel.text = getString(R.string.player_name_with_score, player.name, player.game.score())
+        binding.handSizeLabel.text = getString(R.string.hand_size, player.game.actualHandSize(), player.game.handSizeExpected())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

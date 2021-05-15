@@ -8,6 +8,8 @@
     <string name="settings_button">Settings</string>
     <string name="add_player_button">Add player</string>
     <string name="player_name_label">Player name :</string>
+    <string name="player_name_with_score">"%1$s - Score : %2$d"</string>
+    <string name="hand_size">"%1$d/%2$d"</string>
     <string name="new_player_default_value">New player</string>
     <string name="add_card_button">Add card</string>
     <string name="scan_button">Scan</string>
