@@ -8,8 +8,8 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.GrantPermissionRule
 import com.klamerek.fantasyrealms.R
-import com.klamerek.fantasyrealms.ensureThatGooglePlayServicesUpToDate
 import org.hamcrest.core.AllOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+@Disabled
 @LargeTest
 class ScanActivityTest {
 
@@ -25,8 +26,7 @@ class ScanActivityTest {
 
     @BeforeEach
     fun before() {
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        ensureThatGooglePlayServicesUpToDate(appContext)
+        GrantPermissionRule.grant(android.Manifest.permission.CAMERA);
         scenario = ActivityScenario.launch(ScanActivity::class.java)
         Intents.init()
     }

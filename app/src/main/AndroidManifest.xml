@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         package="com.klamerek.fantasyrealms"
-        android:installLocation="auto" >
+        android:installLocation="auto">
 
-    <uses-feature android:name="android.hardware.camera.any"/>
+    <uses-feature android:name="android.hardware.camera.any" />
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_LOGS"
-            tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
             android:name=".App"
@@ -18,27 +14,20 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".screen.CardsSelectionActivity">
-        </activity>
+        <activity android:name=".screen.CardsSelectionActivity" />
 
-        <meta-data
-                android:name="com.google.Android.gms.version"
-                android:value="@integer/google_play_services_version" />
         <meta-data
                 android:name="com.google.mlkit.vision.DEPENDENCIES"
-                android:value="ocr"/>
+                android:value="ocr" />
 
-        <activity android:name=".screen.ScanActivity">
-        </activity>
-        <activity android:name=".screen.HandSelectionActivity">
-        </activity>
-        <activity android:name=".screen.PlayerSelectionActivity">
-        </activity>
+        <activity android:name=".screen.ScanActivity" />
+        <activity android:name=".screen.HandSelectionActivity" />
+        <activity android:name=".screen.PlayerSelectionActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

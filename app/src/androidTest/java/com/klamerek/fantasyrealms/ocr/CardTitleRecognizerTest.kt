@@ -2,11 +2,9 @@ package com.klamerek.fantasyrealms.ocr
 
 import android.graphics.Bitmap
 import androidx.test.filters.MediumTest
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.common.InputImage
-import com.klamerek.fantasyrealms.ensureThatGooglePlayServicesUpToDate
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.getBitmapFromTestAssets
 import com.klamerek.fantasyrealms.setLocale
@@ -17,14 +15,13 @@ import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
+@Disabled
 @MediumTest
 class CardTitleRecognizerTest {
 
     @BeforeEach
     fun beforeEach() {
         GrantPermissionRule.grant(android.Manifest.permission.CAMERA);
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        ensureThatGooglePlayServicesUpToDate(appContext)
     }
 
     @DisplayName("Empty image")
@@ -92,7 +89,6 @@ class CardTitleRecognizerTest {
         )
     }
 
-    @Disabled
     @DisplayName("Title only (french)")
     @Test
     fun title_only_french() {
