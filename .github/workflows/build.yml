@@ -29,7 +29,10 @@ jobs:
         with:
           api-level: 29
           target: playstore
-          script: ./gradlew connectedCheck --info
+          script: |
+            adb logcat -c
+            adb logcat &
+            ./gradlew connectedCheck --stacktrace
           profile: Nexus 5
           cores: 2
 
