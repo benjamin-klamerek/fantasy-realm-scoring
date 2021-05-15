@@ -28,11 +28,8 @@ jobs:
         uses: ReactiveCircus/android-emulator-runner@v2.16.0
         with:
           api-level: 29
-          target: playstore
-          script: |
-            adb logcat -c
-            adb logcat &
-            ./gradlew connectedCheck --stacktrace
+          target: google_apis
+          script: ./gradlew connectedCheck
           profile: Nexus 5
           cores: 2
 
