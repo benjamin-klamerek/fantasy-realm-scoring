@@ -101,7 +101,7 @@ var MODEL_RELOADED = false
  */
 fun ensureThatGooglePlayServicesUpToDate(context: Context) {
     if (!MODEL_RELOADED) {
-        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+      /*  val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         device.pressHome()
         updateGooglePlayServices(device)
         device.pressHome()
@@ -118,7 +118,7 @@ fun ensureThatGooglePlayServicesUpToDate(context: Context) {
         TextRecognition.getClient()
         sleep(25000)
         TextRecognition.getClient()
-        sleep(25000)
+        sleep(25000)*/
         MODEL_RELOADED = true
     }
 
