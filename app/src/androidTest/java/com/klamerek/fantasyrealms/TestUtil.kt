@@ -101,12 +101,12 @@ var MODEL_RELOADED = false
  */
 fun ensureThatGooglePlayServicesUpToDate(context: Context) {
     if (!MODEL_RELOADED) {
-      /*  val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        device.pressHome()
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+      /*  device.pressHome()
         updateGooglePlayServices(device)
-        device.pressHome()
-        clearGooglePlayServicesCache(device)
         device.pressHome()*/
+        clearGooglePlayServicesCache(device)
+        device.pressHome()
         TextRecognition.getClient()
         sleep(25000)
         TextRecognition.getClient()
@@ -177,13 +177,21 @@ private fun clearGooglePlayServicesCache(device: UiDevice) {
     sleep(5000)
     device.name("Open settings.").clickAndWaitForNewWindowIfExists()
     sleep(5000)
+    Log.i("Automatic updater", "Open settings...")
     device.name("Storage").clickAndWaitForNewWindowIfExists()
+    Log.i("Automatic updater", "Storage...")
     device.name("Internal shared storage", 2).clickAndWaitForNewWindowIfExists()
+    Log.i("Automatic updater", "Internal shared storage...")
     device.name("Other apps").clickAndWaitForNewWindowIfExists()
+    Log.i("Automatic updater", "Other apps...")
     device.name("Google Play services").clickAndWaitForNewWindowIfExists()
+    Log.i("Automatic updater", "Google Play services...")
     device.name("Clear storage").clickAndWaitForNewWindowIfExists()
+    Log.i("Automatic updater", "Clear storage...")
     device.name("CLEAR ALL DATA").clickAndWaitForNewWindowIfExists()
+    Log.i("Automatic updater", "CLEAR ALL DATA...")
     device.name("OK").clickAndWaitForNewWindowIfExists()
+    Log.i("Automatic updater", "DONE...")
 
     device.pressHome()
 }
