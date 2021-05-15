@@ -106,7 +106,7 @@ fun ensureThatGooglePlayServicesUpToDate(context: Context) {
         updateGooglePlayServices(device)
         device.pressHome()
         clearGooglePlayServicesCache(device)
-        device.pressHome()
+        device.pressHome()*/
         TextRecognition.getClient()
         sleep(25000)
         TextRecognition.getClient()
@@ -118,7 +118,7 @@ fun ensureThatGooglePlayServicesUpToDate(context: Context) {
         TextRecognition.getClient()
         sleep(25000)
         TextRecognition.getClient()
-        sleep(25000)*/
+        sleep(25000)
         MODEL_RELOADED = true
     }
 
