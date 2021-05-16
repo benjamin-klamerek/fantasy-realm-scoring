@@ -103,7 +103,7 @@ class HandSelectionActivityTest {
     }
 
     @Test
-    fun book_of_changes_update_basilik_as_army() {
+    fun book_of_changes_updates_basilik_as_army() {
         initPlayer("MY_NAME", listOf(bookOfChanges, island, shapeshifter, mirage, doppelganger, basilisk))
 
         val cardsSelectionExchange = CardsSelectionExchange()
@@ -125,6 +125,33 @@ class HandSelectionActivityTest {
                 RecycleViewMatcher.childOfViewAtPosition(
                     R.id.cardNameLabel, 5,
                     ChipMatcher.backgroundColorResource(R.color.colorArmy)
+                )
+            )
+        )
+    }
+
+    @Test
+    fun shapeshifter_updated_as_basilik() {
+        initPlayer("MY_NAME", listOf(bookOfChanges, island, shapeshifter, mirage, doppelganger))
+
+        val cardsSelectionExchange = CardsSelectionExchange()
+        val cardSelection = Intent()
+        cardSelection.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        val mockedActivityResult = Instrumentation.ActivityResult(Constants.RESULT_OK, cardSelection)
+        intending(hasComponent(CardsSelectionActivity::class.java.name)).respondWith(mockedActivityResult)
+
+        cardsSelectionExchange.cardsSelected.addAll(listOf(basilisk.id))
+        cardsSelectionExchange.cardInitiator = shapeshifter.id
+
+        onView(withId(R.id.handView)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(2, EffectButtonClick())
+        )
+
+        onView(withId(R.id.handView)).check(
+            matches(
+                RecycleViewMatcher.childOfViewAtPosition(
+                    R.id.cardNameLabel, 2,
+                    ChipMatcher.backgroundColorResource(R.color.colorBeast)
                 )
             )
         )
@@ -163,6 +190,60 @@ class HandSelectionActivityTest {
                 RecycleViewMatcher.childOfViewAtPosition(
                     R.id.scoreLabel, 2,
                     withText("5")
+                )
+            )
+        )
+    }
+
+    @Test
+    fun mirage_updated_as_forest() {
+        initPlayer("MY_NAME", listOf(bookOfChanges, island, shapeshifter, mirage, doppelganger))
+
+        val cardsSelectionExchange = CardsSelectionExchange()
+        val cardSelection = Intent()
+        cardSelection.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        val mockedActivityResult = Instrumentation.ActivityResult(Constants.RESULT_OK, cardSelection)
+        intending(hasComponent(CardsSelectionActivity::class.java.name)).respondWith(mockedActivityResult)
+
+        cardsSelectionExchange.cardsSelected.addAll(listOf(forest.id))
+        cardsSelectionExchange.cardInitiator = mirage.id
+
+        onView(withId(R.id.handView)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(3, EffectButtonClick())
+        )
+
+        onView(withId(R.id.handView)).check(
+            matches(
+                RecycleViewMatcher.childOfViewAtPosition(
+                    R.id.cardNameLabel, 3,
+                    ChipMatcher.backgroundColorResource(R.color.colorLand)
+                )
+            )
+        )
+    }
+
+    @Test
+    fun doppelganger_updated_as_basilik() {
+        initPlayer("MY_NAME", listOf(bookOfChanges, island, shapeshifter, mirage, doppelganger, basilisk))
+
+        val cardsSelectionExchange = CardsSelectionExchange()
+        val cardSelection = Intent()
+        cardSelection.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        val mockedActivityResult = Instrumentation.ActivityResult(Constants.RESULT_OK, cardSelection)
+        intending(hasComponent(CardsSelectionActivity::class.java.name)).respondWith(mockedActivityResult)
+
+        cardsSelectionExchange.cardsSelected.addAll(listOf(basilisk.id))
+        cardsSelectionExchange.cardInitiator = doppelganger.id
+
+        onView(withId(R.id.handView)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(4, EffectButtonClick())
+        )
+
+        onView(withId(R.id.handView)).check(
+            matches(
+                RecycleViewMatcher.childOfViewAtPosition(
+                    R.id.cardNameLabel, 4,
+                    ChipMatcher.backgroundColorResource(R.color.colorBeast)
                 )
             )
         )
