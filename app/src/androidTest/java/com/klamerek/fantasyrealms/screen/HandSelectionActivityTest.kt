@@ -2,12 +2,8 @@ package com.klamerek.fantasyrealms.screen
 
 import android.app.Instrumentation
 import android.content.Intent
-import android.view.View
-import android.widget.Button
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -15,14 +11,17 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.klamerek.fantasyrealms.R
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.matcher.ChipMatcher
 import com.klamerek.fantasyrealms.matcher.RecycleViewMatcher
-import org.hamcrest.Matcher
+import com.klamerek.fantasyrealms.viewaction.ButtonClick
+import com.klamerek.fantasyrealms.viewaction.ImageButtonClick
+import org.greenrobot.eventbus.EventBus
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -87,21 +86,6 @@ class HandSelectionActivityTest {
         onView(withId(R.id.handSizeLabel)).check(matches(withText("1/7")))
     }
 
-    class EffectButtonClick : ViewAction {
-        override fun getConstraints(): Matcher<View> {
-            return isAssignableFrom(Button::class.java)
-        }
-
-        override fun getDescription(): String {
-            return "effectButton click action"
-        }
-
-        override fun perform(uiController: UiController?, view: View?) {
-            view?.findViewById<Button>(R.id.effectButton)?.performClick()
-        }
-
-    }
-
     @Test
     fun book_of_changes_updates_basilik_as_army() {
         initPlayer("MY_NAME", listOf(bookOfChanges, island, shapeshifter, mirage, doppelganger, basilisk))
@@ -117,7 +101,7 @@ class HandSelectionActivityTest {
         cardsSelectionExchange.suitsSelected = mutableListOf(Suit.ARMY.name)
 
         onView(withId(R.id.handView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(0, EffectButtonClick())
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(0, ButtonClick(R.id.effectButton))
         )
 
         onView(withId(R.id.handView)).check(
@@ -144,7 +128,7 @@ class HandSelectionActivityTest {
         cardsSelectionExchange.cardInitiator = shapeshifter.id
 
         onView(withId(R.id.handView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(2, EffectButtonClick())
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(2, ButtonClick(R.id.effectButton))
         )
 
         onView(withId(R.id.handView)).check(
@@ -181,7 +165,7 @@ class HandSelectionActivityTest {
         )
 
         onView(withId(R.id.handView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(0, EffectButtonClick())
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(0, ButtonClick(R.id.effectButton))
         )
 
         onView(withId(R.id.playerNameLabel)).check(matches(withText("MY_NAME - Score : 59")))
@@ -209,7 +193,7 @@ class HandSelectionActivityTest {
         cardsSelectionExchange.cardInitiator = mirage.id
 
         onView(withId(R.id.handView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(3, EffectButtonClick())
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(3, ButtonClick(R.id.effectButton))
         )
 
         onView(withId(R.id.handView)).check(
@@ -236,7 +220,7 @@ class HandSelectionActivityTest {
         cardsSelectionExchange.cardInitiator = doppelganger.id
 
         onView(withId(R.id.handView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(4, EffectButtonClick())
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(4, ButtonClick(R.id.cardDetailButton))
         )
 
         onView(withId(R.id.handView)).check(
@@ -293,6 +277,40 @@ class HandSelectionActivityTest {
 
         onView(withId(R.id.addCardsButton)).perform(click())
         Intents.intended(hasComponent(CardsSelectionActivity::class.java.name))
+    }
+
+    @Test
+    fun delete_all_cards() {
+        initPlayer("MY_NAME", listOf(basilisk, lightning, earthElemental))
+
+        EventBus.getDefault().post(AllCardsDeletionEvent())
+
+        onView(withId(R.id.playerNameLabel)).check(matches(withText("MY_NAME - Score : 0")))
+        onView(withId(R.id.handSizeLabel)).check(matches(withText("0/7")))
+    }
+
+    @Test
+    fun display_card_details() {
+        initPlayer("TEST", listOf(earthElemental, forest, bellTower, mountain))
+
+        onView(withId(R.id.playerNameLabel)).check(matches(withText("TEST - Score : 73")))
+        onView(withId(R.id.handSizeLabel)).check(matches(withText("4/7")))
+
+        onView(withId(R.id.handView)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(0, ImageButtonClick(R.id.cardDetailButton))
+        )
+
+        onView(withId(R.id.handView)).check(
+            matches(
+                RecycleViewMatcher.childOfViewAtPosition(R.id.baseValueLabel, 0, withText("4"))
+            )
+        )
+        onView(withId(R.id.handView)).check(
+            matches(
+                RecycleViewMatcher.childOfViewAtPosition(R.id.bonusValueLabel, 0, withText("+45"))
+            )
+        )
+
     }
 
 }
