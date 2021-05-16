@@ -220,7 +220,7 @@ class HandSelectionActivityTest {
         cardsSelectionExchange.cardInitiator = doppelganger.id
 
         onView(withId(R.id.handView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(4, ButtonClick(R.id.cardDetailButton))
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(4, ButtonClick(R.id.effectButton))
         )
 
         onView(withId(R.id.handView)).check(
