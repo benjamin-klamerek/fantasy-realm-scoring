@@ -30,3 +30,6 @@ Replace :
 
 Open "AVD manager" in IDE and redownload...
 ```
+
+    * Ensure that ```Google Play service``` is up to date in your emulator (also don't hesitate to clear cache)
+    * OCR model are downloaded when needed by application but sometimes it can take a long time/number of retry to perform
