@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.filters.LargeTest
@@ -43,9 +44,9 @@ class CardsSelectionActivityTest {
         cardsSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
         scenario = ActivityScenario.launch(cardsSelectionIntent)
 
-        Espresso.onView(ViewMatchers.withId(R.id.chiprangers)).perform(click())
-        Espresso.onView(ViewMatchers.withId(R.id.chipknights)).perform(click())
-        Espresso.onView(ViewMatchers.withId(R.id.chipgreat_flood)).perform(click())
+        Espresso.onView(ViewMatchers.withId(R.id.chiprangers)).perform(scrollTo(), click())
+        Espresso.onView(ViewMatchers.withId(R.id.chipknights)).perform(scrollTo(), click())
+        Espresso.onView(ViewMatchers.withId(R.id.chipgreat_flood)).perform(scrollTo(), click())
         Espresso.onView(ViewMatchers.withId(R.id.addCardsButton)).perform(click())
 
         val receivedIntent = scenario.result.resultData
