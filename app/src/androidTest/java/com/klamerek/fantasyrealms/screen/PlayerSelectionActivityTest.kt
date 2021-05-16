@@ -58,11 +58,20 @@ class PlayerSelectionActivityTest {
     }
 
     @Test
-    fun delete_player() {
+    fun delete_player_swipe_left() {
         addPlayer("ME")
 
         onView(withId(R.id.playersView)).check(RecyclerViewSize(1))
         onView(withId(R.id.playersView)).perform(RecyclerViewActions.actionOnItemAtPosition<PlayerSelectionAdapter.PlayerHolder>(0, swipeLeft()));
+        onView(withId(R.id.playersView)).check(RecyclerViewSize(0))
+    }
+
+    @Test
+    fun delete_player_swipe_right() {
+        addPlayer("ME")
+
+        onView(withId(R.id.playersView)).check(RecyclerViewSize(1))
+        onView(withId(R.id.playersView)).perform(RecyclerViewActions.actionOnItemAtPosition<PlayerSelectionAdapter.PlayerHolder>(0, swipeRight()));
         onView(withId(R.id.playersView)).check(RecyclerViewSize(0))
     }
 
