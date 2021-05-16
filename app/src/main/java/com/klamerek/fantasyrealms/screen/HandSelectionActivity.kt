@@ -38,8 +38,6 @@ class HandSelectionActivity : AppCompatActivity() {
 
         player = Player.all[intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)]
 
-        refreshPlayerLabels()
-
         binding.addCardsButton.setOnClickListener {
             val handSelectionIntent = Intent(this, CardsSelectionActivity::class.java)
             val request = CardsSelectionExchange()
@@ -62,6 +60,10 @@ class HandSelectionActivity : AppCompatActivity() {
             binding.handView.context, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) { position: Int -> EventBus.getDefault().post(CardDeletionEvent(position)) })
         itemTouchHelper.attachToRecyclerView(binding.handView)
+
+        player.game.calculate()
+        refreshPlayerLabels()
+        adapter.notifyDataSetChanged()
     }
 
     private fun refreshPlayerLabels() {
