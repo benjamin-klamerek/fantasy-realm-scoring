@@ -19,8 +19,7 @@ Icon made by Freepik from www.flaticon.com
 ### About development
 - During unit tests, if you encounter exception about version of Google service you have to install Play store
     * If ```Play Store``` is not available in your emulator, the only solution that I found is to manually update config.ini
-    
-``` 
+```
 For Windows, config.ini file can be found in : C:\Users\**YOURUSER**\.android\avd\**YOURDEVICE**.avd
 
 Replace : 
@@ -29,7 +28,6 @@ Replace :
  - "tag.id=google_apis" by "tag.id=google_apis_playstore"
 
 Open "AVD manager" in IDE and redownload...
-```
-
-    * Ensure that ```Google Play service``` is up to date in your emulator (also don't hesitate to clear cache)
-    * OCR model are downloaded when needed by application but sometimes it can take a long time/number of retry to perform
+ ```  
+   * Ensure that ```Google Play service``` is up to date in your emulator (also don't hesitate to clear cache)
+   * OCR model are downloaded when needed by application but sometimes it can take a long time/number of retry to perform
