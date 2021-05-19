@@ -14,6 +14,7 @@ object Constants {
 
     const val SELECT_CARDS = 42
     const val SELECT_RULE_EFFECT = 43
+    const val SELECT_SETTINGS = 44
 
     const val CARD_LIST_SELECTION_MODE_DEFAULT = 0
     const val CARD_LIST_SELECTION_MODE_ONE_CARD = 1

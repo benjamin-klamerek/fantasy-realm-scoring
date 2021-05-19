@@ -40,7 +40,6 @@ class ScanActivityTest {
     /**
      * Too many problems with this test, not yet found a solution with this camera library
      */
-    @Disabled
     @Test
     fun scan_button_close_activity() {
         onView(AllOf.allOf(withId(R.id.cameraCaptureButton))).perform(click())

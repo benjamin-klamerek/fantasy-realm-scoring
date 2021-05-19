@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +25,7 @@ import org.greenrobot.eventbus.Subscribe
  * Activity to add and remove players
  *
  */
-class PlayerSelectionActivity : AppCompatActivity() {
+class PlayerSelectionActivity : CustomActivity() {
 
     private lateinit var adapter: PlayerSelectionAdapter
     private lateinit var binding: ActivityPlayerSelectionBinding

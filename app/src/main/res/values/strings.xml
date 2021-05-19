@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Fantasy Realms Scoring</string>
     <string name="start_button">Start</string>
@@ -15,6 +16,13 @@
     <string name="scan_button">Scan</string>
     <string name="effect_button">Effect</string>
     <string name="base">BASE</string>
+    <string name="disclaimer">Version 0.1 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
+    <string name="done">Done</string>
+    <string name="languageLabel">Language:</string>
+    <string-array name="languages">
+        <item>English</item>
+        <item>French</item>
+    </string-array>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">CLEAR</string>

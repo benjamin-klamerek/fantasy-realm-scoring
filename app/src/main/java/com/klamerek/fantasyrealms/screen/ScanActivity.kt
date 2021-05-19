@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
@@ -25,7 +24,7 @@ import java.util.concurrent.Executors
  * After scanning, activity is closed and result given back to the caller.
  *
  */
-class ScanActivity : AppCompatActivity() {
+class ScanActivity : CustomActivity() {
 
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService

@@ -1,6 +1,7 @@
 package com.klamerek.fantasyrealms
 
 import android.util.Log
+import androidx.test.platform.app.InstrumentationRegistry
 import com.klamerek.fantasyrealms.game.allDefinitions
 import org.junit.jupiter.api.Test
 
@@ -13,7 +14,10 @@ class ChipGenerator {
 
     @Test
     fun generateChipXMLDefinition() {
-        setLocale("en", "EN")
+        LocaleManager.updateContextWithPreferredLanguage(
+            InstrumentationRegistry.getInstrumentation().targetContext, "en", "EN"
+        )
+
         allDefinitions.forEach { definition ->
             val nameCleaned = definition.name().toLowerCase().replace(" ", "_")
             val suitCleaned = definition.suit.name.toLowerCase()

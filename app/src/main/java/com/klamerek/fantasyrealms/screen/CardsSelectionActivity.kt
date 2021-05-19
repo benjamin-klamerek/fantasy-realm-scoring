@@ -3,13 +3,12 @@ package com.klamerek.fantasyrealms.screen
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
 import java.io.Serializable
 
-class CardsSelectionActivity : AppCompatActivity() {
+class CardsSelectionActivity : CustomActivity() {
 
     private lateinit var input: CardsSelectionExchange
     private lateinit var binding: ActivityCardsSelectionBinding

@@ -7,6 +7,9 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.matcher.ViewMatchers
 import org.hamcrest.Matcher
 
+/**
+ * Helper to perform click button action during tests
+ */
 class ButtonClick(private val buttonId: Int) : ViewAction {
     override fun getConstraints(): Matcher<View> {
         return ViewMatchers.isAssignableFrom(Button::class.java)
