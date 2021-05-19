@@ -12,9 +12,9 @@ Icon made by Freepik from www.flaticon.com
 - card recognition through camera using [ML Kit](https://developers.google.com/ml-kit/vision/text-recognition/android). Only card titles required for recognition.
 
 ### Next steps : 
-- In parameters menu, propose a testing screen for quick scanning + language option
+- In parameters menu, propose a testing screen for quick scanning
 - Decorate main activity
-- add button to clear all hands ?
+- Add button to clear all hands ?
 
 ### About development
 - During unit tests, if you encounter exception about version of Google service you have to install Play store

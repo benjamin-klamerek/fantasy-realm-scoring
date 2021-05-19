@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.screen
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -7,6 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -27,6 +29,8 @@ import org.greenrobot.eventbus.Subscribe
  *
  */
 class PlayerSelectionActivity : CustomActivity() {
+
+    private val delayBeforeShowingKeyboard = 200L
 
     private lateinit var adapter: PlayerSelectionAdapter
     private lateinit var binding: ActivityPlayerSelectionBinding
@@ -69,6 +73,11 @@ class PlayerSelectionActivity : CustomActivity() {
         binding.addPlayerButton.setOnClickListener {
             field?.text?.clear()
             dialog.show()
+            field?.requestFocus()
+            field?.postDelayed({
+                val keyboard : InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                keyboard.showSoftInput(field,0);
+            }, delayBeforeShowingKeyboard)
         }
     }
 
