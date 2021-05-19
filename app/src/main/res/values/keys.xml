@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="languagesCode">
-        <item>@string/english_code</item>
-        <item>@string/french_code</item>
-    </string-array>
     <string name="preference_file_key" translatable="false">com.klamerek.preference_file_key</string>
-    <string name="saved_country" translatable="false">saved_country</string>
     <string name="saved_language" translatable="false">saved_language</string>
-    <string name="english_code" translatable="false">ENGLISH_CODE</string>
-    <string name="french_code" translatable="false">FRENCH_CODE</string>
 </resources>

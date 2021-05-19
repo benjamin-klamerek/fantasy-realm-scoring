@@ -1,6 +1,6 @@
 package com.klamerek.fantasyrealms.game
 
-import com.klamerek.fantasyrealms.screen.Constants
+import com.klamerek.fantasyrealms.util.Constants
 import java.lang.Integer.max
 
 /**

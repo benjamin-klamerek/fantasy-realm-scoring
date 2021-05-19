@@ -3,6 +3,7 @@ package com.klamerek.fantasyrealms
 import android.app.Application
 import android.content.res.Resources
 import androidx.annotation.StringRes
+import com.klamerek.fantasyrealms.util.LocaleManager
 
 class App : Application() {
     companion object {

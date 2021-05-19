@@ -18,11 +18,9 @@
     <string name="base">BASE</string>
     <string name="disclaimer">Version 0.1 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
     <string name="done">Done</string>
-    <string name="languageLabel">Language:</string>
-    <string-array name="languages">
-        <item>English</item>
-        <item>French</item>
-    </string-array>
+    <string name="language_label">Language:</string>
+    <string name="language_label_english">English</string>
+    <string name="language_label_french">French</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">CLEAR</string>

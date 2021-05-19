@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
+import com.klamerek.fantasyrealms.util.Constants
 import java.io.Serializable
 
 class CardsSelectionActivity : CustomActivity() {

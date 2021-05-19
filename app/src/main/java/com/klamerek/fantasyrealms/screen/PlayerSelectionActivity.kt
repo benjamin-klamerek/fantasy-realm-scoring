@@ -18,6 +18,7 @@ import com.klamerek.fantasyrealms.databinding.ActivityPlayerSelectionBinding
 import com.klamerek.fantasyrealms.databinding.PlayerListItemBinding
 import com.klamerek.fantasyrealms.game.Game
 import com.klamerek.fantasyrealms.game.Player
+import com.klamerek.fantasyrealms.util.Constants
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 

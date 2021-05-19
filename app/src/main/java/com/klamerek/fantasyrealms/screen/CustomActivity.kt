@@ -2,7 +2,7 @@ package com.klamerek.fantasyrealms.screen
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import com.klamerek.fantasyrealms.LocaleManager
+import com.klamerek.fantasyrealms.util.LocaleManager
 
 abstract class CustomActivity : AppCompatActivity() {
 

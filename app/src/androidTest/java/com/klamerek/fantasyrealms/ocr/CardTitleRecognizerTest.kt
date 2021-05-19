@@ -6,9 +6,11 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.common.InputImage
-import com.klamerek.fantasyrealms.LocaleManager
+import com.klamerek.fantasyrealms.util.LocaleManager
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.getBitmapFromTestAssets
+import com.klamerek.fantasyrealms.util.LocaleManager.english
+import com.klamerek.fantasyrealms.util.LocaleManager.french
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.BeforeEach
@@ -42,7 +44,7 @@ class CardTitleRecognizerTest {
     @Test
     fun hand_example_each_card_separated() {
         LocaleManager.updateContextWithPreferredLanguage(
-            InstrumentationRegistry.getInstrumentation().targetContext, "en", "EN"
+            InstrumentationRegistry.getInstrumentation().targetContext, english
         )
         val bean = CardTitleRecognizer()
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardsExample1.jpg"), 0))
@@ -61,7 +63,7 @@ class CardTitleRecognizerTest {
     @Test
     fun hand_example_2_each_card_separated() {
         LocaleManager.updateContextWithPreferredLanguage(
-            InstrumentationRegistry.getInstrumentation().targetContext, "en", "EN"
+            InstrumentationRegistry.getInstrumentation().targetContext, english
         )
         val bean = CardTitleRecognizer()
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardsExample2.jpg"), 0))
@@ -81,7 +83,7 @@ class CardTitleRecognizerTest {
     @Test
     fun hand_example_3_each_card_separated() {
         LocaleManager.updateContextWithPreferredLanguage(
-            InstrumentationRegistry.getInstrumentation().targetContext, "en", "EN"
+            InstrumentationRegistry.getInstrumentation().targetContext, english
         )
         val bean = CardTitleRecognizer()
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardsExample3.jpg"), 0))
@@ -100,7 +102,7 @@ class CardTitleRecognizerTest {
     @Test
     fun title_only_french() {
         LocaleManager.updateContextWithPreferredLanguage(
-            InstrumentationRegistry.getInstrumentation().targetContext, "fr", "FR"
+            InstrumentationRegistry.getInstrumentation().targetContext, french
         )
         val bean = CardTitleRecognizer()
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardExampleFrench.png"), 0))

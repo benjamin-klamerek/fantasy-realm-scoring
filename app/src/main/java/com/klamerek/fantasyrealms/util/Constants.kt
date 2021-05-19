@@ -1,4 +1,4 @@
-package com.klamerek.fantasyrealms.screen
+package com.klamerek.fantasyrealms.util
 
 object Constants {
 

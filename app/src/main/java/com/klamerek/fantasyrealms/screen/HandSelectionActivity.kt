@@ -13,6 +13,7 @@ import com.klamerek.fantasyrealms.R
 import com.klamerek.fantasyrealms.databinding.ActivityHandSelectionBinding
 import com.klamerek.fantasyrealms.databinding.HandListItemBinding
 import com.klamerek.fantasyrealms.game.*
+import com.klamerek.fantasyrealms.util.Constants
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 

@@ -13,6 +13,7 @@ import com.klamerek.fantasyrealms.R
 import com.klamerek.fantasyrealms.game.celestialKnights
 import com.klamerek.fantasyrealms.game.greatFlood
 import com.klamerek.fantasyrealms.game.rangers
+import com.klamerek.fantasyrealms.util.Constants
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach

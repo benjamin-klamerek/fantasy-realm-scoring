@@ -3,6 +3,8 @@ package com.klamerek.fantasyrealms
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import com.klamerek.fantasyrealms.game.allDefinitions
+import com.klamerek.fantasyrealms.util.LocaleManager
+import com.klamerek.fantasyrealms.util.LocaleManager.english
 import org.junit.jupiter.api.Test
 
 /**
@@ -15,7 +17,7 @@ class ChipGenerator {
     @Test
     fun generateChipXMLDefinition() {
         LocaleManager.updateContextWithPreferredLanguage(
-            InstrumentationRegistry.getInstrumentation().targetContext, "en", "EN"
+            InstrumentationRegistry.getInstrumentation().targetContext, english
         )
 
         allDefinitions.forEach { definition ->

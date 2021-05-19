@@ -7,9 +7,9 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import com.klamerek.fantasyrealms.R
+import com.klamerek.fantasyrealms.util.Constants
 import org.hamcrest.core.AllOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

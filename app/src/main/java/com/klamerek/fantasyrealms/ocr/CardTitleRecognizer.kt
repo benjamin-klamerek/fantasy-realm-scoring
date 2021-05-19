@@ -9,7 +9,7 @@ import com.google.mlkit.vision.text.TextRecognition
 import com.klamerek.fantasyrealms.game.CardDefinition
 import com.klamerek.fantasyrealms.game.allDefinitions
 import com.klamerek.fantasyrealms.game.empty
-import com.klamerek.fantasyrealms.screen.Constants
+import com.klamerek.fantasyrealms.util.Constants
 import me.xdrop.fuzzywuzzy.FuzzySearch
 import com.klamerek.fantasyrealms.normalize
 import java.util.*

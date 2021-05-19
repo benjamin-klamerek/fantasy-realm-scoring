@@ -4,7 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import com.klamerek.fantasyrealms.databinding.ActivityMainBinding
-import com.klamerek.fantasyrealms.screen.Constants
+import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.screen.CustomActivity
 import com.klamerek.fantasyrealms.screen.PlayerSelectionActivity
 import com.klamerek.fantasyrealms.screen.SettingsActivity
