@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/benjamin-klamerek/fantasy-realm-scoring/branch/master/graph/badge.svg)](https://codecov.io/gh/benjamin-klamerek/fantasy-realm-scoring)
+
 # Fantasy Realms scoring app
 Android scoring app for the game [FantasyRealms](https://boardgamegeek.com/boardgame/223040/fantasy-realms)
 
