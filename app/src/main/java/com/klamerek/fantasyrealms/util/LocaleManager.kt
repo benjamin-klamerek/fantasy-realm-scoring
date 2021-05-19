@@ -12,7 +12,7 @@ data class Language(
     val id: String, val labelKey: Int,
     val countryCode: String, val language: String
 ) {
-    private fun label() = Strings.get(labelKey)
+    fun label() = Strings.get(labelKey)
 
     override fun toString(): String {
         return label()

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_list"
-        tools:context=".MainActivity" android:id="@+id/mainActConstraintLayout">
+        tools:context=".screen.MainActivity" android:id="@+id/mainActConstraintLayout">
     <Button
             android:text="@string/start_button"
             android:layout_width="wrap_content"

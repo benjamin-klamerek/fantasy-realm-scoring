@@ -10,6 +10,9 @@ import androidx.core.content.ContextCompat
 import com.klamerek.fantasyrealms.game.Suit
 import com.klamerek.fantasyrealms.game.allDefinitions
 
+/**
+ * Function that can "upgrade" a rule display by bolding and coloring suits and card names
+ */
 fun colorSuitsAndBoldCardNames(context: Context, text: String): SpannableString {
     val sourceCleaned = text.replace("'", " ").replace(",", " ")
     val spannable = SpannableString(text)
