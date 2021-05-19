@@ -30,6 +30,7 @@ import org.greenrobot.eventbus.Subscribe
  */
 class PlayerSelectionActivity : CustomActivity() {
 
+    @Suppress("MagicNumber")
     private val delayBeforeShowingKeyboard = 200L
 
     private lateinit var adapter: PlayerSelectionAdapter
@@ -76,7 +77,7 @@ class PlayerSelectionActivity : CustomActivity() {
             field?.requestFocus()
             field?.postDelayed({
                 val keyboard : InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                keyboard.showSoftInput(field,0);
+                keyboard.showSoftInput(field,0)
             }, delayBeforeShowingKeyboard)
         }
     }
