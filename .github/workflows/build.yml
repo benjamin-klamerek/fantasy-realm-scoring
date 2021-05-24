@@ -31,6 +31,7 @@ jobs:
           target: google_apis
           script: ./gradlew connectedCheck
           profile: Nexus 5
+          disable-animations: true
           cores: 2
 
       - name: generate report
