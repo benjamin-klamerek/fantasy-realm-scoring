@@ -10,6 +10,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.klamerek.fantasyrealms.R
+import com.klamerek.fantasyrealms.game.Suit
 import com.klamerek.fantasyrealms.game.celestialKnights
 import com.klamerek.fantasyrealms.game.greatFlood
 import com.klamerek.fantasyrealms.game.rangers
@@ -59,6 +60,33 @@ class CardsSelectionActivityTest {
             rangers.id, greatFlood.id, celestialKnights.id
         )
 
+    }
+
+    @Test
+    fun card_and_suit_selection_scenario() {
+        val cardsSelectionIntent = Intent(
+            InstrumentationRegistry.getInstrumentation().targetContext,
+            CardsSelectionActivity::class.java
+        )
+        val cardsSelectionExchange = CardsSelectionExchange()
+        cardsSelectionExchange.selectionMode = Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
+        cardsSelectionExchange.cardsScope.addAll(mutableListOf(rangers.id, celestialKnights.id, greatFlood.id))
+        cardsSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        scenario = ActivityScenario.launch(cardsSelectionIntent)
+
+        Espresso.onView(ViewMatchers.withId(R.id.chipWizard)).perform(scrollTo(), click())
+        Espresso.onView(ViewMatchers.withId(R.id.chipknights)).perform(scrollTo(), click())
+        Espresso.onView(ViewMatchers.withId(R.id.addCardsButton)).perform(click())
+
+        val receivedIntent = scenario.result.resultData
+        Assertions.assertThat(receivedIntent.hasExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID))
+        val cardsSelectionIntentOutput = receivedIntent.getSerializableExtra(
+            Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID
+        ) as? CardsSelectionExchange
+        Assertions.assertThat(cardsSelectionIntentOutput?.cardsSelected)
+            .containsExactlyInAnyOrder(celestialKnights.id)
+        Assertions.assertThat(cardsSelectionIntentOutput?.suitsSelected)
+            .containsExactlyInAnyOrder(Suit.WIZARD.name)
     }
 
 }

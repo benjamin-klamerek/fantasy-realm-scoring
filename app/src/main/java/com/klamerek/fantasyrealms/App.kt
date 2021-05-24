@@ -21,8 +21,4 @@ object Strings {
     fun get(@StringRes stringRes: Int, vararg formatArgs: Any = emptyArray()): String {
         return App.mResources.getString(stringRes, *formatArgs)
     }
-
-    fun getArray(arrayRes: Int): Array<out String> {
-        return App.mResources.getStringArray(arrayRes)
-    }
 }
