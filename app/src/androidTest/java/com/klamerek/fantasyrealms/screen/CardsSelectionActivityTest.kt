@@ -1,6 +1,7 @@
 package com.klamerek.fantasyrealms.screen
 
 import android.content.Intent
+import android.os.SystemClock
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions.click
@@ -51,6 +52,9 @@ class CardsSelectionActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.chipgreat_flood)).perform(scrollTo(), click())
         Espresso.onView(ViewMatchers.withId(R.id.addCardsButton)).perform(click())
 
+        //Ensure that activity is finished, haven't found yet a better way to achieve this
+        SystemClock.sleep(2000)
+
         val receivedIntent = scenario.result.resultData
         Assertions.assertThat(receivedIntent.hasExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID))
         val cardsSelectionIntentOutput = receivedIntent.getSerializableExtra(
@@ -77,6 +81,9 @@ class CardsSelectionActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.chipWizard)).perform(scrollTo(), click())
         Espresso.onView(ViewMatchers.withId(R.id.chipknights)).perform(scrollTo(), click())
         Espresso.onView(ViewMatchers.withId(R.id.addCardsButton)).perform(click())
+
+        //Ensure that activity is finished, haven't found yet a better way to achieve this
+        SystemClock.sleep(2000)
 
         val receivedIntent = scenario.result.resultData
         Assertions.assertThat(receivedIntent.hasExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID))

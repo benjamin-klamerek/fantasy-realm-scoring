@@ -44,7 +44,7 @@ class ScanActivityTest {
     fun scan_button_close_activity() {
         onView(AllOf.allOf(withId(R.id.cameraCaptureButton))).perform(click())
 
-        //Have to be sure that activity is finished, haven't found yet a better way to achieve this
+        //Ensure that activity is finished, haven't found yet a better way to achieve this
         sleep(5000)
 
         val result = scenario.result
