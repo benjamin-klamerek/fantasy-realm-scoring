@@ -50,7 +50,7 @@
             android:layout_marginBottom="10dp" />
 
     <TextView
-            android:text="FantasyRealms"
+            android:text="Fantasy Realms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/titleLabel"

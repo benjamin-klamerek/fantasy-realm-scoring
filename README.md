@@ -15,7 +15,6 @@ Icon made by Freepik from www.flaticon.com
 
 ### Next steps : 
 - In parameters menu, propose a testing screen for quick scanning
-- Decorate main activity
 - Add button to clear all hands ?
 
 ### About development
