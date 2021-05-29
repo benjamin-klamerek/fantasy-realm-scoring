@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.screen
 
+import android.os.SystemClock.sleep
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
@@ -46,6 +47,8 @@ class SettingsActivityTest {
         onData(allOf(`is`(instanceOf(Language::class.java)), withMyValue(newSelection.label()))).perform(click())
 
         onView(withId(R.id.doneButton)).perform(click())
+
+        sleep(500)
 
         val resultLanguage = LocaleManager.getLanguage(InstrumentationRegistry.getInstrumentation().targetContext)
 

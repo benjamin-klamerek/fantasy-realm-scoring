@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.screen
 
+import android.os.SystemClock.sleep
 import android.view.View
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
@@ -45,8 +46,11 @@ class PlayerSelectionActivityTest {
 
     private fun addPlayer(name: String) {
         onView(withId(R.id.addPlayerButton)).perform(click())
+        sleep(500)
         onView(withId(R.id.playerNameEditText)).perform(typeText(name))
+        sleep(500)
         onView(withId(positiveButtonId)).perform(click())
+        sleep(500)
     }
 
     @Test
