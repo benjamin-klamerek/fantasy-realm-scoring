@@ -79,7 +79,8 @@ class ScanActivity : CustomActivity() {
         }
     }
 
-    class MyImageCapturedCallback(private val recognizer: CardTitleRecognizer) : ImageCapture.OnImageCapturedCallback() {
+    class MyImageCapturedCallback(private val recognizer: CardTitleRecognizer) :
+        ImageCapture.OnImageCapturedCallback() {
 
         @ExperimentalGetImage
         override fun onCaptureSuccess(imageProxy: ImageProxy) {
@@ -138,9 +139,12 @@ class ScanActivity : CustomActivity() {
     }
 
     private fun allPermissionsGranted() =
-        REQUIRED_PERMISSIONS.all { ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED }
+        REQUIRED_PERMISSIONS.all {
+            ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+        }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 startCamera()

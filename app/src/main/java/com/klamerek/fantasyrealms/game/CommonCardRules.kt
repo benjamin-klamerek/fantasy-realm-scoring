@@ -111,7 +111,7 @@ object AllRules {
             {
                 it.cardsNotBlanked().filter { card ->
                     card.isOneOf(Suit.WEAPON, Suit.FLOOD, Suit.FLAME, Suit.LAND, Suit.WEATHER)
-                }.sumBy { card -> card.value() }
+                }.sumOf { card -> card.value() }
             }
         ),
         waterElemental to listOf(
@@ -161,7 +161,7 @@ object AllRules {
         ),
         warlord to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                it.cardsNotBlanked().filter { card -> card.isOneOf(Suit.ARMY) }.sumBy(Card::value)
+                it.cardsNotBlanked().filter { card -> card.isOneOf(Suit.ARMY) }.sumOf(Card::value)
             }
         ),
         queen to listOf(

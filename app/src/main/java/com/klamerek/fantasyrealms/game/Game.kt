@@ -124,7 +124,7 @@ class Game {
                 .map { rule -> rule as? RuleAboutScore }
                 .filter { rule -> rule?.tags?.contains(Effect.BONUS) ?: false }
                 .map { rule -> rule?.logic?.invoke(this) }
-                .sumBy { any -> if (any is Int) any else 0 }
+                .sumOf { any -> if (any is Int) any else 0 }
         }.toMap())
         penaltyScoreByCard.putAll(cardsNotBlanked().map { card ->
             card.definition to card.rules()
@@ -133,7 +133,7 @@ class Game {
                 .map { rule -> rule as? RuleAboutScore }
                 .filter { rule -> rule?.tags?.contains(Effect.PENALTY) ?: false }
                 .map { rule -> rule?.logic?.invoke(this) }
-                .sumBy { any -> if (any is Int) any else 0 }
+                .sumOf { any -> if (any is Int) any else 0 }
         }.toMap())
     }
 
@@ -145,13 +145,13 @@ class Game {
         islandSelection?.let { cardDefinition -> applyIsland(cardDefinition) }
     }
 
-    fun score(): Int = bonusScoreByCard.entries.sumBy { it.value } +
-            penaltyScoreByCard.entries.sumBy { it.value } +
-            cardsNotBlanked().sumBy { it.value() }
+    fun score(): Int = bonusScoreByCard.entries.sumOf { it.value } +
+            penaltyScoreByCard.entries.sumOf { it.value } +
+            cardsNotBlanked().sumOf { it.value() }
 
     fun score(card: CardDefinition): Int = bonusScore(card) +
             penaltyScore(card) +
-            cardsNotBlanked().filter { it.definition == card }.sumBy { it.value() }
+            cardsNotBlanked().filter { it.definition == card }.sumOf { it.value() }
 
     fun bonusScore(card: CardDefinition): Int = bonusScoreByCard.getOrDefault(card, 0)
 

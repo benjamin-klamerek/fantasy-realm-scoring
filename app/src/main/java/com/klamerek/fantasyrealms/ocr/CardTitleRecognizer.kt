@@ -32,7 +32,7 @@ class CardTitleRecognizer {
      * @param input     text to clean
      * @return "Cleaned" text
      */
-    private fun cleanText(input: String): String = input.toLowerCase(Locale.getDefault()).normalize().filter { it.isLetter() }
+    private fun cleanText(input: String): String = input.lowercase(Locale.getDefault()).normalize().filter { it.isLetter() }
 
     private fun getMatchingResult(input: String): MatchingResult {
         val extractedResult = FuzzySearch.extractOne(input, cardByCleanedName.keys)
