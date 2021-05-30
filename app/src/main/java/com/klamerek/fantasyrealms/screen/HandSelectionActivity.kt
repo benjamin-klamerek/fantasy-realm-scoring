@@ -16,16 +16,12 @@ import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.util.Constants
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import javax.annotation.Generated
 
 
 class HandSelectionActivity : CustomActivity() {
 
-    @Generated
     private lateinit var adapter: HandSelectionAdapter
-    @Generated
     private lateinit var player: Player
-    @Generated
     private lateinit var binding: ActivityHandSelectionBinding
 
     override fun onDestroy() {
