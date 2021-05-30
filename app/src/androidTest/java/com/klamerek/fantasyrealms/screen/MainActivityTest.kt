@@ -27,14 +27,14 @@ class MainActivityTest {
     }
 
     @Test
-    fun open_settings(){
+    fun open_settings() {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         Espresso.onView(ViewMatchers.withId(R.id.settingsButton)).perform(ViewActions.click())
         Intents.intended(IntentMatchers.hasComponent(SettingsActivity::class.java.name))
     }
 
     @Test
-    fun start_game(){
+    fun start_game() {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         Espresso.onView(ViewMatchers.withId(R.id.startButton)).perform(ViewActions.click())
         Intents.intended(IntentMatchers.hasComponent(PlayerSelectionActivity::class.java.name))
