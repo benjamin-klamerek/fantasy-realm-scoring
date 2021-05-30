@@ -6,12 +6,13 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.TextRecognizerOptions
 import com.klamerek.fantasyrealms.game.CardDefinition
 import com.klamerek.fantasyrealms.game.allDefinitions
 import com.klamerek.fantasyrealms.game.empty
+import com.klamerek.fantasyrealms.normalize
 import com.klamerek.fantasyrealms.util.Constants
 import me.xdrop.fuzzywuzzy.FuzzySearch
-import com.klamerek.fantasyrealms.normalize
 import java.util.*
 import kotlin.math.abs
 
@@ -22,7 +23,7 @@ import kotlin.math.abs
  */
 class CardTitleRecognizer {
 
-    private val recognizer = TextRecognition.getClient()
+    private val recognizer = TextRecognition.getClient(TextRecognizerOptions.Builder().build())
     private val cardByCleanedName = allDefinitions.map { cleanText(it.name()) to it }.toMap()
 
     /**
