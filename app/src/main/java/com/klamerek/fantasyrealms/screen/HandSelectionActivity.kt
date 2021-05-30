@@ -16,12 +16,16 @@ import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.util.Constants
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import javax.annotation.Generated
 
 
 class HandSelectionActivity : CustomActivity() {
 
+    @Generated
     private lateinit var adapter: HandSelectionAdapter
+    @Generated
     private lateinit var player: Player
+    @Generated
     private lateinit var binding: ActivityHandSelectionBinding
 
     override fun onDestroy() {
@@ -123,9 +127,9 @@ class HandSelectionActivity : CustomActivity() {
         request.cardInitiator = cardDefinition?.id
         request.label = cardDefinition?.rule()
         request.selectionMode = player.game.ruleEffectSelectionMode(cardDefinition)
-        request.cardsSelected.addAll(player.game.ruleEffectCardSelectionAbout(cardDefinition).map { definition -> definition.id })
-        request.suitsSelected.addAll(player.game.ruleEffectSuitSelectionAbout(cardDefinition).map { suit -> suit.name })
-        request.cardsScope.addAll(player.game.ruleEffectCandidateAbout(cardDefinition).map { definition -> definition.id })
+        request.cardsSelected.addAll(player.game.ruleEffectCardSelectionAbout(cardDefinition).map { it.id })
+        request.suitsSelected.addAll(player.game.ruleEffectSuitSelectionAbout(cardDefinition).map { it.name })
+        request.cardsScope.addAll(player.game.ruleEffectCandidateAbout(cardDefinition).map { it.id })
         handSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, request)
         startActivityForResult(handSelectionIntent, Constants.SELECT_RULE_EFFECT)
     }
