@@ -47,7 +47,7 @@ class PlayerSelectionActivityTest {
     private fun addPlayer(name: String) {
         onView(withId(R.id.addPlayerButton)).perform(click())
         sleep(500)
-        onView(withId(R.id.playerNameEditText)).perform(typeText(name))
+        onView(withId(R.id.playerNameEditText)).perform(replaceText(name))
         sleep(500)
         onView(withId(positiveButtonId)).perform(click())
         sleep(500)

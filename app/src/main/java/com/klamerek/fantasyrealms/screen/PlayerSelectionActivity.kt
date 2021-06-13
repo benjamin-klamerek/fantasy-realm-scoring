@@ -73,13 +73,25 @@ class PlayerSelectionActivity : CustomActivity() {
         val dialog = initDialog(dialogView, field)
         binding.addPlayerButton.setOnClickListener {
             field?.text?.clear()
+            field?.setText(generateNextPlayerName())
             dialog.show()
             field?.requestFocus()
+            field?.selectAll()
             field?.postDelayed({
-                val keyboard : InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                keyboard.showSoftInput(field,0)
+                val keyboard: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                keyboard.showSoftInput(field, 0)
             }, delayBeforeShowingKeyboard)
         }
+    }
+
+    private fun generateNextPlayerName(): String {
+        var number = 1
+        var playerNamePattern = "Player $number"
+        while (Player.all.firstOrNull { playerNamePattern == it.name } != null) {
+            number++
+            playerNamePattern = "Player $number"
+        }
+        return playerNamePattern
     }
 
     private fun initDialog(dialogView: View, field: TextInputEditText?): AlertDialog {
@@ -93,7 +105,7 @@ class PlayerSelectionActivity : CustomActivity() {
             .setNegativeButton(R.string.cancel_button) { _, _ -> }
             .create()
         alertDialog.setOnShowListener {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = false
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = ! (field?.text?.isBlank()?:true)
         }
         field?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
@@ -101,7 +113,7 @@ class PlayerSelectionActivity : CustomActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = !s.isNullOrBlank()
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = ! s.isNullOrBlank()
             }
 
         })
