@@ -111,7 +111,7 @@ object AllRules {
             {
                 it.cardsNotBlanked().filter { card ->
                     card.isOneOf(Suit.WEAPON, Suit.FLOOD, Suit.FLAME, Suit.LAND, Suit.WEATHER)
-                }.sumOf { card -> card.value() }
+                }.maxOfOrNull { card -> card.value() } ?: 0
             }
         ),
         waterElemental to listOf(

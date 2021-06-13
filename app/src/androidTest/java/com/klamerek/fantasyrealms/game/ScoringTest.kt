@@ -257,4 +257,17 @@ class ScoringTest {
         Assertions.assertEquals(137, game.score())
     }
 
+    @DisplayName("fountain of life take only one card (the best one)")
+    @Test
+    fun fountain_of_life_take_only_one_card() {
+        val game = Game()
+        game.add(fountainOfLife)
+        game.add(swamp)
+        game.add(greatFlood)
+        game.add(island)
+        game.add(waterElemental)
+        game.calculate()
+        Assertions.assertEquals(161, game.score())
+    }
+
 }
