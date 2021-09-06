@@ -10,7 +10,7 @@
     <TextView
             android:text="@string/disclaimer"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="150dp"
             android:id="@+id/disclaimerLabel"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"

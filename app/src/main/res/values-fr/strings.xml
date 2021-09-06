@@ -16,7 +16,8 @@
     <string name="scan_button">Scan</string>
     <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.2 \n Merci \"Les joueurs du fort\" pour les tests :-)</string>
+    <string name="disclaimer">Version 0.3 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
+        Vous souhaitez ajouter une autre langue ? \nContactez moi (lien dans play store)</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="language_label_english">Anglais</string>
