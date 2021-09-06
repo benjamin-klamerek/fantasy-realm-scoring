@@ -22,6 +22,7 @@
     <string name="language_label">Langue:</string>
     <string name="language_label_english">Anglais</string>
     <string name="language_label_french">Français</string>
+    <string name="display_card_number_label">Afficher numéro de carte:</string>
     <!-- Effets et Familles -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">EFFACE</string>

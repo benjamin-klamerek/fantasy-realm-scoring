@@ -1,12 +1,15 @@
 package com.klamerek.fantasyrealms.screen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
+import com.klamerek.fantasyrealms.game.allDefinitions
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Preferences
 import java.io.Serializable
 
 class CardsSelectionActivity : CustomActivity() {
@@ -14,6 +17,7 @@ class CardsSelectionActivity : CustomActivity() {
     private lateinit var input: CardsSelectionExchange
     private lateinit var binding: ActivityCardsSelectionBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCardsSelectionBinding.inflate(layoutInflater)
@@ -29,6 +33,12 @@ class CardsSelectionActivity : CustomActivity() {
         adaptCardListDisplay()
         adaptSuitListDisplay()
         updateMainButtonStatus()
+
+        if (Preferences.getDisplayCardNumber(baseContext)){
+            binding.chipGroup.children.toList().forEach {
+                (it as? Chip)?.text = (it as Chip).text.toString() + " (" + it.tag + "/" + allDefinitions.size + ")"
+            }
+        }
 
         binding.addCardsButton.setOnClickListener {
             val closingIntent = Intent()

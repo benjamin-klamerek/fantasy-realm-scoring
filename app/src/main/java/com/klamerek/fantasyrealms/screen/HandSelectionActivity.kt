@@ -14,6 +14,7 @@ import com.klamerek.fantasyrealms.databinding.ActivityHandSelectionBinding
 import com.klamerek.fantasyrealms.databinding.HandListItemBinding
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Preferences
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -53,7 +54,7 @@ class HandSelectionActivity : CustomActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         binding.handView.addItemDecoration(DividerItemDecoration(binding.handView.context, DividerItemDecoration.VERTICAL))
         binding.handView.layoutManager = linearLayoutManager
-        adapter = HandSelectionAdapter(player.game)
+        adapter = HandSelectionAdapter(player.game, Preferences.getDisplayCardNumber(binding.handView.context))
         binding.handView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(
@@ -131,11 +132,11 @@ class HandSelectionActivity : CustomActivity() {
     }
 }
 
-class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSelectionAdapter.HandHolder>() {
+class HandSelectionAdapter(private val game: Game, private val displayCardNumber: Boolean) : RecyclerView.Adapter<HandSelectionAdapter.HandHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HandHolder {
         val itemBinding = HandListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HandHolder(itemBinding, game)
+        return HandHolder(itemBinding, game, displayCardNumber)
     }
 
     override fun getItemCount(): Int = game.actualHandSize()
@@ -144,7 +145,7 @@ class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSe
         holder.bindCard(game.cards().elementAt(position))
     }
 
-    class HandHolder(v: HandListItemBinding, private val game: Game) : RecyclerView.ViewHolder(v.root) {
+    class HandHolder(v: HandListItemBinding, private val game: Game, private val displayCardNumber: Boolean) : RecyclerView.ViewHolder(v.root) {
 
         private var view: HandListItemBinding = v
 
@@ -154,7 +155,11 @@ class HandSelectionAdapter(private val game: Game) : RecyclerView.Adapter<HandSe
         }
 
         private fun updateMainPart(card: Card) {
-            view.cardNameLabel.text = card.definition.name()
+            if (displayCardNumber) {
+                view.cardNameLabel.text = card.definition.name() + " (" + card.definition.id + "/" + allDefinitions.size + ")"
+            } else {
+                view.cardNameLabel.text = card.definition.name()
+            }
             view.cardNameLabel.setChipBackgroundColorResource(card.suit().color)
             view.scoreLabel.text = game.score(card.definition).toString()
             view.effectButton.visibility = if (game.hasManualEffect(card.definition)) View.VISIBLE else View.GONE
