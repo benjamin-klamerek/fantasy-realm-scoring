@@ -1,6 +1,7 @@
 package com.klamerek.fantasyrealms.util
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import com.klamerek.fantasyrealms.App
@@ -31,9 +32,7 @@ object LocaleManager {
     private val languagesById = languages.map { it.id to it }.toMap()
 
     fun getLanguage(context: Context): Language {
-        val sharedPref = context.getSharedPreferences(
-            context.getString(R.string.preference_file_key), Context.MODE_PRIVATE
-        )
+        val sharedPref = Preferences.sharedPreferences(context)
         val key = sharedPref.getString(context.getString(R.string.saved_language), "")
         return languagesById[key] ?: languages.firstOrNull { it.language == Locale.getDefault().language } ?: english
     }
@@ -55,9 +54,7 @@ object LocaleManager {
     }
 
     fun saveLanguageInPreferences(context: Context, language: Language) {
-        val sharedPref = context.getSharedPreferences(
-            context.getString(R.string.preference_file_key), Context.MODE_PRIVATE
-        )
+        val sharedPref = Preferences.sharedPreferences(context)
         with(sharedPref.edit()) {
             putString(context.getString(R.string.saved_language), language.id)
             apply()

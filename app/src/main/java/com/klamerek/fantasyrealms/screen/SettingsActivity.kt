@@ -7,6 +7,7 @@ import com.klamerek.fantasyrealms.util.Language
 import com.klamerek.fantasyrealms.util.LocaleManager
 import com.klamerek.fantasyrealms.util.LocaleManager.getLanguage
 import com.klamerek.fantasyrealms.util.LocaleManager.languages
+import com.klamerek.fantasyrealms.util.Preferences
 
 
 /**
@@ -24,6 +25,7 @@ class SettingsActivity : CustomActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.displayCardNumberCheckBox.isChecked = Preferences.getDisplayCardNumber(baseContext);
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -32,6 +34,7 @@ class SettingsActivity : CustomActivity() {
         binding.doneButton.setOnClickListener {
             val language = binding.languageSpinner.adapter.getItem(binding.languageSpinner.selectedItemPosition) as Language
             LocaleManager.saveLanguageInPreferences(baseContext, language)
+            Preferences.saveDisplayCardNumberInPreferences(baseContext, binding.displayCardNumberCheckBox.isChecked)
             finish()
         }
 

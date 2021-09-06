@@ -16,11 +16,13 @@
     <string name="scan_button">Scan</string>
     <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.2 \n Merci \"Les joueurs du fort\" pour les tests :-)</string>
+    <string name="disclaimer">Version 0.3 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
+        Vous souhaitez ajouter une autre langue ? \nContactez moi (lien dans play store)</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="language_label_english">Anglais</string>
     <string name="language_label_french">Français</string>
+    <string name="display_card_number_label">Afficher numéro de carte:</string>
     <!-- Effets et Familles -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">EFFACE</string>
@@ -94,7 +96,7 @@
     <!-- Card rules -->
     <string name="rangers_rules">Bonus: +10 pour chaque Terrain. Efface le mot Amrée de tous les malus.</string>
     <string name="elven_archers_rules">Bonus: +5 si vous n\'avez pas de Climat</string>
-    <string name="dwarvish_infantry_rules">Malus: -2 pour chaque Armée</string>
+    <string name="dwarvish_infantry_rules">Malus: -2 pour chaque autre Armée</string>
     <string name="light_cavalry_rules">Malus: -2 pour chaque Terrain</string>
     <string name="celestial_knights_rules">Malus: -8 sauf avec au moins un Seigneur</string>
     <string name="protection_rune_rules">Bonus: Efface le malus de toutes les cartes.</string>

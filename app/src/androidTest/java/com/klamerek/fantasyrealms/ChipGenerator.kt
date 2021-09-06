@@ -20,7 +20,7 @@ class ChipGenerator {
             InstrumentationRegistry.getInstrumentation().targetContext, english
         )
 
-        allDefinitions.forEach { definition ->
+        allDefinitions.sortedBy { it.id }.forEach { definition ->
             val nameCleaned = definition.name().toLowerCase().replace(" ", "_")
             val suitCleaned = definition.suit.name.toLowerCase()
             Log.d(
@@ -33,7 +33,7 @@ class ChipGenerator {
                         "\" app:chipBackgroundColor=\"@color/chip_background_" + suitCleaned + "\" \n" +
                         "                android:textColor=\"@color/chip_revert_color_activated\" \n " +
                         "       app:chipStrokeColor=\"@color/color" + definition.suit.display() +"\"\n" +
-                        "       app:chipStrokeWidth=\"1dp\"/>"
+                        "       app:chipStrokeWidth=\"2dp\"/>"
             )
         }
     }

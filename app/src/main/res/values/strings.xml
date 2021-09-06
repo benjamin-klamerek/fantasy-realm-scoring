@@ -16,11 +16,13 @@
     <string name="scan_button">Scan</string>
     <string name="effect_button">Effect</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.2 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
+    <string name="disclaimer">Version 0.3 \n Thanks to \"Les joueurs du fort\" for testing :-) \n\n
+        Do you want do add another language ? \nContact me (link in play store)</string>
     <string name="done">Done</string>
     <string name="language_label">Language:</string>
     <string name="language_label_english">English</string>
     <string name="language_label_french">French</string>
+    <string name="display_card_number_label">Display card number:</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">CLEAR</string>

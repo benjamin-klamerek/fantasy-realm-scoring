@@ -270,4 +270,19 @@ class ScoringTest {
         Assertions.assertEquals(161, game.score())
     }
 
+    @DisplayName("Dwarvish infantry applies on OTHER armies")
+    @Test
+    fun dwarvish_infantry_applies_on_OTHER_armies() {
+        val game = Game()
+        game.add(dwarvishInfantry)
+        game.add(worldTree)
+        game.add(unicorn)
+        game.add(greatFlood)
+        game.add(forest)
+        game.add(empress)
+        game.add(warship)
+        game.calculate()
+        Assertions.assertEquals(171, game.score())
+    }
+
 }

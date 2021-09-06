@@ -10,7 +10,7 @@
     <TextView
             android:text="@string/disclaimer"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="150dp"
             android:id="@+id/disclaimerLabel"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="75dp"
                 android:id="@+id/languageLayout">
 
             <TextView
@@ -45,7 +45,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textStyle="bold"
                     android:layout_marginStart="10dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
             <Space
                     android:layout_width="wrap_content"
@@ -57,8 +57,8 @@
                     android:id="@+id/spaceLanguage" />
 
             <Spinner
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="180dp"
+                    android:layout_height="25dp"
                     android:id="@+id/languageSpinner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -66,9 +66,46 @@
                     android:layout_marginEnd="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/layout_corners_shape"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:id="@+id/displayCardNumberLayout">
+
+            <TextView
+                    android:text="@string/display_card_number_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/displayCardNumberLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    android:textSize="18sp" />
+
+            <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/displayCardNumberLabel"
+                    app:layout_constraintEnd_toStartOf="@id/displayCardNumberCheckBox"
+                    android:id="@+id/spaceDisplayCardNumber" />
+
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/displayCardNumberCheckBox"
+                    android:layout_marginEnd="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
