@@ -94,7 +94,7 @@
     <!-- Card rules -->
     <string name="rangers_rules">Bonus: +10 pour chaque Terrain. Efface le mot Amrée de tous les malus.</string>
     <string name="elven_archers_rules">Bonus: +5 si vous n\'avez pas de Climat</string>
-    <string name="dwarvish_infantry_rules">Malus: -2 pour chaque Armée</string>
+    <string name="dwarvish_infantry_rules">Malus: -2 pour chaque autre Armée</string>
     <string name="light_cavalry_rules">Malus: -2 pour chaque Terrain</string>
     <string name="celestial_knights_rules">Malus: -8 sauf avec au moins un Seigneur</string>
     <string name="protection_rune_rules">Bonus: Efface le malus de toutes les cartes.</string>

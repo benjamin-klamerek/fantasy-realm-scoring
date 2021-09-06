@@ -41,7 +41,7 @@ object AllRules {
         elvenArchers to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { if (it.noCard(Suit.LEADER)) 5 else 0 }),
         dwarvishInfantry to listOf(
-            RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY)) { it.countCard(Suit.ARMY) * -2 }),
+            RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY)) { (it.countCard(Suit.ARMY) - 1) * -2 }),
         lightCavalry to listOf(
             RuleAboutScore(listOf(Effect.PENALTY, Suit.LAND)) { it.countCard(Suit.LAND) * -2 }),
         celestialKnights to listOf(
