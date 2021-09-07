@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.screen
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -36,6 +37,7 @@ class PlayerSelectionActivity : CustomActivity() {
     private lateinit var adapter: PlayerSelectionAdapter
     private lateinit var binding: ActivityPlayerSelectionBinding
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
@@ -67,6 +69,7 @@ class PlayerSelectionActivity : CustomActivity() {
         itemTouchHelper.attachToRecyclerView(binding.playersView)
     }
 
+    @SuppressLint("InflateParams")
     private fun installDialog() {
         val dialogView: View = this.layoutInflater.inflate(R.layout.dialog_new_player, null)
         val field: TextInputEditText? = dialogView.findViewWithTag("playerNameEditText")
@@ -136,6 +139,7 @@ class PlayerSelectionActivity : CustomActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Suppress("UnusedPrivateMember")
     @Subscribe
     fun removeAllPlayers(event: AllPlayersDeletionEvent) {

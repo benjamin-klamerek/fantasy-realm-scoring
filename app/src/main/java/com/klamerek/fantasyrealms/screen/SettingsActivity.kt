@@ -25,7 +25,7 @@ class SettingsActivity : CustomActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.displayCardNumberCheckBox.isChecked = Preferences.getDisplayCardNumber(baseContext);
+        binding.displayCardNumberCheckBox.isChecked = Preferences.getDisplayCardNumber(baseContext)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

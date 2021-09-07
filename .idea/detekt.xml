@@ -3,6 +3,6 @@
   <component name="DetektProjectConfiguration">
     <enableDetekt>true</enableDetekt>
     <buildUponDefaultConfig>true</buildUponDefaultConfig>
-    <rulesPath>C:\Users\Benjamin\StudioProjects\fantasy-realm-scoring\app\detekt.yml</rulesPath>
+    <configPaths>C:\Users\Benjamin\StudioProjects\fantasy-realm-scoring\app\detekt.yml</configPaths>
   </component>
 </project>

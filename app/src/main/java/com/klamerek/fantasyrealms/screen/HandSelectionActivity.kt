@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.screen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class HandSelectionActivity : CustomActivity() {
         EventBus.getDefault().unregister(this)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
@@ -72,6 +74,7 @@ class HandSelectionActivity : CustomActivity() {
         binding.handSizeLabel.text = getString(R.string.hand_size, player.game.actualHandSize(), player.game.handSizeExpected())
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Constants.RESULT_OK && requestCode == Constants.SELECT_CARDS) {
@@ -97,6 +100,7 @@ class HandSelectionActivity : CustomActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun removeAllCards(event: AllCardsDeletionEvent) {
         player.game.clear()
@@ -111,7 +115,7 @@ class HandSelectionActivity : CustomActivity() {
         player.game.remove(player.game.cards().elementAt(event.index).definition)
         player.game.calculate()
         runOnUiThread {
-            adapter.notifyDataSetChanged()
+            adapter.notifyItemRemoved(event.index)
             refreshPlayerLabels()
         }
     }
@@ -154,6 +158,7 @@ class HandSelectionAdapter(private val game: Game, private val displayCardNumber
             updateDetailPart(card)
         }
 
+        @SuppressLint("SetTextI18n")
         private fun updateMainPart(card: Card) {
             if (displayCardNumber) {
                 view.cardNameLabel.text = card.definition.name() + " (" + card.definition.id + "/" + allDefinitions.size + ")"
@@ -176,6 +181,7 @@ class HandSelectionAdapter(private val game: Game, private val displayCardNumber
             }
         }
 
+        @SuppressLint("SetTextI18n")
         private fun updateDetailPart(card: Card) {
             view.detailLinearLayout.visibility = View.GONE
             view.baseValueLabel.text = card.value().toString()

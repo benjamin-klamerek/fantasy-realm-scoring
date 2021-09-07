@@ -6,7 +6,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.TextRecognizerOptions
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.klamerek.fantasyrealms.game.CardDefinition
 import com.klamerek.fantasyrealms.game.allDefinitions
 import com.klamerek.fantasyrealms.game.empty
@@ -23,7 +23,7 @@ import kotlin.math.abs
  */
 class CardTitleRecognizer {
 
-    private val recognizer = TextRecognition.getClient(TextRecognizerOptions.Builder().build())
+    private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
     private val cardByCleanedName = allDefinitions.map { cleanText(it.name()) to it }.toMap()
 
     /**
@@ -76,15 +76,15 @@ class CardTitleRecognizer {
             val taskCompletionSource = TaskCompletionSource<List<Int>>()
             Handler(Looper.getMainLooper()).post {
                 val text = recognizeTextTask.result
-                taskCompletionSource.setResult(text?.textBlocks?.asSequence()
-                    ?.map { textBlock -> cleanText(textBlock.text) }
-                    ?.filter { it.length > 2 }
-                    ?.map { getMatchingResult(it) }
-                    ?.filter { matching -> matching.isAcceptable() }
-                    ?.map { matching -> matching.bestCardResult }
-                    ?.toSet()
-                    ?.map { it.id }
-                    ?: emptyList())
+                taskCompletionSource.setResult(
+                    text.textBlocks.asSequence()
+                        .map { textBlock -> cleanText(textBlock.text) }
+                        .filter { it.length > 2 }
+                        .map { getMatchingResult(it) }
+                        .filter { matching -> matching.isAcceptable() }
+                        .map { matching -> matching.bestCardResult }
+                        .toSet()
+                        .map { it.id })
             }
             taskCompletionSource.task
         }
