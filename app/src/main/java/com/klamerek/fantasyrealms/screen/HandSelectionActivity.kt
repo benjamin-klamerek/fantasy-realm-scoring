@@ -39,7 +39,7 @@ class HandSelectionActivity : CustomActivity() {
         val view = binding.root
         setContentView(view)
 
-        player = Player.all[intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)]
+        player = findOrCreatePlayer()
 
         binding.addCardsButton.setOnClickListener {
             val handSelectionIntent = Intent(this, CardsSelectionActivity::class.java)
@@ -67,6 +67,22 @@ class HandSelectionActivity : CustomActivity() {
         player.game.calculate()
         refreshPlayerLabels()
         adapter.notifyDataSetChanged()
+    }
+
+    /**
+     * I know, this code seems overkill because at this point, a player should already be created.
+     * I have not found why but it seems that many users that exception about this code (array out of bound exception).
+     * This method is a tentative to solve that problem.
+     */
+    private fun findOrCreatePlayer(): Player {
+        var playerIndex = intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)
+        if (Player.all.isEmpty()){
+            Player.all.add(Player(Player.generateNextPlayerName(), Game()))
+            playerIndex = 0;
+        }else if (Player.all.size <= playerIndex){
+            playerIndex = Player.all.size - 1
+        }
+        return Player.all[playerIndex]
     }
 
     private fun refreshPlayerLabels() {

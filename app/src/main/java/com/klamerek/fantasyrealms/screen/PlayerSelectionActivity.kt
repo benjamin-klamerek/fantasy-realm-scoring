@@ -76,7 +76,7 @@ class PlayerSelectionActivity : CustomActivity() {
         val dialog = initDialog(dialogView, field)
         binding.addPlayerButton.setOnClickListener {
             field?.text?.clear()
-            field?.setText(generateNextPlayerName())
+            field?.setText(Player.generateNextPlayerName())
             dialog.show()
             field?.requestFocus()
             field?.selectAll()
@@ -85,16 +85,6 @@ class PlayerSelectionActivity : CustomActivity() {
                 keyboard.showSoftInput(field, 0)
             }, delayBeforeShowingKeyboard)
         }
-    }
-
-    private fun generateNextPlayerName(): String {
-        var number = 1
-        var playerNamePattern = "Player $number"
-        while (Player.all.firstOrNull { playerNamePattern == it.name } != null) {
-            number++
-            playerNamePattern = "Player $number"
-        }
-        return playerNamePattern
     }
 
     private fun initDialog(dialogView: View, field: TextInputEditText?): AlertDialog {

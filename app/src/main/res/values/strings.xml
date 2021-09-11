@@ -22,6 +22,7 @@
     <string name="language_label">Language:</string>
     <string name="language_label_english">English</string>
     <string name="language_label_french">French</string>
+    <string name="language_label_russian">Russian</string>
     <string name="display_card_number_label">Display card number:</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>

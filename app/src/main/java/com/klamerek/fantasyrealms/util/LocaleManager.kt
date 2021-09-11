@@ -1,7 +1,6 @@
 package com.klamerek.fantasyrealms.util
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import com.klamerek.fantasyrealms.App
@@ -27,8 +26,9 @@ object LocaleManager {
 
     val english = Language("ENGLISH_ID", R.string.language_label_english, "en", "EN")
     val french = Language("FRENCH_ID", R.string.language_label_french, "fr", "FR")
+    val russian = Language("RUSSIAN_ID", R.string.language_label_russian, "ru", "RU")
 
-    val languages = listOf(english, french)
+    val languages = listOf(english, french, russian)
     private val languagesById = languages.map { it.id to it }.toMap()
 
     fun getLanguage(context: Context): Language {
