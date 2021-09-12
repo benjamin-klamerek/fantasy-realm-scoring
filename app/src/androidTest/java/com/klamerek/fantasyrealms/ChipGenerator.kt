@@ -6,6 +6,7 @@ import com.klamerek.fantasyrealms.game.allDefinitions
 import com.klamerek.fantasyrealms.util.LocaleManager
 import com.klamerek.fantasyrealms.util.LocaleManager.english
 import org.junit.jupiter.api.Test
+import java.util.*
 
 /**
  * Not a test but a simple generator about chip UI element (one per card)
@@ -21,8 +22,8 @@ class ChipGenerator {
         )
 
         allDefinitions.sortedBy { it.id }.forEach { definition ->
-            val nameCleaned = definition.name().toLowerCase().replace(" ", "_")
-            val suitCleaned = definition.suit.name.toLowerCase()
+            val nameCleaned = definition.name().lowercase(Locale.getDefault()).replace(" ", "_")
+            val suitCleaned = definition.suit.name.lowercase(Locale.getDefault())
             Log.d(
                 "Generator", "<com.google.android.material.chip.Chip\n" +
                         "                android:layout_width=\"wrap_content\"\n" +

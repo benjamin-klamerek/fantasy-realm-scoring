@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.screen
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -36,6 +37,7 @@ class PlayerSelectionActivity : CustomActivity() {
     private lateinit var adapter: PlayerSelectionAdapter
     private lateinit var binding: ActivityPlayerSelectionBinding
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
@@ -67,13 +69,14 @@ class PlayerSelectionActivity : CustomActivity() {
         itemTouchHelper.attachToRecyclerView(binding.playersView)
     }
 
+    @SuppressLint("InflateParams")
     private fun installDialog() {
         val dialogView: View = this.layoutInflater.inflate(R.layout.dialog_new_player, null)
         val field: TextInputEditText? = dialogView.findViewWithTag("playerNameEditText")
         val dialog = initDialog(dialogView, field)
         binding.addPlayerButton.setOnClickListener {
             field?.text?.clear()
-            field?.setText(generateNextPlayerName())
+            field?.setText(Player.generateNextPlayerName())
             dialog.show()
             field?.requestFocus()
             field?.selectAll()
@@ -82,16 +85,6 @@ class PlayerSelectionActivity : CustomActivity() {
                 keyboard.showSoftInput(field, 0)
             }, delayBeforeShowingKeyboard)
         }
-    }
-
-    private fun generateNextPlayerName(): String {
-        var number = 1
-        var playerNamePattern = "Player $number"
-        while (Player.all.firstOrNull { playerNamePattern == it.name } != null) {
-            number++
-            playerNamePattern = "Player $number"
-        }
-        return playerNamePattern
     }
 
     private fun initDialog(dialogView: View, field: TextInputEditText?): AlertDialog {
@@ -136,6 +129,7 @@ class PlayerSelectionActivity : CustomActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Suppress("UnusedPrivateMember")
     @Subscribe
     fun removeAllPlayers(event: AllPlayersDeletionEvent) {

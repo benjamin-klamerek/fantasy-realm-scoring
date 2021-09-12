@@ -16,12 +16,13 @@
     <string name="scan_button">Scan</string>
     <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.3 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
+    <string name="disclaimer">Version 0.4 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
         Vous souhaitez ajouter une autre langue ? \nContactez moi (lien dans play store)</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="language_label_english">Anglais</string>
     <string name="language_label_french">Français</string>
+    <string name="language_label_russian">Russe</string>
     <string name="display_card_number_label">Afficher numéro de carte:</string>
     <!-- Effets et Familles -->
     <string name="effect_bonus">BONUS</string>

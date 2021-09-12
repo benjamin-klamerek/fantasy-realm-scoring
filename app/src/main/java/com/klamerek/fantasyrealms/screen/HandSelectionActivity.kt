@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.screen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class HandSelectionActivity : CustomActivity() {
         EventBus.getDefault().unregister(this)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
@@ -37,7 +39,7 @@ class HandSelectionActivity : CustomActivity() {
         val view = binding.root
         setContentView(view)
 
-        player = Player.all[intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)]
+        player = findOrCreatePlayer()
 
         binding.addCardsButton.setOnClickListener {
             val handSelectionIntent = Intent(this, CardsSelectionActivity::class.java)
@@ -67,11 +69,28 @@ class HandSelectionActivity : CustomActivity() {
         adapter.notifyDataSetChanged()
     }
 
+    /**
+     * I know, this code seems overkill because at this point, a player should already be created.
+     * I have not found why but it seems that many users that exception about this code (array out of bound exception).
+     * This method is a tentative to solve that problem.
+     */
+    private fun findOrCreatePlayer(): Player {
+        var playerIndex = intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)
+        if (Player.all.isEmpty()){
+            Player.all.add(Player(Player.generateNextPlayerName(), Game()))
+            playerIndex = 0;
+        }else if (Player.all.size <= playerIndex){
+            playerIndex = Player.all.size - 1
+        }
+        return Player.all[playerIndex]
+    }
+
     private fun refreshPlayerLabels() {
         binding.playerNameLabel.text = getString(R.string.player_name_with_score, player.name, player.game.score())
         binding.handSizeLabel.text = getString(R.string.hand_size, player.game.actualHandSize(), player.game.handSizeExpected())
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Constants.RESULT_OK && requestCode == Constants.SELECT_CARDS) {
@@ -97,6 +116,7 @@ class HandSelectionActivity : CustomActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun removeAllCards(event: AllCardsDeletionEvent) {
         player.game.clear()
@@ -111,7 +131,7 @@ class HandSelectionActivity : CustomActivity() {
         player.game.remove(player.game.cards().elementAt(event.index).definition)
         player.game.calculate()
         runOnUiThread {
-            adapter.notifyDataSetChanged()
+            adapter.notifyItemRemoved(event.index)
             refreshPlayerLabels()
         }
     }
@@ -154,6 +174,7 @@ class HandSelectionAdapter(private val game: Game, private val displayCardNumber
             updateDetailPart(card)
         }
 
+        @SuppressLint("SetTextI18n")
         private fun updateMainPart(card: Card) {
             if (displayCardNumber) {
                 view.cardNameLabel.text = card.definition.name() + " (" + card.definition.id + "/" + allDefinitions.size + ")"
@@ -176,6 +197,7 @@ class HandSelectionAdapter(private val game: Game, private val displayCardNumber
             }
         }
 
+        @SuppressLint("SetTextI18n")
         private fun updateDetailPart(card: Card) {
             view.detailLinearLayout.visibility = View.GONE
             view.baseValueLabel.text = card.value().toString()
