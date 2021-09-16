@@ -433,4 +433,11 @@ val allDefinitions by lazy {
     )
 }
 
+val allDefinitionsRussian by lazy {
+    mapOf(
+        "IMApa" to hydra,
+        "TEST" to unicorn
+    )
+}
+
 val cardsById by lazy { allDefinitions.map { definition -> definition.id to definition }.toMap() }

@@ -15,6 +15,7 @@ import com.google.mlkit.vision.common.InputImage
 import com.klamerek.fantasyrealms.databinding.ActivityScanBinding
 import com.klamerek.fantasyrealms.ocr.CardTitleRecognizer
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.LocaleManager
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.concurrent.ExecutorService
@@ -29,7 +30,7 @@ class ScanActivity : CustomActivity() {
 
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
-    private val recognizer = CardTitleRecognizer()
+    private lateinit var recognizer : CardTitleRecognizer
     private lateinit var binding: ActivityScanBinding
 
     override fun onDestroy() {
@@ -47,6 +48,7 @@ class ScanActivity : CustomActivity() {
 
         manageCameraPermission()
 
+        recognizer = CardTitleRecognizer(LocaleManager.getLanguage(baseContext))
         cameraExecutor = Executors.newSingleThreadExecutor()
         binding.cameraCaptureButton.setOnClickListener {
             binding.scanProgressBar.visibility = View.VISIBLE
