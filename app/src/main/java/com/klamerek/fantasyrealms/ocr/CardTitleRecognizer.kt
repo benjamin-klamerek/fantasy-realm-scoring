@@ -9,9 +9,12 @@ import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.klamerek.fantasyrealms.game.CardDefinition
 import com.klamerek.fantasyrealms.game.allDefinitions
+import com.klamerek.fantasyrealms.game.allDefinitionsRussian
 import com.klamerek.fantasyrealms.game.empty
 import com.klamerek.fantasyrealms.normalize
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Language
+import com.klamerek.fantasyrealms.util.LocaleManager.russian
 import me.xdrop.fuzzywuzzy.FuzzySearch
 import java.util.*
 import kotlin.math.abs
@@ -21,10 +24,12 @@ import kotlin.math.abs
  * Recognize title card from images and provide list of card (ids) identified
  *
  */
-class CardTitleRecognizer {
+class CardTitleRecognizer(language: Language) {
 
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-    private val cardByCleanedName = allDefinitions.map { cleanText(it.name()) to it }.toMap()
+    private val cardByCleanedName = if (language == russian)
+        allDefinitionsRussian else
+        allDefinitions.map { cleanText(it.name()) to it }.toMap()
 
     /**
      * Put to lower case, remove everything which is not a letter and replace all accented characters per their base letter version<br>

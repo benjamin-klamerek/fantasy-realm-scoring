@@ -14,9 +14,10 @@
     <string name="new_player_default_value">Nouveau joueur</string>
     <string name="add_card_button">Ajouter carte</string>
     <string name="scan_button">Scan</string>
+    <string name="scan_help_label">Conseil: seuls les titres des cartes doivent être visibles</string>
     <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.4 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
+    <string name="disclaimer">Version 0.5 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
         Vous souhaitez ajouter une autre langue ? \nContactez moi (lien dans play store)</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
