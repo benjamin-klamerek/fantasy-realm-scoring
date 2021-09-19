@@ -17,7 +17,7 @@
     <string name="scan_help_label">Совет: обязательны только названия карт</string>
     <string name="effect_button">Эффект</string>
     <string name="base">Основная сила</string>
-    <string name="disclaimer">Version 0.4 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
+    <string name="disclaimer">Version 0.5 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
     <string name="done">Готово</string>
     <string name="language_label">Язык:</string>
     <string name="language_label_english">английский</string>
