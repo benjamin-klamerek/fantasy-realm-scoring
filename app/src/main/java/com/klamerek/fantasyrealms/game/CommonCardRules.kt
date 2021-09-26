@@ -248,6 +248,9 @@ object AllRules {
         ),
         warlockLord to listOf(
             RuleAboutScore(listOf(Effect.PENALTY)) { (it.countCard(Suit.LEADER) + max(it.countCard(Suit.WIZARD) - 1, 0)) * -10 }
+        ),
+        jester to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.isAllOdd()) 50 else (it.countOddCard() -1) * 3 }
         )
     )
 

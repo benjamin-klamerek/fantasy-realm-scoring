@@ -285,4 +285,29 @@ class ScoringTest {
         Assertions.assertEquals(171, game.score())
     }
 
+    @DisplayName("Jester with all cards as odd")
+    @Test
+    fun jester_with_all_cards_as_odd() {
+        val game = Game()
+        game.add(forge)
+        game.add(unicorn)
+        game.add(jester)
+        game.add(warship)
+        game.calculate()
+        Assertions.assertEquals(71, game.score())
+    }
+
+    @DisplayName("Jester with one card not odd")
+    @Test
+    fun jester_with_one_card_not_odd() {
+        val game = Game()
+        game.add(forge)
+        game.add(unicorn)
+        game.add(jester)
+        game.add(hydra)
+        game.add(warship)
+        game.calculate()
+        Assertions.assertEquals(39, game.score())
+    }
+
 }

@@ -449,6 +449,14 @@
                     android:textColor="@color/chip_revert_color_activated"
                     app:chipStrokeColor="@color/colorWild"
                     app:chipStrokeWidth="2dp"/>
+            <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/jester" android:text="@string/jester"
+                    android:checkable="true"
+                    android:tag="666" app:chipBackgroundColor="@color/chip_background_wizard"
+                    android:textColor="@color/chip_revert_color_activated"
+                    app:chipStrokeColor="@color/colorWizard"
+                    app:chipStrokeWidth="2dp"/>
 
 
 

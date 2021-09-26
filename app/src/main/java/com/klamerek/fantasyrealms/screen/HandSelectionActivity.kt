@@ -126,12 +126,13 @@ class HandSelectionActivity : CustomActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun removeCard(event: CardDeletionEvent) {
         player.game.remove(player.game.cards().elementAt(event.index).definition)
         player.game.calculate()
         runOnUiThread {
-            adapter.notifyItemRemoved(event.index)
+            adapter.notifyDataSetChanged()
             refreshPlayerLabels()
         }
     }
@@ -177,7 +178,7 @@ class HandSelectionAdapter(private val game: Game, private val displayCardNumber
         @SuppressLint("SetTextI18n")
         private fun updateMainPart(card: Card) {
             if (displayCardNumber) {
-                view.cardNameLabel.text = card.definition.name() + " (" + card.definition.id + "/" + allDefinitions.size + ")"
+                view.cardNameLabel.text = card.definition.nameWithId()
             } else {
                 view.cardNameLabel.text = card.definition.name()
             }

@@ -17,12 +17,13 @@
     <string name="scan_help_label">Совет: обязательны только названия карт</string>
     <string name="effect_button">Эффект</string>
     <string name="base">Основная сила</string>
-    <string name="disclaimer">Version 0.5 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
+    <string name="disclaimer">Version 0.6 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
     <string name="done">Готово</string>
     <string name="language_label">Язык:</string>
     <string name="language_label_english">английский</string>
     <string name="language_label_french">французкий</string>
     <string name="language_label_russian">русский</string>
+    <string name="language_label_german">Немецкий</string>
     <string name="display_card_number_label">Показать номер карты:</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">Бонус</string>
@@ -94,6 +95,7 @@
     <string name="collector">Собиратель</string>
     <string name="beastmaster">Зверолов</string>
     <string name="warlock_lord">Чернокнижник</string>
+    <string name="jester">Jester</string>
     <!-- Card rules -->
     <string name="rangers_rules">Бонус: +10 за каждую Землю. УДАЛЯЕТ слово Войско из всех штрафов.
     </string>
@@ -152,4 +154,5 @@
     <string name="collector_rules">Бонус: +10 за три разные карты одной масти, +40 за четыре разные карты одной масти, +100 за пять разных карт одной масти.</string>
     <string name="beastmaster_rules">Бонус: +9 за каждого зверя. ОТМЕНЯЕТ штрафы на всех зверях.</string>
     <string name="warlock_lord_rules">Штраф: -10 за каждого правителя и других колдунов.</string>
+    <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
 </resources>

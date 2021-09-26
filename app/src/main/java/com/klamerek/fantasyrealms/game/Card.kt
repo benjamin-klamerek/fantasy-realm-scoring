@@ -41,6 +41,8 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
 
     fun suit(): Suit = simulatedSuit ?: definition.suit
 
+    fun isOdd(): Boolean = value() % 2 == 1
+
     fun rules(): List<Rule<out Any>> = simulatedRules ?: rules
 
     fun name(name: String) {

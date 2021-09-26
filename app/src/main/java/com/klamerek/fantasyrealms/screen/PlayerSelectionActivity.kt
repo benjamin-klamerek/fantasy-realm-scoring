@@ -121,11 +121,12 @@ class PlayerSelectionActivity : CustomActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun removePlayer(event: PlayerDeletionEvent) {
         Player.all.removeAt(event.index)
         runOnUiThread {
-            adapter.notifyItemRemoved(event.index)
+            adapter.notifyDataSetChanged()
         }
     }
 
