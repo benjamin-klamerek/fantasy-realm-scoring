@@ -17,13 +17,14 @@
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
     <string name="effect_button">Effect</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.5 \n Thanks to \"Les joueurs du fort\" for testing :-) \n\n
+    <string name="disclaimer">Version 0.6 \n Thanks to \"Les joueurs du fort\" for testing :-) \n\n
         Do you want do add another language ? \nContact me (link in play store)</string>
     <string name="done">Done</string>
     <string name="language_label">Language:</string>
     <string name="language_label_english">English</string>
     <string name="language_label_french">French</string>
     <string name="language_label_russian">Russian</string>
+    <string name="language_label_german">German</string>
     <string name="display_card_number_label">Display card number:</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>
@@ -41,6 +42,7 @@
     <string name="suit_weather">Weather</string>
     <string name="suit_wild">Wild</string>
     <string name="suit_wizard">Wizard</string>
+    <string name="jester">Jester</string>
     <!-- Card names -->
     <string name="rangers">Rangers</string>
     <string name="elven_archers">Elven Archers</string>
@@ -176,4 +178,5 @@
     </string>
     <string name="beastmaster_rules">Bonus: +9 for each Beast; Clears the Penalty on all Beasts</string>
     <string name="warlock_lord_rules">Penalty: -10 for each Leader and other Wizard</string>
+    <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
 </resources>

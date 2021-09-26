@@ -58,13 +58,15 @@ enum class Suit(private val displayId: Int, val color: Int) : Tag {
  * @property suit       card family
  * @property keyRule    key explanation of the rule as described on the physical card
  */
-class CardDefinition(val id: Int, private val keyName: Int, val value: Int, val suit: Suit, private val keyRule: Int) {
+open class CardDefinition(val id: Int, private val keyName: Int, val value: Int, val suit: Suit, private val keyRule: Int) {
 
     fun isOneOf(vararg suit: Suit) = suit.contains(this.suit)
 
     fun name() = Strings.get(keyName)
 
     fun rule() = Strings.get(keyRule)
+
+    open fun nameWithId() = name() + " (" + id + "/" + numberOfCards + ")"
 
     override fun toString(): String {
         return name() + " " + rule()

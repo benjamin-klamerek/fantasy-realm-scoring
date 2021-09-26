@@ -17,13 +17,14 @@
     <string name="scan_help_label">Conseil: seuls les titres des cartes doivent être visibles</string>
     <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.5 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
+    <string name="disclaimer">Version 0.6 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
         Vous souhaitez ajouter une autre langue ? \nContactez moi (lien dans play store)</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="language_label_english">Anglais</string>
     <string name="language_label_french">Français</string>
     <string name="language_label_russian">Russe</string>
+    <string name="language_label_german">Allemand</string>
     <string name="display_card_number_label">Afficher numéro de carte:</string>
     <!-- Effets et Familles -->
     <string name="effect_bonus">BONUS</string>
@@ -95,6 +96,7 @@
     <string name="collector">Collectionneur</string>
     <string name="beastmaster">Dresseur</string>
     <string name="warlock_lord">Démoniste</string>
+    <string name="jester">Jester</string>
     <!-- Card rules -->
     <string name="rangers_rules">Bonus: +10 pour chaque Terrain. Efface le mot Amrée de tous les malus.</string>
     <string name="elven_archers_rules">Bonus: +5 si vous n\'avez pas de Climat</string>
@@ -149,4 +151,5 @@
     <string name="collector_rules">Bonus: +10 si vous avez 3 cartes de la même famille, +40 si vous avez 4 cartes de la même famille, +100 si vous avez 5 cartes de la même famille</string>
     <string name="beastmaster_rules">Bonus: +9 pour chaque Créature. Efface les malus de toutes les Créatures</string>
     <string name="warlock_lord_rules">Malus: -10 pour chaque Seigneur et chaque autre Sorcier</string>
+    <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
 </resources>

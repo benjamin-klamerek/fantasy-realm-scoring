@@ -25,13 +25,13 @@
 
                 <Button
                         android:text="@string/effect_button"
-                        android:layout_width="80dp"
+                        android:layout_width="74dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/effectButton"
-                        android:textSize="10sp" />
+                        android:textSize="8sp" />
 
                 <TextView
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/scoreLabel"
                         android:gravity="center"
@@ -61,7 +61,7 @@
                             android:textStyle="bold" android:layout_marginStart="10dp"/>
 
                     <TextView
-                            android:layout_width="50dp"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/baseValueLabel"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +90,7 @@
                             android:textStyle="bold" android:layout_marginStart="10dp"/>
 
                     <TextView
-                            android:layout_width="50dp"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/bonusValueLabel"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +121,7 @@
                             android:textStyle="bold" android:layout_marginStart="10dp"/>
 
                     <TextView
-                            android:layout_width="50dp"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/penaltyValueLabel"
                             app:layout_constraintEnd_toEndOf="parent"

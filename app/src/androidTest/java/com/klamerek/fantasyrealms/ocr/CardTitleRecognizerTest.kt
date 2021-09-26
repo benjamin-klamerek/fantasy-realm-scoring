@@ -11,6 +11,7 @@ import com.klamerek.fantasyrealms.getBitmapFromTestAssets
 import com.klamerek.fantasyrealms.util.LocaleManager
 import com.klamerek.fantasyrealms.util.LocaleManager.english
 import com.klamerek.fantasyrealms.util.LocaleManager.french
+import com.klamerek.fantasyrealms.util.LocaleManager.german
 import com.klamerek.fantasyrealms.util.LocaleManager.russian
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
@@ -151,6 +152,24 @@ class CardTitleRecognizerTest {
             task.result, Matchers.containsInAnyOrder(
                 bellTower.id, protectionRune.id, wildfire.id, king.id,
                 warlockLord.id, lightCavalry.id, worldTree.id, basilisk.id
+            )
+        )
+    }
+
+    @DisplayName("Card german jester")
+    @Test
+    fun card_german_jester() {
+        LocaleManager.updateContextWithPreferredLanguage(
+            InstrumentationRegistry.getInstrumentation().targetContext, german
+        )
+        val bean = CardTitleRecognizer(german)
+        val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("germanJester.jpg"), 0))
+
+        Tasks.await(task)
+
+        assertThat(
+            task.result, Matchers.containsInAnyOrder(
+                jester.id
             )
         )
     }

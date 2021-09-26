@@ -8,6 +8,7 @@ import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
 import com.klamerek.fantasyrealms.game.allDefinitions
+import com.klamerek.fantasyrealms.game.cardsById
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Preferences
 import java.io.Serializable
@@ -36,7 +37,7 @@ class CardsSelectionActivity : CustomActivity() {
 
         if (Preferences.getDisplayCardNumber(baseContext)){
             binding.chipGroup.children.toList().forEach {
-                (it as? Chip)?.text = (it as Chip).text.toString() + " (" + it.tag + "/" + allDefinitions.size + ")"
+                (it as? Chip)?.text = cardsById[it.tag.toString().toIntOrNull()?:0]?.nameWithId()?:""
             }
         }
 

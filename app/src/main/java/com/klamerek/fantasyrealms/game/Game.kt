@@ -34,7 +34,7 @@ class Game {
     }
 
     fun remove(cardDefinition: CardDefinition) {
-        cards.removeAll(cards.filter { card -> card.definition == cardDefinition })
+        cards.removeIf{ it.definition == cardDefinition }
         if (cardDefinition == bookOfChanges || cardDefinition == bookOfChangeSelection?.first) {
             bookOfChangeSelection = null
         }
@@ -62,11 +62,16 @@ class Game {
         cards.clear()
     }
 
+    fun countOddCard() = cardsNotBlanked().count { it.isOdd() }
+
+    fun isAllOdd() = cardsNotBlanked().all { it.isOdd() }
+
     fun countCard(suit: Suit) = cardsNotBlanked().count { it.isOneOf(suit) }
 
     fun noCard(suit: Suit) = countCard(suit) == 0
 
     fun atLeastOne(suit: Suit) = countCard(suit) > 0
+
 
     /**
      * Remark : this method uses comparison by name to handle when a wild card simulate another card.
