@@ -2,7 +2,7 @@ name: Build
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ java11 ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -25,7 +25,7 @@ jobs:
             ${{ runner.os }}-${{ github.job }}-
 
       - name: Run tests
-        uses: ReactiveCircus/android-emulator-runner@v2.16.0
+        uses: ReactiveCircus/android-emulator-runner@v2.20.0
         with:
           api-level: 29
           target: google_apis
