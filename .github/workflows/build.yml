@@ -15,7 +15,18 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '11'
 
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.job }}-
 
       - name: Run tests
         uses: ReactiveCircus/android-emulator-runner@v2.20.0
