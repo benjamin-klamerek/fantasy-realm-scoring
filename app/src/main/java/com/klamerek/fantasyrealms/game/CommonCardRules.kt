@@ -39,7 +39,7 @@ object AllRules {
             RuleAboutScore(listOf(Effect.BONUS)) { it.countCard(Suit.LAND) * 10 },
             RuleAboutRule(listOf(Effect.CLEAR, Suit.ARMY)) { it.identifyArmyClearedPenalty { true } }),
         elvenArchers to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.noCard(Suit.LEADER)) 5 else 0 }),
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.noCard(Suit.WEATHER)) 5 else 0 }),
         dwarvishInfantry to listOf(
             RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY)) { (it.countCard(Suit.ARMY) - 1) * -2 }),
         lightCavalry to listOf(

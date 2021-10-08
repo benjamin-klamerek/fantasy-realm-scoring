@@ -310,4 +310,14 @@ class ScoringTest {
         Assertions.assertEquals(39, game.score())
     }
 
+    @DisplayName("Elven archers with weather")
+    @Test
+    fun elven_archers_with_weather() {
+        val game = Game()
+        game.add(elvenArchers)
+        game.add(rainstorm)
+        game.calculate()
+        Assertions.assertEquals(18, game.score())
+    }
+
 }
