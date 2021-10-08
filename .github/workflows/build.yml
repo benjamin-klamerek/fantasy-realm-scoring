@@ -34,7 +34,7 @@ jobs:
         with:
           api-level: 29
           target: google_apis
-          script: ./gradlew connectedCheck
+          script: ./gradlew connectedCheck --stacktrace
           profile: Nexus 5
           disable-animations: true
           cores: 2
