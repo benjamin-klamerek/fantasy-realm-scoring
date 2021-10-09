@@ -24,16 +24,6 @@ plugins {
     id "io.gitlab.arturbosch.detekt" version "1.16.0"
 }
 
-configurations.all{
-    resolutionStrategy {
-        eachDependency { details ->
-            if ('org.jacoco' == details.requested.group) {
-                details.useVersion "0.8.7"
-            }
-        }
-    }
-}
-
 allprojects {
     repositories {
         google()
