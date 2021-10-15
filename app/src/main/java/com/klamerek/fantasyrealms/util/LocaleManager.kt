@@ -3,6 +3,7 @@ package com.klamerek.fantasyrealms.util
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.LocaleList
 import com.klamerek.fantasyrealms.App
 import com.klamerek.fantasyrealms.R
 import com.klamerek.fantasyrealms.Strings
@@ -49,6 +50,9 @@ object LocaleManager {
         val res: Resources = context.resources
         val configuration = Configuration(res.configuration)
         configuration.setLocale(locale)
+        val localeList = LocaleList(locale)
+        LocaleList.setDefault(localeList)
+        configuration.setLocales(localeList)
         val result = context.createConfigurationContext(configuration)
         App.mResources = result.resources
         return result
