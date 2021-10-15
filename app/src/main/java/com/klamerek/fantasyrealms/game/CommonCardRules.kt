@@ -62,7 +62,7 @@ object AllRules {
             }
         ),
         warhorse to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.countCard(Suit.LEADER) + it.countCard(Suit.WIZARD) > 1) 14 else 0 }
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.countCard(Suit.LEADER) + it.countCard(Suit.WIZARD) >= 1) 14 else 0 }
         ),
         unicorn to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {

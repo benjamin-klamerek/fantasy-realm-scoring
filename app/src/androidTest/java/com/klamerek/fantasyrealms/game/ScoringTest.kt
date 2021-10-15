@@ -60,7 +60,7 @@ class ScoringTest {
         game.add(forest)
 
         game.calculate()
-        Assertions.assertEquals(225, game.score())
+        Assertions.assertEquals(239, game.score())
     }
 
     @DisplayName("Unicorn and princess")
