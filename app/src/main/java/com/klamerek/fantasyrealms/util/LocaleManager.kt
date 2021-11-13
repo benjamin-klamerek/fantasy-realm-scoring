@@ -29,8 +29,9 @@ object LocaleManager {
     val french = Language("FRENCH_ID", R.string.language_label_french, "fr", "FR")
     val russian = Language("RUSSIAN_ID", R.string.language_label_russian, "ru", "RU")
     val german = Language("GERMAN_ID", R.string.language_label_german, "de", "DE")
+    val spanish = Language("SPANISH_ID", R.string.language_label_spanish, "es", "ES")
 
-    val languages = listOf(english, french, russian, german)
+    val languages = listOf(english, french, russian, german, spanish)
     private val languagesById = languages.map { it.id to it }.toMap()
 
     fun getLanguage(context: Context): Language {

@@ -17,7 +17,7 @@
     <string name="scan_help_label">Tipp: Nur die Kartennamen sind notwendig</string>
     <string name="effect_button">Wirkung</string>
     <string name="base">Basisstärke</string>
-    <string name="disclaimer">Version 0.8 \n Danke an \"Les joueurs du fort\" für\'s Testen :-) \n\n
+    <string name="disclaimer">Version 0.11 \n Danke an \"Les joueurs du fort\" für\'s Testen :-) \n\n
         Du möchtest eine andere Sprache hinzufügen ? \nKontaktiere mich (Link im Play Store)</string>
     <string name="done">Fertig</string>
     <string name="language_label">Sprache:</string>
@@ -25,6 +25,7 @@
     <string name="language_label_french">Französisch</string>
     <string name="language_label_russian">Russisch</string>
     <string name="language_label_german">Deutsch</string>
+    <string name="language_label_spanish">Spanisch</string>
     <string name="display_card_number_label">Kartennummer anzeigen:</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>
