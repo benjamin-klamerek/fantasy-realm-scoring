@@ -27,6 +27,7 @@
     <string name="language_label_german">German</string>
     <string name="language_label_spanish">Spanish</string>
     <string name="display_card_number_label">Display card number:</string>
+    <string name="discard_area">Discard area</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">CLEAR</string>
@@ -45,7 +46,7 @@
     <string name="suit_wild">Wild</string>
     <string name="suit_wizard">Wizard</string>
     <string name="suit_outsider">Outsider</string>
-    <string name="jester">Jester</string>
+    <string name="suit_undead">Undead</string>
     <!-- Card names -->
     <string name="rangers">Rangers</string>
     <string name="elven_archers">Elven Archers</string>
@@ -100,11 +101,17 @@
     <string name="collector">Collector</string>
     <string name="beastmaster">Beastmaster</string>
     <string name="warlock_lord">Warlock Lord</string>
+    <string name="jester">Jester</string>
     <string name="genie">Genie</string>
     <string name="judge">Judge</string>
     <string name="angel">Angel</string>
     <string name="leprechaun">Leprechaun</string>
     <string name="demon">Demon</string>
+    <string name="dark_queen">Dark Queen</string>
+    <string name="ghoul">Ghoul</string>
+    <string name="specter">Specter</string>
+    <string name="lich">Lich</string>
+    <string name="death_knight">Death knight</string>
     <!-- Card rules -->
     <string name="rangers_rules">Bonus: +10 for each Land; Clears the word Army from Penalty section of all cards in
         hand
@@ -191,5 +198,10 @@
     <string name="angel_rules">Prevent one other card from being BLANKED. This card can never be BLANKED.</string>
     <string name="leprechaun_rules">BONUS: Draw the top card from the deck at the end of the game and add it to your hand. (Resolves before Genie.)</string>
     <string name="demon_rules">PENALTY: For every non-Outsider card : If that card is the only card you have in that suit, then that card is BLANKED. This takes place before any other BLANKING.</string>
+    <string name="dark_queen_rules">BONUS: +5 for each Land, Flood, Flame, Weather, and Unicorn in the discard area.</string>
+    <string name="ghoul_rules">BONUS: +4 for each Wizard, Leader, Army, Beast, and Undead in the discard area.</string>
+    <string name="specter_rules">BONUS: +6 for each Wizard, Artifact, and Outsider in the discard area.</string>
+    <string name="lich_rules">BONUS: +10 for Necromancer and each other Undead. Undead may not be BLANKED.</string>
+    <string name="death_knight_rules">BONUS: +7 for each Weapon and Army in the discard area.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
 </resources>

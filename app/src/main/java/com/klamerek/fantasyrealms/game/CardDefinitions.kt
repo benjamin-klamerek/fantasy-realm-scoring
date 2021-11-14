@@ -636,6 +636,66 @@ val demon by lazy {
 }
 
 @Suppress("MagicNumber")
+val darkQueen by lazy {
+    CardDefinition(
+        11 + CardSet.BASE.numberOfCards,
+        R.string.dark_queen,
+        10,
+        Suit.UNDEAD,
+        R.string.dark_queen_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val ghoul by lazy {
+    CardDefinition(
+        12 + CardSet.BASE.numberOfCards,
+        R.string.ghoul,
+        8,
+        Suit.UNDEAD,
+        R.string.ghoul_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val specter by lazy {
+    CardDefinition(
+        13 + CardSet.BASE.numberOfCards,
+        R.string.specter,
+        12,
+        Suit.UNDEAD,
+        R.string.specter_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val lich by lazy {
+    CardDefinition(
+        14 + CardSet.BASE.numberOfCards,
+        R.string.lich,
+        13,
+        Suit.UNDEAD,
+        R.string.lich_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val deathKnight by lazy {
+    CardDefinition(
+        15 + CardSet.BASE.numberOfCards,
+        R.string.death_knight,
+        14,
+        Suit.UNDEAD,
+        R.string.death_knight_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
 val jester by lazy {
     CardDefinition(
         666,

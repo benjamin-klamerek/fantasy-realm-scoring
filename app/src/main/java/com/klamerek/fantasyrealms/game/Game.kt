@@ -71,7 +71,9 @@ class Game {
 
     fun isAllOdd() = cardsNotBlanked().all { it.isOdd() }
 
-    fun countCard(suit: Suit) = cardsNotBlanked().count { it.isOneOf(suit) }
+    fun countCard(vararg suit: Suit) = cardsNotBlanked().count { it.isOneOf(*suit) }
+
+    fun countCard(predicate: (Card) -> Boolean) = cardsNotBlanked().count(predicate)
 
     fun noCard(suit: Suit) = countCard(suit) == 0
 
@@ -112,14 +114,17 @@ class Game {
 
         applySpecificCardEffects()
 
-        val penaltiesToDeactivate = cards.map { card -> identifyClearedRules(card) }.flatten()
-        penaltiesToDeactivate.forEach { ruleToDeactivate ->
-            cards.forEach { card ->
-                card.rules()
-                    .filter { rule -> rule == ruleToDeactivate }
-                    .forEach { rule -> card.deactivate(rule) }
+        cards.map { card -> identifyClearedRules(card) }.flatten()
+            .forEach { ruleToDeactivate ->
+                cards.forEach { card ->
+                    card.rules()
+                        .filter { rule -> rule == ruleToDeactivate }
+                        .forEach { rule -> card.deactivate(rule) }
+                }
             }
-        }
+
+        cards.map { card -> identifyUnblankableCards(card) }.flatten()
+            .forEach { card -> card.addTemporaryRule(unblankable) }
 
         applyBlankingRules()
 
@@ -198,6 +203,12 @@ class Game {
         card.rules().filter { rule -> card.isActivated(rule) }
             .filter { rule -> rule.tags.contains(Effect.CLEAR) }
             .map { rule -> rule as? RuleAboutRule }
+            .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
+
+    private fun identifyUnblankableCards(card: Card): List<Card> =
+        card.rules().filter { rule -> card.isActivated(rule) }
+            .filter { rule -> rule.tags.contains(Effect.UNBLANKABLE) }
+            .map { rule -> rule as? RuleAboutCard }
             .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
 
 
@@ -298,7 +309,7 @@ class Game {
         }
     }
 
-    fun doppelgangerCandidates(): List<CardDefinition> =
+    private fun doppelgangerCandidates(): List<CardDefinition> =
         cards.map { card -> card.definition }.filter { definition -> definition != doppelganger }
 
     private fun applyDoppelganger(cardToCopy: CardDefinition) {

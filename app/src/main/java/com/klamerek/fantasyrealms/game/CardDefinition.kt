@@ -52,7 +52,8 @@ enum class Suit(private val displayId: Int, val color: Int) : Tag {
     WEATHER(R.string.suit_weather, R.color.colorWeather),
     WILD(R.string.suit_wild, R.color.colorWild),
     WIZARD(R.string.suit_wizard, R.color.colorWizard),
-    OUTSIDER(R.string.suit_outsider, R.color.colorOutsider);
+    OUTSIDER(R.string.suit_outsider, R.color.colorOutsider),
+    UNDEAD(R.string.suit_undead, R.color.colorUndead);
 
     override fun label(): String = this.name
     override fun display(): String = Strings.get(displayId)

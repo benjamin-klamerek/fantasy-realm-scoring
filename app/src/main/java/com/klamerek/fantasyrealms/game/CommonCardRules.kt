@@ -14,7 +14,7 @@ import java.lang.Integer.max
 open class Rule<T>(val tags: List<Tag>, val priority: Int = 100, val logic: (Game) -> T)
 
 /**
- * Rule about effect (like UNBLANKABLE
+ * Rule about effect (like UNBLANKABLE)
  *
  */
 class RuleAboutEffect(tags: List<Tag>, priority: Int = 100, logic: (Game) -> Effect) :
@@ -105,7 +105,13 @@ object AllRules {
             }
         ),
         warhorse to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.countCard(Suit.LEADER) + it.countCard(Suit.WIZARD) >= 1) 14 else 0 }
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                if (it.countCard(
+                        Suit.LEADER,
+                        Suit.WIZARD
+                    ) >= 1
+                ) 14 else 0
+            }
         ),
         unicorn to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
@@ -142,7 +148,7 @@ object AllRules {
             RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.FLAME) - 1) * 15 }
         ),
         forge to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.WEAPON) + it.countCard(Suit.ARTIFACT)) * 9 }
+            RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.WEAPON, Suit.ARTIFACT)) * 9 }
         ),
         lightning to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { if (it.contains(rainstorm)) 30 else 0 }
@@ -170,9 +176,7 @@ object AllRules {
             RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.FLOOD) - 1) * 15 }
         ),
         swamp to listOf(RuleAboutScore(listOf(Effect.PENALTY)) {
-            (it.countCard(Suit.ARMY) + it.countCard(
-                Suit.FLAME
-            )) * -3
+            (it.countCard(Suit.ARMY, Suit.FLAME)) * -3
         }),
         greatFlood to listOf(
             RuleAboutCard(
@@ -236,10 +240,8 @@ object AllRules {
         ),
         princess to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.ARMY) + it.countCard(Suit.WIZARD) + max(
-                    it.countCard(Suit.LEADER) - 1,
-                    0
-                )) * 8
+                (it.countCard(Suit.ARMY, Suit.WIZARD) +
+                        max(it.countCard(Suit.LEADER) - 1, 0)) * 8
             }
         ),
         warlord to listOf(
@@ -337,9 +339,7 @@ object AllRules {
         elementalEnchantress to listOf(
             RuleAboutScore(listOf(Effect.BONUS))
             {
-                (it.countCard(Suit.LAND) + it.countCard(Suit.WEATHER) + it.countCard(Suit.FLOOD) + it.countCard(
-                    Suit.FLAME
-                )) * 5
+                (it.countCard(Suit.LAND, Suit.WEATHER, Suit.FLOOD, Suit.FLAME)) * 5
             }
         ),
         collector to listOf(
@@ -366,11 +366,8 @@ object AllRules {
         ),
         warlockLord to listOf(
             RuleAboutScore(listOf(Effect.PENALTY)) {
-                (it.countCard(Suit.LEADER) + max(
-                    it.countCard(
-                        Suit.WIZARD
-                    ) - 1, 0
-                )) * -10
+                (it.countCard(Suit.LEADER) +
+                        max(it.countCard(Suit.WIZARD) - 1, 0)) * -10
             }
         ),
         genie to listOf(
@@ -386,6 +383,38 @@ object AllRules {
                     .filter { it.key != Suit.OUTSIDER }
                     .filter { it.value.size == 1 }.map { it.value }
                     .flatten()
+            }
+        ),
+        darkQueen to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (DiscardArea.instance.game.countCard(Suit.LAND, Suit.FLOOD, Suit.FLAME, Suit.WEATHER) +
+                        if (DiscardArea.instance.game.contains(unicorn)) 1 else 0 ) * 5
+            }
+        ),
+        ghoul to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (DiscardArea.instance.game.countCard(Suit.WIZARD, Suit.LEADER,
+                    Suit.ARMY, Suit.BEAST, Suit.UNDEAD) ) * 4
+            }
+        ),
+        specter to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (DiscardArea.instance.game.countCard(Suit.ARTIFACT, Suit.OUTSIDER,
+                    Suit.WIZARD) ) * 6
+            }
+        ),
+        lich to listOf(
+            unblankable,
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (it.countCard(Suit.UNDEAD) -1 + if (it.contains(necromancer)) 1 else 0) * 10
+            } ,
+            RuleAboutCard(listOf(Effect.BONUS, Effect.UNBLANKABLE)){
+                it.filterNotBlankedCards { card -> card.isOneOf(Suit.UNDEAD) }
+            }
+        ),
+        deathKnight to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (DiscardArea.instance.game.countCard(Suit.WEAPON, Suit.ARMY) ) * 7
             }
         ),
         jester to listOf(

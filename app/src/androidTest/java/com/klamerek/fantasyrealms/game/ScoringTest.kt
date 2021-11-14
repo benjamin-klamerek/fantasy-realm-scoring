@@ -1,11 +1,17 @@
 package com.klamerek.fantasyrealms.game
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 
 class ScoringTest {
+
+    @BeforeEach
+    fun beforeEach(){
+        DiscardArea.instance.game.clear()
+    }
 
     @DisplayName("worst hand")
     @Test
@@ -430,6 +436,89 @@ class ScoringTest {
         game.bookOfChangeSelection = Pair(warDirigible, Suit.FLOOD)
         game.calculate()
         Assertions.assertEquals(24, game.score())
+    }
+
+    @DisplayName("Dark queen example")
+    @Test
+    fun dark_queen_example() {
+        DiscardArea.instance.game.add(candle)
+        DiscardArea.instance.game.add(undergroundCaverns)
+        DiscardArea.instance.game.add(shieldOfKeth)
+
+        val game = Game()
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(20, game.score())
+    }
+
+    @DisplayName("Ghoul example")
+    @Test
+    fun ghoul_example() {
+        DiscardArea.instance.game.add(celestialKnights)
+        DiscardArea.instance.game.add(undergroundCaverns)
+        DiscardArea.instance.game.add(darkQueen)
+        DiscardArea.instance.game.add(king)
+
+        val game = Game()
+        game.add(ghoul)
+        game.calculate()
+
+        Assertions.assertEquals(8 + 4 + 4 + 4, game.score())
+    }
+
+    @DisplayName("Specter example")
+    @Test
+    fun specter_example() {
+        DiscardArea.instance.game.add(protectionRune)
+        DiscardArea.instance.game.add(undergroundCaverns)
+        DiscardArea.instance.game.add(darkQueen)
+        DiscardArea.instance.game.add(demon)
+
+        val game = Game()
+        game.add(specter)
+        game.calculate()
+
+        Assertions.assertEquals(24, game.score())
+    }
+
+    @DisplayName("Lich example")
+    @Test
+    fun lich_example() {
+        val game = Game()
+        game.add(lich)
+        game.add(necromancer)
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(46, game.score())
+    }
+
+    @DisplayName("Lich UNBLANKABLE")
+    @Test
+    fun lich_unblankable() {
+        val game = Game()
+        game.add(lich)
+        game.add(wildfire)
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(73, game.score())
+    }
+
+    @DisplayName("Death Knight example")
+    @Test
+    fun death_knight_example() {
+        DiscardArea.instance.game.add(celestialKnights)
+        DiscardArea.instance.game.add(swordOfKeth)
+        DiscardArea.instance.game.add(darkQueen)
+        DiscardArea.instance.game.add(demon)
+
+        val game = Game()
+        game.add(deathKnight)
+        game.calculate()
+
+        Assertions.assertEquals(28, game.score())
     }
 
 }
