@@ -320,4 +320,116 @@ class ScoringTest {
         Assertions.assertEquals(18, game.score())
     }
 
+    @DisplayName("Genie with 4 players")
+    @Test
+    fun genie_with_4_players() {
+        Player.all.add(Player("1", Game()))
+        Player.all.add(Player("2", Game()))
+        Player.all.add(Player("3", Game()))
+        Player.all.add(Player("4", Game()))
+        val game = Game()
+        game.add(genie)
+        game.calculate()
+        Assertions.assertEquals(-10, game.score())
+    }
+
+    @DisplayName("Judge with and without penalty")
+    @Test
+    fun judge_with_and_without_penalty() {
+        val game = Game()
+        game.add(judge)
+        game.add(celestialKnights)
+        game.add(lightCavalry)
+        game.calculate()
+        Assertions.assertEquals(60, game.score())
+
+        game.add(protectionRune)
+        game.calculate()
+        Assertions.assertEquals(49, game.score())
+    }
+
+    @DisplayName("Angel is unblankable")
+    @Test
+    fun angel_is_unblankable() {
+        val game = Game()
+        game.add(angel)
+        game.add(wildfire)
+        game.calculate()
+        Assertions.assertEquals(56, game.score())
+    }
+
+    @DisplayName("Angel selection is unblankable")
+    @Test
+    fun angel_selection() {
+        val game = Game()
+        game.add(angel)
+        game.add(wildfire)
+        game.add(celestialKnights)
+        game.angelSelection = celestialKnights
+        game.calculate()
+        Assertions.assertEquals(68, game.score())
+    }
+
+    @DisplayName("Demon with wildfire")
+    @Test
+    fun demon_with_wildfire() {
+        val game = Game()
+        game.add(wildfire)
+        game.add(demon)
+        game.calculate()
+        Assertions.assertEquals(45, game.score())
+    }
+
+    @DisplayName("Indirect blanking case (Great flood -> candle -> smoke)")
+    @Test
+    fun indirect_blanking_case_with_greatflood_candle_smoke() {
+        val game = Game()
+        game.add(smoke)
+        game.add(candle)
+        game.add(greatFlood)
+        game.calculate()
+        Assertions.assertEquals(32, game.score())
+    }
+
+    @DisplayName("Some specific cases with Warship and Book of changes")
+    @Test
+    fun some_specific_cases_with_Warship_and_book_of_changes() {
+        val game = Game()
+        game.add(demon)
+        game.add(warship)
+        game.add(greatFlood)
+        game.add(waterElemental)
+        game.add(elvenArchers)
+        game.add(lightCavalry)
+        game.calculate()
+        Assertions.assertEquals(128, game.score())
+
+        game.clear()
+        game.add(bookOfChanges)
+        game.add(warship)
+        game.add(elvenArchers)
+        game.add(dwarvishInfantry)
+        game.bookOfChangeSelection = Pair(dwarvishInfantry, Suit.FLOOD)
+        game.calculate()
+        Assertions.assertEquals(56, game.score())
+
+        game.clear()
+        game.add(bookOfChanges)
+        game.add(warship)
+        game.add(warDirigible)
+        game.bookOfChangeSelection = Pair(warDirigible, Suit.FLOOD)
+        game.calculate()
+        Assertions.assertEquals(61, game.score())
+
+        game.clear()
+        game.add(bookOfChanges)
+        game.add(warship)
+        game.add(warDirigible)
+        game.add(lightCavalry)
+        game.add(airElemental)
+        game.bookOfChangeSelection = Pair(warDirigible, Suit.FLOOD)
+        game.calculate()
+        Assertions.assertEquals(24, game.score())
+    }
+
 }

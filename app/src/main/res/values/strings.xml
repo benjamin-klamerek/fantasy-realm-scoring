@@ -32,6 +32,7 @@
     <string name="effect_clear">CLEAR</string>
     <string name="effect_penalty">PENALTY</string>
     <string name="effect_blank">BLANK</string>
+    <string name="effect_unbankable">UNBLANKABLE</string>
     <string name="suit_army">Army</string>
     <string name="suit_artifact">Artifact</string>
     <string name="suit_beast">Beast</string>
@@ -43,6 +44,7 @@
     <string name="suit_weather">Weather</string>
     <string name="suit_wild">Wild</string>
     <string name="suit_wizard">Wizard</string>
+    <string name="suit_outsider">Outsider</string>
     <string name="jester">Jester</string>
     <!-- Card names -->
     <string name="rangers">Rangers</string>
@@ -98,6 +100,11 @@
     <string name="collector">Collector</string>
     <string name="beastmaster">Beastmaster</string>
     <string name="warlock_lord">Warlock Lord</string>
+    <string name="genie">Genie</string>
+    <string name="judge">Judge</string>
+    <string name="angel">Angel</string>
+    <string name="leprechaun">Leprechaun</string>
+    <string name="demon">Demon</string>
     <!-- Card rules -->
     <string name="rangers_rules">Bonus: +10 for each Land; Clears the word Army from Penalty section of all cards in
         hand
@@ -179,5 +186,10 @@
     </string>
     <string name="beastmaster_rules">Bonus: +9 for each Beast; Clears the Penalty on all Beasts</string>
     <string name="warlock_lord_rules">Penalty: -10 for each Leader and other Wizard</string>
+    <string name="genie_rules">BONUS: +10 per other player, At the end of the game, look through the draw deck and put one card in your hand. (Resolves after Leprechaun.)</string>
+    <string name="judge_rules">BONUS: +10 for each card that contains a card with a Penalty not CLEARED.</string>
+    <string name="angel_rules">Prevent one other card from being BLANKED. This card can never be BLANKED.</string>
+    <string name="leprechaun_rules">BONUS: Draw the top card from the deck at the end of the game and add it to your hand. (Resolves before Genie.)</string>
+    <string name="demon_rules">PENALTY: For every non-Outsider card : If that card is the only card you have in that suit, then that card is BLANKED. This takes place before any other BLANKING.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
 </resources>

@@ -21,10 +21,18 @@ enum class Effect(private val displayId: Int) : Tag {
     BONUS(R.string.effect_bonus),
     CLEAR(R.string.effect_clear),
     PENALTY(R.string.effect_penalty),
-    BLANK(R.string.effect_blank);
+    BLANK(R.string.effect_blank),
+    UNBLANKABLE(R.string.effect_unbankable);
 
     override fun label(): String = this.name
     override fun display(): String = Strings.get(displayId)
+}
+
+@Suppress("MagicNumber")
+enum class CardSet(val numberOfCards: Int) {
+    BASE(53),
+    PROMO(1),
+    CURSED_HOARD(47)
 }
 
 /**
@@ -43,7 +51,8 @@ enum class Suit(private val displayId: Int, val color: Int) : Tag {
     WEAPON(R.string.suit_weapon, R.color.colorWeapon),
     WEATHER(R.string.suit_weather, R.color.colorWeather),
     WILD(R.string.suit_wild, R.color.colorWild),
-    WIZARD(R.string.suit_wizard, R.color.colorWizard);
+    WIZARD(R.string.suit_wizard, R.color.colorWizard),
+    OUTSIDER(R.string.suit_outsider, R.color.colorOutsider);
 
     override fun label(): String = this.name
     override fun display(): String = Strings.get(displayId)
@@ -58,7 +67,11 @@ enum class Suit(private val displayId: Int, val color: Int) : Tag {
  * @property suit       card family
  * @property keyRule    key explanation of the rule as described on the physical card
  */
-open class CardDefinition(val id: Int, private val keyName: Int, val value: Int, val suit: Suit, private val keyRule: Int) {
+open class CardDefinition(
+    val id: Int, private val keyName: Int,
+    val value: Int, val suit: Suit, private val keyRule: Int,
+    private val cardSet: CardSet
+) {
 
     fun isOneOf(vararg suit: Suit) = suit.contains(this.suit)
 
@@ -66,7 +79,11 @@ open class CardDefinition(val id: Int, private val keyName: Int, val value: Int,
 
     fun rule() = Strings.get(keyRule)
 
-    open fun nameWithId() = name() + " (" + id + "/" + numberOfCards + ")"
+    fun nameWithId() = when (cardSet) {
+        CardSet.PROMO -> name() + " (Promo)"
+        CardSet.CURSED_HOARD -> name() + " (" + (id - CardSet.BASE.numberOfCards) + "/" + cardSet.numberOfCards + ")"
+        else -> name() + " (" + id + "/" + cardSet.numberOfCards + ")"
+    }
 
     override fun toString(): String {
         return name() + " " + rule()
@@ -86,6 +103,7 @@ open class CardDefinition(val id: Int, private val keyName: Int, val value: Int,
     override fun hashCode(): Int {
         return id
     }
-
-
 }
+
+
+

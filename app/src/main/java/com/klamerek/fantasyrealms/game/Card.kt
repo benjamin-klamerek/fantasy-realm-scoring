@@ -15,8 +15,10 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
     private var simulatedRules: List<Rule<out Any>>? = null
     var blanked: Boolean = false
     private val ruleDeactivated: ArrayList<Rule<out Any>> = ArrayList()
+    private val temporaryRules: ArrayList<Rule<out Any>> = ArrayList()
 
     fun clear() {
+        temporaryRules.clear()
         ruleDeactivated.clear()
         clearSimulation()
         blanked = false
@@ -28,6 +30,8 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
         simulatedSuit = null
         simulatedRules = null
     }
+
+    fun addTemporaryRule(rule: Rule<out Any>) = temporaryRules.add(rule)
 
     fun deactivate(rule: Rule<out Any>) = ruleDeactivated.add(rule)
 
@@ -43,7 +47,7 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
 
     fun isOdd(): Boolean = value() % 2 == 1
 
-    fun rules(): List<Rule<out Any>> = simulatedRules ?: rules
+    fun rules(): List<Rule<out Any>> = listOf(simulatedRules ?: rules, temporaryRules).flatten()
 
     fun name(name: String) {
         this.simulatedName = name

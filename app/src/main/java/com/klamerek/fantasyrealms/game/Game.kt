@@ -18,6 +18,7 @@ class Game {
     var shapeShifterSelection: CardDefinition? = null
     var mirageSelection: CardDefinition? = null
     var doppelgangerSelection: CardDefinition? = null
+    var angelSelection: CardDefinition? = null
 
     fun cards(): Collection<Card> {
         return ArrayList(cards)
@@ -34,7 +35,7 @@ class Game {
     }
 
     fun remove(cardDefinition: CardDefinition) {
-        cards.removeIf{ it.definition == cardDefinition }
+        cards.removeIf { it.definition == cardDefinition }
         if (cardDefinition == bookOfChanges || cardDefinition == bookOfChangeSelection?.first) {
             bookOfChangeSelection = null
         }
@@ -50,11 +51,15 @@ class Game {
         if (cardDefinition == doppelganger || cardDefinition == doppelgangerSelection) {
             doppelgangerSelection = null
         }
+        if (cardDefinition == angel || cardDefinition == angelSelection) {
+            angelSelection = null
+        }
     }
 
     fun update(cardDefinitions: List<CardDefinition>) {
         cardDefinitions.forEach { definition -> add(definition) }
-        cards.map { card -> card.definition }.filter { definition -> !cardDefinitions.contains(definition) }
+        cards.map { card -> card.definition }
+            .filter { definition -> !cardDefinitions.contains(definition) }
             .forEach { definition -> remove(definition) }
     }
 
@@ -99,7 +104,7 @@ class Game {
     }
 
     fun largestSuit(): Int {
-        return cardsNotBlanked().groupBy { card -> card.suit() }.map { entry -> entry.value.size }.maxOrNull() ?: 0
+        return groupNotBlankedCardsBySuit().map { entry -> entry.value.size }.maxOrNull() ?: 0
     }
 
     fun calculate() {
@@ -116,9 +121,7 @@ class Game {
             }
         }
 
-        val blankedCardFirstLevel = cards.map { card -> identifyBlankedCards(card) }.flatten()
-        blankedCardFirstLevel.forEach { card -> card.blanked = true }
-        cardsNotBlanked().map { card -> identifyBlankedCards(card) }.flatten().forEach { card -> card.blanked = true }
+        applyBlankingRules()
 
         bonusScoreByCard.clear()
         penaltyScoreByCard.clear()
@@ -148,6 +151,7 @@ class Game {
         shapeShifterSelection?.let { cardDefinition -> applyShapeShifter(cardDefinition) }
         bookOfChangeSelection?.let { pair -> applyBookOfChanges(pair.first, pair.second) }
         islandSelection?.let { cardDefinition -> applyIsland(cardDefinition) }
+        angelSelection?.let { cardDefinition -> applyAngel(cardDefinition) }
     }
 
     fun score(): Int = bonusScoreByCard.entries.sumOf { it.value } +
@@ -162,11 +166,33 @@ class Game {
 
     fun penaltyScore(card: CardDefinition): Int = penaltyScoreByCard.getOrDefault(card, 0)
 
-    private fun identifyBlankedCards(card: Card): List<Card> =
-        card.rules().filter { rule -> card.isActivated(rule) }
-            .filter { rule -> rule.tags.contains(Effect.BLANK) }
-            .map { rule -> rule as? RuleAboutCard }
-            .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
+    /**
+     * Sensitive method. Apply BLANK rules on cards<br>
+     * - We apply each BLANK rule by priority order (introduced with Demon card)<br>
+     * - We take attention before applying the rule that the card is still active.<br>
+     * - Some cards are UNBLANKABLE (like Angel).<br>
+     * - This code is repeated twice, to handle cases where blanking effect can happen after another
+     * (could be solved by handling priority but not yet defined in base game).<br>
+     *
+     */
+    private fun applyBlankingRules(): Unit =
+        repeat(2) {
+            cards.map { card ->
+                card.rules()
+                    .filter { rule -> card.isActivated(rule) }
+                    .filter { rule -> rule.tags.contains(Effect.BLANK) }
+                    .map { rule -> rule as? RuleAboutCard }
+                    .map { rule -> Pair(card, rule) }
+            }.flatten()
+                .sortedByDescending { pair -> pair.second?.priority }
+                .forEach {
+                    if (!it.first.blanked) {
+                        it.second?.logic?.invoke(this)?.filter { potentialCard ->
+                            !potentialCard.rules().contains(unblankable)
+                        }.orEmpty().forEach { cardToBlank -> cardToBlank.blanked = true }
+                    }
+                }
+        }
 
     private fun identifyClearedRules(card: Card): List<Rule<out Any>> =
         card.rules().filter { rule -> card.isActivated(rule) }
@@ -175,7 +201,7 @@ class Game {
             .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
 
 
-    fun identifyBlankedCards(scope: (Card) -> Boolean): List<Card> {
+    fun filterNotBlankedCards(scope: (Card) -> Boolean): List<Card> {
         return this.cardsNotBlanked().filter(scope)
     }
 
@@ -193,16 +219,18 @@ class Game {
             .filter { rule -> rule.tags.containsAll(tags.asList()) }
     }
 
-    fun bookOfChangesCandidates(): List<CardDefinition> {
-        return cards.map { card -> card.definition }.filter { definition -> definition != bookOfChanges }
+    private fun bookOfChangesCandidates(): List<CardDefinition> {
+        return cards.map { card -> card.definition }
+            .filter { definition -> definition != bookOfChanges }
     }
 
     private fun applyBookOfChanges(cardToUpdate: CardDefinition?, newSuit: Suit?) =
         cards.filter { card -> card.definition == cardToUpdate }
             .map { card -> card.suit(newSuit) }
 
-    fun islandCandidates(): List<CardDefinition> {
-        return cards.filter { card -> card.isOneOf(Suit.FLOOD, Suit.FLAME) }.map { card -> card.definition }
+    private fun islandCandidates(): List<CardDefinition> {
+        return cards.filter { card -> card.isOneOf(Suit.FLOOD, Suit.FLAME) }
+            .map { card -> card.definition }
     }
 
     private fun applyIsland(cardToClean: CardDefinition) {
@@ -216,8 +244,16 @@ class Game {
         }
     }
 
-    fun shapeShifterCandidates(): List<CardDefinition> {
-        return allDefinitions.filter { definition -> definition.isOneOf(Suit.ARTIFACT, Suit.LEADER, Suit.WIZARD, Suit.WEAPON, Suit.BEAST) }
+    private fun shapeShifterCandidates(): List<CardDefinition> {
+        return allDefinitions.filter { definition ->
+            definition.isOneOf(
+                Suit.ARTIFACT,
+                Suit.LEADER,
+                Suit.WIZARD,
+                Suit.WEAPON,
+                Suit.BEAST
+            )
+        }
     }
 
     private fun applyShapeShifter(cardToCopy: CardDefinition) {
@@ -230,8 +266,26 @@ class Game {
         }
     }
 
-    fun mirageCandidates(): List<CardDefinition> {
-        return allDefinitions.filter { definition -> definition.isOneOf(Suit.ARMY, Suit.LAND, Suit.WEATHER, Suit.FLOOD, Suit.FLAME) }
+    private fun angelCandidates(): List<CardDefinition> {
+        return cards.filter { card -> card.definition != angel }
+            .map { card -> card.definition }
+    }
+
+    private fun applyAngel(cardToProtect: CardDefinition) {
+        cards.filter { card -> card.definition == cardToProtect }
+            .map { card -> card.addTemporaryRule(unblankable) }
+    }
+
+    private fun mirageCandidates(): List<CardDefinition> {
+        return allDefinitions.filter { definition ->
+            definition.isOneOf(
+                Suit.ARMY,
+                Suit.LAND,
+                Suit.WEATHER,
+                Suit.FLOOD,
+                Suit.FLAME
+            )
+        }
     }
 
     private fun applyMirage(cardToCopy: CardDefinition) {
@@ -254,13 +308,16 @@ class Game {
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
                     card.value(cardToCopy.value)
-                    card.rules(AllRules.instance[cardToCopy].orEmpty().filter { rule -> rule.tags.contains(Effect.PENALTY) })
+                    card.rules(
+                        AllRules.instance[cardToCopy].orEmpty()
+                            .filter { rule -> rule.tags.contains(Effect.PENALTY) })
                 }
         }
     }
 
     fun handSizeExpected(): Int {
-        return Constants.DEFAULT_HAND_SIZE + cards.map { card -> card.definition }.filter { definition -> definition == necromancer }.count()
+        return Constants.DEFAULT_HAND_SIZE + cards.map { card -> card.definition }
+            .filter { definition -> definition == necromancer }.count()
     }
 
     fun actualHandSize(): Int {
@@ -274,6 +331,7 @@ class Game {
             shapeshifter -> listOfNotNull(shapeShifterSelection)
             bookOfChanges -> listOfNotNull(bookOfChangeSelection?.first)
             island -> listOfNotNull(islandSelection)
+            angel -> listOfNotNull(angelSelection)
             else -> emptyList()
         }
     }
@@ -292,6 +350,7 @@ class Game {
             shapeshifter -> shapeShifterCandidates()
             bookOfChanges -> bookOfChangesCandidates()
             island -> islandCandidates()
+            angel -> angelCandidates()
             else -> emptyList()
         }
     }
@@ -303,11 +362,30 @@ class Game {
             shapeshifter -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
             bookOfChanges -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
             island -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
+            angel -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
             else -> Constants.CARD_LIST_SELECTION_MODE_DEFAULT
         }
     }
 
     fun hasManualEffect(definition: CardDefinition): Boolean =
-        listOf(doppelganger, mirage, shapeshifter, bookOfChanges, island).contains(definition)
+        listOf(
+            doppelganger,
+            mirage,
+            shapeshifter,
+            bookOfChanges,
+            island,
+            angel
+        ).contains(definition)
+
+    fun countCardWithAtLeastOnePenaltyNotCleared(): Int {
+        return cardsNotBlanked().count { card ->
+            card.rules()
+                .any { rule -> rule.tags.contains(Effect.PENALTY) && card.isActivated(rule) }
+        }
+    }
+
+    fun groupNotBlankedCardsBySuit(): Map<Suit, List<Card>> {
+        return cardsNotBlanked().groupBy { card -> card.suit() }
+    }
 
 }

@@ -3,18 +3,29 @@ package com.klamerek.fantasyrealms.game
 import com.klamerek.fantasyrealms.R
 
 @Suppress("MagicNumber")
-val empty by lazy { CardDefinition(-1, -1, -1, Suit.WILD, -1) }
+val empty by lazy {
+    CardDefinition(
+        -1, -1, -1, Suit.WILD, -1,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
 val rangers by lazy {
     CardDefinition(
         25, R.string.rangers, 5,
-        Suit.ARMY, R.string.rangers_rules
+        Suit.ARMY, R.string.rangers_rules,
+        CardSet.BASE
     )
 }
 
 @Suppress("MagicNumber")
-val elvenArchers by lazy { CardDefinition(22, R.string.elven_archers, 10, Suit.ARMY, R.string.elven_archers_rules) }
+val elvenArchers by lazy {
+    CardDefinition(
+        22, R.string.elven_archers, 10, Suit.ARMY, R.string.elven_archers_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
 val dwarvishInfantry by lazy {
@@ -23,12 +34,18 @@ val dwarvishInfantry by lazy {
         R.string.dwarvish_infantry,
         15,
         Suit.ARMY,
-        R.string.dwarvish_infantry_rules
+        R.string.dwarvish_infantry_rules,
+        CardSet.BASE
     )
 }
 
 @Suppress("MagicNumber")
-val lightCavalry by lazy { CardDefinition(23, R.string.light_cavalry, 17, Suit.ARMY, R.string.light_cavalry_rules) }
+val lightCavalry by lazy {
+    CardDefinition(
+        23, R.string.light_cavalry, 17, Suit.ARMY, R.string.light_cavalry_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
 val celestialKnights by lazy {
@@ -37,7 +54,8 @@ val celestialKnights by lazy {
         R.string.celestial_knights,
         20,
         Suit.ARMY,
-        R.string.celestial_knights_rules
+        R.string.celestial_knights_rules,
+        CardSet.BASE
     )
 }
 
@@ -48,7 +66,8 @@ val protectionRune by lazy {
         R.string.protection_rune,
         1,
         Suit.ARTIFACT,
-        R.string.protection_rune_rules
+        R.string.protection_rune_rules,
+        CardSet.BASE
     )
 }
 
@@ -59,7 +78,8 @@ val worldTree by lazy {
         R.string.world_tree,
         2,
         Suit.ARTIFACT,
-        R.string.world_tree_rules
+        R.string.world_tree_rules,
+        CardSet.BASE
     )
 }
 
@@ -70,7 +90,8 @@ val bookOfChanges by lazy {
         R.string.book_of_changes,
         3,
         Suit.ARTIFACT,
-        R.string.book_of_changes_rules
+        R.string.book_of_changes_rules,
+        CardSet.BASE
     )
 }
 
@@ -81,7 +102,8 @@ val shieldOfKeth by lazy {
         R.string.shield_of_keth,
         4,
         Suit.ARTIFACT,
-        R.string.shield_of_keth_rules
+        R.string.shield_of_keth_rules,
+        CardSet.BASE
     )
 }
 
@@ -92,13 +114,14 @@ val gemOfOrder by lazy {
         R.string.gem_of_order,
         5,
         Suit.ARTIFACT,
-        R.string.gem_of_order_rules
+        R.string.gem_of_order_rules,
+        CardSet.BASE
     )
 }
 
 @Suppress("MagicNumber")
 val warhorse by lazy {
-    CardDefinition(38, R.string.warhorse, 6, Suit.BEAST, R.string.warhorse_rules)
+    CardDefinition(38, R.string.warhorse, 6, Suit.BEAST, R.string.warhorse_rules, CardSet.BASE)
 }
 
 @Suppress("MagicNumber")
@@ -108,15 +131,26 @@ val unicorn by lazy {
         R.string.unicorn,
         9,
         Suit.BEAST,
-        R.string.unicorn_rules
+        R.string.unicorn_rules,
+        CardSet.BASE
     )
 }
 
 @Suppress("MagicNumber")
-val hydra by lazy { CardDefinition(40, R.string.hydra, 12, Suit.BEAST, R.string.hydra_rules) }
+val hydra by lazy {
+    CardDefinition(
+        40, R.string.hydra, 12, Suit.BEAST, R.string.hydra_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
-val dragon by lazy { CardDefinition(39, R.string.dragon, 30, Suit.BEAST, R.string.dragon_rules) }
+val dragon by lazy {
+    CardDefinition(
+        39, R.string.dragon, 30, Suit.BEAST, R.string.dragon_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
 val basilisk by lazy {
@@ -125,7 +159,8 @@ val basilisk by lazy {
         R.string.basilisk,
         35,
         Suit.BEAST,
-        R.string.basilisk_rules
+        R.string.basilisk_rules,
+        CardSet.BASE
     )
 }
 
@@ -136,18 +171,34 @@ val candle by lazy {
         R.string.candle,
         2,
         Suit.FLAME,
-        R.string.candle_rules
+        R.string.candle_rules,
+        CardSet.BASE
     )
 }
 
 @Suppress("MagicNumber")
-val fireElemental by lazy { CardDefinition(20, R.string.fire_elemental, 4, Suit.FLAME, R.string.fire_elemental_rules) }
+val fireElemental by lazy {
+    CardDefinition(
+        20, R.string.fire_elemental, 4, Suit.FLAME, R.string.fire_elemental_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
-val forge by lazy { CardDefinition(18, R.string.forge, 9, Suit.FLAME, R.string.forge_rules) }
+val forge by lazy {
+    CardDefinition(
+        18, R.string.forge, 9, Suit.FLAME, R.string.forge_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
-val lightning by lazy { CardDefinition(19, R.string.lightning, 11, Suit.FLAME, R.string.lightning_rules) }
+val lightning by lazy {
+    CardDefinition(
+        19, R.string.lightning, 11, Suit.FLAME, R.string.lightning_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
 val wildfire by lazy {
@@ -156,7 +207,8 @@ val wildfire by lazy {
         R.string.wildfire,
         40,
         Suit.FLAME,
-        R.string.wildfire_rules
+        R.string.wildfire_rules,
+        CardSet.BASE
     )
 }
 
@@ -167,18 +219,34 @@ val fountainOfLife by lazy {
         R.string.fountain_of_life,
         1,
         Suit.FLOOD,
-        R.string.fountain_of_life_rules
+        R.string.fountain_of_life_rules,
+        CardSet.BASE
     )
 }
 
 @Suppress("MagicNumber")
-val waterElemental by lazy { CardDefinition(10, R.string.water_elemental, 4, Suit.FLOOD, R.string.water_elemental_rules) }
+val waterElemental by lazy {
+    CardDefinition(
+        10, R.string.water_elemental, 4, Suit.FLOOD, R.string.water_elemental_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
-val island by lazy { CardDefinition(9, R.string.island, 14, Suit.FLOOD, R.string.island_rules) }
+val island by lazy {
+    CardDefinition(
+        9, R.string.island, 14, Suit.FLOOD, R.string.island_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
-val swamp by lazy { CardDefinition(7, R.string.swamp, 18, Suit.FLOOD, R.string.swamp_rules) }
+val swamp by lazy {
+    CardDefinition(
+        7, R.string.swamp, 18, Suit.FLOOD, R.string.swamp_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
 val greatFlood by lazy {
@@ -187,12 +255,18 @@ val greatFlood by lazy {
         R.string.great_flood,
         32,
         Suit.FLOOD,
-        R.string.great_flood_rules
+        R.string.great_flood_rules,
+        CardSet.BASE
     )
 }
 
 @Suppress("MagicNumber")
-val earthElemental by lazy { CardDefinition(5, R.string.earth_elemental, 4, Suit.LAND, R.string.earth_elemental_rules) }
+val earthElemental by lazy {
+    CardDefinition(
+        5, R.string.earth_elemental, 4, Suit.LAND, R.string.earth_elemental_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
 val undergroundCaverns by lazy {
@@ -201,15 +275,26 @@ val undergroundCaverns by lazy {
         R.string.underground_caverns,
         6,
         Suit.LAND,
-        R.string.underground_caverns_rules
+        R.string.underground_caverns_rules,
+        CardSet.BASE
     )
 }
 
 @Suppress("MagicNumber")
-val forest by lazy { CardDefinition(4, R.string.forest, 7, Suit.LAND, R.string.forest_rules) }
+val forest by lazy {
+    CardDefinition(
+        4, R.string.forest, 7, Suit.LAND, R.string.forest_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
-val bellTower by lazy { CardDefinition(3, R.string.bell_tower, 8, Suit.LAND, R.string.bell_tower_rules) }
+val bellTower by lazy {
+    CardDefinition(
+        3, R.string.bell_tower, 8, Suit.LAND, R.string.bell_tower_rules,
+        CardSet.BASE
+    )
+}
 
 @Suppress("MagicNumber")
 val mountain by lazy {
@@ -218,7 +303,8 @@ val mountain by lazy {
         R.string.mountain,
         9,
         Suit.LAND,
-        R.string.mountain_rules
+        R.string.mountain_rules,
+        CardSet.BASE
     )
 }
 
@@ -229,7 +315,8 @@ val princess by lazy {
         R.string.princess,
         2,
         Suit.LEADER,
-        R.string.princess_rules
+        R.string.princess_rules,
+        CardSet.BASE
     )
 }
 
@@ -240,7 +327,8 @@ val warlord by lazy {
         R.string.warlord,
         4,
         Suit.LEADER,
-        R.string.warlord_rules
+        R.string.warlord_rules,
+        CardSet.BASE
     )
 }
 
@@ -251,7 +339,8 @@ val queen by lazy {
         R.string.queen,
         6,
         Suit.LEADER,
-        R.string.queen_rules
+        R.string.queen_rules,
+        CardSet.BASE
     )
 }
 
@@ -262,7 +351,8 @@ val king by lazy {
         R.string.king,
         8,
         Suit.LEADER,
-        R.string.king_rules
+        R.string.king_rules,
+        CardSet.BASE
     )
 }
 
@@ -273,7 +363,8 @@ val empress by lazy {
         R.string.empress,
         15,
         Suit.LEADER,
-        R.string.empress_rules
+        R.string.empress_rules,
+        CardSet.BASE
     )
 }
 
@@ -281,7 +372,8 @@ val empress by lazy {
 val magicWand by lazy {
     CardDefinition(
         42,
-        R.string.magic_wand, 1, Suit.WEAPON, R.string.magic_wand_rules
+        R.string.magic_wand, 1, Suit.WEAPON, R.string.magic_wand_rules,
+        CardSet.BASE
     )
 }
 
@@ -292,7 +384,8 @@ val elvenLongbow by lazy {
         R.string.elven_longbow,
         3,
         Suit.WEAPON,
-        R.string.elven_longbow_rules
+        R.string.elven_longbow_rules,
+        CardSet.BASE
     )
 }
 
@@ -303,7 +396,8 @@ val swordOfKeth by lazy {
         R.string.sword_of_keth,
         7,
         Suit.WEAPON,
-        R.string.sword_of_keth_rules
+        R.string.sword_of_keth_rules,
+        CardSet.BASE
     )
 }
 
@@ -314,7 +408,8 @@ val warship by lazy {
         R.string.warship,
         23,
         Suit.WEAPON,
-        R.string.warship_rules
+        R.string.warship_rules,
+        CardSet.BASE
     )
 }
 
@@ -325,7 +420,8 @@ val warDirigible by lazy {
         R.string.war_dirigible,
         35,
         Suit.WEAPON,
-        R.string.war_dirigible_rules
+        R.string.war_dirigible_rules,
+        CardSet.BASE
     )
 }
 
@@ -333,7 +429,8 @@ val warDirigible by lazy {
 val airElemental by lazy {
     CardDefinition(
         15,
-        R.string.air_elemental, 4, Suit.WEATHER, R.string.air_elemental_rules
+        R.string.air_elemental, 4, Suit.WEATHER, R.string.air_elemental_rules,
+        CardSet.BASE
     )
 }
 
@@ -344,7 +441,8 @@ val rainstorm by lazy {
         R.string.rainstorm,
         8,
         Suit.WEATHER,
-        R.string.rainstorm_rules
+        R.string.rainstorm_rules,
+        CardSet.BASE
     )
 }
 
@@ -355,7 +453,8 @@ val whirlwind by lazy {
         R.string.whirlwind,
         13,
         Suit.WEATHER,
-        R.string.whirlwind_rules
+        R.string.whirlwind_rules,
+        CardSet.BASE
     )
 }
 
@@ -363,7 +462,8 @@ val whirlwind by lazy {
 val smoke by lazy {
     CardDefinition(
         13,
-        R.string.smoke, 27, Suit.WEATHER, R.string.smoke_rules
+        R.string.smoke, 27, Suit.WEATHER, R.string.smoke_rules,
+        CardSet.BASE
     )
 }
 
@@ -374,7 +474,8 @@ val blizzard by lazy {
         R.string.blizzard,
         30,
         Suit.WEATHER,
-        R.string.blizzard_rules
+        R.string.blizzard_rules,
+        CardSet.BASE
     )
 }
 
@@ -385,7 +486,8 @@ val shapeshifter by lazy {
         R.string.shapeshifter,
         0,
         Suit.WILD,
-        R.string.shapeshifter_rules
+        R.string.shapeshifter_rules,
+        CardSet.BASE
     )
 }
 
@@ -396,7 +498,8 @@ val mirage by lazy {
         R.string.mirage,
         0,
         Suit.WILD,
-        R.string.mirage_rules
+        R.string.mirage_rules,
+        CardSet.BASE
     )
 }
 
@@ -407,7 +510,8 @@ val doppelganger by lazy {
         R.string.doppelganger,
         0,
         Suit.WILD,
-        R.string.doppelganger_rules
+        R.string.doppelganger_rules,
+        CardSet.BASE
     )
 }
 
@@ -418,7 +522,8 @@ val necromancer by lazy {
         R.string.necromancer,
         3,
         Suit.WIZARD,
-        R.string.necromancer_rules
+        R.string.necromancer_rules,
+        CardSet.BASE
     )
 }
 
@@ -429,7 +534,8 @@ val elementalEnchantress by lazy {
         R.string.elemental_enchantress,
         5,
         Suit.WIZARD,
-        R.string.elemental_enchantress_rules
+        R.string.elemental_enchantress_rules,
+        CardSet.BASE
     )
 }
 
@@ -440,7 +546,8 @@ val collector by lazy {
         R.string.collector,
         7,
         Suit.WIZARD,
-        R.string.collector_rules
+        R.string.collector_rules,
+        CardSet.BASE
     )
 }
 
@@ -451,7 +558,8 @@ val beastmaster by lazy {
         R.string.beastmaster,
         9,
         Suit.WIZARD,
-        R.string.beastmaster_rules
+        R.string.beastmaster_rules,
+        CardSet.BASE
     )
 }
 
@@ -462,21 +570,81 @@ val warlockLord by lazy {
         R.string.warlock_lord,
         25,
         Suit.WIZARD,
-        R.string.warlock_lord_rules
+        R.string.warlock_lord_rules,
+        CardSet.BASE
+    )
+}
+
+@Suppress("MagicNumber")
+val genie by lazy {
+    CardDefinition(
+        6 + CardSet.BASE.numberOfCards,
+        R.string.genie,
+        -50,
+        Suit.OUTSIDER,
+        R.string.genie_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val judge by lazy {
+    CardDefinition(
+        7 + CardSet.BASE.numberOfCards,
+        R.string.judge,
+        11,
+        Suit.OUTSIDER,
+        R.string.judge_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val angel by lazy {
+    CardDefinition(
+        8 + CardSet.BASE.numberOfCards,
+        R.string.angel,
+        16,
+        Suit.OUTSIDER,
+        R.string.angel_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val leprechaun by lazy {
+    CardDefinition(
+        9 + CardSet.BASE.numberOfCards,
+        R.string.leprechaun,
+        20,
+        Suit.OUTSIDER,
+        R.string.leprechaun_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val demon by lazy {
+    CardDefinition(
+        10 + CardSet.BASE.numberOfCards,
+        R.string.demon,
+        45,
+        Suit.OUTSIDER,
+        R.string.demon_rules,
+        CardSet.CURSED_HOARD
     )
 }
 
 @Suppress("MagicNumber")
 val jester by lazy {
-    object : CardDefinition(
+    CardDefinition(
         666,
         R.string.jester,
         3,
         Suit.WIZARD,
-        R.string.jester_rules
-    ) {
-        override fun nameWithId() = name() + " (Promo)"
-    }
+        R.string.jester_rules,
+        CardSet.PROMO
+    )
 }
 
 val allDefinitions: List<CardDefinition> by lazy {
@@ -537,11 +705,6 @@ val allDefinitions: List<CardDefinition> by lazy {
         jester
     )
 }
-
-/**
- * Count number of cards for base game (without promo cards)
- */
-val numberOfCards by lazy { allDefinitions.size -1 }
 
 /**
  * Temporary solution until cyrillic characters are handled by MLKit text recognition
