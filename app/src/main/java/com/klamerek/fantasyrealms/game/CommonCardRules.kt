@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.game
 
+import com.klamerek.fantasyrealms.toInt
 import java.lang.Integer.max
 
 /**
@@ -387,34 +388,90 @@ object AllRules {
         ),
         darkQueen to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game.countCard(Suit.LAND, Suit.FLOOD, Suit.FLAME, Suit.WEATHER) +
-                        if (DiscardArea.instance.game.contains(unicorn)) 1 else 0 ) * 5
+                (DiscardArea.instance.game.countCard(
+                    Suit.LAND,
+                    Suit.FLOOD,
+                    Suit.FLAME,
+                    Suit.WEATHER
+                ) +
+                        if (DiscardArea.instance.game.contains(unicorn)) 1 else 0) * 5
             }
         ),
         ghoul to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game.countCard(Suit.WIZARD, Suit.LEADER,
-                    Suit.ARMY, Suit.BEAST, Suit.UNDEAD) ) * 4
+                (DiscardArea.instance.game.countCard(
+                    Suit.WIZARD, Suit.LEADER,
+                    Suit.ARMY, Suit.BEAST, Suit.UNDEAD
+                )) * 4
             }
         ),
         specter to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game.countCard(Suit.ARTIFACT, Suit.OUTSIDER,
-                    Suit.WIZARD) ) * 6
+                (DiscardArea.instance.game.countCard(
+                    Suit.ARTIFACT, Suit.OUTSIDER,
+                    Suit.WIZARD
+                )) * 6
             }
         ),
         lich to listOf(
             unblankable,
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.UNDEAD) -1 + if (it.contains(necromancer)) 1 else 0) * 10
-            } ,
-            RuleAboutCard(listOf(Effect.BONUS, Effect.UNBLANKABLE)){
+                (it.countCard(Suit.UNDEAD) - 1 + if (it.contains(necromancer)) 1 else 0) * 10
+            },
+            RuleAboutCard(listOf(Effect.BONUS, Effect.UNBLANKABLE)) {
                 it.filterNotBlankedCards { card -> card.isOneOf(Suit.UNDEAD) }
             }
         ),
         deathKnight to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game.countCard(Suit.WEAPON, Suit.ARMY) ) * 7
+                (DiscardArea.instance.game.countCard(Suit.WEAPON, Suit.ARMY)) * 7
+            }
+        ),
+        dungeon to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (it.countCard(Suit.UNDEAD, Suit.BEAST, Suit.ARTIFACT) +
+                        it.contains(necromancer).toInt() +
+                        it.contains(warlockLord).toInt() +
+                        it.contains(demon).toInt()) * 5 +
+                        (it.countCard(Suit.UNDEAD) > 0).toInt() * 5 +
+                        (it.countCard(Suit.BEAST) > 0).toInt() * 5 +
+                        (it.countCard(Suit.ARTIFACT) > 0).toInt() * 5
+            }
+        ),
+        castle to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (it.countCard(Suit.BUILDING) - 1) * 5 +
+                        (it.countCard(Suit.LEADER) > 0).toInt() * 10 +
+                        (it.countCard(Suit.ARMY) > 0).toInt() * 10 +
+                        (it.countCard(Suit.LAND) > 0).toInt() * 10 +
+                        (it.countCard(Suit.BUILDING) - 1 > 0).toInt() * 5
+
+            }
+        ),
+        crypt to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                it.cardsNotBlanked().filter { card -> card.isOneOf(Suit.UNDEAD) }
+                    .sumOf { card -> card.value() }
+            },
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.LEADER))
+            { it.filterNotBlankedCards { card -> card.isOneOf(Suit.LEADER) } }
+        ),
+        chapel to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (it.countCard(Suit.WIZARD, Suit.OUTSIDER, Suit.UNDEAD, Suit.LEADER) == 2 &&
+                        (it.countCard(Suit.WIZARD) == 2 ||
+                                it.countCard(Suit.OUTSIDER) == 2 ||
+                                it.countCard(Suit.UNDEAD) == 2 ||
+                                it.countCard(Suit.LEADER) == 2)).toInt() * 40
+            }
+        ),
+        garden to listOf(
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (it.countCard(Suit.LEADER, Suit.BEAST)) * 11
+            },
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK)) {
+                if (it.countCard(Suit.UNDEAD) > 0 || it.contains(necromancer) || it.contains(demon))
+                    it.filterNotBlankedCards { card -> card.definition == garden } else emptyList()
             }
         ),
         jester to listOf(

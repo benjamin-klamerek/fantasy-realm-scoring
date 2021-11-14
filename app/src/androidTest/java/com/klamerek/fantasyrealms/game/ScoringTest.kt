@@ -521,4 +521,98 @@ class ScoringTest {
         Assertions.assertEquals(28, game.score())
     }
 
+    @DisplayName("Dungeon example")
+    @Test
+    fun dungeon_example() {
+        val game = Game()
+        game.add(dungeon)
+        game.add(darkQueen)
+        game.add(unicorn)
+        game.add(warlockLord)
+        game.calculate()
+
+        Assertions.assertEquals(76, game.score())
+    }
+
+    @DisplayName("Castle example")
+    @Test
+    fun castle_example() {
+        val game = Game()
+        game.add(castle)
+        game.add(dungeon)
+        game.add(king)
+        game.add(queen)
+        game.calculate()
+
+        Assertions.assertEquals(51, game.score())
+    }
+
+    @DisplayName("Crypt example")
+    @Test
+    fun crypt_example() {
+        val game = Game()
+        game.add(crypt)
+        game.add(darkQueen)
+        game.add(ghoul)
+        game.add(king)
+        game.add(queen)
+        game.calculate()
+
+        Assertions.assertEquals(57, game.score())
+    }
+
+    @DisplayName("Chapel not activated because too many cards")
+    @Test
+    fun chapel_not_activated_because_too_many_cards() {
+        val game = Game()
+        game.add(chapel)
+        game.add(king)
+        game.add(queen)
+        game.add(judge)
+        game.calculate()
+
+        Assertions.assertEquals(27, game.score())
+    }
+
+    @DisplayName("Chapel activated")
+    @Test
+    fun chapel_activated() {
+        val game = Game()
+        game.add(chapel)
+        game.add(king)
+        game.add(queen)
+        game.calculate()
+
+        Assertions.assertEquals(56, game.score())
+    }
+
+    @DisplayName("Garden example")
+    @Test
+    fun garden_activated() {
+        val game = Game()
+        game.add(garden)
+        game.add(king)
+        game.add(queen)
+        game.add(unicorn)
+        game.calculate()
+
+        Assertions.assertEquals(82, game.score())
+    }
+
+    @DisplayName("Garden blanked")
+    @Test
+    fun garden_blanked() {
+        val game = Game()
+        game.add(garden)
+        game.add(king)
+        game.add(queen)
+        game.add(unicorn)
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(48, game.score())
+    }
+
+
+
 }

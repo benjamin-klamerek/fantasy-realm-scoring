@@ -576,6 +576,66 @@ val warlockLord by lazy {
 }
 
 @Suppress("MagicNumber")
+val dungeon by lazy {
+    CardDefinition(
+        1 + CardSet.BASE.numberOfCards,
+        R.string.dungeon,
+        7,
+        Suit.BUILDING,
+        R.string.dungeon_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val castle by lazy {
+    CardDefinition(
+        2 + CardSet.BASE.numberOfCards,
+        R.string.castle,
+        10,
+        Suit.BUILDING,
+        R.string.castle_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val crypt by lazy {
+    CardDefinition(
+        3 + CardSet.BASE.numberOfCards,
+        R.string.crypt,
+        21,
+        Suit.BUILDING,
+        R.string.crypt_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val chapel by lazy {
+    CardDefinition(
+        4 + CardSet.BASE.numberOfCards,
+        R.string.chapel,
+        2,
+        Suit.BUILDING,
+        R.string.chapel_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val garden by lazy {
+    CardDefinition(
+        5 + CardSet.BASE.numberOfCards,
+        R.string.garden,
+        11,
+        Suit.LAND,
+        R.string.garden_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
 val genie by lazy {
     CardDefinition(
         6 + CardSet.BASE.numberOfCards,

@@ -45,6 +45,7 @@
     <string name="suit_weather">Weather</string>
     <string name="suit_wild">Wild</string>
     <string name="suit_wizard">Wizard</string>
+    <string name="suit_building">Building</string>
     <string name="suit_outsider">Outsider</string>
     <string name="suit_undead">Undead</string>
     <!-- Card names -->
@@ -102,6 +103,11 @@
     <string name="beastmaster">Beastmaster</string>
     <string name="warlock_lord">Warlock Lord</string>
     <string name="jester">Jester</string>
+    <string name="dungeon">Dungeon</string>
+    <string name="castle">Castle</string>
+    <string name="crypt">Crypt</string>
+    <string name="chapel">Chapel</string>
+    <string name="garden">Garden</string>
     <string name="genie">Genie</string>
     <string name="judge">Judge</string>
     <string name="angel">Angel</string>
@@ -193,6 +199,11 @@
     </string>
     <string name="beastmaster_rules">Bonus: +9 for each Beast; Clears the Penalty on all Beasts</string>
     <string name="warlock_lord_rules">Penalty: -10 for each Leader and other Wizard</string>
+    <string name="dungeon_rules">BONUS: +10 each for the first Undead, Beast, and Artifact. +5 for each additional card in any of these suits and Necromancer, Warlock Lord, Demon.</string>
+    <string name="castle_rules">BONUS: +10 for the first Leader, Army, Land, and other Building. +5 for each additional Building.</string>
+    <string name="crypt_rules">BONUS: The sum of the base strength of all Undead. PENALTY: BLANKs all Leaders.</string>
+    <string name="chapel_rules">BONUS: +40 if you have exactly two cards from among these suits: Leader, Wizard, Outsider, and Undead.</string>
+    <string name="garden_rules">BONUS: +11 for each Leader and Beast.</string>
     <string name="genie_rules">BONUS: +10 per other player, At the end of the game, look through the draw deck and put one card in your hand. (Resolves after Leprechaun.)</string>
     <string name="judge_rules">BONUS: +10 for each card that contains a card with a Penalty not CLEARED.</string>
     <string name="angel_rules">Prevent one other card from being BLANKED. This card can never be BLANKED.</string>

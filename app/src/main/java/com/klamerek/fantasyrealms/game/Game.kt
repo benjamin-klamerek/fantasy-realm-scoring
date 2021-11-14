@@ -73,8 +73,6 @@ class Game {
 
     fun countCard(vararg suit: Suit) = cardsNotBlanked().count { it.isOneOf(*suit) }
 
-    fun countCard(predicate: (Card) -> Boolean) = cardsNotBlanked().count(predicate)
-
     fun noCard(suit: Suit) = countCard(suit) == 0
 
     fun atLeastOne(suit: Suit) = countCard(suit) > 0

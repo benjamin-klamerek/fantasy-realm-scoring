@@ -16,6 +16,7 @@
     <color name="colorWeapon">#404142</color>
     <color name="colorLand">#533D2A</color>
     <color name="colorLeader">#621FBF</color>
+    <color name="colorBuilding">#18126A</color>
     <color name="colorOutsider">#FF9800</color>
     <color name="colorUndead">#125E4B</color>
 </resources>

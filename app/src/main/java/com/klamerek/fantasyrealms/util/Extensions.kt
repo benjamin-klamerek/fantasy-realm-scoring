@@ -14,4 +14,11 @@ fun String.normalize(): String {
     return REGEX_UNACCENT.replace(temp, "")
 }
 
+/**
+ * Convert Boolean to Int
+ *
+ * @return 1 for true, O for false
+ */
+fun Boolean.toInt() = if (this) 1 else 0
+
 
