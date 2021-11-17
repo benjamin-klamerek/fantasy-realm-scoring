@@ -214,5 +214,13 @@
     <string name="specter_rules">BONUS: +6 for each Wizard, Artifact, and Outsider in the discard area.</string>
     <string name="lich_rules">BONUS: +10 for Necromancer and each other Undead. Undead may not be BLANKED.</string>
     <string name="death_knight_rules">BONUS: +7 for each Weapon and Army in the discard area.</string>
+    <string name="bell_tower_rules2">BONUS: +15 with any one Wizard or Undead.</string>
+    <string name="fountain_of_life_rules2">BONUS: Add the base strength of any one Building, Weapon, Flood, Flame, Land or Weather in your hand.</string>
+    <string name="great_flood_rules2">PENALTY: BLANKS all Armies, all Buildings, all Lands except Mountain, and all Flames except Lightning.</string>
+    <string name="rangers_rules2">BONUS: +10 for each Land and Building. CLEARS the word Army from all Penalties.</string>
+    <string name="necromancer_rules2">BONUS: At the end of the game, you may take one Army, Leader, Wizard, Beast, or Undead from the discard pile and add it to your hand. Undead may not be blanked.</string>
+    <string name="world_tree_rules2">BONUS: +70 if every non-BLANKED card is a different suit.</string>
+    <string name="shapeshifter_rules2">BONUS: Shapeshifter may duplicate the name and suit of any one Artifact, Leader, Wizard, Weapon, Beast, or Undead in the game. Does not take the bonus, penalty, or base strength of the card duplicated.</string>
+    <string name="mirage_rules2">BONUS: Mirage may duplicate the name and suit of any one Army, Building, Land, Weather, Flood or Flame in the game. Does not take the bonus, penalty, or base strength of the card duplicated.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
 </resources>

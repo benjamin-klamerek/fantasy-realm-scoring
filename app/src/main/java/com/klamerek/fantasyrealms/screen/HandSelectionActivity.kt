@@ -54,9 +54,17 @@ class HandSelectionActivity : CustomActivity() {
         }
 
         val linearLayoutManager = LinearLayoutManager(this)
-        binding.handView.addItemDecoration(DividerItemDecoration(binding.handView.context, DividerItemDecoration.VERTICAL))
+        binding.handView.addItemDecoration(
+            DividerItemDecoration(
+                binding.handView.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         binding.handView.layoutManager = linearLayoutManager
-        adapter = HandSelectionAdapter(player.game, Preferences.getDisplayCardNumber(binding.handView.context))
+        adapter = HandSelectionAdapter(
+            player.game,
+            Preferences.getDisplayCardNumber(binding.handView.context)
+        )
         binding.handView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(
@@ -76,33 +84,44 @@ class HandSelectionActivity : CustomActivity() {
      */
     private fun findOrCreatePlayer(): Player {
         var playerIndex = intent.getIntExtra(Constants.PLAYER_SESSION_ID, 0)
-        if (Player.all.isEmpty()){
+        if (Player.all.isEmpty()) {
             Player.all.add(Player(Player.generateNextPlayerName(), Game()))
             playerIndex = 0;
-        }else if (Player.all.size <= playerIndex){
+        } else if (Player.all.size <= playerIndex) {
             playerIndex = Player.all.size - 1
         }
         return Player.all[playerIndex]
     }
 
     private fun refreshPlayerLabels() {
-        binding.playerNameLabel.text = getString(R.string.player_name_with_score, player.name, player.game.score())
-        binding.handSizeLabel.text = getString(R.string.hand_size, player.game.actualHandSize(), player.game.handSizeExpected())
+        binding.playerNameLabel.text =
+            getString(R.string.player_name_with_score, player.name, player.game.score())
+        binding.handSizeLabel.text = getString(
+            R.string.hand_size,
+            player.game.actualHandSize(),
+            player.game.handSizeExpected()
+        )
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        val allCardsById = CardDefinitions.getAllById();
         if (resultCode == Constants.RESULT_OK && requestCode == Constants.SELECT_CARDS) {
-            val answer = data?.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as? CardsSelectionExchange
-            player.game.update(answer?.cardsSelected?.mapNotNull { index -> cardsById[index] }.orEmpty())
+            val answer =
+                data?.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as? CardsSelectionExchange
+            player.game.update(answer?.cardsSelected?.mapNotNull { index -> allCardsById[index] }
+                .orEmpty())
         } else if (resultCode == Constants.RESULT_OK && requestCode == Constants.SELECT_RULE_EFFECT) {
-            val answer = data?.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as? CardsSelectionExchange
-            val cardDefinition = cardsById[answer?.cardInitiator]
-            val cardSelected = cardsById[answer?.cardsSelected?.firstOrNull()]
-            val suitSelected = answer?.suitsSelected?.firstOrNull()?.let { name -> Suit.valueOf(name) }
+            val answer =
+                data?.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as? CardsSelectionExchange
+            val cardDefinition = allCardsById[answer?.cardInitiator]
+            val cardSelected = allCardsById[answer?.cardsSelected?.firstOrNull()]
+            val suitSelected =
+                answer?.suitsSelected?.firstOrNull()?.let { name -> Suit.valueOf(name) }
             when (cardDefinition) {
-                bookOfChanges -> player.game.bookOfChangeSelection = Pair(cardSelected, suitSelected)
+                bookOfChanges -> player.game.bookOfChangeSelection =
+                    Pair(cardSelected, suitSelected)
                 island -> player.game.islandSelection = cardSelected
                 shapeshifter -> player.game.shapeShifterSelection = cardSelected
                 mirage -> player.game.mirageSelection = cardSelected
@@ -139,24 +158,29 @@ class HandSelectionActivity : CustomActivity() {
 
     @Subscribe
     fun requestCardEffectSelection(event: RequestCardEffectSelectionEvent) {
-        val cardDefinition = cardsById[event.cardDefinitionId]
+        val cardDefinition = CardDefinitions.getAllById()[event.cardDefinitionId]
         val handSelectionIntent = Intent(this, CardsSelectionActivity::class.java)
         val request = CardsSelectionExchange()
         request.cardInitiator = cardDefinition?.id
         request.label = cardDefinition?.rule()
         request.selectionMode = player.game.ruleEffectSelectionMode(cardDefinition)
-        request.cardsSelected.addAll(player.game.ruleEffectCardSelectionAbout(cardDefinition).map { it.id })
-        request.suitsSelected.addAll(player.game.ruleEffectSuitSelectionAbout(cardDefinition).map { it.name })
-        request.cardsScope.addAll(player.game.ruleEffectCandidateAbout(cardDefinition).map { it.id })
+        request.cardsSelected.addAll(
+            player.game.ruleEffectCardSelectionAbout(cardDefinition).map { it.id })
+        request.suitsSelected.addAll(
+            player.game.ruleEffectSuitSelectionAbout(cardDefinition).map { it.name })
+        request.cardsScope.addAll(
+            player.game.ruleEffectCandidateAbout(cardDefinition).map { it.id })
         handSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, request)
         startActivityForResult(handSelectionIntent, Constants.SELECT_RULE_EFFECT)
     }
 }
 
-class HandSelectionAdapter(private val game: Game, private val displayCardNumber: Boolean) : RecyclerView.Adapter<HandSelectionAdapter.HandHolder>() {
+class HandSelectionAdapter(private val game: Game, private val displayCardNumber: Boolean) :
+    RecyclerView.Adapter<HandSelectionAdapter.HandHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HandHolder {
-        val itemBinding = HandListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding =
+            HandListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HandHolder(itemBinding, game, displayCardNumber)
     }
 
@@ -166,7 +190,11 @@ class HandSelectionAdapter(private val game: Game, private val displayCardNumber
         holder.bindCard(game.cards().elementAt(position))
     }
 
-    class HandHolder(v: HandListItemBinding, private val game: Game, private val displayCardNumber: Boolean) : RecyclerView.ViewHolder(v.root) {
+    class HandHolder(
+        v: HandListItemBinding,
+        private val game: Game,
+        private val displayCardNumber: Boolean
+    ) : RecyclerView.ViewHolder(v.root) {
 
         private var view: HandListItemBinding = v
 
@@ -184,12 +212,14 @@ class HandSelectionAdapter(private val game: Game, private val displayCardNumber
             }
             view.cardNameLabel.setChipBackgroundColorResource(card.suit().color)
             view.scoreLabel.text = game.score(card.definition).toString()
-            view.effectButton.visibility = if (game.hasManualEffect(card.definition)) View.VISIBLE else View.GONE
+            view.effectButton.visibility =
+                if (game.hasManualEffect(card.definition)) View.VISIBLE else View.GONE
             view.effectButton.setOnClickListener {
                 EventBus.getDefault().post(RequestCardEffectSelectionEvent(card.definition.id))
             }
             view.cardDetailButton.setOnClickListener {
-                view.detailLinearLayout.visibility = if (view.detailLinearLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+                view.detailLinearLayout.visibility =
+                    if (view.detailLinearLayout.visibility == View.GONE) View.VISIBLE else View.GONE
                 view.cardDetailButton.setImageResource(
                     if (view.detailLinearLayout.visibility == View.GONE)
                         R.drawable.ic_baseline_keyboard_arrow_down_36 else
@@ -209,7 +239,8 @@ class HandSelectionAdapter(private val game: Game, private val displayCardNumber
 
             val penalty = game.penaltyScore(card.definition)
             view.penaltyValueLabel.text = "$penalty"
-            view.detailPenaltyConstraintLayout.visibility = if (penalty < 0) View.VISIBLE else View.GONE
+            view.detailPenaltyConstraintLayout.visibility =
+                if (penalty < 0) View.VISIBLE else View.GONE
         }
 
     }

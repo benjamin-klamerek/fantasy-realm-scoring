@@ -7,8 +7,8 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.core.content.ContextCompat
+import com.klamerek.fantasyrealms.game.CardDefinitions
 import com.klamerek.fantasyrealms.game.Suit
-import com.klamerek.fantasyrealms.game.allDefinitions
 
 /**
  * Function that can "upgrade" a rule display by bolding and coloring suits and card names
@@ -30,7 +30,7 @@ fun colorSuitsAndBoldCardNames(context: Context, text: String): SpannableString 
         }
     }
 
-    allDefinitions.forEach { definition ->
+    CardDefinitions.getAll().forEach { definition ->
         ("\\b" + definition.name() + "\\b").toRegex().find(sourceCleaned, 0)?.range?.let { range ->
             spannable.setSpan(
                 StyleSpan(Typeface.BOLD),

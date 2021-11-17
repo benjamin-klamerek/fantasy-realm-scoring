@@ -47,7 +47,10 @@ class CardsSelectionActivityTest {
             CardsSelectionActivity::class.java
         )
         val cardsSelectionExchange = CardsSelectionExchange()
-        cardsSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        cardsSelectionIntent.putExtra(
+            Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID,
+            cardsSelectionExchange
+        )
         scenario = ActivityScenario.launch(cardsSelectionIntent)
 
         Espresso.onView(ViewMatchers.withId(R.id.chiprangers)).perform(scrollTo(), click())
@@ -77,8 +80,17 @@ class CardsSelectionActivityTest {
         )
         val cardsSelectionExchange = CardsSelectionExchange()
         cardsSelectionExchange.selectionMode = Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
-        cardsSelectionExchange.cardsScope.addAll(mutableListOf(rangers.id, celestialKnights.id, greatFlood.id))
-        cardsSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        cardsSelectionExchange.cardsScope.addAll(
+            mutableListOf(
+                rangers.id,
+                celestialKnights.id,
+                greatFlood.id
+            )
+        )
+        cardsSelectionIntent.putExtra(
+            Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID,
+            cardsSelectionExchange
+        )
         scenario = ActivityScenario.launch(cardsSelectionIntent)
 
         Espresso.onView(ViewMatchers.withId(R.id.chipWizard)).perform(scrollTo(), click())
@@ -100,47 +112,47 @@ class CardsSelectionActivityTest {
     }
 
     @Test
-    fun card_names_contains_number(){
-        LocaleManager.updateContextWithPreferredLanguage(
+    fun card_names_contains_number() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.english)
+        val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.english
         )
-        Preferences.saveDisplayCardNumberInPreferences(
-            InstrumentationRegistry.getInstrumentation().targetContext, true
-        )
+        Preferences.saveDisplayCardNumberInPreferences(context, true)
 
-        val cardsSelectionIntent = Intent(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            CardsSelectionActivity::class.java
-        )
+        val cardsSelectionIntent = Intent(context, CardsSelectionActivity::class.java)
         val cardsSelectionExchange = CardsSelectionExchange()
         cardsSelectionExchange.selectionMode = Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
         cardsSelectionExchange.cardsScope.addAll(mutableListOf(rangers.id))
-        cardsSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        cardsSelectionIntent.putExtra(
+            Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID,
+            cardsSelectionExchange
+        )
         scenario = ActivityScenario.launch(cardsSelectionIntent)
 
-        Espresso.onView(ViewMatchers.withId(R.id.chiprangers)).check(ViewAssertions.matches(ViewMatchers.withText("Rangers (25/53)")))
+        Espresso.onView(ViewMatchers.withId(R.id.chiprangers))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Rangers (25/53)")))
     }
 
     @Test
-    fun card_names_without_number(){
-        LocaleManager.updateContextWithPreferredLanguage(
+    fun card_names_without_number() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.english)
+        val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.english
         )
-        Preferences.saveDisplayCardNumberInPreferences(
-            InstrumentationRegistry.getInstrumentation().targetContext, false
-        )
+        Preferences.saveDisplayCardNumberInPreferences(context, false)
 
-        val cardsSelectionIntent = Intent(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            CardsSelectionActivity::class.java
-        )
+        val cardsSelectionIntent = Intent(context, CardsSelectionActivity::class.java)
         val cardsSelectionExchange = CardsSelectionExchange()
         cardsSelectionExchange.selectionMode = Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
         cardsSelectionExchange.cardsScope.addAll(mutableListOf(rangers.id))
-        cardsSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        cardsSelectionIntent.putExtra(
+            Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID,
+            cardsSelectionExchange
+        )
         scenario = ActivityScenario.launch(cardsSelectionIntent)
 
-        Espresso.onView(ViewMatchers.withId(R.id.chiprangers)).check(ViewAssertions.matches(ViewMatchers.withText("Rangers")))
+        Espresso.onView(ViewMatchers.withId(R.id.chiprangers))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Rangers")))
     }
 
 }

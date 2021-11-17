@@ -16,7 +16,9 @@ class Game {
     var bookOfChangeSelection: Pair<CardDefinition?, Suit?>? = null
     var islandSelection: CardDefinition? = null
     var shapeShifterSelection: CardDefinition? = null
+    var shapeShifterV2Selection: CardDefinition? = null
     var mirageSelection: CardDefinition? = null
+    var mirageV2Selection: CardDefinition? = null
     var doppelgangerSelection: CardDefinition? = null
     var angelSelection: CardDefinition? = null
 
@@ -45,8 +47,14 @@ class Game {
         if (cardDefinition == shapeshifter || cardDefinition == shapeShifterSelection) {
             shapeShifterSelection = null
         }
+        if (cardDefinition == shapeshifterV2 || cardDefinition == shapeShifterV2Selection) {
+            shapeShifterV2Selection = null
+        }
         if (cardDefinition == mirage || cardDefinition == mirageSelection) {
             mirageSelection = null
+        }
+        if (cardDefinition == mirageV2 || cardDefinition == mirageV2Selection) {
+            mirageV2Selection = null
         }
         if (cardDefinition == doppelganger || cardDefinition == doppelgangerSelection) {
             doppelgangerSelection = null
@@ -151,7 +159,9 @@ class Game {
     private fun applySpecificCardEffects() {
         doppelgangerSelection?.let { cardDefinition -> applyDoppelganger(cardDefinition) }
         mirageSelection?.let { cardDefinition -> applyMirage(cardDefinition) }
+        mirageV2Selection?.let { cardDefinition -> applyMirageV2(cardDefinition) }
         shapeShifterSelection?.let { cardDefinition -> applyShapeShifter(cardDefinition) }
+        shapeShifterV2Selection?.let { cardDefinition -> applyShapeShifterV2(cardDefinition) }
         bookOfChangeSelection?.let { pair -> applyBookOfChanges(pair.first, pair.second) }
         islandSelection?.let { cardDefinition -> applyIsland(cardDefinition) }
         angelSelection?.let { cardDefinition -> applyAngel(cardDefinition) }
@@ -254,7 +264,10 @@ class Game {
     }
 
     private fun shapeShifterCandidates(): List<CardDefinition> {
-        return allDefinitions.filter { definition ->
+        return CardDefinitions.get(
+            buildingsOutsidersUndead = false,
+            cursedItems = false
+        ).filter { definition ->
             definition.isOneOf(
                 Suit.ARTIFACT,
                 Suit.LEADER,
@@ -265,9 +278,35 @@ class Game {
         }
     }
 
+    private fun shapeShifterV2Candidates(): List<CardDefinition> {
+        return CardDefinitions.get(
+            buildingsOutsidersUndead = true,
+            cursedItems = false
+        ).filter { definition ->
+            definition.isOneOf(
+                Suit.ARTIFACT,
+                Suit.LEADER,
+                Suit.WIZARD,
+                Suit.WEAPON,
+                Suit.BEAST,
+                Suit.UNDEAD
+            )
+        }
+    }
+
     private fun applyShapeShifter(cardToCopy: CardDefinition) {
         if (shapeShifterCandidates().contains(cardToCopy)) {
             cards.filter { card -> card.definition == shapeshifter }
+                .map { card ->
+                    card.name(cardToCopy.name())
+                    card.suit(cardToCopy.suit)
+                }
+        }
+    }
+
+    private fun applyShapeShifterV2(cardToCopy: CardDefinition) {
+        if (shapeShifterV2Candidates().contains(cardToCopy)) {
+            cards.filter { card -> card.definition == shapeshifterV2 }
                 .map { card ->
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
@@ -286,7 +325,10 @@ class Game {
     }
 
     private fun mirageCandidates(): List<CardDefinition> {
-        return allDefinitions.filter { definition ->
+        return CardDefinitions.get(
+            buildingsOutsidersUndead = false,
+            cursedItems = false
+        ).filter { definition ->
             definition.isOneOf(
                 Suit.ARMY,
                 Suit.LAND,
@@ -297,9 +339,35 @@ class Game {
         }
     }
 
+    private fun mirageV2Candidates(): List<CardDefinition> {
+        return CardDefinitions.get(
+            buildingsOutsidersUndead = true,
+            cursedItems = false
+        ).filter { definition ->
+            definition.isOneOf(
+                Suit.ARMY,
+                Suit.LAND,
+                Suit.WEATHER,
+                Suit.FLOOD,
+                Suit.FLAME,
+                Suit.BUILDING
+            )
+        }
+    }
+
     private fun applyMirage(cardToCopy: CardDefinition) {
         if (mirageCandidates().contains(cardToCopy)) {
             cards.filter { card -> card.definition == mirage }
+                .map { card ->
+                    card.name(cardToCopy.name())
+                    card.suit(cardToCopy.suit)
+                }
+        }
+    }
+
+    private fun applyMirageV2(cardToCopy: CardDefinition) {
+        if (mirageV2Candidates().contains(cardToCopy)) {
+            cards.filter { card -> card.definition == mirageV2}
                 .map { card ->
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
@@ -337,7 +405,9 @@ class Game {
         return when (cardDefinition) {
             doppelganger -> listOfNotNull(doppelgangerSelection)
             mirage -> listOfNotNull(mirageSelection)
+            mirageV2 -> listOfNotNull(mirageV2Selection)
             shapeshifter -> listOfNotNull(shapeShifterSelection)
+            shapeshifterV2 -> listOfNotNull(shapeShifterV2Selection)
             bookOfChanges -> listOfNotNull(bookOfChangeSelection?.first)
             island -> listOfNotNull(islandSelection)
             angel -> listOfNotNull(angelSelection)
@@ -356,7 +426,9 @@ class Game {
         return when (cardDefinition) {
             doppelganger -> doppelgangerCandidates()
             mirage -> mirageCandidates()
+            mirageV2 -> mirageV2Candidates()
             shapeshifter -> shapeShifterCandidates()
+            shapeshifterV2 -> shapeShifterV2Candidates()
             bookOfChanges -> bookOfChangesCandidates()
             island -> islandCandidates()
             angel -> angelCandidates()
@@ -368,7 +440,9 @@ class Game {
         return when (cardDefinition) {
             doppelganger -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
             mirage -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
+            mirageV2 -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
             shapeshifter -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
+            shapeshifterV2 -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
             bookOfChanges -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
             island -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
             angel -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
@@ -380,7 +454,9 @@ class Game {
         listOf(
             doppelganger,
             mirage,
+            mirageV2,
             shapeshifter,
+            shapeshifterV2,
             bookOfChanges,
             island,
             angel

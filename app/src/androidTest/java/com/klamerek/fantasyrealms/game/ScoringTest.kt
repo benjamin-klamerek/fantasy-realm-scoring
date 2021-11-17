@@ -613,6 +613,18 @@ class ScoringTest {
         Assertions.assertEquals(48, game.score())
     }
 
+    @DisplayName("Fountain of life v2 example")
+    @Test
+    fun fountain_of_life_v2_example() {
+        val game = Game()
+        game.add(fountainOfLifeV2)
+        game.add(rainstorm)
+        game.add(whirlwind)
+        game.calculate()
+
+        Assertions.assertEquals(45, game.score())
+    }
+
 
 
 }

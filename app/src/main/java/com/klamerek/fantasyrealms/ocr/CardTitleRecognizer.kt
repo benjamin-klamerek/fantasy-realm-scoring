@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms.ocr
 
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import com.google.android.gms.tasks.Task
@@ -8,12 +9,12 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.klamerek.fantasyrealms.game.CardDefinition
-import com.klamerek.fantasyrealms.game.allDefinitions
+import com.klamerek.fantasyrealms.game.CardDefinitions
 import com.klamerek.fantasyrealms.game.allDefinitionsRussian
 import com.klamerek.fantasyrealms.game.empty
 import com.klamerek.fantasyrealms.normalize
 import com.klamerek.fantasyrealms.util.Constants
-import com.klamerek.fantasyrealms.util.Language
+import com.klamerek.fantasyrealms.util.LocaleManager
 import com.klamerek.fantasyrealms.util.LocaleManager.russian
 import me.xdrop.fuzzywuzzy.FuzzySearch
 import java.util.*
@@ -24,12 +25,12 @@ import kotlin.math.abs
  * Recognize title card from images and provide list of card (ids) identified
  *
  */
-class CardTitleRecognizer(language: Language) {
+class CardTitleRecognizer(context: Context) {
 
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-    private val cardByCleanedName = if (language == russian)
+    private val cardByCleanedName = if (LocaleManager.getLanguage(context) == russian)
         allDefinitionsRussian else
-        allDefinitions.map { cleanText(it.name()) to it }.toMap()
+        CardDefinitions.get(context).map { cleanText(it.name()) to it }.toMap()
 
     /**
      * Put to lower case, remove everything which is not a letter and replace all accented characters per their base letter version<br>
@@ -38,11 +39,17 @@ class CardTitleRecognizer(language: Language) {
      * @param input     text to clean
      * @return "Cleaned" text
      */
-    private fun cleanText(input: String): String = input.lowercase(Locale.getDefault()).normalize().filter { it.isLetter() }
+    private fun cleanText(input: String): String =
+        input.lowercase(Locale.getDefault()).normalize().filter { it.isLetter() }
 
     private fun getMatchingResult(input: String): MatchingResult {
         val extractedResult = FuzzySearch.extractOne(input, cardByCleanedName.keys)
-        return MatchingResult(input, cardByCleanedName[extractedResult.string] ?: empty, extractedResult.score, extractedResult.string)
+        return MatchingResult(
+            input,
+            cardByCleanedName[extractedResult.string] ?: empty,
+            extractedResult.score,
+            extractedResult.string
+        )
     }
 
     /**
@@ -53,7 +60,12 @@ class CardTitleRecognizer(language: Language) {
      * @property score              score obtained
      * @property matchingKey        best matching key with input
      */
-    class MatchingResult(private val input: String, val bestCardResult: CardDefinition, val score: Int, private val matchingKey: String) {
+    class MatchingResult(
+        private val input: String,
+        val bestCardResult: CardDefinition,
+        val score: Int,
+        private val matchingKey: String
+    ) {
 
         /**
          * A match is considered valid when :
@@ -64,9 +76,10 @@ class CardTitleRecognizer(language: Language) {
          * <ul>
          *
          */
-        fun isAcceptable() = abs(input.length - matchingKey.length) < Constants.DIFFERENCE_LENGTH_IN_NAME_THRESHOLD &&
-                score > Constants.MATCHING_CARD_SCORE_THRESHOLD &&
-                bestCardResult != empty
+        fun isAcceptable() =
+            abs(input.length - matchingKey.length) < Constants.DIFFERENCE_LENGTH_IN_NAME_THRESHOLD &&
+                    score > Constants.MATCHING_CARD_SCORE_THRESHOLD &&
+                    bestCardResult != empty
 
     }
 

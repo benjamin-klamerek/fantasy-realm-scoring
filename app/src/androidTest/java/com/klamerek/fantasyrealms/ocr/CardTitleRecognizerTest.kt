@@ -32,7 +32,7 @@ class CardTitleRecognizerTest {
     @DisplayName("Empty image")
     @Test
     fun empty_image() {
-        val bean = CardTitleRecognizer(LocaleManager.getLanguage(InstrumentationRegistry.getInstrumentation().targetContext))
+        val bean = CardTitleRecognizer(InstrumentationRegistry.getInstrumentation().targetContext)
         val conf = Bitmap.Config.ARGB_8888
         val bitmap = Bitmap.createBitmap(400, 400, conf)
         val task = bean.process(InputImage.fromBitmap(bitmap, 0))
@@ -45,10 +45,10 @@ class CardTitleRecognizerTest {
     @DisplayName("Hand example, each card separated (english)")
     @Test
     fun hand_example_each_card_separated() {
-        LocaleManager.updateContextWithPreferredLanguage(
+        val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, english
         )
-        val bean = CardTitleRecognizer(english)
+        val bean = CardTitleRecognizer(context)
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardsExample1.jpg"), 0))
 
         Tasks.await(task)
@@ -67,7 +67,7 @@ class CardTitleRecognizerTest {
         val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, english
         )
-        val bean = CardTitleRecognizer(english)
+        val bean = CardTitleRecognizer(context)
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardsExample2.jpg"), 0))
 
         Tasks.await(task)
@@ -84,10 +84,10 @@ class CardTitleRecognizerTest {
     @DisplayName("Hand example 3, each card separated (english)")
     @Test
     fun hand_example_3_each_card_separated() {
-        LocaleManager.updateContextWithPreferredLanguage(
+        val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, english
         )
-        val bean = CardTitleRecognizer(english)
+        val bean = CardTitleRecognizer(context)
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardsExample3.jpg"), 0))
 
         Tasks.await(task)
@@ -103,10 +103,10 @@ class CardTitleRecognizerTest {
     @DisplayName("Title only (french)")
     @Test
     fun title_only_french() {
-        LocaleManager.updateContextWithPreferredLanguage(
+        val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, french
         )
-        val bean = CardTitleRecognizer(french)
+        val bean = CardTitleRecognizer(context)
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardExampleFrench.png"), 0))
 
         Tasks.await(task)
@@ -122,10 +122,10 @@ class CardTitleRecognizerTest {
     @DisplayName("One card (russian)")
     @Test
     fun one_card_russian() {
-        LocaleManager.updateContextWithPreferredLanguage(
+        val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, russian
         )
-        val bean = CardTitleRecognizer(russian)
+        val bean = CardTitleRecognizer(context)
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardExampleRussian.jpg"), 0))
 
         Tasks.await(task)
@@ -140,10 +140,10 @@ class CardTitleRecognizerTest {
     @DisplayName("Card set russian")
     @Test
     fun card_set_russian() {
-        LocaleManager.updateContextWithPreferredLanguage(
+        val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, russian
         )
-        val bean = CardTitleRecognizer(russian)
+        val bean = CardTitleRecognizer(context)
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardSetRussian.jpg"), 0))
 
         Tasks.await(task)
@@ -159,10 +159,10 @@ class CardTitleRecognizerTest {
     @DisplayName("Card german jester")
     @Test
     fun card_german_jester() {
-        LocaleManager.updateContextWithPreferredLanguage(
+        val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, german
         )
-        val bean = CardTitleRecognizer(german)
+        val bean = CardTitleRecognizer(context)
         val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("germanJester.jpg"), 0))
 
         Tasks.await(task)
