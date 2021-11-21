@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_cards_selection.xml" value="0.1" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_cards_selection.xml" value="0.23809523809523808" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_hand_selection.xml" value="0.21" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_scan.xml" value="0.18" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_settings.xml" value="0.33" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/hand_list_item.xml" value="0.33" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/player_list_item.xml" value="0.2125" />
       </map>

@@ -17,8 +17,9 @@
     <string name="scan_help_label">Tipp: Nur die Kartennamen sind notwendig</string>
     <string name="effect_button">Wirkung</string>
     <string name="base">Basisstärke</string>
-    <string name="disclaimer">Version 0.11 \n Danke an \"Les joueurs du fort\" für\'s Testen :-) \n\n
-        Du möchtest eine andere Sprache hinzufügen ? \nKontaktiere mich (Link im Play Store)</string>
+    <string name="disclaimer">Version 0.12 \n
+        With expansion, I\'m adding translations little by little. Default is english.\n\n
+        Found a bug (highly possible with the expansion) ? \nTranslation missing and you want to contribute ? \n\nContact me (link in play store)</string>
     <string name="done">Fertig</string>
     <string name="language_label">Sprache:</string>
     <string name="language_label_english">Englisch</string>

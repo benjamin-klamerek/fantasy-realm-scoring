@@ -17,8 +17,9 @@
     <string name="scan_help_label">Conseil: seuls les titres des cartes doivent être visibles</string>
     <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.11 \n Merci \"Les joueurs du fort\" pour les tests :-) \n\n
-        Vous souhaitez ajouter une autre langue ? \nContactez moi (lien dans play store)</string>
+    <string name="disclaimer">Version 0.12 \n
+        Avec l\'extension, les autres lanagues sont ajoutées petit à petit (d\'abord l\'anglais)\n\n
+        Vous avez trouvé un bug ? \nTraduction manquante et vous voulez contribuer ? \n\nContactez moi (lien dans play store)</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="language_label_english">Anglais</string>

@@ -17,8 +17,9 @@
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
     <string name="effect_button">Effect</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.11 \n Thanks to \"Les joueurs du fort\" for testing :-) \n\n
-        Do you want do add another language ? \nContact me (link in play store)</string>
+    <string name="disclaimer">Version 0.12 \n
+        With expansion, I\'m adding translations little by little. Default is english.\n\n
+        Found a bug (highly possible with the expansion) ? \nTranslation missing and you want to contribute ? \n\nContact me (link in play store)</string>
     <string name="done">Done</string>
     <string name="language_label">Language:</string>
     <string name="language_label_english">English</string>
@@ -27,6 +28,8 @@
     <string name="language_label_german">German</string>
     <string name="language_label_spanish">Spanish</string>
     <string name="display_card_number_label">Display card number:</string>
+    <string name="buildings_outsiders_undead_label">Buildings, outsiders and undead:</string>
+    <string name="cursed_items_label">Cursed items:</string>
     <string name="discard_area">Discard area</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>

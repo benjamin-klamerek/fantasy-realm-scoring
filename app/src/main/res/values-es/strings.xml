@@ -17,8 +17,9 @@
     <string name="scan_help_label">Consejo: solo los nombres de las cartas son obligatorios</string>
     <string name="effect_button">Efecto</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.11 \n Gracias a  \"Les joueurs du fort\" por realizar las pruebas :-) \n\n
-        ¿Quieres añadir otro idioma? \nContáctame (enlace en la play store)</string>
+    <string name="disclaimer">Version 0.12 \n
+        With expansion, I\'m adding translations little by little. Default is english.\n\n
+        Found a bug (highly possible with the expansion) ? \nTranslation missing and you want to contribute ? \n\nContact me (link in play store)</string>
     <string name="done">Hecho</string>
     <string name="language_label">Idioma:</string>
     <string name="language_label_english">Inglés</string>

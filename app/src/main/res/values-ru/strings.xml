@@ -17,7 +17,9 @@
     <string name="scan_help_label">Совет: обязательны только названия карт</string>
     <string name="effect_button">Эффект</string>
     <string name="base">Основная сила</string>
-    <string name="disclaimer">Version 0.11 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
+    <string name="disclaimer">Version 0.12 \n
+        With expansion, I\'m adding translations little by little. Default is english.\n\n
+        Found a bug (highly possible with the expansion) ? \nTranslation missing and you want to contribute ? \n\nContact me (link in play store)</string>
     <string name="done">Готово</string>
     <string name="language_label">Язык:</string>
     <string name="language_label_english">английский</string>

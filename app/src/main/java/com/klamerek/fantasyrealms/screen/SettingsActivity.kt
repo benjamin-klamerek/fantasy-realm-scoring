@@ -26,6 +26,8 @@ class SettingsActivity : CustomActivity() {
         setContentView(view)
 
         binding.displayCardNumberCheckBox.isChecked = Preferences.getDisplayCardNumber(baseContext)
+        binding.withBuildingsOutsidersUndeadCheckBox.isChecked = Preferences.getBuildingsOutsidersUndead(baseContext)
+        binding.withCursedItemsCheckBox.isChecked = Preferences.getCursedItems(baseContext)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -35,6 +37,8 @@ class SettingsActivity : CustomActivity() {
             val language = binding.languageSpinner.adapter.getItem(binding.languageSpinner.selectedItemPosition) as Language
             LocaleManager.saveLanguageInPreferences(baseContext, language)
             Preferences.saveDisplayCardNumberInPreferences(baseContext, binding.displayCardNumberCheckBox.isChecked)
+            Preferences.saveBuildingsOutsidersUndeadInPreferences(baseContext, binding.withBuildingsOutsidersUndeadCheckBox.isChecked)
+            Preferences.saveCursedItemsInPreferences(baseContext, binding.withCursedItemsCheckBox.isChecked)
             finish()
         }
 

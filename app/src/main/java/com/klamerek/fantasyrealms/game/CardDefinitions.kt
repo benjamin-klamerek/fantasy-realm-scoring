@@ -6,29 +6,48 @@ import com.klamerek.fantasyrealms.util.Preferences
 
 object CardDefinitions {
 
-    fun getAllById() : Map<Int, CardDefinition> {
+    /**
+     * Warning, this method gives ALL card definitions (meaning that you can see many times the same card if it has many versions)
+     */
+    fun getAllById(): Map<Int, CardDefinition> {
         return getAll().map { definition -> definition.id to definition }.toMap()
     }
 
+    /**
+     * Warning, this method gives ALL card definitions (meaning that you can see many times the same card if it has many versions)
+     */
     fun getAll(): List<CardDefinition> {
-        return get(buildingsOutsidersUndead = true, cursedItems = true);
+        return getBaseCards().plus(getCardsV2()).plus(getCursedHoardNewCards())
     }
 
     fun get(context: Context): List<CardDefinition> {
         val buildingsOutsidersUndead = Preferences.getBuildingsOutsidersUndead(context)
         val cursedItems = Preferences.getCursedItems(context)
-        return get(buildingsOutsidersUndead, cursedItems);
+        return get(buildingsOutsidersUndead, cursedItems)
     }
 
-    fun get(buildingsOutsidersUndead: Boolean, cursedItems: Boolean): List<CardDefinition> {
-        val baseCards: List<CardDefinition> = listOf(
-            if (buildingsOutsidersUndead) rangers else rangersV2,
+    private fun getCardsV2(): List<CardDefinition> {
+        return listOf(
+            rangersV2,
+            worldTreeV2,
+            fountainOfLifeV2,
+            greatFloodV2,
+            bellTowerV2,
+            shapeshifterV2,
+            mirageV2,
+            necromancerV2
+        )
+    }
+
+    private fun getBaseCards(): List<CardDefinition> {
+        return listOf(
+            rangers,
             elvenArchers,
             dwarvishInfantry,
             lightCavalry,
             celestialKnights,
             protectionRune,
-            if (buildingsOutsidersUndead) worldTree else worldTreeV2,
+            worldTree,
             bookOfChanges,
             shieldOfKeth,
             gemOfOrder,
@@ -42,15 +61,15 @@ object CardDefinitions {
             forge,
             lightning,
             wildfire,
-            if (buildingsOutsidersUndead) fountainOfLife else fountainOfLifeV2,
+            fountainOfLife,
             waterElemental,
             island,
             swamp,
-            if (buildingsOutsidersUndead) greatFlood else greatFloodV2,
+            greatFlood,
             undergroundCaverns,
             earthElemental,
             forest,
-            if (buildingsOutsidersUndead) bellTower else bellTowerV2,
+            bellTower,
             mountain,
             princess,
             warlord,
@@ -67,35 +86,45 @@ object CardDefinitions {
             whirlwind,
             smoke,
             blizzard,
-            if (buildingsOutsidersUndead) shapeshifter else shapeshifterV2,
-            if (buildingsOutsidersUndead) mirage else mirageV2,
+            shapeshifter,
+            mirage,
             doppelganger,
-            if (buildingsOutsidersUndead) necromancer else necromancerV2,
+            necromancer,
             elementalEnchantress,
             collector,
             beastmaster,
-            warlockLord,
-            jester
+            warlockLord
         )
+    }
+
+    private fun getCursedHoardNewCards(): List<CardDefinition> {
+        return listOf(
+            dungeon,
+            castle,
+            crypt,
+            chapel,
+            garden,
+            genie,
+            judge,
+            angel,
+            leprechaun,
+            demon,
+            darkQueen,
+            ghoul,
+            specter,
+            lich,
+            deathKnight
+        )
+    }
+
+    fun get(buildingsOutsidersUndead: Boolean, cursedItems: Boolean): List<CardDefinition> {
+        val cardV2Names = getCardsV2().map { it.name() }.toList()
+        val baseCards = if (buildingsOutsidersUndead)
+            getBaseCards().minus(getBaseCards().filter { cardV2Names.contains(it.name()) })
+                .plus(getCardsV2()) else getBaseCards()
 
         val newBaseCardsFromExpansion: List<CardDefinition> =
-            if (buildingsOutsidersUndead) listOf(
-                dungeon,
-                castle,
-                crypt,
-                chapel,
-                garden,
-                genie,
-                judge,
-                angel,
-                leprechaun,
-                demon,
-                darkQueen,
-                ghoul,
-                specter,
-                lich,
-                deathKnight
-            ) else emptyList()
+            if (buildingsOutsidersUndead) getCursedHoardNewCards() else emptyList()
 
         val cursedItemsDefinitions: List<CardDefinition> =
             if (cursedItems) emptyList() else emptyList()
