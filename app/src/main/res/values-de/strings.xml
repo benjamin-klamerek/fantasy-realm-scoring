@@ -170,5 +170,5 @@
     <string name="warlock_lord_rules">STRAFE: -10 für jeden Anführer und/oder anderen Zauberer</string>
     <string name="jester_rules">BONUS: +3 für jede andere Karte mit ungerader Basisstärke ODER +50 wenn alle Karten eine ungerade Basisstärke haben</string>
     <string name="clear_button">Abwischen</string>
-    <string name="discard_area">Verwerfen</string>
+    <string name="discard_area">Bereich verwerfen</string>
 </resources>
