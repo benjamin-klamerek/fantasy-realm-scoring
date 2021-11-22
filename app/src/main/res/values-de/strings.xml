@@ -19,7 +19,7 @@
     <string name="base">Basisstärke</string>
     <string name="disclaimer">Version 0.12 \n
         With expansion, I\'m adding translations little by little. Default is english.\n\n
-        Found a bug (highly possible with the expansion) ? \nTranslation missing and you want to contribute ? \n\nContact me (link in play store)</string>
+        Found a bug ? \nTranslation missing ? \n\nContact me (link in play store)</string>
     <string name="done">Fertig</string>
     <string name="language_label">Sprache:</string>
     <string name="language_label_english">Englisch</string>
@@ -169,4 +169,6 @@
     <string name="beastmaster_rules">BONUS: +9 für jede Bestie; HEBT die Strafe auf allen Bestien AUF.</string>
     <string name="warlock_lord_rules">STRAFE: -10 für jeden Anführer und/oder anderen Zauberer</string>
     <string name="jester_rules">BONUS: +3 für jede andere Karte mit ungerader Basisstärke ODER +50 wenn alle Karten eine ungerade Basisstärke haben</string>
+    <string name="clear_button">Abwischen</string>
+    <string name="discard_area">Verwerfen</string>
 </resources>

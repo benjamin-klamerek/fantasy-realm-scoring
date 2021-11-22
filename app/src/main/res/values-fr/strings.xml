@@ -18,8 +18,8 @@
     <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
     <string name="disclaimer">Version 0.12 \n
-        Avec l\'extension, les autres lanagues sont ajoutées petit à petit (d\'abord l\'anglais)\n\n
-        Vous avez trouvé un bug ? \nTraduction manquante et vous voulez contribuer ? \n\nContactez moi (lien dans play store)</string>
+        Avec l\'extension, les traductions sont incomplètes (elles seront ajoutées au fur et à mesure)\n\n
+        Vous avez trouvé un bug ? \nTraduction manquante ? \n\nContactez moi (lien dans play store)</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="language_label_english">Anglais</string>
@@ -154,4 +154,6 @@
     <string name="beastmaster_rules">Bonus: +9 pour chaque Créature. Efface les malus de toutes les Créatures</string>
     <string name="warlock_lord_rules">Malus: -10 pour chaque Seigneur et chaque autre Sorcier</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
+    <string name="clear_button">Supprimer</string>
+    <string name="discard_area">Défausse</string>
 </resources>

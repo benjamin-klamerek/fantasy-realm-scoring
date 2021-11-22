@@ -19,7 +19,7 @@
     <string name="base">BASE</string>
     <string name="disclaimer">Version 0.12 \n
         With expansion, I\'m adding translations little by little. Default is english.\n\n
-        Found a bug (highly possible with the expansion) ? \nTranslation missing and you want to contribute ? \n\nContact me (link in play store)</string>
+        Found a bug ? \nTranslation missing ? \n\nContact me (link in play store)</string>
     <string name="done">Hecho</string>
     <string name="language_label">Idioma:</string>
     <string name="language_label_english">Inglés</string>
@@ -154,4 +154,6 @@
     <string name="beastmaster_rules">Bonus: +9 por cada Bestia; Ignora la Penalización de todas las Bestias</string>
     <string name="warlock_lord_rules">Penalización: -10 por cada Líder y otro Mago que tengas</string>
     <string name="jester_rules">BONUS: +3 por cada otra carta con un valor impar de Fuerza Base O +50 si toda tu mano tiene valores impares de fuerza base</string>
+    <string name="clear_button">Borrar</string>
+    <string name="discard_area">Descarte</string>
 </resources>
