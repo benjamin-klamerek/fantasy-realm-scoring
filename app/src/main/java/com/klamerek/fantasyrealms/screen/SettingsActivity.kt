@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.klamerek.fantasyrealms.databinding.ActivitySettingsBinding
 import com.klamerek.fantasyrealms.game.CardDefinitions
+import com.klamerek.fantasyrealms.game.DiscardArea
 import com.klamerek.fantasyrealms.game.Player
 import com.klamerek.fantasyrealms.toInt
 import com.klamerek.fantasyrealms.util.Language
@@ -73,10 +74,10 @@ class SettingsActivity : CustomActivity() {
     private fun removeCardOutOfScope(initialValue: String) {
         if (initialValue != getCardScopeId()) {
             val scope = CardDefinitions.get(baseContext)
-            Player.all.forEach { player ->
-                player.game.cards().map { it.definition }
+            Player.all.plus(DiscardArea.instance).forEach { withGame ->
+                withGame.game().cards().map { it.definition }
                     .filter { !scope.contains(it) }.toList()
-                    .forEach { cardToRemove -> player.game.remove(cardToRemove) }
+                    .forEach { cardToRemove -> withGame.game().remove(cardToRemove) }
             }
         }
     }

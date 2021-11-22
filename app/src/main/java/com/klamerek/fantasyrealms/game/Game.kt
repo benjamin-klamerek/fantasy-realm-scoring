@@ -1,6 +1,7 @@
 package com.klamerek.fantasyrealms.game
 
 import android.content.Context
+import com.klamerek.fantasyrealms.toInt
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Preferences
 import java.lang.Integer.max
@@ -11,7 +12,8 @@ import java.lang.Integer.max
  */
 class Game {
 
-    private val cards = ArrayList<Card>()
+    private val handCards = ArrayList<Card>()
+    private val tableCards = ArrayList<Card>()
     private val bonusScoreByCard = HashMap<CardDefinition, Int>()
     private val penaltyScoreByCard = HashMap<CardDefinition, Int>()
 
@@ -25,21 +27,27 @@ class Game {
     var angelSelection: CardDefinition? = null
 
     fun cards(): Collection<Card> {
-        return ArrayList(cards)
+        return handCards.plus(tableCards)
     }
 
-    fun cardsNotBlanked(): Collection<Card> {
-        return cards.filter { card -> !card.blanked }
+    fun handCards(): Collection<Card> {
+        return ArrayList(handCards)
+    }
+
+    fun handCardsNotBlanked(): Collection<Card> {
+        return handCards.filter { card -> !card.blanked }
     }
 
     fun add(cardDefinition: CardDefinition) {
-        if (!cards.map { card -> card.definition }.contains(cardDefinition)) {
-            cards.add(Card(cardDefinition, AllRules.instance[cardDefinition].orEmpty()))
+        val list = if (cardDefinition.position() == CardPosition.HAND) handCards else tableCards
+        if (!list.map { card -> card.definition }.contains(cardDefinition)) {
+            list.add(Card(cardDefinition, AllRules.instance[cardDefinition].orEmpty()))
         }
     }
 
     fun remove(cardDefinition: CardDefinition) {
-        cards.removeIf { it.definition == cardDefinition }
+        val list = if (cardDefinition.position() == CardPosition.HAND) handCards else tableCards
+        list.removeIf { it.definition == cardDefinition }
         if (cardDefinition == bookOfChanges || cardDefinition == bookOfChangeSelection?.first) {
             bookOfChangeSelection = null
         }
@@ -68,24 +76,27 @@ class Game {
 
     fun update(cardDefinitions: List<CardDefinition>) {
         cardDefinitions.forEach { definition -> add(definition) }
-        cards.map { card -> card.definition }
+        handCards.plus(tableCards).map { card -> card.definition }
             .filter { definition -> !cardDefinitions.contains(definition) }
             .forEach { definition -> remove(definition) }
     }
 
     fun clear() {
-        cards.clear()
+        handCards.clear()
+        tableCards.clear()
     }
 
-    fun countOddCard() = cardsNotBlanked().count { it.isOdd() }
+    fun countOddHandCards() = handCardsNotBlanked().count { it.isOdd() }
 
-    fun isAllOdd() = cardsNotBlanked().all { it.isOdd() }
+    fun isAllHandCardsOdd() = handCardsNotBlanked().all { it.isOdd() }
 
-    fun countCard(vararg suit: Suit) = cardsNotBlanked().count { it.isOneOf(*suit) }
+    fun countHandCards(vararg suit: Suit) = handCardsNotBlanked().count { it.isOneOf(*suit) }
 
-    fun noCard(suit: Suit) = countCard(suit) == 0
+    fun countTableCards(vararg suit: Suit) = tableCards.count { it.isOneOf(*suit) }
 
-    fun atLeastOne(suit: Suit) = countCard(suit) > 0
+    fun noHandCardsOf(suit: Suit) = countHandCards(suit) == 0
+
+    fun atLeastOneHandCardOf(suit: Suit) = countHandCards(suit) > 0
 
 
     /**
@@ -93,11 +104,11 @@ class Game {
      *
      * @param cardExpected      list of cards expected in the game
      */
-    fun contains(vararg cardExpected: CardDefinition) = cardsNotBlanked()
+    fun containsHandCards(vararg cardExpected: CardDefinition) = handCardsNotBlanked()
         .map { it.name() }.containsAll(cardExpected.toList().map { it.name() })
 
     fun longestSuite(): Int {
-        val sorted = cardsNotBlanked().sortedBy { card -> card.value() }
+        val sorted = handCardsNotBlanked().sortedBy { card -> card.value() }
         var maxCount = 1
         var count = 1
         var previousValue = Int.MIN_VALUE
@@ -118,27 +129,27 @@ class Game {
     }
 
     fun calculate() {
-        cards.forEach { card -> card.clear() }
+        handCards.forEach { card -> card.clear() }
 
         applySpecificCardEffects()
 
-        cards.map { card -> identifyClearedRules(card) }.flatten()
+        handCards.map { card -> identifyClearedRules(card) }.flatten()
             .forEach { ruleToDeactivate ->
-                cards.forEach { card ->
+                handCards.forEach { card ->
                     card.rules()
                         .filter { rule -> rule == ruleToDeactivate }
                         .forEach { rule -> card.deactivate(rule) }
                 }
             }
 
-        cards.map { card -> identifyUnblankableCards(card) }.flatten()
+        handCards.map { card -> identifyUnblankableCards(card) }.flatten()
             .forEach { card -> card.addTemporaryRule(unblankable) }
 
         applyBlankingRules()
 
         bonusScoreByCard.clear()
         penaltyScoreByCard.clear()
-        bonusScoreByCard.putAll(cardsNotBlanked().map { card ->
+        bonusScoreByCard.putAll(cardsForScoring().map { card ->
             card.definition to card.rules()
                 .asSequence()
                 .filter { rule -> card.isActivated(rule) }
@@ -147,7 +158,7 @@ class Game {
                 .map { rule -> rule?.logic?.invoke(this) }
                 .sumOf { any -> if (any is Int) any else 0 }
         }.toMap())
-        penaltyScoreByCard.putAll(cardsNotBlanked().map { card ->
+        penaltyScoreByCard.putAll(cardsForScoring().map { card ->
             card.definition to card.rules()
                 .asSequence()
                 .filter { rule -> card.isActivated(rule) }
@@ -171,11 +182,13 @@ class Game {
 
     fun score(): Int = bonusScoreByCard.entries.sumOf { it.value } +
             penaltyScoreByCard.entries.sumOf { it.value } +
-            cardsNotBlanked().sumOf { it.value() }
+            cardsForScoring().sumOf { it.value() }
 
     fun score(card: CardDefinition): Int = bonusScore(card) +
             penaltyScore(card) +
-            cardsNotBlanked().filter { it.definition == card }.sumOf { it.value() }
+            cardsForScoring().filter { it.definition == card }.sumOf { it.value() }
+
+    private fun cardsForScoring() = handCardsNotBlanked().plus(tableCards)
 
     fun bonusScore(card: CardDefinition): Int = bonusScoreByCard.getOrDefault(card, 0)
 
@@ -192,7 +205,7 @@ class Game {
      */
     private fun applyBlankingRules(): Unit =
         repeat(2) {
-            cards.map { card ->
+            handCards.map { card ->
                 card.rules()
                     .filter { rule -> card.isActivated(rule) }
                     .filter { rule -> rule.tags.contains(Effect.BLANK) }
@@ -222,8 +235,8 @@ class Game {
             .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
 
 
-    fun filterNotBlankedCards(scope: (Card) -> Boolean): List<Card> {
-        return this.cardsNotBlanked().filter(scope)
+    fun filterNotBlankedHandCards(scope: (Card) -> Boolean): List<Card> {
+        return this.handCardsNotBlanked().filter(scope)
     }
 
     fun identifyClearedPenalty(scope: (Card) -> Boolean): List<Rule<out Any>> {
@@ -235,28 +248,28 @@ class Game {
     }
 
     private fun identifyRule(scope: (Card) -> Boolean, vararg tags: Tag): List<Rule<out Any>> {
-        return cardsNotBlanked().filter(scope)
+        return handCardsNotBlanked().filter(scope)
             .flatMap { card -> card.rules() }
             .filter { rule -> rule.tags.containsAll(tags.asList()) }
     }
 
     private fun bookOfChangesCandidates(): List<CardDefinition> {
-        return cards.map { card -> card.definition }
+        return handCards.map { card -> card.definition }
             .filter { definition -> definition != bookOfChanges }
     }
 
     private fun applyBookOfChanges(cardToUpdate: CardDefinition?, newSuit: Suit?) =
-        cards.filter { card -> card.definition == cardToUpdate }
+        handCards.filter { card -> card.definition == cardToUpdate }
             .map { card -> card.suit(newSuit) }
 
     private fun islandCandidates(): List<CardDefinition> {
-        return cards.filter { card -> card.isOneOf(Suit.FLOOD, Suit.FLAME) }
+        return handCards.filter { card -> card.isOneOf(Suit.FLOOD, Suit.FLAME) }
             .map { card -> card.definition }
     }
 
     private fun applyIsland(cardToClean: CardDefinition) {
         if (islandCandidates().contains(cardToClean)) {
-            cards.filter { card -> card.definition == cardToClean }
+            handCards.filter { card -> card.definition == cardToClean }
                 .map { card ->
                     card.rules()
                         .filter { rule -> rule.tags.contains(Effect.PENALTY) }
@@ -298,7 +311,7 @@ class Game {
 
     private fun applyShapeShifter(cardToCopy: CardDefinition) {
         if (shapeShifterCandidates().contains(cardToCopy)) {
-            cards.filter { card -> card.definition == shapeshifter }
+            handCards.filter { card -> card.definition == shapeshifter }
                 .map { card ->
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
@@ -308,7 +321,7 @@ class Game {
 
     private fun applyShapeShifterV2(cardToCopy: CardDefinition) {
         if (shapeShifterV2Candidates().contains(cardToCopy)) {
-            cards.filter { card -> card.definition == shapeshifterV2 }
+            handCards.filter { card -> card.definition == shapeshifterV2 }
                 .map { card ->
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
@@ -317,12 +330,12 @@ class Game {
     }
 
     private fun angelCandidates(): List<CardDefinition> {
-        return cards.filter { card -> card.definition != angel }
+        return handCards.filter { card -> card.definition != angel }
             .map { card -> card.definition }
     }
 
     private fun applyAngel(cardToProtect: CardDefinition) {
-        cards.filter { card -> card.definition == cardToProtect }
+        handCards.filter { card -> card.definition == cardToProtect }
             .map { card -> card.addTemporaryRule(unblankable) }
     }
 
@@ -359,7 +372,7 @@ class Game {
 
     private fun applyMirage(cardToCopy: CardDefinition) {
         if (mirageCandidates().contains(cardToCopy)) {
-            cards.filter { card -> card.definition == mirage }
+            handCards.filter { card -> card.definition == mirage }
                 .map { card ->
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
@@ -369,7 +382,7 @@ class Game {
 
     private fun applyMirageV2(cardToCopy: CardDefinition) {
         if (mirageV2Candidates().contains(cardToCopy)) {
-            cards.filter { card -> card.definition == mirageV2 }
+            handCards.filter { card -> card.definition == mirageV2 }
                 .map { card ->
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
@@ -378,11 +391,12 @@ class Game {
     }
 
     private fun doppelgangerCandidates(): List<CardDefinition> =
-        cards.map { card -> card.definition }.filter { definition -> definition != doppelganger }
+        handCards.map { card -> card.definition }
+            .filter { definition -> definition != doppelganger }
 
     private fun applyDoppelganger(cardToCopy: CardDefinition) {
         if (doppelgangerCandidates().contains(cardToCopy)) {
-            cards.filter { card -> card.definition == doppelganger }
+            handCards.filter { card -> card.definition == doppelganger }
                 .map { card ->
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
@@ -396,12 +410,16 @@ class Game {
 
     fun handSizeExpected(context: Context): Int {
         return Constants.DEFAULT_HAND_SIZE +
-                (if (Preferences.getBuildingsOutsidersUndead(context)) 1 else 0) +
-                (if (cards.any { card -> card.hasSameNameThan(necromancer) }) 1 else 0)
+                Preferences.getBuildingsOutsidersUndead(context).toInt() +
+                handCards.any { card ->
+                    card.definition == necromancer || card.definition == necromancerV2
+                }.toInt() +
+                handCards.any { card -> card.definition == genie }.toInt() +
+                handCards.any { card -> card.definition == leprechaun }.toInt()
     }
 
     fun actualHandSize(): Int {
-        return cards.size
+        return handCards.size
     }
 
     fun ruleEffectCardSelectionAbout(cardDefinition: CardDefinition?): List<CardDefinition> {
@@ -466,14 +484,14 @@ class Game {
         ).contains(definition)
 
     fun countCardWithAtLeastOnePenaltyNotCleared(): Int {
-        return cardsNotBlanked().count { card ->
+        return handCardsNotBlanked().count { card ->
             card.rules()
                 .any { rule -> rule.tags.contains(Effect.PENALTY) && card.isActivated(rule) }
         }
     }
 
     fun groupNotBlankedCardsBySuit(): Map<Suit, List<Card>> {
-        return cardsNotBlanked().groupBy { card -> card.suit() }
+        return handCardsNotBlanked().groupBy { card -> card.suit() }
     }
 
     fun applySelection(

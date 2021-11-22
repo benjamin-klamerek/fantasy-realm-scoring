@@ -39,7 +39,11 @@ class HandSelectionActivityTest {
         actualHand.forEach { game.add(it) }
         Player.all.clear()
         Player.all.add(Player(playerName, game))
-        scenario = ActivityScenario.launch(HandSelectionActivity::class.java)
+        val handSelectionIntent = Intent(
+            InstrumentationRegistry.getInstrumentation().targetContext,
+            HandSelectionActivity::class.java)
+        handSelectionIntent.putExtra(Constants.GAME_SESSION_ID, 0)
+        scenario = ActivityScenario.launch(handSelectionIntent)
         return scenario
     }
 
@@ -83,7 +87,7 @@ class HandSelectionActivityTest {
             InstrumentationRegistry.getInstrumentation().targetContext,
             HandSelectionActivity::class.java
         )
-        handSelectionIntent.putExtra(Constants.PLAYER_SESSION_ID, 1)
+        handSelectionIntent.putExtra(Constants.GAME_SESSION_ID, 1)
         scenario = ActivityScenario.launch(handSelectionIntent)
 
         onView(withId(R.id.playerNameLabel)).check(matches(withText("PLAYER 2 - Score : 35")))

@@ -10,7 +10,7 @@ class ScoringTest {
 
     @BeforeEach
     fun beforeEach(){
-        DiscardArea.instance.game.clear()
+        DiscardArea.instance.game().clear()
     }
 
     @DisplayName("worst hand")
@@ -441,9 +441,9 @@ class ScoringTest {
     @DisplayName("Dark queen example")
     @Test
     fun dark_queen_example() {
-        DiscardArea.instance.game.add(candle)
-        DiscardArea.instance.game.add(undergroundCaverns)
-        DiscardArea.instance.game.add(shieldOfKeth)
+        DiscardArea.instance.game().add(candle)
+        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(shieldOfKeth)
 
         val game = Game()
         game.add(darkQueen)
@@ -455,10 +455,10 @@ class ScoringTest {
     @DisplayName("Ghoul example")
     @Test
     fun ghoul_example() {
-        DiscardArea.instance.game.add(celestialKnights)
-        DiscardArea.instance.game.add(undergroundCaverns)
-        DiscardArea.instance.game.add(darkQueen)
-        DiscardArea.instance.game.add(king)
+        DiscardArea.instance.game().add(celestialKnights)
+        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(darkQueen)
+        DiscardArea.instance.game().add(king)
 
         val game = Game()
         game.add(ghoul)
@@ -470,10 +470,10 @@ class ScoringTest {
     @DisplayName("Specter example")
     @Test
     fun specter_example() {
-        DiscardArea.instance.game.add(protectionRune)
-        DiscardArea.instance.game.add(undergroundCaverns)
-        DiscardArea.instance.game.add(darkQueen)
-        DiscardArea.instance.game.add(demon)
+        DiscardArea.instance.game().add(protectionRune)
+        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(darkQueen)
+        DiscardArea.instance.game().add(demon)
 
         val game = Game()
         game.add(specter)
@@ -509,10 +509,10 @@ class ScoringTest {
     @DisplayName("Death Knight example")
     @Test
     fun death_knight_example() {
-        DiscardArea.instance.game.add(celestialKnights)
-        DiscardArea.instance.game.add(swordOfKeth)
-        DiscardArea.instance.game.add(darkQueen)
-        DiscardArea.instance.game.add(demon)
+        DiscardArea.instance.game().add(celestialKnights)
+        DiscardArea.instance.game().add(swordOfKeth)
+        DiscardArea.instance.game().add(darkQueen)
+        DiscardArea.instance.game().add(demon)
 
         val game = Game()
         game.add(deathKnight)

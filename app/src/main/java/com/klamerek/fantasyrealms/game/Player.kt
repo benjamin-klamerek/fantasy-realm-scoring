@@ -6,7 +6,7 @@ package com.klamerek.fantasyrealms.game
  * @property name
  * @property game
  */
-class Player(var name: String, val game: Game) {
+class Player(private var name: String,private val game: Game) : WithGame{
 
     companion object {
         val all : MutableList<Player> = ArrayList()
@@ -22,4 +22,8 @@ class Player(var name: String, val game: Game) {
         }
 
     }
+
+    override fun name(): String = name;
+
+    override fun game(): Game = game;
 }

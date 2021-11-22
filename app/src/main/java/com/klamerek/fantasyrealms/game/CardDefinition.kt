@@ -35,6 +35,11 @@ enum class CardSet(val numberOfCards: Int) {
     CURSED_HOARD(47)
 }
 
+enum class CardPosition {
+    HAND,
+    TABLE
+}
+
 /**
  * Suit of card (family)
  *
@@ -81,6 +86,8 @@ open class CardDefinition(
     fun name() = Strings.get(keyName)
 
     fun rule() = Strings.get(keyRule)
+
+    fun position() = if (Suit.CURSED_ITEM == suit) CardPosition.TABLE else CardPosition.HAND
 
     fun nameWithId() = when (cardSet) {
         CardSet.PROMO -> name() + " (Promo)"

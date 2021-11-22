@@ -85,6 +85,9 @@ class PlayerSelectionActivity : CustomActivity() {
                 keyboard.showSoftInput(field, 0)
             }, delayBeforeShowingKeyboard)
         }
+        binding.discardAreaButton.setOnClickListener {
+            EventBus.getDefault().post(DiscardAreaEditEvent())
+        }
     }
 
     private fun initDialog(dialogView: View, field: TextInputEditText?): AlertDialog {
@@ -143,7 +146,16 @@ class PlayerSelectionActivity : CustomActivity() {
     @Subscribe
     fun editPlayer(event: PlayerEditEvent) {
         val handSelectionIntent = Intent(this, HandSelectionActivity::class.java)
-        handSelectionIntent.putExtra(Constants.PLAYER_SESSION_ID, Player.all.indexOf(event.player))
+        handSelectionIntent.putExtra(Constants.GAME_SESSION_ID, Player.all.indexOf(event.player))
+        startActivity(handSelectionIntent)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    @Suppress("UnusedPrivateMember")
+    @Subscribe
+    fun editDiscardArea(event: DiscardAreaEditEvent) {
+        val handSelectionIntent = Intent(this, HandSelectionActivity::class.java)
+        handSelectionIntent.putExtra(Constants.GAME_SESSION_ID, -1)
         startActivity(handSelectionIntent)
     }
 
@@ -167,8 +179,9 @@ class PlayerSelectionAdapter(private val players: Collection<Player>) : Recycler
         private var view: PlayerListItemBinding = v
 
         fun bindPlayer(player: Player) {
-            view.playerNameField.text = player.name
-            view.scoreLabel.text = player.game.score().toString()
+            view.playerNameField.text = player.name()
+            player.game().calculate()
+            view.scoreLabel.text = player.game().score().toString()
             view.editButton.setOnClickListener {
                 EventBus.getDefault().post(PlayerEditEvent(player))
             }
@@ -185,3 +198,5 @@ class PlayerDeletionEvent(val index: Int)
 class AllPlayersDeletionEvent
 
 class PlayerEditEvent(val player: Player)
+
+class DiscardAreaEditEvent

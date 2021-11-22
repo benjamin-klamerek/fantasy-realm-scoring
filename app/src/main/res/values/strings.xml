@@ -14,6 +14,7 @@
     <string name="new_player_default_value">New player</string>
     <string name="add_card_button">Add card</string>
     <string name="scan_button">Scan</string>
+    <string name="clear_button">Clear</string>
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
     <string name="effect_button">Effect</string>
     <string name="base">BASE</string>

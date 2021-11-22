@@ -20,7 +20,10 @@ object Constants {
     const val CARD_LIST_SELECTION_MODE_ONE_CARD = 1
     const val CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT = 2
 
-    const val PLAYER_SESSION_ID = "PLAYER"
+    /**
+     * -1 means discard area, superior to zero indicates a player
+     */
+    const val GAME_SESSION_ID = "GAME_SESSION_ID"
     const val CARD_SELECTION_DATA_EXCHANGE_SESSION_ID = "CARD_SELECTION_DATA_EXCHANGE"
 }
 

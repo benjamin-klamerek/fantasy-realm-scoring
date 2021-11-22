@@ -52,7 +52,7 @@ class RuleAboutCard(tags: List<Tag>, priority: Int = 100, logic: (Game) -> List<
 object AllRules {
     val instance = mapOf(
         rangers to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { it.countCard(Suit.LAND) * 10 },
+            RuleAboutScore(listOf(Effect.BONUS)) { it.countHandCards(Suit.LAND) * 10 },
             RuleAboutRule(
                 listOf(
                     Effect.CLEAR,
@@ -60,28 +60,33 @@ object AllRules {
                 )
             ) { it.identifyArmyClearedPenalty { true } }),
         elvenArchers to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.noCard(Suit.WEATHER)) 5 else 0 }),
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.noHandCardsOf(Suit.WEATHER)) 5 else 0 }),
         dwarvishInfantry to listOf(
             RuleAboutScore(
                 listOf(
                     Effect.PENALTY,
                     Suit.ARMY
                 )
-            ) { (it.countCard(Suit.ARMY) - 1) * -2 }),
+            ) { (it.countHandCards(Suit.ARMY) - 1) * -2 }),
         lightCavalry to listOf(
-            RuleAboutScore(listOf(Effect.PENALTY, Suit.LAND)) { it.countCard(Suit.LAND) * -2 }),
+            RuleAboutScore(
+                listOf(
+                    Effect.PENALTY,
+                    Suit.LAND
+                )
+            ) { it.countHandCards(Suit.LAND) * -2 }),
         celestialKnights to listOf(
             RuleAboutScore(
                 listOf(
                     Effect.PENALTY,
                     Suit.LEADER
                 )
-            ) { if (it.noCard(Suit.LEADER)) -8 else 0 }),
+            ) { if (it.noHandCardsOf(Suit.LEADER)) -8 else 0 }),
         protectionRune to listOf(
             RuleAboutRule(listOf(Effect.CLEAR)) { it.identifyClearedPenalty { true } }),
         worldTree to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.cardsNotBlanked()
+                if (it.handCardsNotBlanked()
                         .groupBy { card -> card.suit() }.entries.any { entry -> entry.value.size > 1 }
                 ) 0 else 50
             }),
@@ -91,13 +96,13 @@ object AllRules {
                     Effect.BONUS,
                     Suit.LEADER
                 )
-            ) { if (it.atLeastOne(Suit.LEADER)) 15 else 0 },
+            ) { if (it.atLeastOneHandCardOf(Suit.LEADER)) 15 else 0 },
             RuleAboutScore(
                 listOf(
                     Effect.BONUS,
                     Suit.LEADER
                 )
-            ) { if (it.atLeastOne(Suit.LEADER) && it.contains(swordOfKeth)) 25 else 0 }
+            ) { if (it.atLeastOneHandCardOf(Suit.LEADER) && it.containsHandCards(swordOfKeth)) 25 else 0 }
         ),
         gemOfOrder to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
@@ -107,7 +112,7 @@ object AllRules {
         ),
         warhorse to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.countCard(
+                if (it.countHandCards(
                         Suit.LEADER,
                         Suit.WIZARD
                     ) >= 1
@@ -116,29 +121,31 @@ object AllRules {
         ),
         unicorn to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.contains(princess)) 30 else if (it.contains(empress) || it.contains(queen) || it.contains(
+                if (it.containsHandCards(princess)) 30 else if (it.containsHandCards(empress) || it.containsHandCards(
+                        queen
+                    ) || it.containsHandCards(
                         elementalEnchantress
                     )
                 ) 15 else 0
             }
         ),
         hydra to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.contains(swamp)) 28 else 0 }
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.containsHandCards(swamp)) 28 else 0 }
         ),
         dragon to listOf(
-            RuleAboutScore(listOf(Effect.PENALTY)) { if (it.noCard(Suit.WIZARD)) -40 else 0 }
+            RuleAboutScore(listOf(Effect.PENALTY)) { if (it.noHandCardsOf(Suit.WIZARD)) -40 else 0 }
         ),
         basilisk to listOf(
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.ARMY))
-            { it.filterNotBlankedCards { card -> card.isOneOf(Suit.ARMY) } },
+            { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.ARMY) } },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.LEADER))
-            { it.filterNotBlankedCards { card -> card.isOneOf(Suit.LEADER) } },
+            { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.LEADER) } },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.BEAST))
-            { it.filterNotBlankedCards { card -> (card.isOneOf(Suit.BEAST) && card.definition != basilisk) } }
+            { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.BEAST) && card.definition != basilisk) } }
         ),
         candle to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.atLeastOne(Suit.WIZARD) && it.contains(
+                if (it.atLeastOneHandCardOf(Suit.WIZARD) && it.containsHandCards(
                         bookOfChanges,
                         bellTower
                     )
@@ -146,18 +153,23 @@ object AllRules {
             }
         ),
         fireElemental to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.FLAME) - 1) * 15 }
+            RuleAboutScore(listOf(Effect.BONUS)) { (it.countHandCards(Suit.FLAME) - 1) * 15 }
         ),
         forge to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.WEAPON, Suit.ARTIFACT)) * 9 }
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                (it.countHandCards(
+                    Suit.WEAPON,
+                    Suit.ARTIFACT
+                )) * 9
+            }
         ),
         lightning to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.contains(rainstorm)) 30 else 0 }
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.containsHandCards(rainstorm)) 30 else 0 }
         ),
         wildfire to listOf(
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK))
             {
-                it.filterNotBlankedCards { card ->
+                it.filterNotBlankedHandCards { card ->
                     !(card.isOneOf(Suit.FLAME) || card.isOneOf(Suit.WEATHER) || card.isOneOf(Suit.WIZARD) ||
                             card.isOneOf(Suit.WEAPON) || card.isOneOf(Suit.ARTIFACT) ||
                             card.hasSameNameThan(greatFlood) ||
@@ -171,16 +183,16 @@ object AllRules {
         fountainOfLife to listOf(
             RuleAboutScore(listOf(Effect.BONUS))
             {
-                it.cardsNotBlanked().filter { card ->
+                it.handCardsNotBlanked().filter { card ->
                     card.isOneOf(Suit.WEAPON, Suit.FLOOD, Suit.FLAME, Suit.LAND, Suit.WEATHER)
                 }.maxOfOrNull { card -> card.value() } ?: 0
             }
         ),
         waterElemental to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.FLOOD) - 1) * 15 }
+            RuleAboutScore(listOf(Effect.BONUS)) { (it.countHandCards(Suit.FLOOD) - 1) * 15 }
         ),
         swamp to listOf(RuleAboutScore(listOf(Effect.PENALTY)) {
-            (it.countCard(Suit.ARMY, Suit.FLAME)) * -3
+            (it.countHandCards(Suit.ARMY, Suit.FLAME)) * -3
         }),
         greatFlood to listOf(
             RuleAboutCard(
@@ -189,28 +201,28 @@ object AllRules {
                     Effect.BLANK,
                     Suit.ARMY
                 )
-            ) { it.filterNotBlankedCards { card -> card.isOneOf(Suit.ARMY) } },
+            ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.ARMY) } },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.LAND
                 )
-            ) { it.filterNotBlankedCards { card -> (card.isOneOf(Suit.LAND) && card.definition != mountain) } },
+            ) { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.LAND) && card.definition != mountain) } },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.FLAME
                 )
-            ) { it.filterNotBlankedCards { card -> (card.isOneOf(Suit.FLAME) && card.definition != lightning) } }
+            ) { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.FLAME) && card.definition != lightning) } }
         ),
         earthElemental to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.LAND) - 1) * 15 }
+            RuleAboutScore(listOf(Effect.BONUS)) { (it.countHandCards(Suit.LAND) - 1) * 15 }
         ),
         undergroundCaverns to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.contains(dwarvishInfantry) || it.contains(
+                if (it.containsHandCards(dwarvishInfantry) || it.containsHandCards(
                         dragon
                     )
                 ) 25 else 0
@@ -225,15 +237,21 @@ object AllRules {
         ),
         forest to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.BEAST) + it.cardsNotBlanked()
+                (it.countHandCards(Suit.BEAST) + it.handCardsNotBlanked()
                     .filter { card -> card.hasSameNameThan(elvenArchers) }.count()) * 12
             }
         ),
         bellTower to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.atLeastOne(Suit.WIZARD)) 15 else 0 }
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.atLeastOneHandCardOf(Suit.WIZARD)) 15 else 0 }
         ),
         mountain to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.contains(smoke, wildfire)) 50 else 0 },
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                if (it.containsHandCards(
+                        smoke,
+                        wildfire
+                    )
+                ) 50 else 0
+            },
             RuleAboutRule(listOf(Effect.CLEAR)) {
                 it.identifyClearedPenalty { card ->
                     card.isOneOf(
@@ -244,39 +262,51 @@ object AllRules {
         ),
         princess to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.ARMY, Suit.WIZARD) +
-                        max(it.countCard(Suit.LEADER) - 1, 0)) * 8
+                (it.countHandCards(Suit.ARMY, Suit.WIZARD) +
+                        max(it.countHandCards(Suit.LEADER) - 1, 0)) * 8
             }
         ),
         warlord to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                it.cardsNotBlanked().filter { card -> card.isOneOf(Suit.ARMY) }.sumOf(Card::value)
+                it.handCardsNotBlanked().filter { card -> card.isOneOf(Suit.ARMY) }
+                    .sumOf(Card::value)
             }
         ),
         queen to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { it.countCard(Suit.ARMY) * 5 },
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.contains(king)) it.countCard(Suit.ARMY) * 15 else 0 }
+            RuleAboutScore(listOf(Effect.BONUS)) { it.countHandCards(Suit.ARMY) * 5 },
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                if (it.containsHandCards(king)) it.countHandCards(
+                    Suit.ARMY
+                ) * 15 else 0
+            }
         ),
         king to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { it.countCard(Suit.ARMY) * 5 },
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.contains(queen)) it.countCard(Suit.ARMY) * 15 else 0 }
+            RuleAboutScore(listOf(Effect.BONUS)) { it.countHandCards(Suit.ARMY) * 5 },
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                if (it.containsHandCards(queen)) it.countHandCards(
+                    Suit.ARMY
+                ) * 15 else 0
+            }
         ),
         empress to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { it.countCard(Suit.ARMY) * 10 },
-            RuleAboutScore(listOf(Effect.PENALTY)) { (it.countCard(Suit.LEADER) - 1) * -5 }
+            RuleAboutScore(listOf(Effect.BONUS)) { it.countHandCards(Suit.ARMY) * 10 },
+            RuleAboutScore(listOf(Effect.PENALTY)) { (it.countHandCards(Suit.LEADER) - 1) * -5 }
         ),
         magicWand to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.atLeastOne(Suit.WIZARD)) 25 else 0 }
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.atLeastOneHandCardOf(Suit.WIZARD)) 25 else 0 }
         ),
         elvenLongbow to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.contains(elvenArchers) || it.contains(warlord) || it.contains(beastmaster)) 30 else 0
+                if (it.containsHandCards(elvenArchers) || it.containsHandCards(warlord) || it.containsHandCards(
+                        beastmaster
+                    )
+                ) 30 else 0
             }
         ),
         swordOfKeth to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.atLeastOne(Suit.LEADER)) 10 else 0 },
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.atLeastOneHandCardOf(Suit.LEADER)) 10 else 0 },
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.atLeastOne(Suit.LEADER) && it.contains(
+                if (it.atLeastOneHandCardOf(Suit.LEADER) && it.containsHandCards(
                         shieldOfKeth
                     )
                 ) 30 else 0
@@ -288,7 +318,13 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK
                 )
-            ) { if (it.noCard(Suit.FLOOD)) it.filterNotBlankedCards { card -> card.hasSameNameThan(warship) } else emptyList() },
+            ) {
+                if (it.noHandCardsOf(Suit.FLOOD)) it.filterNotBlankedHandCards { card ->
+                    card.hasSameNameThan(
+                        warship
+                    )
+                } else emptyList()
+            },
             RuleAboutRule(listOf(Effect.CLEAR)) {
                 it.identifyArmyClearedPenalty { card ->
                     card.isOneOf(
@@ -299,25 +335,40 @@ object AllRules {
         ),
         warDirigible to listOf(
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.ARMY))
-            { if (it.noCard(Suit.ARMY)) it.filterNotBlankedCards { card -> card.hasSameNameThan(warDirigible) } else emptyList() },
+            {
+                if (it.noHandCardsOf(Suit.ARMY)) it.filterNotBlankedHandCards { card ->
+                    card.hasSameNameThan(
+                        warDirigible
+                    )
+                } else emptyList()
+            },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK))
-            { if (it.atLeastOne(Suit.WEATHER)) it.filterNotBlankedCards { card -> card.hasSameNameThan(warDirigible) } else emptyList() }
+            {
+                if (it.atLeastOneHandCardOf(Suit.WEATHER)) it.filterNotBlankedHandCards { card ->
+                    card.hasSameNameThan(
+                        warDirigible
+                    )
+                } else emptyList()
+            }
         ),
         airElemental to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.WEATHER) - 1) * 15 }
+            RuleAboutScore(listOf(Effect.BONUS)) { (it.countHandCards(Suit.WEATHER) - 1) * 15 }
         ),
         rainstorm to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.FLOOD)) * 10 },
+            RuleAboutScore(listOf(Effect.BONUS)) { (it.countHandCards(Suit.FLOOD)) * 10 },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK
                 )
-            ) { it.filterNotBlankedCards { card -> card.isOneOf(Suit.FLAME) && card.definition != lightning } }
+            ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.FLAME) && card.definition != lightning } }
         ),
         whirlwind to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.contains(rainstorm) && (it.contains(blizzard) || it.contains(greatFlood))) 40 else 0
+                if (it.containsHandCards(rainstorm) && (it.containsHandCards(blizzard) || it.containsHandCards(
+                        greatFlood
+                    ))
+                ) 40 else 0
             }
         ),
         smoke to listOf(
@@ -326,7 +377,13 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK
                 )
-            ) { if (it.noCard(Suit.FLAME)) it.filterNotBlankedCards { card -> card.hasSameNameThan(smoke) } else emptyList() }
+            ) {
+                if (it.noHandCardsOf(Suit.FLAME)) it.filterNotBlankedHandCards { card ->
+                    card.hasSameNameThan(
+                        smoke
+                    )
+                } else emptyList()
+            }
         ),
         blizzard to listOf(
             RuleAboutCard(
@@ -334,16 +391,31 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK
                 )
-            ) { it.filterNotBlankedCards { card -> card.isOneOf(Suit.FLOOD) } },
-            RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY)) { it.countCard(Suit.ARMY) * -5 },
-            RuleAboutScore(listOf(Effect.PENALTY, Suit.LEADER)) { it.countCard(Suit.LEADER) * -5 },
-            RuleAboutScore(listOf(Effect.PENALTY, Suit.BEAST)) { it.countCard(Suit.BEAST) * -5 },
-            RuleAboutScore(listOf(Effect.PENALTY, Suit.FLAME)) { it.countCard(Suit.FLAME) * -5 }
+            ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.FLOOD) } },
+            RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY)) { it.countHandCards(Suit.ARMY) * -5 },
+            RuleAboutScore(
+                listOf(
+                    Effect.PENALTY,
+                    Suit.LEADER
+                )
+            ) { it.countHandCards(Suit.LEADER) * -5 },
+            RuleAboutScore(
+                listOf(
+                    Effect.PENALTY,
+                    Suit.BEAST
+                )
+            ) { it.countHandCards(Suit.BEAST) * -5 },
+            RuleAboutScore(
+                listOf(
+                    Effect.PENALTY,
+                    Suit.FLAME
+                )
+            ) { it.countHandCards(Suit.FLAME) * -5 }
         ),
         elementalEnchantress to listOf(
             RuleAboutScore(listOf(Effect.BONUS))
             {
-                (it.countCard(Suit.LAND, Suit.WEATHER, Suit.FLOOD, Suit.FLAME)) * 5
+                (it.countHandCards(Suit.LAND, Suit.WEATHER, Suit.FLOOD, Suit.FLAME)) * 5
             }
         ),
         collector to listOf(
@@ -359,7 +431,7 @@ object AllRules {
             }
         ),
         beastmaster to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { it.countCard(Suit.BEAST) * 9 },
+            RuleAboutScore(listOf(Effect.BONUS)) { it.countHandCards(Suit.BEAST) * 9 },
             RuleAboutRule(listOf(Effect.CLEAR)) {
                 it.identifyClearedPenalty { card ->
                     card.isOneOf(
@@ -370,8 +442,8 @@ object AllRules {
         ),
         warlockLord to listOf(
             RuleAboutScore(listOf(Effect.PENALTY)) {
-                (it.countCard(Suit.LEADER) +
-                        max(it.countCard(Suit.WIZARD) - 1, 0)) * -10
+                (it.countHandCards(Suit.LEADER) +
+                        max(it.countHandCards(Suit.WIZARD) - 1, 0)) * -10
             }
         ),
         genie to listOf(
@@ -391,18 +463,17 @@ object AllRules {
         ),
         darkQueen to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game.countCard(
+                (DiscardArea.instance.game().countHandCards(
                     Suit.LAND,
                     Suit.FLOOD,
                     Suit.FLAME,
                     Suit.WEATHER
-                ) +
-                        if (DiscardArea.instance.game.contains(unicorn)) 1 else 0) * 5
+                ) + DiscardArea.instance.game().containsHandCards(unicorn).toInt()) * 5
             }
         ),
         ghoul to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game.countCard(
+                (DiscardArea.instance.game().countHandCards(
                     Suit.WIZARD, Suit.LEADER,
                     Suit.ARMY, Suit.BEAST, Suit.UNDEAD
                 )) * 4
@@ -410,7 +481,7 @@ object AllRules {
         ),
         specter to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game.countCard(
+                (DiscardArea.instance.game().countHandCards(
                     Suit.ARTIFACT, Suit.OUTSIDER,
                     Suit.WIZARD
                 )) * 6
@@ -419,72 +490,76 @@ object AllRules {
         lich to listOf(
             unblankable,
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.UNDEAD) - 1 + if (it.contains(necromancer)) 1 else 0) * 10
+                (it.countHandCards(Suit.UNDEAD) - 1 + it.containsHandCards(necromancer)
+                    .toInt()) * 10
             },
             RuleAboutCard(listOf(Effect.BONUS, Effect.UNBLANKABLE)) {
-                it.filterNotBlankedCards { card -> card.isOneOf(Suit.UNDEAD) }
+                it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.UNDEAD) }
             }
         ),
         deathKnight to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game.countCard(Suit.WEAPON, Suit.ARMY)) * 7
+                (DiscardArea.instance.game().countHandCards(Suit.WEAPON, Suit.ARMY)) * 7
             }
         ),
         dungeon to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.UNDEAD, Suit.BEAST, Suit.ARTIFACT) +
-                        it.contains(necromancer).toInt() +
-                        it.contains(warlockLord).toInt() +
-                        it.contains(demon).toInt()) * 5 +
-                        (it.atLeastOne(Suit.UNDEAD)).toInt() * 5 +
-                        (it.atLeastOne(Suit.BEAST)).toInt() * 5 +
-                        (it.atLeastOne(Suit.ARTIFACT)).toInt() * 5
+                (it.countHandCards(Suit.UNDEAD, Suit.BEAST, Suit.ARTIFACT) +
+                        it.containsHandCards(necromancer).toInt() +
+                        it.containsHandCards(warlockLord).toInt() +
+                        it.containsHandCards(demon).toInt()) * 5 +
+                        (it.atLeastOneHandCardOf(Suit.UNDEAD)).toInt() * 5 +
+                        (it.atLeastOneHandCardOf(Suit.BEAST)).toInt() * 5 +
+                        (it.atLeastOneHandCardOf(Suit.ARTIFACT)).toInt() * 5
             }
         ),
         castle to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.BUILDING) - 1) * 5 +
-                        (it.atLeastOne(Suit.LEADER)).toInt() * 10 +
-                        (it.atLeastOne(Suit.ARMY)).toInt() * 10 +
-                        (it.atLeastOne(Suit.LAND)).toInt() * 10 +
-                        (it.countCard(Suit.BUILDING) - 1 > 0).toInt() * 5
+                (it.countHandCards(Suit.BUILDING) - 1) * 5 +
+                        (it.atLeastOneHandCardOf(Suit.LEADER)).toInt() * 10 +
+                        (it.atLeastOneHandCardOf(Suit.ARMY)).toInt() * 10 +
+                        (it.atLeastOneHandCardOf(Suit.LAND)).toInt() * 10 +
+                        (it.countHandCards(Suit.BUILDING) - 1 > 0).toInt() * 5
 
             }
         ),
         crypt to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                it.cardsNotBlanked().filter { card -> card.isOneOf(Suit.UNDEAD) }
+                it.handCardsNotBlanked().filter { card -> card.isOneOf(Suit.UNDEAD) }
                     .sumOf { card -> card.value() }
             },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.LEADER))
-            { it.filterNotBlankedCards { card -> card.isOneOf(Suit.LEADER) } }
+            { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.LEADER) } }
         ),
         chapel to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.WIZARD, Suit.OUTSIDER, Suit.UNDEAD, Suit.LEADER) == 2 &&
-                        (it.countCard(Suit.WIZARD) == 2 ||
-                                it.countCard(Suit.OUTSIDER) == 2 ||
-                                it.countCard(Suit.UNDEAD) == 2 ||
-                                it.countCard(Suit.LEADER) == 2)).toInt() * 40
+                (it.countHandCards(Suit.WIZARD, Suit.OUTSIDER, Suit.UNDEAD, Suit.LEADER) == 2 &&
+                        (it.countHandCards(Suit.WIZARD) == 2 ||
+                                it.countHandCards(Suit.OUTSIDER) == 2 ||
+                                it.countHandCards(Suit.UNDEAD) == 2 ||
+                                it.countHandCards(Suit.LEADER) == 2)).toInt() * 40
             }
         ),
         garden to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countCard(Suit.LEADER, Suit.BEAST)) * 11
+                (it.countHandCards(Suit.LEADER, Suit.BEAST)) * 11
             },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK)) {
-                if (it.countCard(Suit.UNDEAD) > 0 || it.contains(necromancer) || it.contains(demon))
-                    it.filterNotBlankedCards { card -> card.hasSameNameThan(garden) } else emptyList()
+                if (it.countHandCards(Suit.UNDEAD) > 0 || it.containsHandCards(necromancer) || it.containsHandCards(
+                        demon
+                    )
+                )
+                    it.filterNotBlankedHandCards { card -> card.hasSameNameThan(garden) } else emptyList()
             }
         ),
         bellTowerV2 to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.atLeastOne(Suit.WIZARD) || it.atLeastOne(Suit.UNDEAD)).toInt() * 15
+                (it.atLeastOneHandCardOf(Suit.WIZARD) || it.atLeastOneHandCardOf(Suit.UNDEAD)).toInt() * 15
             }
         ),
         fountainOfLifeV2 to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                it.cardsNotBlanked().filter { card ->
+                it.handCardsNotBlanked().filter { card ->
                     card.isOneOf(
                         Suit.BUILDING, Suit.WEAPON, Suit.FLOOD,
                         Suit.FLAME, Suit.LAND, Suit.WEATHER
@@ -499,31 +574,36 @@ object AllRules {
                     Effect.BLANK,
                     Suit.ARMY
                 )
-            ) { it.filterNotBlankedCards { card -> card.isOneOf(Suit.ARMY) } },
+            ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.ARMY) } },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.BUILDING
                 )
-            ) { it.filterNotBlankedCards { card -> card.isOneOf(Suit.BUILDING) } },
+            ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.BUILDING) } },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.LAND
                 )
-            ) { it.filterNotBlankedCards { card -> (card.isOneOf(Suit.LAND) && card.definition != mountain) } },
+            ) { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.LAND) && card.definition != mountain) } },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.FLAME
                 )
-            ) { it.filterNotBlankedCards { card -> (card.isOneOf(Suit.FLAME) && card.definition != lightning) } }
+            ) { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.FLAME) && card.definition != lightning) } }
         ),
         rangersV2 to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { it.countCard(Suit.LAND, Suit.BUILDING) * 10 },
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                it.countHandCards(
+                    Suit.LAND,
+                    Suit.BUILDING
+                ) * 10
+            },
             RuleAboutRule(
                 listOf(
                     Effect.CLEAR,
@@ -532,26 +612,26 @@ object AllRules {
             ) { it.identifyArmyClearedPenalty { true } }),
         necromancerV2 to listOf(
             RuleAboutCard(listOf(Effect.BONUS, Effect.UNBLANKABLE)) {
-                it.filterNotBlankedCards { card -> card.isOneOf(Suit.UNDEAD) }
+                it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.UNDEAD) }
             }
         ),
         worldTreeV2 to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.cardsNotBlanked()
+                if (it.handCardsNotBlanked()
                         .groupBy { card -> card.suit() }.entries.any { entry -> entry.value.size > 1 }
                 ) 0 else 70
             }),
         spyglass to listOf(
-            RuleAboutScore(emptyList()) {
+            RuleAboutScore(listOf(Effect.PENALTY)) {
                 if (Player.all.size == 2) -9 else 0
             }),
         treasure_chest to listOf(
-            RuleAboutScore(emptyList()) {
-                if (it.countCard(Suit.CURSED_ITEM) > 3) 25 else 0
+            RuleAboutScore(listOf(Effect.BONUS)) {
+                if (it.countTableCards(Suit.CURSED_ITEM) > 3) 25 else 0
             }),
 
         jester to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { if (it.isAllOdd()) 50 else (it.countOddCard() - 1) * 3 }
+            RuleAboutScore(listOf(Effect.BONUS)) { if (it.isAllHandCardsOdd()) 50 else (it.countOddHandCards() - 1) * 3 }
         )
     )
 
