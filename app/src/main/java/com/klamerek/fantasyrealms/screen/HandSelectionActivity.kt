@@ -119,14 +119,8 @@ class HandSelectionActivity : CustomActivity() {
             val cardSelected = allCardsById[answer?.cardsSelected?.firstOrNull()]
             val suitSelected =
                 answer?.suitsSelected?.firstOrNull()?.let { name -> Suit.valueOf(name) }
-            when (cardDefinition) {
-                bookOfChanges -> player.game.bookOfChangeSelection =
-                    Pair(cardSelected, suitSelected)
-                island -> player.game.islandSelection = cardSelected
-                shapeshifter -> player.game.shapeShifterSelection = cardSelected
-                mirage -> player.game.mirageSelection = cardSelected
-                doppelganger -> player.game.doppelgangerSelection = cardSelected
-            }
+            player.game.applySelection(cardDefinition, cardSelected, suitSelected)
+
         }
         player.game.calculate()
         runOnUiThread {

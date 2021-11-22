@@ -476,4 +476,21 @@ class Game {
         return cardsNotBlanked().groupBy { card -> card.suit() }
     }
 
+    fun applySelection(
+        cardDefinition: CardDefinition?,
+        cardSelected: CardDefinition?,
+        suitSelected: Suit?
+    ) {
+        when (cardDefinition) {
+            bookOfChanges -> bookOfChangeSelection = Pair(cardSelected, suitSelected)
+            island -> islandSelection = cardSelected
+            shapeshifter -> shapeShifterSelection = cardSelected
+            shapeshifterV2 -> shapeShifterV2Selection = cardSelected
+            mirage -> mirageSelection = cardSelected
+            mirageV2 -> mirageV2Selection = cardSelected
+            angel -> angelSelection = cardSelected
+            doppelganger -> doppelgangerSelection = cardSelected
+        }
+    }
+
 }
