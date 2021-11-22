@@ -21,7 +21,7 @@ class ChipGenerator {
             InstrumentationRegistry.getInstrumentation().targetContext, english
         )
 
-        CardDefinitions.getAll().sortedBy { it.id }.forEach { definition ->
+        CardDefinitions.getCursedItems().sortedBy { it.id }.forEach { definition ->
             val nameCleaned = definition.name().lowercase(Locale.getDefault()).replace(" ", "_")
             val suitCleaned = definition.suit.name.lowercase(Locale.getDefault())
             Log.d(

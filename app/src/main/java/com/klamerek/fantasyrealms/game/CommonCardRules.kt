@@ -160,8 +160,11 @@ object AllRules {
                 it.filterNotBlankedCards { card ->
                     !(card.isOneOf(Suit.FLAME) || card.isOneOf(Suit.WEATHER) || card.isOneOf(Suit.WIZARD) ||
                             card.isOneOf(Suit.WEAPON) || card.isOneOf(Suit.ARTIFACT) ||
-                            card.definition.name() == greatFlood.name() || card.definition.name() == greatFloodV2.name() || card.definition.name() == island.name() ||
-                            card.definition.name() == mountain.name() || card.definition.name() == unicorn.name() || card.definition.name() == dragon.name())
+                            card.hasSameNameThan(greatFlood) ||
+                            card.hasSameNameThan(island) ||
+                            card.hasSameNameThan(mountain) ||
+                            card.hasSameNameThan(unicorn) ||
+                            card.hasSameNameThan(dragon))
                 }
             }
         ),
@@ -223,7 +226,7 @@ object AllRules {
         forest to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
                 (it.countCard(Suit.BEAST) + it.cardsNotBlanked()
-                    .filter { card -> card.definition.name() == elvenArchers.name() }.count()) * 12
+                    .filter { card -> card.hasSameNameThan(elvenArchers) }.count()) * 12
             }
         ),
         bellTower to listOf(
@@ -285,7 +288,7 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK
                 )
-            ) { if (it.noCard(Suit.FLOOD)) it.filterNotBlankedCards { card -> card.definition.name() == warship.name() } else emptyList() },
+            ) { if (it.noCard(Suit.FLOOD)) it.filterNotBlankedCards { card -> card.hasSameNameThan(warship) } else emptyList() },
             RuleAboutRule(listOf(Effect.CLEAR)) {
                 it.identifyArmyClearedPenalty { card ->
                     card.isOneOf(
@@ -296,9 +299,9 @@ object AllRules {
         ),
         warDirigible to listOf(
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.ARMY))
-            { if (it.noCard(Suit.ARMY)) it.filterNotBlankedCards { card -> card.definition.name() == warDirigible.name() } else emptyList() },
+            { if (it.noCard(Suit.ARMY)) it.filterNotBlankedCards { card -> card.hasSameNameThan(warDirigible) } else emptyList() },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK))
-            { if (it.atLeastOne(Suit.WEATHER)) it.filterNotBlankedCards { card -> card.definition.name() == warDirigible.name() } else emptyList() }
+            { if (it.atLeastOne(Suit.WEATHER)) it.filterNotBlankedCards { card -> card.hasSameNameThan(warDirigible) } else emptyList() }
         ),
         airElemental to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { (it.countCard(Suit.WEATHER) - 1) * 15 }
@@ -323,7 +326,7 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK
                 )
-            ) { if (it.noCard(Suit.FLAME)) it.filterNotBlankedCards { card -> card.definition.name() == smoke.name() } else emptyList() }
+            ) { if (it.noCard(Suit.FLAME)) it.filterNotBlankedCards { card -> card.hasSameNameThan(smoke) } else emptyList() }
         ),
         blizzard to listOf(
             RuleAboutCard(
@@ -471,7 +474,7 @@ object AllRules {
             },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK)) {
                 if (it.countCard(Suit.UNDEAD) > 0 || it.contains(necromancer) || it.contains(demon))
-                    it.filterNotBlankedCards { card -> card.definition.name() == garden.name() } else emptyList()
+                    it.filterNotBlankedCards { card -> card.hasSameNameThan(garden) } else emptyList()
             }
         ),
         bellTowerV2 to listOf(
@@ -538,6 +541,15 @@ object AllRules {
                         .groupBy { card -> card.suit() }.entries.any { entry -> entry.value.size > 1 }
                 ) 0 else 70
             }),
+        spyglass to listOf(
+            RuleAboutScore(emptyList()) {
+                if (Player.all.size == 2) -9 else 0
+            }),
+        treasure_chest to listOf(
+            RuleAboutScore(emptyList()) {
+                if (it.countCard(Suit.CURSED_ITEM) > 3) 25 else 0
+            }),
+
         jester to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { if (it.isAllOdd()) 50 else (it.countOddCard() - 1) * 3 }
         )

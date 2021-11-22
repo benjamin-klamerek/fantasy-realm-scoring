@@ -1,6 +1,8 @@
 package com.klamerek.fantasyrealms.game
 
+import android.content.Context
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Preferences
 import java.lang.Integer.max
 
 /**
@@ -367,7 +369,7 @@ class Game {
 
     private fun applyMirageV2(cardToCopy: CardDefinition) {
         if (mirageV2Candidates().contains(cardToCopy)) {
-            cards.filter { card -> card.definition == mirageV2}
+            cards.filter { card -> card.definition == mirageV2 }
                 .map { card ->
                     card.name(cardToCopy.name())
                     card.suit(cardToCopy.suit)
@@ -392,9 +394,10 @@ class Game {
         }
     }
 
-    fun handSizeExpected(): Int {
-        return Constants.DEFAULT_HAND_SIZE + cards.map { card -> card.definition }
-            .filter { definition -> definition == necromancer }.count()
+    fun handSizeExpected(context: Context): Int {
+        return Constants.DEFAULT_HAND_SIZE +
+                (if (Preferences.getBuildingsOutsidersUndead(context)) 1 else 0) +
+                (if (cards.any { card -> card.hasSameNameThan(necromancer) }) 1 else 0)
     }
 
     fun actualHandSize(): Int {

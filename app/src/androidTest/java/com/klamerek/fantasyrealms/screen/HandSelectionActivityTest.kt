@@ -20,6 +20,7 @@ import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.matcher.ChipMatcher
 import com.klamerek.fantasyrealms.matcher.RecycleViewMatcher
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Preferences
 import com.klamerek.fantasyrealms.viewaction.ButtonClick
 import com.klamerek.fantasyrealms.viewaction.ImageButtonClick
 import org.greenrobot.eventbus.EventBus
@@ -44,6 +45,8 @@ class HandSelectionActivityTest {
 
     @BeforeEach
     fun before() {
+        Preferences.saveBuildingsOutsidersUndeadInPreferences(
+            InstrumentationRegistry.getInstrumentation().targetContext, false)
         Intents.init()
     }
 

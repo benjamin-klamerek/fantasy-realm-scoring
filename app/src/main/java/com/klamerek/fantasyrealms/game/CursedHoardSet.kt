@@ -272,3 +272,291 @@ val mirageV2 by lazy {
         CardSet.CURSED_HOARD
     )
 }
+
+@Suppress("MagicNumber")
+val spyglass by lazy {
+    CardDefinition(
+        24 + CardSet.BASE.numberOfCards,
+        R.string.spyglass,
+        -1,
+        Suit.CURSED_ITEM,
+        R.string.spyglass_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val sarcophagus by lazy {
+    CardDefinition(
+        25 + CardSet.BASE.numberOfCards,
+        R.string.sarcophagus,
+        5,
+        Suit.CURSED_ITEM,
+        R.string.sarcophagus_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val blindfold by lazy {
+    CardDefinition(
+        26 + CardSet.BASE.numberOfCards,
+        R.string.blindfold,
+        5,
+        Suit.CURSED_ITEM,
+        R.string.blindfold_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val book_of_prophecy by lazy {
+    CardDefinition(
+        27 + CardSet.BASE.numberOfCards,
+        R.string.book_of_prophecy,
+        -1,
+        Suit.CURSED_ITEM,
+        R.string.book_of_prophecy_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val crystal_ball by lazy {
+    CardDefinition(
+        28 + CardSet.BASE.numberOfCards,
+        R.string.crystal_ball,
+        -1,
+        Suit.CURSED_ITEM,
+        R.string.crystal_ball_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val market_wagon by lazy {
+    CardDefinition(
+        29 + CardSet.BASE.numberOfCards,
+        R.string.market_wagon,
+        -2,
+        Suit.CURSED_ITEM,
+        R.string.market_wagon_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val backpack by lazy {
+    CardDefinition(
+        30 + CardSet.BASE.numberOfCards,
+        R.string.backpack,
+        -2,
+        Suit.CURSED_ITEM,
+        R.string.backpack_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val shovel by lazy {
+    CardDefinition(
+        31 + CardSet.BASE.numberOfCards,
+        R.string.shovel,
+        -2,
+        Suit.CURSED_ITEM,
+        R.string.shovel_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val sealed_vault by lazy {
+    CardDefinition(
+        32 + CardSet.BASE.numberOfCards,
+        R.string.sealed_vault,
+        -4,
+        Suit.CURSED_ITEM,
+        R.string.sealed_vault_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val crystal_lens by lazy {
+    CardDefinition(
+        33 + CardSet.BASE.numberOfCards,
+        R.string.crystal_lens,
+        -2,
+        Suit.CURSED_ITEM,
+        R.string.crystal_lens_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val larcenous_gloves by lazy {
+    CardDefinition(
+        34 + CardSet.BASE.numberOfCards,
+        R.string.larcenous_gloves,
+        -3,
+        Suit.CURSED_ITEM,
+        R.string.larcenous_gloves_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val junkyard_map by lazy {
+    CardDefinition(
+        35 + CardSet.BASE.numberOfCards,
+        R.string.junkyard_map,
+        -3,
+        Suit.CURSED_ITEM,
+        R.string.junkyard_map_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val winged_boots by lazy {
+    CardDefinition(
+        36 + CardSet.BASE.numberOfCards,
+        R.string.winged_boots,
+        -4,
+        Suit.CURSED_ITEM,
+        R.string.winged_boots_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val staff_of_transmutation by lazy {
+    CardDefinition(
+        37 + CardSet.BASE.numberOfCards,
+        R.string.staff_of_transmutation,
+        -4,
+        Suit.CURSED_ITEM,
+        R.string.staff_of_transmutation_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val rake by lazy {
+    CardDefinition(
+        38 + CardSet.BASE.numberOfCards,
+        R.string.rake,
+        -4,
+        Suit.CURSED_ITEM,
+        R.string.rake_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val treasure_chest by lazy {
+    CardDefinition(
+        39 + CardSet.BASE.numberOfCards,
+        R.string.treasure_chest,
+        -5,
+        Suit.CURSED_ITEM,
+        R.string.treasure_chest_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val fishhook by lazy {
+    CardDefinition(
+        40 + CardSet.BASE.numberOfCards,
+        R.string.fishhook,
+        -6,
+        Suit.CURSED_ITEM,
+        R.string.fishhook_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val repair_kit by lazy {
+    CardDefinition(
+        41 + CardSet.BASE.numberOfCards,
+        R.string.repair_kit,
+        -6,
+        Suit.CURSED_ITEM,
+        R.string.repair_kit_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val hourglass by lazy {
+    CardDefinition(
+        42 + CardSet.BASE.numberOfCards,
+        R.string.hourglass,
+        -7,
+        Suit.CURSED_ITEM,
+        R.string.hourglass_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val gold_mirror by lazy {
+    CardDefinition(
+        43 + CardSet.BASE.numberOfCards,
+        R.string.gold_mirror,
+        -8,
+        Suit.CURSED_ITEM,
+        R.string.gold_mirror_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val cauldron by lazy {
+    CardDefinition(
+        44 + CardSet.BASE.numberOfCards,
+        R.string.cauldron,
+        -9,
+        Suit.CURSED_ITEM,
+        R.string.cauldron_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val lantern by lazy {
+    CardDefinition(
+        45 + CardSet.BASE.numberOfCards,
+        R.string.lantern,
+        -10,
+        Suit.CURSED_ITEM,
+        R.string.lantern_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val portal by lazy {
+    CardDefinition(
+        46 + CardSet.BASE.numberOfCards,
+        R.string.portal,
+        -20,
+        Suit.CURSED_ITEM,
+        R.string.portal_rules,
+        CardSet.CURSED_HOARD
+    )
+}
+
+@Suppress("MagicNumber")
+val wishing_ring by lazy {
+    CardDefinition(
+        47 + CardSet.BASE.numberOfCards,
+        R.string.wishing_ring,
+        -30,
+        Suit.CURSED_ITEM,
+        R.string.wishing_ring_rules,
+        CardSet.CURSED_HOARD
+    )
+}

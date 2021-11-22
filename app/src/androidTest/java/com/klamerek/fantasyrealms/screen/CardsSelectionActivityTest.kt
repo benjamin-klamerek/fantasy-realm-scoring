@@ -31,7 +31,10 @@ class CardsSelectionActivityTest {
 
     @BeforeEach
     fun before() {
+        Preferences.saveBuildingsOutsidersUndeadInPreferences(
+            InstrumentationRegistry.getInstrumentation().targetContext, false)
         Intents.init()
+
     }
 
     @AfterEach

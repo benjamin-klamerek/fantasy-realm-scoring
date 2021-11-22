@@ -951,6 +951,294 @@
                 app:chipStrokeColor="@color/colorUndead"
                 app:chipStrokeWidth="2dp" />
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipspyglass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="77"
+                android:text="@string/spyglass"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipsarcophagus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="78"
+                android:text="@string/sarcophagus"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipblindfold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="79"
+                android:text="@string/blindfold"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipbook_of_prophecy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80"
+                android:text="@string/book_of_prophecy"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipcrystal_ball"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="81"
+                android:text="@string/crystal_ball"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipmarket_wagon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="82"
+                android:text="@string/market_wagon"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipbackpack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="83"
+                android:text="@string/backpack"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipshovel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="84"
+                android:text="@string/shovel"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipsealed_vault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="85"
+                android:text="@string/sealed_vault"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipcrystal_lens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="86"
+                android:text="@string/crystal_lens"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chiplarcenous_gloves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="87"
+                android:text="@string/larcenous_gloves"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipjunkyard_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="88"
+                android:text="@string/junkyard_map"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipwinged_boots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="89"
+                android:text="@string/winged_boots"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipstaff_of_transmutation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="90"
+                android:text="@string/staff_of_transmutation"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chiprake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="91"
+                android:text="@string/rake"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chiptreasure_chest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="92"
+                android:text="@string/treasure_chest"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipfishhook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="93"
+                android:text="@string/fishhook"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chiprepair_kit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="94"
+                android:text="@string/repair_kit"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chiphourglass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="95"
+                android:text="@string/hourglass"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipgold_mirror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="96"
+                android:text="@string/gold_mirror"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipcauldron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="97"
+                android:text="@string/cauldron"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chiplantern"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="98"
+                android:text="@string/lantern"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipportal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="99"
+                android:text="@string/portal"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipwishing_ring"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="100"
+                android:text="@string/wishing_ring"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_cursed_item"
+                app:chipStrokeColor="@color/colorCursedItem"
+                app:chipStrokeWidth="2dp" />
+
 
         </com.google.android.material.chip.ChipGroup>
     </ScrollView>

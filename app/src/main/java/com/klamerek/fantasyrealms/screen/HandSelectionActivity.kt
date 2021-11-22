@@ -99,7 +99,7 @@ class HandSelectionActivity : CustomActivity() {
         binding.handSizeLabel.text = getString(
             R.string.hand_size,
             player.game.actualHandSize(),
-            player.game.handSizeExpected()
+            player.game.handSizeExpected(baseContext)
         )
     }
 

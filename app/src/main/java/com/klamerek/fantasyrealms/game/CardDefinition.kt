@@ -54,7 +54,8 @@ enum class Suit(private val displayId: Int, val color: Int, val set: CardSet) : 
     WIZARD(R.string.suit_wizard, R.color.colorWizard, CardSet.BASE),
     BUILDING(R.string.suit_building, R.color.colorBuilding, CardSet.CURSED_HOARD),
     OUTSIDER(R.string.suit_outsider, R.color.colorOutsider, CardSet.CURSED_HOARD),
-    UNDEAD(R.string.suit_undead, R.color.colorUndead, CardSet.CURSED_HOARD);
+    UNDEAD(R.string.suit_undead, R.color.colorUndead, CardSet.CURSED_HOARD),
+    CURSED_ITEM(R.string.suit_cursed_item, R.color.colorCursedItem, CardSet.CURSED_HOARD);
 
     override fun label(): String = this.name
     override fun display(): String = Strings.get(displayId)

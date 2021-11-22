@@ -17,7 +17,7 @@ object CardDefinitions {
      * Warning, this method gives ALL card definitions (meaning that you can see many times the same card if it has many versions)
      */
     fun getAll(): List<CardDefinition> {
-        return getBaseCards().plus(getCardsV2()).plus(getCursedHoardNewCards())
+        return getBaseCards().plus(getCardsV2()).plus(getCursedHoardNewCards()).plus(getCursedItems())
     }
 
     fun get(context: Context): List<CardDefinition> {
@@ -117,6 +117,33 @@ object CardDefinitions {
         )
     }
 
+    fun getCursedItems(): List<CardDefinition> {
+        return listOf(spyglass,
+                sarcophagus,
+                blindfold,
+                book_of_prophecy,
+                crystal_ball,
+                market_wagon,
+                backpack,
+                shovel,
+                sealed_vault,
+                crystal_lens,
+                larcenous_gloves,
+                junkyard_map,
+                winged_boots,
+                staff_of_transmutation,
+                rake,
+                treasure_chest,
+                fishhook,
+                repair_kit,
+                hourglass,
+                gold_mirror,
+                cauldron,
+                lantern,
+                portal,
+                wishing_ring)
+    }
+
     fun get(buildingsOutsidersUndead: Boolean, cursedItems: Boolean): List<CardDefinition> {
         val cardV2Names = getCardsV2().map { it.name() }.toList()
         val baseCards = if (buildingsOutsidersUndead)
@@ -127,7 +154,7 @@ object CardDefinitions {
             if (buildingsOutsidersUndead) getCursedHoardNewCards() else emptyList()
 
         val cursedItemsDefinitions: List<CardDefinition> =
-            if (cursedItems) emptyList() else emptyList()
+            if (cursedItems) getCursedItems() else emptyList()
 
         return newBaseCardsFromExpansion.plus(baseCards).plus(cursedItemsDefinitions)
     }
@@ -137,7 +164,6 @@ object CardDefinitions {
 /**
  * Temporary solution until cyrillic characters are handled by MLKit text recognition
  */
-//TODO THIS FIX
 val allDefinitionsRussian by lazy {
     mapOf(
         "IMApa" to hydra,

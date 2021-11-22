@@ -19,4 +19,5 @@
     <color name="colorBuilding">#18126A</color>
     <color name="colorOutsider">#FF9800</color>
     <color name="colorUndead">#125E4B</color>
+    <color name="colorCursedItem">#A11948</color>
 </resources>
