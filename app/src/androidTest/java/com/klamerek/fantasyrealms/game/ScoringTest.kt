@@ -376,6 +376,18 @@ class ScoringTest {
         Assertions.assertEquals(68, game.score())
     }
 
+    @DisplayName("Angel selection is unblankable 2")
+    @Test
+    fun angel_selection_2() {
+        val game = Game()
+        game.add(angel)
+        game.add(basilisk)
+        game.add(queen)
+        game.angelSelection = queen
+        game.calculate()
+        Assertions.assertEquals(57, game.score())
+    }
+
     @DisplayName("Demon with wildfire")
     @Test
     fun demon_with_wildfire() {
@@ -384,6 +396,35 @@ class ScoringTest {
         game.add(demon)
         game.calculate()
         Assertions.assertEquals(45, game.score())
+    }
+
+    @DisplayName("Demon applies after warship clearing penalties")
+    @Test
+    fun demon_applies_after_warship_clearing_penalties() {
+        val game = Game()
+        game.add(warship)
+        game.add(demon)
+        game.add(waterElemental)
+        game.add(swamp)
+        game.add(elvenArchers)
+        game.add(lightCavalry)
+        game.calculate()
+        Assertions.assertEquals(114, game.score())
+    }
+
+    @DisplayName("Demon with wild cards")
+    @Test
+    fun demon_with_wild_cards() {
+        val game = Game()
+        game.add(demon)
+        game.add(garden)
+        game.add(earthElemental)
+        game.add(shapeshifterV2)
+        game.add(mirageV2)
+        game.add(doppelganger)
+        game.doppelgangerSelection = garden
+        game.calculate()
+        Assertions.assertEquals(49, game.score())
     }
 
     @DisplayName("Indirect blanking case (Great flood -> candle -> smoke)")

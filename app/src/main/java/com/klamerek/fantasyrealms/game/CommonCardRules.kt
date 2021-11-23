@@ -133,7 +133,7 @@ object AllRules {
             RuleAboutScore(listOf(Effect.BONUS)) { if (it.containsHandCards(swamp)) 28 else 0 }
         ),
         dragon to listOf(
-            RuleAboutScore(listOf(Effect.PENALTY)) { if (it.noHandCardsOf(Suit.WIZARD)) -40 else 0 }
+            RuleAboutScore(listOf(Effect.PENALTY, Suit.WIZARD)) { if (it.noHandCardsOf(Suit.WIZARD)) -40 else 0 }
         ),
         basilisk to listOf(
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.ARMY))
@@ -191,7 +191,7 @@ object AllRules {
         waterElemental to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { (it.countHandCards(Suit.FLOOD) - 1) * 15 }
         ),
-        swamp to listOf(RuleAboutScore(listOf(Effect.PENALTY)) {
+        swamp to listOf(RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY, Suit.FLAME)) {
             (it.countHandCards(Suit.ARMY, Suit.FLAME)) * -3
         }),
         greatFlood to listOf(
@@ -290,7 +290,7 @@ object AllRules {
         ),
         empress to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { it.countHandCards(Suit.ARMY) * 10 },
-            RuleAboutScore(listOf(Effect.PENALTY)) { (it.countHandCards(Suit.LEADER) - 1) * -5 }
+            RuleAboutScore(listOf(Effect.PENALTY, Suit.LEADER)) { (it.countHandCards(Suit.LEADER) - 1) * -5 }
         ),
         magicWand to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { if (it.atLeastOneHandCardOf(Suit.WIZARD)) 25 else 0 }
@@ -441,7 +441,7 @@ object AllRules {
             }
         ),
         warlockLord to listOf(
-            RuleAboutScore(listOf(Effect.PENALTY)) {
+            RuleAboutScore(listOf(Effect.PENALTY, Suit.LEADER, Suit.WIZARD)) {
                 (it.countHandCards(Suit.LEADER) +
                         max(it.countHandCards(Suit.WIZARD) - 1, 0)) * -10
             }
@@ -544,11 +544,9 @@ object AllRules {
             RuleAboutScore(listOf(Effect.BONUS)) {
                 (it.countHandCards(Suit.LEADER, Suit.BEAST)) * 11
             },
-            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK)) {
-                if (it.countHandCards(Suit.UNDEAD) > 0 || it.containsHandCards(necromancer) || it.containsHandCards(
-                        demon
-                    )
-                )
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.UNDEAD)) {
+                if (it.countHandCards(Suit.UNDEAD) > 0 || it.containsHandCards(necromancer) ||
+                    it.containsHandCards(demon))
                     it.filterNotBlankedHandCards { card -> card.hasSameNameThan(garden) } else emptyList()
             }
         ),
