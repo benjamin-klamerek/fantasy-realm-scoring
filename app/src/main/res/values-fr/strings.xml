@@ -17,9 +17,6 @@
     <string name="scan_help_label">Conseil: seuls les titres des cartes doivent être visibles</string>
     <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
-    <string name="disclaimer">Version 0.12 \n
-        Avec l\'extension, les traductions sont incomplètes (elles seront ajoutées au fur et à mesure)\n\n
-        Vous avez trouvé un bug ? \nTraduction manquante ? \n\nContactez moi (lien dans play store)</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="language_label_english">Anglais</string>
