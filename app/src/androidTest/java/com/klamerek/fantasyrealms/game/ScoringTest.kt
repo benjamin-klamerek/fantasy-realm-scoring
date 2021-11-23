@@ -476,7 +476,7 @@ class ScoringTest {
         game.add(airElemental)
         game.bookOfChangeSelection = Pair(warDirigible, Suit.FLOOD)
         game.calculate()
-        Assertions.assertEquals(24, game.score())
+        Assertions.assertEquals(47, game.score())
     }
 
     @DisplayName("Dark queen example")
@@ -666,6 +666,18 @@ class ScoringTest {
         Assertions.assertEquals(45, game.score())
     }
 
+    @DisplayName("Count OTHER cards with book of change")
+    @Test
+    fun count_OTHER_cards_with_book_of_change() {
+        val game = Game()
+        game.add(whirlwind)
+        game.add(airElemental)
+        game.add(bookOfChanges)
+        game.bookOfChangeSelection = Pair(airElemental, Suit.BEAST)
+        game.calculate()
+
+        Assertions.assertEquals(35, game.score())
+    }
 
 
 }

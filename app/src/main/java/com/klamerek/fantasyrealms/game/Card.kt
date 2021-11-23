@@ -67,6 +67,8 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
         this.simulatedRules = rules
     }
 
+    override fun toString(): String = name()
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

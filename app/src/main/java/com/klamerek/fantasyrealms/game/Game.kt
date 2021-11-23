@@ -92,6 +92,9 @@ class Game {
 
     fun countHandCards(vararg suit: Suit) = handCardsNotBlanked().count { it.isOneOf(*suit) }
 
+    fun countHandCardsExcept(suit: Suit, cardDefinition: CardDefinition) =
+        handCardsNotBlanked().filter { it.definition != cardDefinition }.count { it.isOneOf(suit) }
+
     fun countTableCards(vararg suit: Suit) = tableCards.count { it.isOneOf(*suit) }
 
     fun noHandCardsOf(suit: Suit) = countHandCards(suit) == 0
@@ -199,28 +202,28 @@ class Game {
      * - We apply each BLANK rule by priority order (introduced with Demon card)<br>
      * - We take attention before applying the rule that the card is still active.<br>
      * - Some cards are UNBLANKABLE (like Angel).<br>
-     * - This code is repeated twice, to handle cases where blanking effect can happen after another
-     * (could be solved by handling priority but not yet defined in base game).<br>
-     *
      */
-    private fun applyBlankingRules(): Unit =
-        repeat(2) {
-            handCards.map { card ->
-                card.rules()
-                    .filter { rule -> card.isActivated(rule) }
-                    .filter { rule -> rule.tags.contains(Effect.BLANK) }
-                    .map { rule -> rule as? RuleAboutCard }
-                    .map { rule -> Pair(card, rule) }
-            }.flatten()
-                .sortedByDescending { pair -> pair.second?.priority }
-                .forEach {
-                    if (!it.first.blanked) {
-                        it.second?.logic?.invoke(this)?.filter { potentialCard ->
-                            !potentialCard.rules().contains(unblankable)
-                        }.orEmpty().forEach { cardToBlank -> cardToBlank.blanked = true }
-                    }
+    private fun applyBlankingRules() {
+        handCards.map { card ->
+            card.rules()
+                .filter { rule -> card.isActivated(rule) }
+                .filter { rule -> rule.tags.contains(Effect.BLANK) }
+                .map { rule -> rule as? RuleAboutCard }
+                .map { rule -> Pair(card, rule) }
+        }.flatten()
+            .sortedByDescending { pair -> pair.second?.priority }
+            .forEach() { applyBlankingRules(it) }
+    }
+
+    private fun applyBlankingRules(pair: Pair<Card, RuleAboutCard?>) {
+        if (!pair.first.blanked) {
+            pair.second?.logic?.invoke(this)
+                ?.filter { potentialCard -> !potentialCard.rules().contains(unblankable) }
+                .orEmpty().forEach { cardToBlank ->
+                    cardToBlank.blanked = true
                 }
         }
+    }
 
     private fun identifyClearedRules(card: Card): List<Rule<out Any>> =
         card.rules().filter { rule -> card.isActivated(rule) }
