@@ -116,11 +116,12 @@ class PlayerSelectionActivity : CustomActivity() {
         return alertDialog
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun addPlayer(event: PlayerCreationEvent) {
         Player.all.add(Player(event.name, Game()))
         runOnUiThread {
-            adapter.notifyItemInserted(Player.all.size - 1)
+            adapter.notifyDataSetChanged()
         }
     }
 
