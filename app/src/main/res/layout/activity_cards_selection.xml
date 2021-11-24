@@ -89,6 +89,18 @@
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chipgarden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="58"
+                android:text="@string/garden"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_land"
+                app:chipStrokeColor="@color/colorLand"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
                 android:id="@+id/chipfountain_of_life"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -817,18 +829,6 @@
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_building"
                 app:chipStrokeColor="@color/colorBuilding"
-                app:chipStrokeWidth="2dp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipgarden"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkable="true"
-                android:tag="58"
-                android:text="@string/garden"
-                android:textColor="@color/chip_revert_color_activated"
-                app:chipBackgroundColor="@color/chip_background_land"
-                app:chipStrokeColor="@color/colorLand"
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
