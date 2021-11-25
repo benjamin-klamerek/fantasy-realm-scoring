@@ -20,6 +20,7 @@ import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.matcher.ChipMatcher
 import com.klamerek.fantasyrealms.matcher.RecycleViewMatcher
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Preferences
 import com.klamerek.fantasyrealms.viewaction.ButtonClick
 import com.klamerek.fantasyrealms.viewaction.ImageButtonClick
 import org.greenrobot.eventbus.EventBus
@@ -38,12 +39,18 @@ class HandSelectionActivityTest {
         actualHand.forEach { game.add(it) }
         Player.all.clear()
         Player.all.add(Player(playerName, game))
-        scenario = ActivityScenario.launch(HandSelectionActivity::class.java)
+        val handSelectionIntent = Intent(
+            InstrumentationRegistry.getInstrumentation().targetContext,
+            HandSelectionActivity::class.java)
+        handSelectionIntent.putExtra(Constants.GAME_SESSION_ID, 0)
+        scenario = ActivityScenario.launch(handSelectionIntent)
         return scenario
     }
 
     @BeforeEach
     fun before() {
+        Preferences.saveBuildingsOutsidersUndeadInPreferences(
+            InstrumentationRegistry.getInstrumentation().targetContext, false)
         Intents.init()
     }
 
@@ -80,7 +87,7 @@ class HandSelectionActivityTest {
             InstrumentationRegistry.getInstrumentation().targetContext,
             HandSelectionActivity::class.java
         )
-        handSelectionIntent.putExtra(Constants.PLAYER_SESSION_ID, 1)
+        handSelectionIntent.putExtra(Constants.GAME_SESSION_ID, 1)
         scenario = ActivityScenario.launch(handSelectionIntent)
 
         onView(withId(R.id.playerNameLabel)).check(matches(withText("PLAYER 2 - Score : 35")))

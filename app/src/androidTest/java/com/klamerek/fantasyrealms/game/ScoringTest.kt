@@ -1,11 +1,17 @@
 package com.klamerek.fantasyrealms.game
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 
 class ScoringTest {
+
+    @BeforeEach
+    fun beforeEach(){
+        DiscardArea.instance.game().clear()
+    }
 
     @DisplayName("worst hand")
     @Test
@@ -319,5 +325,359 @@ class ScoringTest {
         game.calculate()
         Assertions.assertEquals(18, game.score())
     }
+
+    @DisplayName("Genie with 4 players")
+    @Test
+    fun genie_with_4_players() {
+        Player.all.add(Player("1", Game()))
+        Player.all.add(Player("2", Game()))
+        Player.all.add(Player("3", Game()))
+        Player.all.add(Player("4", Game()))
+        val game = Game()
+        game.add(genie)
+        game.calculate()
+        Assertions.assertEquals(-10, game.score())
+    }
+
+    @DisplayName("Judge with and without penalty")
+    @Test
+    fun judge_with_and_without_penalty() {
+        val game = Game()
+        game.add(judge)
+        game.add(celestialKnights)
+        game.add(lightCavalry)
+        game.calculate()
+        Assertions.assertEquals(60, game.score())
+
+        game.add(protectionRune)
+        game.calculate()
+        Assertions.assertEquals(49, game.score())
+    }
+
+    @DisplayName("Angel is unblankable")
+    @Test
+    fun angel_is_unblankable() {
+        val game = Game()
+        game.add(angel)
+        game.add(wildfire)
+        game.calculate()
+        Assertions.assertEquals(56, game.score())
+    }
+
+    @DisplayName("Angel selection is unblankable")
+    @Test
+    fun angel_selection() {
+        val game = Game()
+        game.add(angel)
+        game.add(wildfire)
+        game.add(celestialKnights)
+        game.angelSelection = celestialKnights
+        game.calculate()
+        Assertions.assertEquals(68, game.score())
+    }
+
+    @DisplayName("Angel selection is unblankable 2")
+    @Test
+    fun angel_selection_2() {
+        val game = Game()
+        game.add(angel)
+        game.add(basilisk)
+        game.add(queen)
+        game.angelSelection = queen
+        game.calculate()
+        Assertions.assertEquals(57, game.score())
+    }
+
+    @DisplayName("Demon with wildfire")
+    @Test
+    fun demon_with_wildfire() {
+        val game = Game()
+        game.add(wildfire)
+        game.add(demon)
+        game.calculate()
+        Assertions.assertEquals(45, game.score())
+    }
+
+    @DisplayName("Demon applies after warship clearing penalties")
+    @Test
+    fun demon_applies_after_warship_clearing_penalties() {
+        val game = Game()
+        game.add(warship)
+        game.add(demon)
+        game.add(waterElemental)
+        game.add(swamp)
+        game.add(elvenArchers)
+        game.add(lightCavalry)
+        game.calculate()
+        Assertions.assertEquals(114, game.score())
+    }
+
+    @DisplayName("Demon with wild cards")
+    @Test
+    fun demon_with_wild_cards() {
+        val game = Game()
+        game.add(demon)
+        game.add(garden)
+        game.add(earthElemental)
+        game.add(shapeshifterV2)
+        game.add(mirageV2)
+        game.add(doppelganger)
+        game.doppelgangerSelection = garden
+        game.calculate()
+        Assertions.assertEquals(49, game.score())
+    }
+
+    @DisplayName("Indirect blanking case (Great flood -> candle -> smoke)")
+    @Test
+    fun indirect_blanking_case_with_greatflood_candle_smoke() {
+        val game = Game()
+        game.add(smoke)
+        game.add(candle)
+        game.add(greatFlood)
+        game.calculate()
+        Assertions.assertEquals(32, game.score())
+    }
+
+    @DisplayName("Some specific cases with Warship and Book of changes")
+    @Test
+    fun some_specific_cases_with_Warship_and_book_of_changes() {
+        val game = Game()
+        game.add(demon)
+        game.add(warship)
+        game.add(greatFlood)
+        game.add(waterElemental)
+        game.add(elvenArchers)
+        game.add(lightCavalry)
+        game.calculate()
+        Assertions.assertEquals(128, game.score())
+
+        game.clear()
+        game.add(bookOfChanges)
+        game.add(warship)
+        game.add(elvenArchers)
+        game.add(dwarvishInfantry)
+        game.bookOfChangeSelection = Pair(dwarvishInfantry, Suit.FLOOD)
+        game.calculate()
+        Assertions.assertEquals(56, game.score())
+
+        game.clear()
+        game.add(bookOfChanges)
+        game.add(warship)
+        game.add(warDirigible)
+        game.bookOfChangeSelection = Pair(warDirigible, Suit.FLOOD)
+        game.calculate()
+        Assertions.assertEquals(61, game.score())
+
+        game.clear()
+        game.add(bookOfChanges)
+        game.add(warship)
+        game.add(warDirigible)
+        game.add(lightCavalry)
+        game.add(airElemental)
+        game.bookOfChangeSelection = Pair(warDirigible, Suit.FLOOD)
+        game.calculate()
+        Assertions.assertEquals(47, game.score())
+    }
+
+    @DisplayName("Dark queen example")
+    @Test
+    fun dark_queen_example() {
+        DiscardArea.instance.game().add(candle)
+        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(shieldOfKeth)
+
+        val game = Game()
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(20, game.score())
+    }
+
+    @DisplayName("Ghoul example")
+    @Test
+    fun ghoul_example() {
+        DiscardArea.instance.game().add(celestialKnights)
+        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(darkQueen)
+        DiscardArea.instance.game().add(king)
+
+        val game = Game()
+        game.add(ghoul)
+        game.calculate()
+
+        Assertions.assertEquals(8 + 4 + 4 + 4, game.score())
+    }
+
+    @DisplayName("Specter example")
+    @Test
+    fun specter_example() {
+        DiscardArea.instance.game().add(protectionRune)
+        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(darkQueen)
+        DiscardArea.instance.game().add(demon)
+
+        val game = Game()
+        game.add(specter)
+        game.calculate()
+
+        Assertions.assertEquals(24, game.score())
+    }
+
+    @DisplayName("Lich example")
+    @Test
+    fun lich_example() {
+        val game = Game()
+        game.add(lich)
+        game.add(necromancer)
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(46, game.score())
+    }
+
+    @DisplayName("Lich UNBLANKABLE")
+    @Test
+    fun lich_unblankable() {
+        val game = Game()
+        game.add(lich)
+        game.add(wildfire)
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(73, game.score())
+    }
+
+    @DisplayName("Death Knight example")
+    @Test
+    fun death_knight_example() {
+        DiscardArea.instance.game().add(celestialKnights)
+        DiscardArea.instance.game().add(swordOfKeth)
+        DiscardArea.instance.game().add(darkQueen)
+        DiscardArea.instance.game().add(demon)
+
+        val game = Game()
+        game.add(deathKnight)
+        game.calculate()
+
+        Assertions.assertEquals(28, game.score())
+    }
+
+    @DisplayName("Dungeon example")
+    @Test
+    fun dungeon_example() {
+        val game = Game()
+        game.add(dungeon)
+        game.add(darkQueen)
+        game.add(unicorn)
+        game.add(warlockLord)
+        game.calculate()
+
+        Assertions.assertEquals(76, game.score())
+    }
+
+    @DisplayName("Castle example")
+    @Test
+    fun castle_example() {
+        val game = Game()
+        game.add(castle)
+        game.add(dungeon)
+        game.add(king)
+        game.add(queen)
+        game.calculate()
+
+        Assertions.assertEquals(51, game.score())
+    }
+
+    @DisplayName("Crypt example")
+    @Test
+    fun crypt_example() {
+        val game = Game()
+        game.add(crypt)
+        game.add(darkQueen)
+        game.add(ghoul)
+        game.add(king)
+        game.add(queen)
+        game.calculate()
+
+        Assertions.assertEquals(57, game.score())
+    }
+
+    @DisplayName("Chapel not activated because too many cards")
+    @Test
+    fun chapel_not_activated_because_too_many_cards() {
+        val game = Game()
+        game.add(chapel)
+        game.add(king)
+        game.add(queen)
+        game.add(judge)
+        game.calculate()
+
+        Assertions.assertEquals(27, game.score())
+    }
+
+    @DisplayName("Chapel activated")
+    @Test
+    fun chapel_activated() {
+        val game = Game()
+        game.add(chapel)
+        game.add(king)
+        game.add(queen)
+        game.calculate()
+
+        Assertions.assertEquals(56, game.score())
+    }
+
+    @DisplayName("Garden example")
+    @Test
+    fun garden_activated() {
+        val game = Game()
+        game.add(garden)
+        game.add(king)
+        game.add(queen)
+        game.add(unicorn)
+        game.calculate()
+
+        Assertions.assertEquals(82, game.score())
+    }
+
+    @DisplayName("Garden blanked")
+    @Test
+    fun garden_blanked() {
+        val game = Game()
+        game.add(garden)
+        game.add(king)
+        game.add(queen)
+        game.add(unicorn)
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(48, game.score())
+    }
+
+    @DisplayName("Fountain of life v2 example")
+    @Test
+    fun fountain_of_life_v2_example() {
+        val game = Game()
+        game.add(fountainOfLifeV2)
+        game.add(rainstorm)
+        game.add(whirlwind)
+        game.calculate()
+
+        Assertions.assertEquals(45, game.score())
+    }
+
+    @DisplayName("Count OTHER cards with book of change")
+    @Test
+    fun count_OTHER_cards_with_book_of_change() {
+        val game = Game()
+        game.add(whirlwind)
+        game.add(airElemental)
+        game.add(bookOfChanges)
+        game.bookOfChangeSelection = Pair(airElemental, Suit.BEAST)
+        game.calculate()
+
+        Assertions.assertEquals(35, game.score())
+    }
+
 
 }

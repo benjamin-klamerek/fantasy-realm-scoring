@@ -1,5 +1,7 @@
 package com.klamerek.fantasyrealms.game
 
+import androidx.test.platform.app.InstrumentationRegistry
+import com.klamerek.fantasyrealms.util.Preferences
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -13,7 +15,7 @@ class GameTest {
         game.add(necromancer)
         game.add(necromancer)
 
-        Assertions.assertThat(game.cards()).hasSize(1)
+        Assertions.assertThat(game.handCards()).hasSize(1)
     }
 
     @DisplayName("Remove card")
@@ -26,7 +28,7 @@ class GameTest {
 
         game.remove(doppelganger)
 
-        Assertions.assertThat(game.cards()).hasSize(2)
+        Assertions.assertThat(game.handCards()).hasSize(2)
     }
 
     @DisplayName("Update card list")
@@ -40,12 +42,28 @@ class GameTest {
 
 
         org.junit.jupiter.api.Assertions.assertAll(
-            { Assertions.assertThat(game.cards()).hasSize(3) },
+            { Assertions.assertThat(game.handCards()).hasSize(3) },
             {
-                Assertions.assertThat(game.cards().map { it.definition })
+                Assertions.assertThat(game.handCards().map { it.definition })
                     .contains(candle, collector, dragon)
             }
         )
+    }
+
+    @DisplayName("Max hand size")
+    @Test
+    fun max_hand_size(){
+        Preferences.saveBuildingsOutsidersUndeadInPreferences(
+            InstrumentationRegistry.getInstrumentation().targetContext, true)
+
+        val game = Game()
+        game.add(necromancer)
+        game.add(necromancerV2)
+        game.add(genie)
+        game.add(leprechaun)
+
+        Assertions.assertThat(
+            game.handSizeExpected(InstrumentationRegistry.getInstrumentation().targetContext)).isEqualTo(11)
     }
 
 }

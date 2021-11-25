@@ -1,14 +1,16 @@
 package com.klamerek.fantasyrealms.screen
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
-import com.klamerek.fantasyrealms.game.allDefinitions
-import com.klamerek.fantasyrealms.game.cardsById
+import com.klamerek.fantasyrealms.game.CardDefinitions
+import com.klamerek.fantasyrealms.game.CardSet
+import com.klamerek.fantasyrealms.game.Suit
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Preferences
 import java.io.Serializable
@@ -25,8 +27,10 @@ class CardsSelectionActivity : CustomActivity() {
         val view = binding.root
         setContentView(view)
 
-        input = intent.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as CardsSelectionExchange
+        input =
+            intent.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as CardsSelectionExchange
 
+        updateVisibleChips(baseContext)
         updateMainLabel()
         checkSelectedCards()
         checkSelectedSuits()
@@ -35,9 +39,11 @@ class CardsSelectionActivity : CustomActivity() {
         adaptSuitListDisplay()
         updateMainButtonStatus()
 
-        if (Preferences.getDisplayCardNumber(baseContext)){
+        if (Preferences.getDisplayCardNumber(baseContext)) {
             binding.chipGroup.children.toList().forEach {
-                (it as? Chip)?.text = cardsById[it.tag.toString().toIntOrNull()?:0]?.nameWithId()?:""
+                (it as? Chip)?.text =
+                    CardDefinitions.getAllById()[it.tag.toString().toIntOrNull() ?: 0]?.nameWithId()
+                        ?: ""
             }
         }
 
@@ -46,7 +52,8 @@ class CardsSelectionActivity : CustomActivity() {
             val answer = CardsSelectionExchange()
             answer.cardInitiator = input.cardInitiator
             answer.cardsSelected = cardChips().filter { chip -> chip.isChecked }
-                .map { chip -> chip.tag }.mapNotNull { tag -> Integer.valueOf(tag.toString()) }.toMutableList()
+                .map { chip -> chip.tag }.mapNotNull { tag -> Integer.valueOf(tag.toString()) }
+                .toMutableList()
             answer.suitsSelected = suitChips().filter { chip -> chip.isChecked }
                 .mapNotNull { chip -> chip.tag.toString() }.toMutableList()
             closingIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, answer)
@@ -56,12 +63,29 @@ class CardsSelectionActivity : CustomActivity() {
 
     }
 
+    private fun updateVisibleChips(context: Context) {
+        val activeDefinitions = CardDefinitions.get(context).map { it.id.toString() }
+        cardChips().forEach { chip ->
+            chip.visibility = if (activeDefinitions.contains(chip.tag.toString())) View.VISIBLE else View.GONE
+        }
+
+        suitChips().forEach { chip ->
+            chip.visibility = when (Suit.valueOf(chip.tag.toString()).set){
+                CardSet.CURSED_HOARD -> if (Preferences.getBuildingsOutsidersUndead(context)) View.VISIBLE else View.GONE
+                else -> View.VISIBLE
+            }
+        }
+    }
+
     private fun checkSelectedSuits() {
-        suitChips().forEach { chip -> chip.isChecked = input.suitsSelected.contains(chip.tag.toString()) }
+        suitChips().forEach { chip ->
+            chip.isChecked = input.suitsSelected.contains(chip.tag.toString())
+        }
     }
 
     private fun adaptSuitListDisplay() {
-        val suitActivated = input.selectionMode == Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
+        val suitActivated =
+            input.selectionMode == Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
         binding.suitScrollView.visibility = if (suitActivated) View.VISIBLE else View.GONE
         binding.divider.visibility = if (suitActivated) View.VISIBLE else View.GONE
         suitChips().forEach { chip -> chip.setOnClickListener(onlyOneSuitSelected()) }
@@ -75,7 +99,8 @@ class CardsSelectionActivity : CustomActivity() {
     }
 
     private fun updateMainLabel() {
-        binding.selectionLabel.text = colorSuitsAndBoldCardNames(applicationContext, input.label.orEmpty())
+        binding.selectionLabel.text =
+            colorSuitsAndBoldCardNames(applicationContext, input.label.orEmpty())
     }
 
     private fun onlyOneSuitSelected(): View.OnClickListener {
@@ -98,25 +123,31 @@ class CardsSelectionActivity : CustomActivity() {
             Constants.CARD_LIST_SELECTION_MODE_ONE_CARD ->
                 binding.addCardsButton.isEnabled = cardChips().count { chip -> chip.isChecked } == 1
             Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT ->
-                binding.addCardsButton.isEnabled = cardChips().count { chip -> chip.isChecked } == 1 &&
-                        suitChips().count { chip -> chip.isChecked } == 1
+                binding.addCardsButton.isEnabled =
+                    cardChips().count { chip -> chip.isChecked } == 1 &&
+                            suitChips().count { chip -> chip.isChecked } == 1
 
         }
     }
 
     private fun showOnlyPotentialCandidates() {
-        cardChips().forEach { chip ->
-            chip.visibility = if (input.cardsScope.contains(Integer.valueOf(chip.tag.toString()))) View.VISIBLE else View.GONE
+       cardChips().forEach { chip ->
+            chip.visibility =
+                if (input.cardsScope.contains(Integer.valueOf(chip.tag.toString()))) View.VISIBLE else View.GONE
         }
     }
 
     private fun checkSelectedCards() {
-        cardChips().forEach { chip -> chip.isChecked = input.cardsSelected.contains(Integer.valueOf(chip.tag.toString())) }
+        cardChips().forEach { chip ->
+            chip.isChecked = input.cardsSelected.contains(Integer.valueOf(chip.tag.toString()))
+        }
     }
 
-    private fun cardChips() = binding.chipGroup.children.filter { child -> child is Chip }.map { child -> child as Chip }
+    private fun cardChips() =
+        binding.chipGroup.children.filter { child -> child is Chip }.map { child -> child as Chip }
 
-    private fun suitChips() = binding.suitChipGroup.children.filter { child -> child is Chip }.map { child -> child as Chip }
+    private fun suitChips() = binding.suitChipGroup.children.filter { child -> child is Chip }
+        .map { child -> child as Chip }
 }
 
 /**

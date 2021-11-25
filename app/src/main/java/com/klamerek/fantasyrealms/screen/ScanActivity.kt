@@ -48,7 +48,7 @@ class ScanActivity : CustomActivity() {
 
         manageCameraPermission()
 
-        recognizer = CardTitleRecognizer(LocaleManager.getLanguage(baseContext))
+        recognizer = CardTitleRecognizer(baseContext)
         cameraExecutor = Executors.newSingleThreadExecutor()
         binding.cameraCaptureButton.setOnClickListener {
             binding.scanProgressBar.visibility = View.VISIBLE

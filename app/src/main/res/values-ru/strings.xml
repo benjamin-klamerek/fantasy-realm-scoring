@@ -17,7 +17,6 @@
     <string name="scan_help_label">Совет: обязательны только названия карт</string>
     <string name="effect_button">Эффект</string>
     <string name="base">Основная сила</string>
-    <string name="disclaimer">Version 0.11 \n Thanks to \"Les joueurs du fort\" for testing :-)</string>
     <string name="done">Готово</string>
     <string name="language_label">Язык:</string>
     <string name="language_label_english">английский</string>
@@ -156,4 +155,6 @@
     <string name="beastmaster_rules">Бонус: +9 за каждого зверя. ОТМЕНЯЕТ штрафы на всех зверях.</string>
     <string name="warlock_lord_rules">Штраф: -10 за каждого правителя и других колдунов.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
+    <string name="clear_button">Cтереть</string>
+    <string name="discard_area">Отказаться</string>
 </resources>

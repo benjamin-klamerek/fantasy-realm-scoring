@@ -15,8 +15,10 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
     private var simulatedRules: List<Rule<out Any>>? = null
     var blanked: Boolean = false
     private val ruleDeactivated: ArrayList<Rule<out Any>> = ArrayList()
+    private val temporaryRules: ArrayList<Rule<out Any>> = ArrayList()
 
     fun clear() {
+        temporaryRules.clear()
         ruleDeactivated.clear()
         clearSimulation()
         blanked = false
@@ -29,11 +31,15 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
         simulatedRules = null
     }
 
+    fun addTemporaryRule(rule: Rule<out Any>) = temporaryRules.add(rule)
+
     fun deactivate(rule: Rule<out Any>) = ruleDeactivated.add(rule)
 
     fun isActivated(rule: Rule<out Any>): Boolean = !ruleDeactivated.contains(rule)
 
     fun isOneOf(vararg suit: Suit) = suit.contains(this.suit())
+
+    fun hasSameNameThan(definition: CardDefinition) = this.name() == definition.name()
 
     fun name(): String = simulatedName ?: definition.name()
 
@@ -43,7 +49,7 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
 
     fun isOdd(): Boolean = value() % 2 == 1
 
-    fun rules(): List<Rule<out Any>> = simulatedRules ?: rules
+    fun rules(): List<Rule<out Any>> = listOf(simulatedRules ?: rules, temporaryRules).flatten()
 
     fun name(name: String) {
         this.simulatedName = name
@@ -60,6 +66,8 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
     fun rules(rules: List<Rule<out Any>>) {
         this.simulatedRules = rules
     }
+
+    override fun toString(): String = name()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
