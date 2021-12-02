@@ -19,11 +19,6 @@
     <string name="base">Basisstärke</string>
     <string name="done">Fertig</string>
     <string name="language_label">Sprache:</string>
-    <string name="language_label_english">Englisch</string>
-    <string name="language_label_french">Französisch</string>
-    <string name="language_label_russian">Russisch</string>
-    <string name="language_label_german">Deutsch</string>
-    <string name="language_label_spanish">Spanisch</string>
     <string name="display_card_number_label">Kartennummer anzeigen:</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>

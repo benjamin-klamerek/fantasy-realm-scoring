@@ -23,11 +23,10 @@
         Found a bug ? \nTranslation missing ? \n\nContact me (link in play store)</string>
     <string name="done">Done</string>
     <string name="language_label">Language:</string>
-    <string name="language_label_english">English</string>
-    <string name="language_label_french">French</string>
-    <string name="language_label_russian">Russian</string>
-    <string name="language_label_german">German</string>
-    <string name="language_label_spanish">Spanish</string>
+    <string name="language_label_english" translatable="false">English</string>
+    <string name="language_label_russian" translatable="false">русский</string>
+    <string name="language_label_german" translatable="false">Deutsch</string>
+    <string name="language_label_spanish" translatable="false">Español</string>
     <string name="display_card_number_label">Display card number:</string>
     <string name="buildings_outsiders_undead_label">Buildings, outsiders and undead:</string>
     <string name="cursed_items_label">Cursed items:</string>
@@ -249,4 +248,5 @@
     <string name="portal_rules">ANY TIME: Skip your discard phase this turn. \n(You will have one extra card in your hand from now on.)</string>
     <string name="wishing_ring_rules">ANY TIME: Look through the deck and place any card you wish on top. \n(You may do this immediately before you draw.) \nReshuffle the deck at the end of your turn.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
+    <string name="language_label_french" translatable="false">Français</string>
 </resources>

@@ -19,11 +19,6 @@
     <string name="base">BASE</string>
     <string name="done">Hecho</string>
     <string name="language_label">Idioma:</string>
-    <string name="language_label_english">Inglés</string>
-    <string name="language_label_french">Francés</string>
-    <string name="language_label_russian">Ruso</string>
-    <string name="language_label_german">Alemán</string>
-    <string name="language_label_spanish">Español</string>
     <string name="display_card_number_label">Mostrar número de carta:</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">BONUS</string>
