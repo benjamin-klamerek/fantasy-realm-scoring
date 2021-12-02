@@ -50,6 +50,7 @@ abstract class CardAndSuitSelection(source: CardDefinition) : CardSelection(sour
     override fun selectionMode(): Int = Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
 
     override fun clear() {
+        super.clear()
         suitSelected = null
     }
 
