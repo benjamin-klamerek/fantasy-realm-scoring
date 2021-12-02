@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class ScoringTest {
 
     @BeforeEach
-    fun beforeEach(){
+    fun beforeEach() {
         DiscardArea.instance.game().clear()
     }
 
@@ -26,8 +26,8 @@ class ScoringTest {
         game.add(shapeshifter)
         game.add(doppelganger)
 
-        game.doppelgangerSelection = warlockLord
-        game.shapeShifterSelection = king
+        game.applySelection(doppelganger, warlockLord)
+        game.applySelection(shapeshifter, king)
 
         game.calculate()
         Assertions.assertEquals(-74, game.score())
@@ -46,7 +46,7 @@ class ScoringTest {
         game.add(gemOfOrder)
         game.add(bookOfChanges)
 
-        game.bookOfChangeSelection = Pair(bellTower, Suit.LEADER)
+        game.applySelection(bookOfChanges, bellTower, Suit.LEADER)
 
         game.calculate()
         Assertions.assertEquals(397, game.score())
@@ -105,8 +105,8 @@ class ScoringTest {
         game.add(blizzard)
         game.add(shapeshifter)
 
-        game.shapeShifterSelection = king
-        game.mirageSelection = rainstorm
+        game.applySelection(shapeshifter, king)
+        game.applySelection(mirage, rainstorm)
 
         game.calculate()
         Assertions.assertEquals(138, game.score())
@@ -371,7 +371,7 @@ class ScoringTest {
         game.add(angel)
         game.add(wildfire)
         game.add(celestialKnights)
-        game.angelSelection = celestialKnights
+        game.applySelection(angel, celestialKnights)
         game.calculate()
         Assertions.assertEquals(68, game.score())
     }
@@ -383,7 +383,7 @@ class ScoringTest {
         game.add(angel)
         game.add(basilisk)
         game.add(queen)
-        game.angelSelection = queen
+        game.applySelection(angel, queen)
         game.calculate()
         Assertions.assertEquals(57, game.score())
     }
@@ -422,7 +422,7 @@ class ScoringTest {
         game.add(shapeshifterV2)
         game.add(mirageV2)
         game.add(doppelganger)
-        game.doppelgangerSelection = garden
+        game.applySelection(doppelganger, garden)
         game.calculate()
         Assertions.assertEquals(49, game.score())
     }
@@ -456,7 +456,7 @@ class ScoringTest {
         game.add(warship)
         game.add(elvenArchers)
         game.add(dwarvishInfantry)
-        game.bookOfChangeSelection = Pair(dwarvishInfantry, Suit.FLOOD)
+        game.applySelection(bookOfChanges, dwarvishInfantry, Suit.FLOOD)
         game.calculate()
         Assertions.assertEquals(56, game.score())
 
@@ -464,7 +464,7 @@ class ScoringTest {
         game.add(bookOfChanges)
         game.add(warship)
         game.add(warDirigible)
-        game.bookOfChangeSelection = Pair(warDirigible, Suit.FLOOD)
+        game.applySelection(bookOfChanges, warDirigible, Suit.FLOOD)
         game.calculate()
         Assertions.assertEquals(61, game.score())
 
@@ -474,7 +474,7 @@ class ScoringTest {
         game.add(warDirigible)
         game.add(lightCavalry)
         game.add(airElemental)
-        game.bookOfChangeSelection = Pair(warDirigible, Suit.FLOOD)
+        game.applySelection(bookOfChanges, warDirigible, Suit.FLOOD)
         game.calculate()
         Assertions.assertEquals(47, game.score())
     }
@@ -673,7 +673,7 @@ class ScoringTest {
         game.add(whirlwind)
         game.add(airElemental)
         game.add(bookOfChanges)
-        game.bookOfChangeSelection = Pair(airElemental, Suit.BEAST)
+        game.applySelection(bookOfChanges, airElemental, Suit.BEAST)
         game.calculate()
 
         Assertions.assertEquals(35, game.score())
