@@ -56,9 +56,10 @@ class Game {
     }
 
     fun clear() {
+        selections.values.forEach { it.clear() }
+        handCards.forEach { it.clear() }
         handCards.clear()
         tableCards.clear()
-        selections.values.forEach { it.clear() }
     }
 
     fun countOddHandCards() = handCardsNotBlanked().count { it.isOdd() }
