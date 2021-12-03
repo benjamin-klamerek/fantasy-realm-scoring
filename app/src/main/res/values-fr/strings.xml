@@ -19,11 +19,6 @@
     <string name="base">BASE</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
-    <string name="language_label_english">Anglais</string>
-    <string name="language_label_french">Français</string>
-    <string name="language_label_russian">Russe</string>
-    <string name="language_label_german">Allemand</string>
-    <string name="language_label_spanish">Espagnol</string>
     <string name="display_card_number_label">Afficher numéro de carte:</string>
     <!-- Effets et Familles -->
     <string name="effect_bonus">BONUS</string>

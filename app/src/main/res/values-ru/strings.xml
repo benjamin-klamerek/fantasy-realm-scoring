@@ -19,11 +19,6 @@
     <string name="base">Основная сила</string>
     <string name="done">Готово</string>
     <string name="language_label">Язык:</string>
-    <string name="language_label_english">английский</string>
-    <string name="language_label_french">французкий</string>
-    <string name="language_label_russian">русский</string>
-    <string name="language_label_german">Немецкий</string>
-    <string name="language_label_spanish">испанский</string>
     <string name="display_card_number_label">Показать номер карты:</string>
     <!-- Effects and Suits -->
     <string name="effect_bonus">Бонус</string>

@@ -135,18 +135,18 @@ class HandSelectionActivity : CustomActivity() {
 
         }
         withGame.game().calculate()
-        runOnUiThread {
-            refreshGameSessionLabels()
-            adapter.notifyDataSetChanged()
-        }
+
+        refreshGameSessionLabels()
+        adapter.notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun removeAllCards(event: AllCardsDeletionEvent) {
-        withGame.game().clear()
-        withGame.game().calculate()
         runOnUiThread {
+            withGame.game().clear()
+            withGame.game().calculate()
+
             adapter.notifyDataSetChanged()
             refreshGameSessionLabels()
         }
@@ -155,9 +155,10 @@ class HandSelectionActivity : CustomActivity() {
     @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun removeCard(event: CardDeletionEvent) {
-        withGame.game().remove(withGame.game().cards().elementAt(event.index).definition)
-        withGame.game().calculate()
         runOnUiThread {
+            withGame.game().remove(withGame.game().cards().elementAt(event.index).definition)
+            withGame.game().calculate()
+
             adapter.notifyDataSetChanged()
             refreshGameSessionLabels()
         }

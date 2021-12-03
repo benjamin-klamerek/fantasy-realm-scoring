@@ -58,7 +58,12 @@ class PlayerSelectionActivity : CustomActivity() {
         installDialog()
 
         val linearLayoutManager = LinearLayoutManager(this)
-        binding.playersView.addItemDecoration(DividerItemDecoration(binding.playersView.context, DividerItemDecoration.VERTICAL))
+        binding.playersView.addItemDecoration(
+            DividerItemDecoration(
+                binding.playersView.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         binding.playersView.layoutManager = linearLayoutManager
         adapter = PlayerSelectionAdapter(Player.all)
         binding.playersView.adapter = adapter
@@ -81,7 +86,8 @@ class PlayerSelectionActivity : CustomActivity() {
             field?.requestFocus()
             field?.selectAll()
             field?.postDelayed({
-                val keyboard: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val keyboard: InputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 keyboard.showSoftInput(field, 0)
             }, delayBeforeShowingKeyboard)
         }
@@ -95,13 +101,16 @@ class PlayerSelectionActivity : CustomActivity() {
             .setView(dialogView)
             .setPositiveButton(R.string.ok_button) { _, _ ->
                 EventBus.getDefault().post(
-                    PlayerCreationEvent(field?.text?.toString() ?: getString(R.string.new_player_default_value))
+                    PlayerCreationEvent(
+                        field?.text?.toString() ?: getString(R.string.new_player_default_value)
+                    )
                 )
             }
             .setNegativeButton(R.string.cancel_button) { _, _ -> }
             .create()
         alertDialog.setOnShowListener {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = ! (field?.text?.isBlank()?:true)
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled =
+                !(field?.text?.isBlank() ?: true)
         }
         field?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
@@ -109,7 +118,7 @@ class PlayerSelectionActivity : CustomActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = ! s.isNullOrBlank()
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = !s.isNullOrBlank()
             }
 
         })
@@ -119,8 +128,8 @@ class PlayerSelectionActivity : CustomActivity() {
     @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun addPlayer(event: PlayerCreationEvent) {
-        Player.all.add(Player(event.name, Game()))
         runOnUiThread {
+            Player.all.add(Player(event.name, Game()))
             adapter.notifyDataSetChanged()
         }
     }
@@ -128,8 +137,8 @@ class PlayerSelectionActivity : CustomActivity() {
     @SuppressLint("NotifyDataSetChanged")
     @Subscribe
     fun removePlayer(event: PlayerDeletionEvent) {
-        Player.all.removeAt(event.index)
         runOnUiThread {
+            Player.all.removeAt(event.index)
             adapter.notifyDataSetChanged()
         }
     }
@@ -138,8 +147,8 @@ class PlayerSelectionActivity : CustomActivity() {
     @Suppress("UnusedPrivateMember")
     @Subscribe
     fun removeAllPlayers(event: AllPlayersDeletionEvent) {
-        Player.all.clear()
         runOnUiThread {
+            Player.all.clear()
             adapter.notifyDataSetChanged()
         }
     }
@@ -162,10 +171,12 @@ class PlayerSelectionActivity : CustomActivity() {
 
 }
 
-class PlayerSelectionAdapter(private val players: Collection<Player>) : RecyclerView.Adapter<PlayerSelectionAdapter.PlayerHolder>() {
+class PlayerSelectionAdapter(private val players: Collection<Player>) :
+    RecyclerView.Adapter<PlayerSelectionAdapter.PlayerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerHolder {
-        val itemBinding = PlayerListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding =
+            PlayerListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PlayerHolder(itemBinding)
     }
 

@@ -17,7 +17,7 @@ object CardDefinitions {
      * Warning, this method gives ALL card definitions (meaning that you can see many times the same card if it has many versions)
      */
     fun getAll(): List<CardDefinition> {
-        return getBaseCards().plus(getCardsV2()).plus(getCursedHoardNewCards()).plus(getCursedItems())
+        return getBaseCards().plus(getCardsV2()).plus(getCursedHoardNewCards()).plus(getCursedItems()).plus(getPromo())
     }
 
     fun get(context: Context): List<CardDefinition> {
@@ -97,6 +97,10 @@ object CardDefinitions {
         )
     }
 
+    private fun getPromo(): List<CardDefinition> {
+        return listOf(jester)
+    }
+
     private fun getCursedHoardNewCards(): List<CardDefinition> {
         return listOf(
             dungeon,
@@ -147,7 +151,7 @@ object CardDefinitions {
     fun get(buildingsOutsidersUndead: Boolean, cursedItems: Boolean): List<CardDefinition> {
         val cardV2Names = getCardsV2().map { it.name() }.toList()
         val baseCards = if (buildingsOutsidersUndead)
-            getBaseCards().minus(getBaseCards().filter { cardV2Names.contains(it.name()) })
+            getBaseCards().minus(getBaseCards().filter { cardV2Names.contains(it.name()) }.toSet())
                 .plus(getCardsV2()) else getBaseCards()
 
         val newBaseCardsFromExpansion: List<CardDefinition> =
@@ -156,7 +160,7 @@ object CardDefinitions {
         val cursedItemsDefinitions: List<CardDefinition> =
             if (cursedItems) getCursedItems() else emptyList()
 
-        return newBaseCardsFromExpansion.plus(baseCards).plus(cursedItemsDefinitions)
+        return newBaseCardsFromExpansion.plus(baseCards).plus(cursedItemsDefinitions).plus(getPromo())
     }
 
 }

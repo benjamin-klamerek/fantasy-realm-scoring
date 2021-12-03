@@ -17,14 +17,11 @@ class Game {
     private val bonusScoreByCard = HashMap<CardDefinition, Int>()
     private val penaltyScoreByCard = HashMap<CardDefinition, Int>()
 
-    var bookOfChangeSelection: Pair<CardDefinition?, Suit?>? = null
-    var islandSelection: CardDefinition? = null
-    var shapeShifterSelection: CardDefinition? = null
-    var shapeShifterV2Selection: CardDefinition? = null
-    var mirageSelection: CardDefinition? = null
-    var mirageV2Selection: CardDefinition? = null
-    var doppelgangerSelection: CardDefinition? = null
-    var angelSelection: CardDefinition? = null
+    private val selections = listOf(
+        DoppelgangerSelection(), IslandSelection(),
+        ShapeShifterSelection(), ShapeShifterV2Selection(), MirageSelection(),
+        MirageV2Selection(), AngelSelection(), BookOfChangesSelection()
+    ).map { selection -> selection.source to selection }.toMap()
 
     fun cards(): Collection<Card> {
         return handCards.plus(tableCards)
@@ -48,30 +45,7 @@ class Game {
     fun remove(cardDefinition: CardDefinition) {
         val list = if (cardDefinition.position() == CardPosition.HAND) handCards else tableCards
         list.removeIf { it.definition == cardDefinition }
-        if (cardDefinition == bookOfChanges || cardDefinition == bookOfChangeSelection?.first) {
-            bookOfChangeSelection = null
-        }
-        if (cardDefinition == island || cardDefinition == islandSelection) {
-            islandSelection = null
-        }
-        if (cardDefinition == shapeshifter || cardDefinition == shapeShifterSelection) {
-            shapeShifterSelection = null
-        }
-        if (cardDefinition == shapeshifterV2 || cardDefinition == shapeShifterV2Selection) {
-            shapeShifterV2Selection = null
-        }
-        if (cardDefinition == mirage || cardDefinition == mirageSelection) {
-            mirageSelection = null
-        }
-        if (cardDefinition == mirageV2 || cardDefinition == mirageV2Selection) {
-            mirageV2Selection = null
-        }
-        if (cardDefinition == doppelganger || cardDefinition == doppelgangerSelection) {
-            doppelgangerSelection = null
-        }
-        if (cardDefinition == angel || cardDefinition == angelSelection) {
-            angelSelection = null
-        }
+        selections.values.forEach { it.clear(cardDefinition) }
     }
 
     fun update(cardDefinitions: List<CardDefinition>) {
@@ -82,6 +56,8 @@ class Game {
     }
 
     fun clear() {
+        selections.values.forEach { it.clear() }
+        handCards.forEach { it.clear() }
         handCards.clear()
         tableCards.clear()
     }
@@ -173,14 +149,7 @@ class Game {
     }
 
     private fun applySpecificCardEffects() {
-        doppelgangerSelection?.let { cardDefinition -> applyDoppelganger(cardDefinition) }
-        mirageSelection?.let { cardDefinition -> applyMirage(cardDefinition) }
-        mirageV2Selection?.let { cardDefinition -> applyMirageV2(cardDefinition) }
-        shapeShifterSelection?.let { cardDefinition -> applyShapeShifter(cardDefinition) }
-        shapeShifterV2Selection?.let { cardDefinition -> applyShapeShifterV2(cardDefinition) }
-        bookOfChangeSelection?.let { pair -> applyBookOfChanges(pair.first, pair.second) }
-        islandSelection?.let { cardDefinition -> applyIsland(cardDefinition) }
-        angelSelection?.let { cardDefinition -> applyAngel(cardDefinition) }
+        selections.values.forEach { it.apply(this) }
     }
 
     fun score(): Int = bonusScoreByCard.entries.sumOf { it.value } +
@@ -256,161 +225,6 @@ class Game {
             .filter { rule -> rule.tags.containsAll(tags.asList()) }
     }
 
-    private fun bookOfChangesCandidates(): List<CardDefinition> {
-        return handCards.map { card -> card.definition }
-            .filter { definition -> definition != bookOfChanges }
-    }
-
-    private fun applyBookOfChanges(cardToUpdate: CardDefinition?, newSuit: Suit?) =
-        handCards.filter { card -> card.definition == cardToUpdate }
-            .map { card -> card.suit(newSuit) }
-
-    private fun islandCandidates(): List<CardDefinition> {
-        return handCards.filter { card -> card.isOneOf(Suit.FLOOD, Suit.FLAME) }
-            .map { card -> card.definition }
-    }
-
-    private fun applyIsland(cardToClean: CardDefinition) {
-        if (islandCandidates().contains(cardToClean)) {
-            handCards.filter { card -> card.definition == cardToClean }
-                .map { card ->
-                    card.rules()
-                        .filter { rule -> rule.tags.contains(Effect.PENALTY) }
-                        .forEach { rule -> card.deactivate(rule) }
-                }
-        }
-    }
-
-    private fun shapeShifterCandidates(): List<CardDefinition> {
-        return CardDefinitions.get(
-            buildingsOutsidersUndead = false,
-            cursedItems = false
-        ).filter { definition ->
-            definition.isOneOf(
-                Suit.ARTIFACT,
-                Suit.LEADER,
-                Suit.WIZARD,
-                Suit.WEAPON,
-                Suit.BEAST
-            )
-        }
-    }
-
-    private fun shapeShifterV2Candidates(): List<CardDefinition> {
-        return CardDefinitions.get(
-            buildingsOutsidersUndead = true,
-            cursedItems = false
-        ).filter { definition ->
-            definition.isOneOf(
-                Suit.ARTIFACT,
-                Suit.LEADER,
-                Suit.WIZARD,
-                Suit.WEAPON,
-                Suit.BEAST,
-                Suit.UNDEAD
-            )
-        }
-    }
-
-    private fun applyShapeShifter(cardToCopy: CardDefinition) {
-        if (shapeShifterCandidates().contains(cardToCopy)) {
-            handCards.filter { card -> card.definition == shapeshifter }
-                .map { card ->
-                    card.name(cardToCopy.name())
-                    card.suit(cardToCopy.suit)
-                }
-        }
-    }
-
-    private fun applyShapeShifterV2(cardToCopy: CardDefinition) {
-        if (shapeShifterV2Candidates().contains(cardToCopy)) {
-            handCards.filter { card -> card.definition == shapeshifterV2 }
-                .map { card ->
-                    card.name(cardToCopy.name())
-                    card.suit(cardToCopy.suit)
-                }
-        }
-    }
-
-    private fun angelCandidates(): List<CardDefinition> {
-        return handCards.filter { card -> card.definition != angel }
-            .map { card -> card.definition }
-    }
-
-    private fun applyAngel(cardToProtect: CardDefinition) {
-        handCards.filter { card -> card.definition == cardToProtect }
-            .map { card -> card.addTemporaryRule(unblankable) }
-    }
-
-    private fun mirageCandidates(): List<CardDefinition> {
-        return CardDefinitions.get(
-            buildingsOutsidersUndead = false,
-            cursedItems = false
-        ).filter { definition ->
-            definition.isOneOf(
-                Suit.ARMY,
-                Suit.LAND,
-                Suit.WEATHER,
-                Suit.FLOOD,
-                Suit.FLAME
-            )
-        }
-    }
-
-    private fun mirageV2Candidates(): List<CardDefinition> {
-        return CardDefinitions.get(
-            buildingsOutsidersUndead = true,
-            cursedItems = false
-        ).filter { definition ->
-            definition.isOneOf(
-                Suit.ARMY,
-                Suit.LAND,
-                Suit.WEATHER,
-                Suit.FLOOD,
-                Suit.FLAME,
-                Suit.BUILDING
-            )
-        }
-    }
-
-    private fun applyMirage(cardToCopy: CardDefinition) {
-        if (mirageCandidates().contains(cardToCopy)) {
-            handCards.filter { card -> card.definition == mirage }
-                .map { card ->
-                    card.name(cardToCopy.name())
-                    card.suit(cardToCopy.suit)
-                }
-        }
-    }
-
-    private fun applyMirageV2(cardToCopy: CardDefinition) {
-        if (mirageV2Candidates().contains(cardToCopy)) {
-            handCards.filter { card -> card.definition == mirageV2 }
-                .map { card ->
-                    card.name(cardToCopy.name())
-                    card.suit(cardToCopy.suit)
-                }
-        }
-    }
-
-    private fun doppelgangerCandidates(): List<CardDefinition> =
-        handCards.map { card -> card.definition }
-            .filter { definition -> definition != doppelganger }
-
-    private fun applyDoppelganger(cardToCopy: CardDefinition) {
-        if (doppelgangerCandidates().contains(cardToCopy)) {
-            handCards.filter { card -> card.definition == doppelganger }
-                .map { card ->
-                    card.name(cardToCopy.name())
-                    card.suit(cardToCopy.suit)
-                    card.value(cardToCopy.value)
-                    card.rules(
-                        AllRules.instance[cardToCopy].orEmpty()
-                            .filter { rule -> rule.tags.contains(Effect.PENALTY) })
-                }
-        }
-    }
-
     fun handSizeExpected(context: Context): Int {
         return Constants.DEFAULT_HAND_SIZE +
                 Preferences.getBuildingsOutsidersUndead(context).toInt() +
@@ -425,66 +239,20 @@ class Game {
         return handCards.size
     }
 
-    fun ruleEffectCardSelectionAbout(cardDefinition: CardDefinition?): List<CardDefinition> {
-        return when (cardDefinition) {
-            doppelganger -> listOfNotNull(doppelgangerSelection)
-            mirage -> listOfNotNull(mirageSelection)
-            mirageV2 -> listOfNotNull(mirageV2Selection)
-            shapeshifter -> listOfNotNull(shapeShifterSelection)
-            shapeshifterV2 -> listOfNotNull(shapeShifterV2Selection)
-            bookOfChanges -> listOfNotNull(bookOfChangeSelection?.first)
-            island -> listOfNotNull(islandSelection)
-            angel -> listOfNotNull(angelSelection)
-            else -> emptyList()
-        }
-    }
+    fun ruleEffectCardSelectionAbout(cardDefinition: CardDefinition?): List<CardDefinition> =
+        listOfNotNull(selections[cardDefinition]?.cardSelected)
 
-    fun ruleEffectSuitSelectionAbout(cardDefinition: CardDefinition?): List<Suit> {
-        return when (cardDefinition) {
-            bookOfChanges -> listOfNotNull(bookOfChangeSelection?.second)
-            else -> emptyList()
-        }
-    }
+    fun ruleEffectSuitSelectionAbout(cardDefinition: CardDefinition?): List<Suit> =
+        listOfNotNull((selections[cardDefinition] as? CardAndSuitSelection)?.suitSelected)
 
-    fun ruleEffectCandidateAbout(cardDefinition: CardDefinition?): List<CardDefinition> {
-        return when (cardDefinition) {
-            doppelganger -> doppelgangerCandidates()
-            mirage -> mirageCandidates()
-            mirageV2 -> mirageV2Candidates()
-            shapeshifter -> shapeShifterCandidates()
-            shapeshifterV2 -> shapeShifterV2Candidates()
-            bookOfChanges -> bookOfChangesCandidates()
-            island -> islandCandidates()
-            angel -> angelCandidates()
-            else -> emptyList()
-        }
-    }
+    fun ruleEffectCandidateAbout(cardDefinition: CardDefinition?): List<CardDefinition> =
+        selections[cardDefinition]?.candidates(this) ?: emptyList()
 
-    fun ruleEffectSelectionMode(cardDefinition: CardDefinition?): Int {
-        return when (cardDefinition) {
-            doppelganger -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
-            mirage -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
-            mirageV2 -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
-            shapeshifter -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
-            shapeshifterV2 -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
-            bookOfChanges -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT
-            island -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
-            angel -> Constants.CARD_LIST_SELECTION_MODE_ONE_CARD
-            else -> Constants.CARD_LIST_SELECTION_MODE_DEFAULT
-        }
-    }
+    fun ruleEffectSelectionMode(cardDefinition: CardDefinition?): Int =
+        selections[cardDefinition]?.selectionMode() ?: Constants.CARD_LIST_SELECTION_MODE_DEFAULT
 
     fun hasManualEffect(definition: CardDefinition): Boolean =
-        listOf(
-            doppelganger,
-            mirage,
-            mirageV2,
-            shapeshifter,
-            shapeshifterV2,
-            bookOfChanges,
-            island,
-            angel
-        ).contains(definition)
+        selections.keys.contains(definition)
 
     fun countCardWithAtLeastOnePenaltyNotCleared(): Int {
         return handCardsNotBlanked().count { card ->
@@ -500,18 +268,17 @@ class Game {
     fun applySelection(
         cardDefinition: CardDefinition?,
         cardSelected: CardDefinition?,
+    ) {
+        selections[cardDefinition]?.cardSelected = cardSelected
+    }
+
+    fun applySelection(
+        cardDefinition: CardDefinition?,
+        cardSelected: CardDefinition?,
         suitSelected: Suit?
     ) {
-        when (cardDefinition) {
-            bookOfChanges -> bookOfChangeSelection = Pair(cardSelected, suitSelected)
-            island -> islandSelection = cardSelected
-            shapeshifter -> shapeShifterSelection = cardSelected
-            shapeshifterV2 -> shapeShifterV2Selection = cardSelected
-            mirage -> mirageSelection = cardSelected
-            mirageV2 -> mirageV2Selection = cardSelected
-            angel -> angelSelection = cardSelected
-            doppelganger -> doppelgangerSelection = cardSelected
-        }
+        applySelection(cardDefinition, cardSelected)
+        (selections[cardDefinition] as? CardAndSuitSelection)?.suitSelected = suitSelected
     }
 
 }

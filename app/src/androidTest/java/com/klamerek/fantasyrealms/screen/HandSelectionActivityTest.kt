@@ -2,6 +2,7 @@ package com.klamerek.fantasyrealms.screen
 
 import android.app.Instrumentation
 import android.content.Intent
+import android.os.SystemClock
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -318,6 +319,54 @@ class HandSelectionActivityTest {
                 RecycleViewMatcher.childOfViewAtPosition(R.id.bonusValueLabel, 0, withText("+45"))
             )
         )
+
+    }
+
+    /**
+     * Scenario to fix bug : transformation effect are kept after clearing hand
+     */
+    @Test
+    fun transformation_effects_are_cleared_after_clear_hand() {
+        initPlayer("MY_NAME", listOf(greatFlood, beastmaster, princess, unicorn, basilisk, swordOfKeth, shieldOfKeth, bookOfChanges))
+
+        //STEP1 : init hand
+
+        val cardsSelectionExchange = CardsSelectionExchange()
+        val cardSelection = Intent()
+        cardSelection.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
+        val mockedActivityResult = Instrumentation.ActivityResult(Constants.RESULT_OK, cardSelection)
+        intending(hasComponent(CardsSelectionActivity::class.java.name)).respondWith(mockedActivityResult)
+
+        //STEP2 : set basilik as weather
+
+        cardsSelectionExchange.cardsSelected.addAll(listOf(basilisk.id))
+        cardsSelectionExchange.cardInitiator = bookOfChanges.id
+        cardsSelectionExchange.suitsSelected = mutableListOf(Suit.WEATHER.name)
+
+        onView(withId(R.id.handView)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(0, ButtonClick(R.id.effectButton))
+        )
+
+        //STEP3 : clear all hand
+
+        EventBus.getDefault().post(AllCardsDeletionEvent())
+
+        //STEP4 : re add cards expect book of change
+
+        val cardsSelectionExchange2 = CardsSelectionExchange()
+        cardsSelectionExchange2.cardsSelected.addAll(listOf(greatFlood.id, beastmaster.id, princess.id,
+            unicorn.id, basilisk.id, swordOfKeth.id, shieldOfKeth.id))
+        val cardSelection2 = Intent()
+        cardSelection2.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange2)
+        val mockedActivityResult2 = Instrumentation.ActivityResult(Constants.RESULT_OK, cardSelection2)
+
+        intending(hasComponent(CardsSelectionActivity::class.java.name)).respondWith(mockedActivityResult2)
+        onView(withId(R.id.addCardsButton)).perform(click())
+
+        //STEP5 : ensure that score meet expectation (basilik is no more a weather card)
+
+        onView(withId(R.id.playerNameLabel)).check(matches(withText("MY_NAME - Score : 234")))
+        onView(withId(R.id.handSizeLabel)).check(matches(withText("7/7")))
 
     }
 
