@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: 'io.gitlab.arturbosch.detekt'
 apply plugin: 'jacoco'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -79,6 +80,9 @@ android {
 }
 
 dependencies {
+    implementation platform('com.google.firebase:firebase-bom:29.0.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "101829329659",
+    "project_id": "fantasy-realms-scoring",
+    "storage_bucket": "fantasy-realms-scoring.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101829329659:android:dec8ae727e0b707f90265e",
+        "android_client_info": {
+          "package_name": "com.klamerek.fantasyrealms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101829329659-tb3pfodf05bdvgitagab4pij7q9g059u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.klamerek.fantasyrealms",
+            "certificate_hash": "7685c9d762dee50eb70e0cd154e1b2ade3af360c"
+          }
+        },
+        {
+          "client_id": "101829329659-1t85vpvae1l5og44i9psdb9ic0k8dc3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-tmNtVWxFmGzgKTVbQQ_pDo-hkQK3iMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101829329659-1t85vpvae1l5og44i9psdb9ic0k8dc3p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
