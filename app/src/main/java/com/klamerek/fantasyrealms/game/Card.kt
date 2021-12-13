@@ -37,7 +37,8 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
 
     fun isActivated(rule: Rule<out Any>): Boolean = !ruleDeactivated.contains(rule)
 
-    fun isOneOf(vararg suit: Suit) = suit.contains(this.suit())
+    fun isOneOf(vararg suit: Suit) = suit.contains(this.suit()) ||
+            definition.additionalSuits.any { suit.contains(it) }
 
     fun hasSameNameThan(definition: CardDefinition) = this.name() == definition.name()
 

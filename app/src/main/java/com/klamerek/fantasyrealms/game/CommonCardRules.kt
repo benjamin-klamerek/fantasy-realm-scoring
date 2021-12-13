@@ -57,7 +57,7 @@ object AllRules {
                     Effect.CLEAR,
                     Suit.ARMY
                 )
-            ) { it.identifyArmyClearedPenalty { true } }),
+            ) { it.identifyArmyPenalties { true } }),
         elvenArchers to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { if (it.noHandCardsOf(Suit.WEATHER)) 5 else 0 }),
         dwarvishInfantry to listOf(
@@ -82,11 +82,10 @@ object AllRules {
                 )
             ) { if (it.noHandCardsOf(Suit.LEADER)) -8 else 0 }),
         protectionRune to listOf(
-            RuleAboutRule(listOf(Effect.CLEAR)) { it.identifyClearedPenalty { true } }),
+            RuleAboutRule(listOf(Effect.CLEAR)) { it.identifyPenalties { true } }),
         worldTree to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.handCardsNotBlanked()
-                        .groupBy { card -> card.suit() }.entries.any { entry -> entry.value.size > 1 }
+                if (it.groupNotBlankedCardsBySuit().entries.any { entry -> entry.value.size > 1 }
                 ) 0 else 50
             }),
         shieldOfKeth to listOf(
@@ -145,7 +144,13 @@ object AllRules {
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.LEADER), 200)
             { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.LEADER) } },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.BEAST), 200)
-            { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.BEAST) && card.definition != basilisk) } }
+            {
+                it.filterNotBlankedHandCards { card ->
+                    (card.isOneOf(Suit.BEAST) && !card.hasSameNameThan(
+                        basilisk
+                    ))
+                }
+            }
         ),
         candle to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
@@ -222,14 +227,26 @@ object AllRules {
                     Effect.BLANK,
                     Suit.LAND
                 ), 200
-            ) { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.LAND) && card.definition != mountain) } },
+            ) {
+                it.filterNotBlankedHandCards { card ->
+                    (card.isOneOf(Suit.LAND) && !card.hasSameNameThan(
+                        mountain
+                    ))
+                }
+            },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.FLAME
                 ), 200
-            ) { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.FLAME) && card.definition != lightning) } }
+            ) {
+                it.filterNotBlankedHandCards { card ->
+                    (card.isOneOf(Suit.FLAME) && !card.hasSameNameThan(
+                        lightning
+                    ))
+                }
+            }
         ),
         earthElemental to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
@@ -247,7 +264,7 @@ object AllRules {
                 ) 25 else 0
             },
             RuleAboutRule(listOf(Effect.CLEAR)) {
-                it.identifyClearedPenalty { card ->
+                it.identifyPenalties { card ->
                     card.isOneOf(
                         Suit.WEATHER
                     )
@@ -272,7 +289,7 @@ object AllRules {
                 ) 50 else 0
             },
             RuleAboutRule(listOf(Effect.CLEAR)) {
-                it.identifyClearedPenalty { card ->
+                it.identifyPenalties { card ->
                     card.isOneOf(
                         Suit.FLOOD
                     )
@@ -350,7 +367,7 @@ object AllRules {
                 } else emptyList()
             },
             RuleAboutRule(listOf(Effect.CLEAR)) {
-                it.identifyArmyClearedPenalty { card ->
+                it.identifyArmyPenalties { card ->
                     card.isOneOf(
                         Suit.FLOOD
                     )
@@ -390,7 +407,13 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK
                 ), 200
-            ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.FLAME) && card.definition != lightning } }
+            ) {
+                it.filterNotBlankedHandCards { card ->
+                    card.isOneOf(Suit.FLAME) && !card.hasSameNameThan(
+                        lightning
+                    )
+                }
+            }
         ),
         whirlwind to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
@@ -462,7 +485,7 @@ object AllRules {
         beastmaster to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { it.countHandCards(Suit.BEAST) * 9 },
             RuleAboutRule(listOf(Effect.CLEAR)) {
-                it.identifyClearedPenalty { card ->
+                it.identifyPenalties { card ->
                     card.isOneOf(
                         Suit.BEAST
                     )
@@ -616,14 +639,26 @@ object AllRules {
                     Effect.BLANK,
                     Suit.LAND
                 ), 200
-            ) { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.LAND) && card.definition != mountain) } },
+            ) {
+                it.filterNotBlankedHandCards { card ->
+                    (card.isOneOf(Suit.LAND) && !card.hasSameNameThan(
+                        lightning
+                    ))
+                }
+            },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.FLAME
                 ), 200
-            ) { it.filterNotBlankedHandCards { card -> (card.isOneOf(Suit.FLAME) && card.definition != lightning) } }
+            ) {
+                it.filterNotBlankedHandCards { card ->
+                    (card.isOneOf(Suit.FLAME) && !card.hasSameNameThan(
+                        lightning
+                    ))
+                }
+            }
         ),
         rangersV2 to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
@@ -637,7 +672,7 @@ object AllRules {
                     Effect.CLEAR,
                     Suit.ARMY
                 )
-            ) { it.identifyArmyClearedPenalty { true } }),
+            ) { it.identifyArmyPenalties { true } }),
         necromancerV2 to listOf(
             RuleAboutCard(listOf(Effect.BONUS, Effect.UNBLANKABLE)) {
                 it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.UNDEAD) }
@@ -645,8 +680,7 @@ object AllRules {
         ),
         worldTreeV2 to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                if (it.handCardsNotBlanked()
-                        .groupBy { card -> card.suit() }.entries.any { entry -> entry.value.size > 1 }
+                if (it.groupNotBlankedCardsBySuit().entries.any { entry -> entry.value.size > 1 }
                 ) 0 else 70
             }),
         spyglass to listOf(
@@ -660,7 +694,20 @@ object AllRules {
 
         jester to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { if (it.isAllHandCardsOdd()) 50 else (it.countOddHandCards() - 1) * 3 }
+        ),
+        phoenix to listOf(
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.REDUCE_BASE_STRENGTH_TO_ZERO)) {
+                it.cards().filter { card -> card.hasSameNameThan(phoenix) && card.blanked }
+            },
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK)) {
+                if (it.atLeastOneHandCardOf(Suit.FLOOD)) it.filterNotBlankedHandCards { card ->
+                    card.hasSameNameThan(
+                        phoenix
+                    )
+                } else emptyList()
+            }
         )
+
     )
 
 }

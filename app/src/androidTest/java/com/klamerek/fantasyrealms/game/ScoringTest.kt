@@ -679,5 +679,41 @@ class ScoringTest {
         Assertions.assertEquals(35, game.score())
     }
 
+    @DisplayName("Phoenix counts also as Flame and Weather (elemental case)")
+    @Test
+    fun phoenix_counts_also_as_flame_and_weather_elemental_case(){
+        val game = Game()
+        game.add(phoenix)
+        game.add(airElemental)
+        game.add(fireElemental)
+        game.calculate()
+
+        Assertions.assertEquals(4 + 4 + 30 + 14, game.score())
+    }
+
+    @DisplayName("Phoenix counts also as Flame and Weather (collector and blank effect)")
+    @Test
+    fun phoenix_counts_also_as_flame_and_weather_collector_and_blank(){
+        val game = Game()
+        game.add(phoenix)
+        game.add(collector)
+        game.add(rainstorm)
+        game.add(blizzard)
+        game.add(smoke)
+        game.calculate()
+
+        Assertions.assertEquals(0 + 7 + 8 + 30 + 27 + 40 -10, game.score())
+    }
+
+    @DisplayName("Phoenix is blanked with water elemental")
+    @Test
+    fun phoenix_is_blanked_with_water_elemental(){
+        val game = Game()
+        game.add(phoenix)
+        game.add(waterElemental)
+        game.calculate()
+
+        Assertions.assertEquals(4, game.score())
+    }
 
 }
