@@ -36,7 +36,7 @@
     <string name="effect_clear">CLEAR</string>
     <string name="effect_penalty">PENALTY</string>
     <string name="effect_blank">BLANK</string>
-    <string name="effect_unbankable">UNBLANKABLE</string>
+    <string name="effect_unbankable" translatable="false">UNBLANKABLE</string>
     <string name="effect_reduce_base_strength_to_zero" translatable="false">REDUCE_BASE_STRENTGH_TO_ZERO</string>
     <string name="suit_army">Army</string>
     <string name="suit_artifact">Artifact</string>

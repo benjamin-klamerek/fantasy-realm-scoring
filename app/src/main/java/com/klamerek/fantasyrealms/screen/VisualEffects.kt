@@ -18,26 +18,42 @@ fun colorSuitsAndBoldCardNames(context: Context, text: String): SpannableString 
     val spannable = SpannableString(text)
 
     Suit.values().forEach { suit ->
-        ("\\b" + suit.display() + "\\b").toRegex().find(sourceCleaned, 0)?.range?.let { range ->
-            spannable.setSpan(
-                ForegroundColorSpan(ContextCompat.getColor(context, suit.color)),
-                range.first, range.last + 1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-            )
-            spannable.setSpan(
-                StyleSpan(Typeface.BOLD),
-                range.first, range.last + 1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-            )
-        }
+        generatePatternFromName(suit.display())
+            .mapNotNull(searchRanges(sourceCleaned))
+            .onEach(applyColor(spannable, context, suit.color))
+            .onEach(applyBold(spannable))
     }
 
     CardDefinitions.getAll().forEach { definition ->
-        ("\\b" + definition.name() + "\\b").toRegex().find(sourceCleaned, 0)?.range?.let { range ->
-            spannable.setSpan(
-                StyleSpan(Typeface.BOLD),
-                range.first, range.last + 1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-            )
-        }
+        generatePatternFromName(definition.name())
+            .mapNotNull(searchRanges(sourceCleaned))
+            .onEach(applyBold(spannable))
     }
 
     return spannable
+}
+
+private fun generatePatternFromName(name: String) =
+    listOf("\\b$name\\b", "\\b" + name + "s\\b")
+
+private fun applyColor(
+    spannable: SpannableString,
+    context: Context,
+    color: Int
+) = { range: IntRange ->
+    setSpan(
+        spannable,
+        ForegroundColorSpan(ContextCompat.getColor(context, color)),
+        range
+    )
+}
+
+private fun applyBold(spannable: SpannableString) =
+    { range: IntRange -> setSpan(spannable, StyleSpan(Typeface.BOLD), range) }
+
+private fun searchRanges(sourceCleaned: String) =
+    { pattern: String -> pattern.toRegex().find(sourceCleaned, 0)?.range }
+
+private fun setSpan(spannable: SpannableString, what: Any, range: IntRange) {
+    spannable.setSpan(what, range.first, range.last + 1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
 }
