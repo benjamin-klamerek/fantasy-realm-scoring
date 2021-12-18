@@ -6,10 +6,10 @@ package com.klamerek.fantasyrealms.game
  * @property name
  * @property game
  */
-class Player(private var name: String,private val game: Game) : WithGame{
+class Player(private var name: String, private val game: Game) : WithGame {
 
     companion object {
-        val all : MutableList<Player> = ArrayList()
+        val all: MutableList<Player> = ArrayList()
 
         fun generateNextPlayerName(): String {
             var number = 1
@@ -21,6 +21,10 @@ class Player(private var name: String,private val game: Game) : WithGame{
             return playerNamePattern
         }
 
+    }
+
+    fun setName(name: String) {
+        this.name = name
     }
 
     override fun name(): String = name;
