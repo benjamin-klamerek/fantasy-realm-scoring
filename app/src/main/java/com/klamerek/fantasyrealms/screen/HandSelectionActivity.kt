@@ -2,6 +2,7 @@ package com.klamerek.fantasyrealms.screen
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -217,6 +218,8 @@ class HandSelectionAdapter(private val withGame: WithGame, private val displayCa
                 if (displayCardNumber) card.definition.nameWithId()
                 else card.definition.name()
             view.cardNameLabel.setChipBackgroundColorResource(card.suit().color)
+            view.cardNameLabel.paintFlags =
+                if (card.blanked && withGame.displayScore()) Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG else 0
             view.scoreLabel.text =
                 if (withGame.displayScore()) withGame.game().score(card.definition).toString()
                 else ""
