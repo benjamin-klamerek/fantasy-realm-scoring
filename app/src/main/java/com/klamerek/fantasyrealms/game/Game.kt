@@ -50,9 +50,6 @@ class Game {
 
     fun update(cardDefinitions: List<CardDefinition>) {
         cardDefinitions.forEach { definition -> add(definition) }
-        handCards.plus(tableCards).map { card -> card.definition }
-            .filter { definition -> !cardDefinitions.contains(definition) }
-            .forEach { definition -> remove(definition) }
     }
 
     fun clear() {
