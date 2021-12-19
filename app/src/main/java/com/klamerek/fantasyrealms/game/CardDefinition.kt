@@ -22,7 +22,8 @@ enum class Effect(private val displayId: Int) : Tag {
     CLEAR(R.string.effect_clear),
     PENALTY(R.string.effect_penalty),
     BLANK(R.string.effect_blank),
-    UNBLANKABLE(R.string.effect_unbankable);
+    UNBLANKABLE(R.string.effect_unbankable),
+    REDUCE_BASE_STRENGTH_TO_ZERO(R.string.effect_reduce_base_strength_to_zero);
 
     override fun label(): String = this.name
     override fun display(): String = Strings.get(displayId)
@@ -69,19 +70,22 @@ enum class Suit(private val displayId: Int, val color: Int, val set: CardSet) : 
 /**
  * Immutable definition of a card
  *
- * @property id         card id
- * @property name       key card name
- * @property value      base value for scoring
- * @property suit       card family
- * @property keyRule    key explanation of the rule as described on the physical card
+ * @property id                 card id
+ * @property name               key card name
+ * @property value              base value for scoring
+ * @property suit               card family
+ * @property keyRule            key explanation of the rule as described on the physical card
+ * @property cardSet            card set (base, promo, expansion)
+ * @property additionalSuits    additional suit for some specific cards like phoenix
  */
 open class CardDefinition(
     val id: Int, private val keyName: Int,
     val value: Int, val suit: Suit, private val keyRule: Int,
-    private val cardSet: CardSet
+    private val cardSet: CardSet, val additionalSuits: List<Suit> = emptyList()
 ) {
 
-    fun isOneOf(vararg suit: Suit) = suit.contains(this.suit)
+    fun isOneOf(vararg suit: Suit) = suit.contains(this.suit) ||
+            additionalSuits.any { suit.contains(it) }
 
     fun name() = Strings.get(keyName)
 

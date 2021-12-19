@@ -32,7 +32,7 @@ class Game {
     }
 
     fun handCardsNotBlanked(): Collection<Card> {
-        return handCards.filter { card -> !card.blanked }
+        return handCards.filter { card -> !card.blanked || card.definition == phoenix}
     }
 
     fun add(cardDefinition: CardDefinition) {
@@ -50,9 +50,6 @@ class Game {
 
     fun update(cardDefinitions: List<CardDefinition>) {
         cardDefinitions.forEach { definition -> add(definition) }
-        handCards.plus(tableCards).map { card -> card.definition }
-            .filter { definition -> !cardDefinitions.contains(definition) }
-            .forEach { definition -> remove(definition) }
     }
 
     fun clear() {
@@ -125,6 +122,9 @@ class Game {
             .forEach { card -> card.addTemporaryRule(unblankable) }
 
         applyBlankingRules()
+
+        handCards.map { card -> identifyReduceBaseStrengthToZeroCards(card) }.flatten()
+            .forEach { card -> card.value(0) }
 
         bonusScoreByCard.clear()
         penaltyScoreByCard.clear()
@@ -206,16 +206,22 @@ class Game {
             .map { rule -> rule as? RuleAboutCard }
             .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
 
+    private fun identifyReduceBaseStrengthToZeroCards(card: Card): List<Card> =
+        card.rules().filter { rule -> card.isActivated(rule) }
+            .filter { rule -> rule.tags.contains(Effect.REDUCE_BASE_STRENGTH_TO_ZERO) }
+            .map { rule -> rule as? RuleAboutCard }
+            .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
+
 
     fun filterNotBlankedHandCards(scope: (Card) -> Boolean): List<Card> {
         return this.handCardsNotBlanked().filter(scope)
     }
 
-    fun identifyClearedPenalty(scope: (Card) -> Boolean): List<Rule<out Any>> {
+    fun identifyPenalties(scope: (Card) -> Boolean): List<Rule<out Any>> {
         return identifyRule(scope, Effect.PENALTY)
     }
 
-    fun identifyArmyClearedPenalty(scope: (Card) -> Boolean): List<Rule<out Any>> {
+    fun identifyArmyPenalties(scope: (Card) -> Boolean): List<Rule<out Any>> {
         return identifyRule(scope, Effect.PENALTY, Suit.ARMY)
     }
 
@@ -262,7 +268,9 @@ class Game {
     }
 
     fun groupNotBlankedCardsBySuit(): Map<Suit, List<Card>> {
-        return handCardsNotBlanked().groupBy { card -> card.suit() }
+        return handCardsNotBlanked()
+            .flatMap { card -> listOf(card.suit()).plus(card.definition.additionalSuits).map { card to it }}
+            .groupBy ( { it.second }, { it.first })
     }
 
     fun applySelection(

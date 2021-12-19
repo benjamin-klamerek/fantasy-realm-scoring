@@ -18,7 +18,7 @@
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
     <string name="effect_button">Effect</string>
     <string name="base">BASE</string>
-    <string name="disclaimer" translatable="false">Version 0.14 \n
+    <string name="disclaimer" translatable="false">Version 0.15 \n
         With expansion, I\'m adding translations little by little. Default is english.\n\n
         Found a bug ? \nTranslation missing ? \n\nContact me (link in play store)</string>
     <string name="done">Done</string>
@@ -36,7 +36,8 @@
     <string name="effect_clear">CLEAR</string>
     <string name="effect_penalty">PENALTY</string>
     <string name="effect_blank">BLANK</string>
-    <string name="effect_unbankable">UNBLANKABLE</string>
+    <string name="effect_unbankable" translatable="false">UNBLANKABLE</string>
+    <string name="effect_reduce_base_strength_to_zero" translatable="false">REDUCE_BASE_STRENTGH_TO_ZERO</string>
     <string name="suit_army">Army</string>
     <string name="suit_artifact">Artifact</string>
     <string name="suit_beast">Beast</string>
@@ -107,6 +108,7 @@
     <string name="beastmaster">Beastmaster</string>
     <string name="warlock_lord">Warlock Lord</string>
     <string name="jester">Jester</string>
+    <string name="phoenix">Phoenix</string>
     <string name="dungeon">Dungeon</string>
     <string name="castle">Castle</string>
     <string name="crypt">Crypt</string>
@@ -248,5 +250,6 @@
     <string name="portal_rules">ANY TIME: Skip your discard phase this turn. \n(You will have one extra card in your hand from now on.)</string>
     <string name="wishing_ring_rules">ANY TIME: Look through the deck and place any card you wish on top. \n(You may do this immediately before you draw.) \nReshuffle the deck at the end of your turn.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
+    <string name="phoenix_rules">BONUS: also counts as a Flame and Weather card. PENALTY: BLANKED with any Flood card. If this card is BLANKED for any reason, its base strength is reduced to 0 but it retains its suits.</string>
     <string name="language_label_french" translatable="false">Français</string>
 </resources>

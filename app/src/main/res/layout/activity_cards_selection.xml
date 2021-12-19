@@ -448,6 +448,18 @@
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/jester"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="666"
+                android:text="@string/jester"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_wizard"
+                app:chipStrokeColor="@color/colorWizard"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
                 android:id="@+id/chipking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -562,6 +574,18 @@
                 android:checkable="true"
                 android:tag="40"
                 android:text="@string/hydra"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_beast"
+                app:chipStrokeColor="@color/colorBeast"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/phoenix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="667"
+                android:text="@string/phoenix"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_beast"
                 app:chipStrokeColor="@color/colorBeast"
@@ -757,18 +781,6 @@
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_wild"
                 app:chipStrokeColor="@color/colorWild"
-                app:chipStrokeWidth="2dp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/jester"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkable="true"
-                android:tag="666"
-                android:text="@string/jester"
-                android:textColor="@color/chip_revert_color_activated"
-                app:chipBackgroundColor="@color/chip_background_wizard"
-                app:chipStrokeColor="@color/colorWizard"
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip

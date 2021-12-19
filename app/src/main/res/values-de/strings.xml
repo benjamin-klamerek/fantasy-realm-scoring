@@ -165,7 +165,6 @@
     <string name="discard_area">Ablagebereich</string>
     <string name="buildings_outsiders_undead_label">Gebäude/Outsider/Untote</string>
     <string name="cursed_items_label">Verfluchte Gegenstände</string>
-    <string name="effect_unbankable">NICHTBLOCKIERT</string>
     <string name="suit_building">Gebäude</string>
     <string name="suit_outsider">Outsider</string>
     <string name="suit_undead">Untoter</string>

@@ -13,3 +13,16 @@ val jester by lazy {
         CardSet.PROMO
     )
 }
+
+@Suppress("MagicNumber")
+val phoenix by lazy {
+    CardDefinition(
+        667,
+        R.string.phoenix,
+        14,
+        Suit.BEAST,
+        R.string.phoenix_rules,
+        CardSet.PROMO,
+        listOf(Suit.FLAME, Suit.WEATHER)
+    )
+}

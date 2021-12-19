@@ -91,6 +91,17 @@ class PlayerSelectionActivityTest {
     }
 
     @Test
+    fun rename_player(){
+        addPlayer("ME")
+        onView(allOf(withId(R.id.playerNameField), withText("ME"))).perform(longClick())
+        onView(withId(R.id.playerNameEditText)).perform(replaceText("NEW_NAME"))
+        sleep(500)
+        onView(withId(positiveButtonId)).perform(click())
+        sleep(500)
+        onView(allOf(withId(R.id.playerNameField), withText("NEW_NAME"))).check(matches(isDisplayed()))
+    }
+
+    @Test
     fun edit_player_open_hand_activity() {
         addPlayer("ME")
 

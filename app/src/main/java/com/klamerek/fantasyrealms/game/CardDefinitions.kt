@@ -98,7 +98,7 @@ object CardDefinitions {
     }
 
     private fun getPromo(): List<CardDefinition> {
-        return listOf(jester)
+        return listOf(jester, phoenix)
     }
 
     private fun getCursedHoardNewCards(): List<CardDefinition> {
@@ -223,6 +223,7 @@ val allDefinitionsRussian by lazy {
         "KaBanepua" to lightCavalry,
         "MupOBOC ACPeBo" to worldTree,
         "BacuaMCK" to basilisk,
-        "Jester" to jester
+        "Jester" to jester,
+        "Phoenix" to phoenix
     )
 }
