@@ -20,6 +20,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.klamerek.fantasyrealms.R
 import com.klamerek.fantasyrealms.databinding.ActivityPlayerSelectionBinding
 import com.klamerek.fantasyrealms.databinding.PlayerListItemBinding
+import com.klamerek.fantasyrealms.game.DiscardArea
 import com.klamerek.fantasyrealms.game.Game
 import com.klamerek.fantasyrealms.game.Player
 import com.klamerek.fantasyrealms.screen.PlayerSelectionActivity.Companion.playerNameDialog
@@ -94,10 +95,11 @@ class PlayerSelectionActivity : CustomActivity() {
         lateinit var playerNameDialog: PlayerNameDialog
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
+        binding.discardItem.scoreLabel.text = "" + DiscardArea.instance.game().actualHandSize() + " card(s)"
     }
 
     override fun onDestroy() {
@@ -112,7 +114,9 @@ class PlayerSelectionActivity : CustomActivity() {
         val view = binding.root
         setContentView(view)
 
-        installDialog()
+        setUpListeners()
+
+        binding.discardItem.playerNameField.text = getString(R.string.discard_area)
 
         val linearLayoutManager = LinearLayoutManager(this)
         binding.playersView.addItemDecoration(
@@ -131,7 +135,7 @@ class PlayerSelectionActivity : CustomActivity() {
         itemTouchHelper.attachToRecyclerView(binding.playersView)
     }
 
-    private fun installDialog() {
+    private fun setUpListeners() {
         playerNameDialog = PlayerNameDialog(this, this.layoutInflater)
 
         binding.addPlayerButton.setOnClickListener {
@@ -146,7 +150,7 @@ class PlayerSelectionActivity : CustomActivity() {
                 )
             }
         }
-        binding.discardAreaButton.setOnClickListener {
+        binding.discardItem.editButton.setOnClickListener {
             EventBus.getDefault().post(DiscardAreaEditEvent())
         }
     }
