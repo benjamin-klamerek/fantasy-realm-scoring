@@ -15,7 +15,7 @@
     <string name="add_card_button">Karte hinzufügen</string>
     <string name="scan_button">Einscannen</string>
     <string name="scan_help_label">Tipp: Nur die Kartennamen sind notwendig</string>
-    <string name="effect_button">Wirkung</string>
+    <string name="effect_button">Effekt</string>
     <string name="base">Basisstärke</string>
     <string name="done">Fertig</string>
     <string name="language_label">Sprache:</string>
@@ -161,8 +161,8 @@
     <string name="beastmaster_rules">BONUS: +9 für jede Bestie; HEBT die Strafe auf allen Bestien AUF.</string>
     <string name="warlock_lord_rules">STRAFE: -10 für jeden Anführer und/oder anderen Zauberer</string>
     <string name="jester_rules">BONUS: +3 für jede andere Karte mit ungerader Basisstärke ODER +50 wenn alle Karten eine ungerade Basisstärke haben</string>
-    <string name="clear_button">Abwischen</string>
-    <string name="discard_area">Bereich verwerfen</string>
+    <string name="clear_button">Löschen</string>
+    <string name="discard_area">Ablagebereich</string>
     <string name="buildings_outsiders_undead_label">Gebäude/Outsider/Untote</string>
     <string name="cursed_items_label">Verfluchte Gegenstände</string>
     <string name="suit_building">Gebäude</string>
