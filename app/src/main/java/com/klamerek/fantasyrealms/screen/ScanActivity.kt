@@ -15,7 +15,6 @@ import com.google.mlkit.vision.common.InputImage
 import com.klamerek.fantasyrealms.databinding.ActivityScanBinding
 import com.klamerek.fantasyrealms.ocr.CardTitleRecognizer
 import com.klamerek.fantasyrealms.util.Constants
-import com.klamerek.fantasyrealms.util.LocaleManager
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.concurrent.ExecutorService
@@ -30,7 +29,7 @@ class ScanActivity : CustomActivity() {
 
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var recognizer : CardTitleRecognizer
+    private lateinit var recognizer: CardTitleRecognizer
     private lateinit var binding: ActivityScanBinding
 
     override fun onDestroy() {
@@ -88,7 +87,8 @@ class ScanActivity : CustomActivity() {
         override fun onCaptureSuccess(imageProxy: ImageProxy) {
             val mediaImage = imageProxy.image
             if (mediaImage != null) {
-                val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                val image =
+                    InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
                 imageProxy.close()
                 recognizer.process(image).addOnSuccessListener {
                     EventBus.getDefault().post(CardDetectedEvent(it))
@@ -103,7 +103,10 @@ class ScanActivity : CustomActivity() {
 
     private fun scan() {
         val imageCapture = imageCapture ?: return
-        imageCapture.takePicture(ContextCompat.getMainExecutor(this), MyImageCapturedCallback(recognizer))
+        imageCapture.takePicture(
+            ContextCompat.getMainExecutor(this),
+            MyImageCapturedCallback(recognizer)
+        )
     }
 
     @Suppress("TooGenericExceptionCaught")
@@ -145,7 +148,11 @@ class ScanActivity : CustomActivity() {
             ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
         }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
