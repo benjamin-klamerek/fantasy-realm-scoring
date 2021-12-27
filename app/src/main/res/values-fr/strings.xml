@@ -20,6 +20,7 @@
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="display_card_number_label">Afficher numéro de carte:</string>
+    <string name="display_chip_color_on_search_label">Forcer couleur pour sélection:</string>
     <!-- Effets et Familles -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">EFFACE</string>
