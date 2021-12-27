@@ -81,7 +81,7 @@
     <string name="swamp">Swamp</string>
     <string name="great_flood">Great Flood</string>
     <string name="earth_elemental">Earth Elemental</string>
-    <string name="underground_caverns">Underground Caverns</string>
+    <string name="cavern">Cavern</string>
     <string name="forest">Forest</string>
     <string name="bell_tower">Bell Tower</string>
     <string name="mountain">Mountain</string>
@@ -176,7 +176,7 @@
     <string name="swamp_rules">"Penalty: -3 for each Army and Flame"</string>
     <string name="great_flood_rules">Penalty: Blanks all Armies, all Land except Mountain, all Flames except Lightning</string>
     <string name="earth_elemental_rules">Bonus: +15 for each other Land</string>
-    <string name="underground_caverns_rules">Bonus: +25 with Dwarvish Infantry or Dragon; Clears the Penalty on all Weather</string>
+    <string name="cavern_rules">Bonus: +25 with Dwarvish Infantry or Dragon; Clears the Penalty on all Weather</string>
     <string name="forest_rules">Bonus: +12 for each Beast and Elven Archers</string>
     <string name="bell_tower_rules">Bonus: +15 with any one Wizard</string>
     <string name="mountain_rules">Bonus: +50 with both Smoke and Wildfire; Clears the Penalty on all Floods</string>

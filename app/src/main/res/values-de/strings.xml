@@ -63,7 +63,7 @@
     <string name="swamp">Sumpf</string>
     <string name="great_flood">Große Flut</string>
     <string name="earth_elemental">Erdwesen</string>
-    <string name="underground_caverns">Höhle</string>
+    <string name="cavern">Höhle</string>
     <string name="forest">Wald</string>
     <string name="bell_tower">Glockenturm</string>
     <string name="mountain">Gebirge</string>
@@ -124,7 +124,7 @@
     <string name="great_flood_rules">STRAFE: BLOCKIERT alle Armeen, alle Länder außer Gebirge, und alle Flammen, außer Blitz.
     </string>
     <string name="earth_elemental_rules">BONUS: +15 für jedes andere Land</string>
-    <string name="underground_caverns_rules">BONUS: +25 mit Zwergeninfanterie oder Drache; HEBT die Strafen auf allen Wettern AUF.
+    <string name="cavern_rules">BONUS: +25 mit Zwergeninfanterie oder Drache; HEBT die Strafen auf allen Wettern AUF.
     </string>
     <string name="forest_rules">BONUS: +12 für jede Bestie und/oder Elbenschützen</string>
     <string name="bell_tower_rules">BONUS: +15 mit mindestens einem Zauberer</string>

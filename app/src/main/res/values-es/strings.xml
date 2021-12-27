@@ -64,7 +64,7 @@
     <string name="swamp">Pantano</string>
     <string name="great_flood">Inundación</string>
     <string name="earth_elemental">Elemental de Tierra</string>
-    <string name="underground_caverns">Caverna</string>
+    <string name="cavern">Caverna</string>
     <string name="forest">Bosque</string>
     <string name="bell_tower">Campanario</string>
     <string name="mountain">Montaña</string>
@@ -118,7 +118,7 @@
     <string name="swamp_rules">" Penalización: -3 por cada Ejército y Fuego"</string>
     <string name="great_flood_rules"> Penalización: Anula todos los Ejércitos, todas las Tierras excepto Montaña y todos los Fuegos excepto Relámpago</string>
     <string name="earth_elemental_rules">Bonus: +15 por cada otra carta de Tierra</string>
-    <string name="underground_caverns_rules">Bonus: +25 con Dragón o Infantería Enana. Ignora la Penalización de las cartas de Aire</string>
+    <string name="cavern_rules">Bonus: +25 con Dragón o Infantería Enana. Ignora la Penalización de las cartas de Aire</string>
     <string name="forest_rules">Bonus: +12 por cada Bestia y Arqueros Élficos</string>
     <string name="bell_tower_rules">Bonus: +15 con cualquier Mago</string>
     <string name="mountain_rules">Bonus: +50 con Incendio y Humo; Ignora la Penalización de las cartas de Agua</string>

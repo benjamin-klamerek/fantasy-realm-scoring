@@ -41,12 +41,12 @@
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipunderground_caverns"
+                android:id="@+id/chipcavern"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
                 android:tag="2"
-                android:text="@string/underground_caverns"
+                android:text="@string/cavern"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_land"
                 app:chipStrokeColor="@color/chip_stroke_color_land"

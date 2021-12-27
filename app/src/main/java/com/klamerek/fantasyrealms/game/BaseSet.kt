@@ -273,13 +273,13 @@ val earthElemental by lazy {
 }
 
 @Suppress("MagicNumber")
-val undergroundCaverns by lazy {
+val cavern by lazy {
     CardDefinition(
         2,
-        R.string.underground_caverns,
+        R.string.cavern,
         6,
         Suit.LAND,
-        R.string.underground_caverns_rules,
+        R.string.cavern_rules,
         CardSet.BASE
     )
 }
