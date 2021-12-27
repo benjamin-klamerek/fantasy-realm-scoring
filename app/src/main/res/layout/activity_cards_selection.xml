@@ -121,7 +121,7 @@
                 android:text="@string/fountain_of_life"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_flood"
-                app:chipStrokeColor="@color/chip_stroke_color_land"
+                app:chipStrokeColor="@color/chip_stroke_color_flood"
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
@@ -133,7 +133,7 @@
                 android:text="@string/swamp"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_flood"
-                app:chipStrokeColor="@color/chip_stroke_color_land"
+                app:chipStrokeColor="@color/chip_stroke_color_flood"
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
@@ -145,7 +145,7 @@
                 android:text="@string/great_flood"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_flood"
-                app:chipStrokeColor="@color/chip_stroke_color_land"
+                app:chipStrokeColor="@color/chip_stroke_color_flood"
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
@@ -156,7 +156,7 @@
                 android:tag="71"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_flood"
-                app:chipStrokeColor="@color/chip_stroke_color_land"
+                app:chipStrokeColor="@color/chip_stroke_color_flood"
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
@@ -168,7 +168,7 @@
                 android:text="@string/island"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_flood"
-                app:chipStrokeColor="@color/chip_stroke_color_land"
+                app:chipStrokeColor="@color/chip_stroke_color_flood"
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
@@ -180,7 +180,7 @@
                 android:text="@string/water_elemental"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_flood"
-                app:chipStrokeColor="@color/chip_stroke_color_land"
+                app:chipStrokeColor="@color/chip_stroke_color_flood"
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
