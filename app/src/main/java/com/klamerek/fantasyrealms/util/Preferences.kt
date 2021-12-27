@@ -57,4 +57,8 @@ object Preferences {
         }
     }
 
+    fun getDisplayChipColor(context: Context): Boolean {
+        TODO("Not yet implemented")
+    }
+
 }

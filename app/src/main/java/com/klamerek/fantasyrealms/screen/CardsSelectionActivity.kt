@@ -3,6 +3,7 @@ package com.klamerek.fantasyrealms.screen
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.children
@@ -11,6 +12,7 @@ import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
 import com.klamerek.fantasyrealms.game.CardDefinitions
 import com.klamerek.fantasyrealms.game.CardSet
 import com.klamerek.fantasyrealms.game.Suit
+import com.klamerek.fantasyrealms.revertChipColorState
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Preferences
 import java.io.Serializable
@@ -30,6 +32,7 @@ class CardsSelectionActivity : CustomActivity() {
         input =
             intent.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as CardsSelectionExchange
 
+        invertSelectionColorMode(baseContext)
         updateVisibleChips(baseContext)
         updateMainLabel()
         checkSelectedCards()
@@ -63,14 +66,27 @@ class CardsSelectionActivity : CustomActivity() {
 
     }
 
+    private fun invertSelectionColorMode(context: Context) {
+        if (Preferences.getDisplayChipColor(context)){
+            cardChips().plus(suitChips()).forEach { chip ->
+                run {
+                    chip.chipBackgroundColor = chip.chipBackgroundColor?.revertChipColorState()
+                    chip.setTextColor(chip.textColors.revertChipColorState())
+                    chip.chipStrokeColor = chip.chipStrokeColor?.revertChipColorState()
+                }
+            }
+        }
+    }
+
     private fun updateVisibleChips(context: Context) {
         val activeDefinitions = CardDefinitions.get(context).map { it.id.toString() }
         cardChips().forEach { chip ->
-            chip.visibility = if (activeDefinitions.contains(chip.tag.toString())) View.VISIBLE else View.GONE
+            chip.visibility =
+                if (activeDefinitions.contains(chip.tag.toString())) View.VISIBLE else View.GONE
         }
 
         suitChips().forEach { chip ->
-            chip.visibility = when (Suit.valueOf(chip.tag.toString()).set){
+            chip.visibility = when (Suit.valueOf(chip.tag.toString()).set) {
                 CardSet.CURSED_HOARD -> if (Preferences.getBuildingsOutsidersUndead(context)) View.VISIBLE else View.GONE
                 else -> View.VISIBLE
             }
@@ -131,7 +147,7 @@ class CardsSelectionActivity : CustomActivity() {
     }
 
     private fun showOnlyPotentialCandidates() {
-       cardChips().forEach { chip ->
+        cardChips().forEach { chip ->
             chip.visibility =
                 if (input.cardsScope.contains(Integer.valueOf(chip.tag.toString()))) View.VISIBLE else View.GONE
         }
