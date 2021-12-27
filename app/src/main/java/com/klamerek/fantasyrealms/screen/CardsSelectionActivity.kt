@@ -67,7 +67,7 @@ class CardsSelectionActivity : CustomActivity() {
     }
 
     private fun invertSelectionColorMode(context: Context) {
-        if (Preferences.getDisplayChipColor(context)){
+        if (Preferences.getDisplayChipColorOnSearch(context)){
             cardChips().plus(suitChips()).forEach { chip ->
                 run {
                     chip.chipBackgroundColor = chip.chipBackgroundColor?.revertChipColorState()
