@@ -208,7 +208,7 @@ class ScoringTest {
     fun full_game_sample_7() {
         val game = Game()
         game.add(mountain)
-        game.add(undergroundCaverns)
+        game.add(cavern)
         game.add(wildfire)
         game.add(rangers)
         game.add(beastmaster)
@@ -238,7 +238,7 @@ class ScoringTest {
     fun full_game_sample_9() {
         val game = Game()
         game.add(elementalEnchantress)
-        game.add(undergroundCaverns)
+        game.add(cavern)
         game.add(bellTower)
         game.add(worldTree)
         game.add(waterElemental)
@@ -483,7 +483,7 @@ class ScoringTest {
     @Test
     fun dark_queen_example() {
         DiscardArea.instance.game().add(candle)
-        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(cavern)
         DiscardArea.instance.game().add(shieldOfKeth)
 
         val game = Game()
@@ -497,7 +497,7 @@ class ScoringTest {
     @Test
     fun ghoul_example() {
         DiscardArea.instance.game().add(celestialKnights)
-        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(cavern)
         DiscardArea.instance.game().add(darkQueen)
         DiscardArea.instance.game().add(king)
 
@@ -512,7 +512,7 @@ class ScoringTest {
     @Test
     fun specter_example() {
         DiscardArea.instance.game().add(protectionRune)
-        DiscardArea.instance.game().add(undergroundCaverns)
+        DiscardArea.instance.game().add(cavern)
         DiscardArea.instance.game().add(darkQueen)
         DiscardArea.instance.game().add(demon)
 

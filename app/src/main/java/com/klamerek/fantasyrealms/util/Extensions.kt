@@ -1,5 +1,6 @@
 package com.klamerek.fantasyrealms
 
+import android.content.res.ColorStateList
 import java.text.Normalizer
 
 private val REGEX_UNACCENT = "\\p{InCombiningDiacriticalMarks}+".toRegex()
@@ -20,5 +21,16 @@ fun String.normalize(): String {
  * @return 1 for true, O for false
  */
 fun Boolean.toInt() = if (this) 1 else 0
+
+/**
+ * Invert ColorStateList for chip with 2 states
+ * @return inverted ColorStateList
+ */
+fun ColorStateList.revertChipColorState(): ColorStateList{
+    return ColorStateList(
+        arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
+        intArrayOf(this.getColorForState(intArrayOf(), -1),
+            this.getColorForState(intArrayOf(android.R.attr.state_checked), -1)))
+}
 
 

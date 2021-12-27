@@ -18,9 +18,8 @@
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
     <string name="effect_button">Effect</string>
     <string name="base">BASE</string>
-    <string name="disclaimer" translatable="false">Version 0.15 \n
-        With expansion, I\'m adding translations little by little. Default is english.\n\n
-        Found a bug ? \nTranslation missing ? \n\nContact me (link in play store)</string>
+    <string name="disclaimer" translatable="false">V 0.16 \n
+        Found a bug ? \nTranslation missing and you want to contribute? \n\nContact me (link in play store)</string>
     <string name="done">Done</string>
     <string name="language_label">Language:</string>
     <string name="language_label_english" translatable="false">English</string>
@@ -28,6 +27,7 @@
     <string name="language_label_german" translatable="false">Deutsch</string>
     <string name="language_label_spanish" translatable="false">Español</string>
     <string name="display_card_number_label">Display card number:</string>
+    <string name="display_chip_color_on_search_label">Display chip color on search:</string>
     <string name="buildings_outsiders_undead_label">Buildings, outsiders and undead:</string>
     <string name="cursed_items_label">Cursed items:</string>
     <string name="discard_area">Discard area</string>
@@ -80,7 +80,7 @@
     <string name="swamp">Swamp</string>
     <string name="great_flood">Great Flood</string>
     <string name="earth_elemental">Earth Elemental</string>
-    <string name="underground_caverns">Underground Caverns</string>
+    <string name="cavern">Cavern</string>
     <string name="forest">Forest</string>
     <string name="bell_tower">Bell Tower</string>
     <string name="mountain">Mountain</string>
@@ -175,7 +175,7 @@
     <string name="swamp_rules">"Penalty: -3 for each Army and Flame"</string>
     <string name="great_flood_rules">Penalty: Blanks all Armies, all Land except Mountain, all Flames except Lightning</string>
     <string name="earth_elemental_rules">Bonus: +15 for each other Land</string>
-    <string name="underground_caverns_rules">Bonus: +25 with Dwarvish Infantry or Dragon; Clears the Penalty on all Weather</string>
+    <string name="cavern_rules">Bonus: +25 with Dwarvish Infantry or Dragon; Clears the Penalty on all Weather</string>
     <string name="forest_rules">Bonus: +12 for each Beast and Elven Archers</string>
     <string name="bell_tower_rules">Bonus: +15 with any one Wizard</string>
     <string name="mountain_rules">Bonus: +50 with both Smoke and Wildfire; Clears the Penalty on all Floods</string>

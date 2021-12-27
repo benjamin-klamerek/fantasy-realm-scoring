@@ -256,7 +256,7 @@ object AllRules {
                 ) * 15
             }
         ),
-        undergroundCaverns to listOf(
+        cavern to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
                 if (it.containsHandCards(dwarvishInfantry) || it.containsHandCards(
                         dragon

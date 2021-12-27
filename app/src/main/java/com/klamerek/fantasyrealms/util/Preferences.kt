@@ -57,4 +57,19 @@ object Preferences {
         }
     }
 
+    fun saveDisplayChipColorOnSearchInPreferences(context: Context, activate: Boolean) {
+        val sharedPref = sharedPreferences(context)
+        with(sharedPref.edit()) {
+            putBoolean(context.getString(R.string.display_chip_color_on_search), activate)
+            apply()
+        }
+    }
+
+    fun getDisplayChipColorOnSearch(context: Context): Boolean {
+        return sharedPreferences(context).getBoolean(
+            context.getString(R.string.display_chip_color_on_search),
+            false
+        )
+    }
+
 }

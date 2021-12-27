@@ -63,7 +63,7 @@
     <string name="swamp">Болото</string>
     <string name="great_flood">Великий потоп</string>
     <string name="earth_elemental">Дух земли</string>
-    <string name="underground_caverns">Пещера</string>
+    <string name="cavern">Пещера</string>
     <string name="forest">Лес</string>
     <string name="bell_tower">Колокольня</string>
     <string name="mountain">Гора</string>
@@ -121,7 +121,7 @@
     <string name="swamp_rules">Штраф: -3 за каждую армию и пламя.</string>
     <string name="great_flood_rules">Штраф: БЛОКИРУЕТ все войска, все земли, кроме горы, и всё пламя, кроме молнии.</string>
     <string name="earth_elemental_rules">Бонус: +15 за каждую другую землю.</string>
-    <string name="underground_caverns_rules">Бонус: +25 вместе с гномьей пехотой или драконом.ОТМЕНЯЕТ штрафы на всех картах погоды.</string>
+    <string name="cavern_rules">Бонус: +25 вместе с гномьей пехотой или драконом.ОТМЕНЯЕТ штрафы на всех картах погоды.</string>
     <string name="forest_rules">Бонус: +12 за каждого зверя и эльфов-стрелков.</string>
     <string name="bell_tower_rules">Бонус: +15 вместе с любым колдуном.</string>
     <string name="mountain_rules">Бонус: +50 вместе с дымом и пожаром. ОТМЕНЯЕТ штраф на всех потопах.</string>

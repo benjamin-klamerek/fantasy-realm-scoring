@@ -20,6 +20,7 @@
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
     <string name="display_card_number_label">Afficher numéro de carte:</string>
+    <string name="display_chip_color_on_search_label">Forcer couleur pour sélection:</string>
     <!-- Effets et Familles -->
     <string name="effect_bonus">BONUS</string>
     <string name="effect_clear">EFFACE</string>
@@ -63,7 +64,7 @@
     <string name="swamp">Marécage</string>
     <string name="great_flood">Inondation</string>
     <string name="earth_elemental">Elémental de Terre</string>
-    <string name="underground_caverns">Caverne</string>
+    <string name="cavern">Caverne</string>
     <string name="forest">Forêt</string>
     <string name="bell_tower">Beffroi</string>
     <string name="mountain">Montagne</string>
@@ -118,7 +119,7 @@
     <string name="swamp_rules">"Malus: -3 pour chaque Armée ou Flamme"</string>
     <string name="great_flood_rules">Malus: Masque toutes les Armées, tous les Terrains sauf la Montagne, et toutes les Flammes sauf l\'Eclair.</string>
     <string name="earth_elemental_rules">Bonus: +15 pour chaque autre Terrain</string>
-    <string name="underground_caverns_rules">Bonus: +25 avec l\Infanterie naine ou le Dragon. Efface les malus de tous les Climats.</string>
+    <string name="cavern_rules">Bonus: +25 avec l\Infanterie naine ou le Dragon. Efface les malus de tous les Climats.</string>
     <string name="forest_rules">Bonus: +12 pour les Archers Elfes et chaque Créature.</string>
     <string name="bell_tower_rules">Bonus: +15 avec n\'importe quel Sorcier</string>
     <string name="mountain_rules">Bonus: +50 avec la Fumée et le Feu de Forêt. Efface le malus de toutes les Vagues.</string>

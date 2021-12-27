@@ -3,6 +3,8 @@ package com.klamerek.fantasyrealms.screen
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,8 +19,10 @@ import com.klamerek.fantasyrealms.ocr.CardTitleRecognizer
 import com.klamerek.fantasyrealms.util.Constants
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import java.nio.ByteBuffer
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 /**
  * Activity using camera and text recognition (ML kit) to detect cards from titles<br>
@@ -87,12 +91,29 @@ class ScanActivity : CustomActivity() {
         override fun onCaptureSuccess(imageProxy: ImageProxy) {
             val mediaImage = imageProxy.image
             if (mediaImage != null) {
-                val image =
-                    InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                val image = convertImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
                 imageProxy.close()
                 recognizer.process(image).addOnSuccessListener {
                     EventBus.getDefault().post(CardDetectedEvent(it))
                 }
+            }
+        }
+
+        /**
+         * Convert image to InputImage<br>
+         * This method as a workaround so solve this issue : https://github.com/benjamin-klamerek/fantasy-realm-scoring/issues/12<br>
+         * I cannot guarantee that the problem is solved. But at least, app crash is avoided<br>
+         */
+        private fun convertImage(mediaImage: Image, rotationDegrees: Int): InputImage {
+            return try {
+                InputImage.fromMediaImage(mediaImage, rotationDegrees)
+            } catch (e: IllegalArgumentException) {
+                Log.e(TAG, "Could not parse image from media image, try workaround", e)
+                val buffer: ByteBuffer = mediaImage.planes[0].buffer
+                val bytes = ByteArray(buffer.capacity())
+                buffer.get(bytes)
+                val bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
+                InputImage.fromBitmap(bitmapImage, rotationDegrees)
             }
         }
 
