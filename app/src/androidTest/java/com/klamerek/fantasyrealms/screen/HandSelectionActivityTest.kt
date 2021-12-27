@@ -256,23 +256,6 @@ class HandSelectionActivityTest {
     }
 
     @Test
-    fun cards_selection_update_display_and_override_existing_hand() {
-        val cardsSelectionExchange = CardsSelectionExchange()
-        cardsSelectionExchange.cardsSelected.addAll(listOf(basilisk.id, forge.id, earthElemental.id))
-        val cardSelection = Intent()
-        cardSelection.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, cardsSelectionExchange)
-        val result = Instrumentation.ActivityResult(Constants.RESULT_OK, cardSelection)
-
-        initPlayer("TEST", listOf(fireElemental))
-
-        intending(hasComponent(CardsSelectionActivity::class.java.name)).respondWith(result)
-        onView(withId(R.id.addCardsButton)).perform(click())
-
-        onView(withId(R.id.playerNameLabel)).check(matches(withText("TEST - Score : 48")))
-        onView(withId(R.id.handSizeLabel)).check(matches(withText("3/7")))
-    }
-
-    @Test
     fun scan_button() {
         initPlayer("TEST", emptyList())
 

@@ -42,10 +42,10 @@ class GameTest {
 
 
         org.junit.jupiter.api.Assertions.assertAll(
-            { Assertions.assertThat(game.handCards()).hasSize(3) },
+            { Assertions.assertThat(game.handCards()).hasSize(4) },
             {
                 Assertions.assertThat(game.handCards().map { it.definition })
-                    .contains(candle, collector, dragon)
+                    .contains(necromancer, candle, collector, dragon)
             }
         )
     }

@@ -45,6 +45,7 @@ class CardTitleRecognizerTest {
     @DisplayName("Hand example, each card separated (english)")
     @Test
     fun hand_example_each_card_separated() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.english)
         val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, english
         )
@@ -64,6 +65,7 @@ class CardTitleRecognizerTest {
     @DisplayName("Hand example 2, each card separated (english)")
     @Test
     fun hand_example_2_each_card_separated() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.english)
         val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, english
         )
@@ -84,6 +86,7 @@ class CardTitleRecognizerTest {
     @DisplayName("Hand example 3, each card separated (english)")
     @Test
     fun hand_example_3_each_card_separated() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.english)
         val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, english
         )
@@ -103,6 +106,7 @@ class CardTitleRecognizerTest {
     @DisplayName("Title only (french)")
     @Test
     fun title_only_french() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.french)
         val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, french
         )
@@ -122,6 +126,7 @@ class CardTitleRecognizerTest {
     @DisplayName("One card (russian)")
     @Test
     fun one_card_russian() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.russian)
         val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, russian
         )
@@ -140,6 +145,7 @@ class CardTitleRecognizerTest {
     @DisplayName("Card set russian")
     @Test
     fun card_set_russian() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.russian)
         val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, russian
         )
@@ -159,6 +165,7 @@ class CardTitleRecognizerTest {
     @DisplayName("Card german jester")
     @Test
     fun card_german_jester() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, LocaleManager.german)
         val context = LocaleManager.updateContextWithPreferredLanguage(
             InstrumentationRegistry.getInstrumentation().targetContext, german
         )
