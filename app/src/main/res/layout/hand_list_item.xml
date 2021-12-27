@@ -18,6 +18,8 @@
                 <com.google.android.material.chip.Chip
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/cardNameLabel"
+                        app:chipStrokeColor="@color/design_default_color_on_secondary"
+                        app:chipStrokeWidth="2dp"
                         android:textColor="@color/design_default_color_on_primary"/>
                 <Space
                         android:layout_width="wrap_content"

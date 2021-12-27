@@ -2,6 +2,8 @@ package com.klamerek.fantasyrealms.screen
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import com.klamerek.fantasyrealms.R
+import com.klamerek.fantasyrealms.Strings
 import com.klamerek.fantasyrealms.databinding.ActivitySettingsBinding
 import com.klamerek.fantasyrealms.game.CardDefinitions
 import com.klamerek.fantasyrealms.game.DiscardArea
@@ -33,6 +35,8 @@ class SettingsActivity : CustomActivity() {
         binding.withBuildingsOutsidersUndeadCheckBox.isChecked =
             Preferences.getBuildingsOutsidersUndead(baseContext)
         binding.withCursedItemsCheckBox.isChecked = Preferences.getCursedItems(baseContext)
+        binding.displayChipColorOnSearchCheckBox.isChecked =
+            Preferences.getDisplayChipColorOnSearch(baseContext)
 
         val initialValue = getCardScopeId()
 
@@ -55,6 +59,10 @@ class SettingsActivity : CustomActivity() {
             Preferences.saveCursedItemsInPreferences(
                 baseContext,
                 binding.withCursedItemsCheckBox.isChecked
+            )
+            Preferences.saveDisplayChipColorOnSearchInPreferences(
+                baseContext,
+                binding.displayChipColorOnSearchCheckBox.isChecked
             )
             removeCardOutOfScope(initialValue)
             finish()
