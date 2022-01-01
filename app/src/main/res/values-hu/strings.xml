@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mesebeli birodalmak Scoring</string>
+    <string name="app_name">Mesebeli birodalmak Pontozó</string>
     <string name="start_button">Kezdés</string>
     <string name="edit_button">Beállítások</string>
     <string name="ok_button">OK</string>
@@ -20,27 +20,27 @@
     <string name="base">Alaperő</string>
     <string name="done">Done</string>
     <string name="language_label">Language:</string>
-    <string name="display_card_number_label">Display card number:</string>
-    <string name="display_chip_color_on_search_label">Display chip color on search:</string>
-    <string name="buildings_outsiders_undead_label">Buildings, outsiders and undead:</string>
-    <string name="cursed_items_label">Cursed items:</string>
-    <string name="discard_area">Discard area</string>
+    <string name="display_card_number_label">Mutasd a kártya számát:</string>
+    <string name="display_chip_color_on_search_label">Mutasd a kártyák típusát keresésnél:</string>
+    <string name="buildings_outsiders_undead_label">Épületek, kívülállók és élőholtak</string>
+    <string name="cursed_items_label">Elátkozott tárgyak:</string>
+    <string name="discard_area">Dobópakli</string>
     <!-- Effects and Suits -->
-    <string name="effect_bonus">BONUS</string>
-    <string name="effect_clear">CLEAR</string>
-    <string name="effect_penalty">PENALTY</string>
-    <string name="effect_blank">BLANK</string>
-    <string name="suit_army">Army</string>
-    <string name="suit_artifact">Artifact</string>
-    <string name="suit_beast">Beast</string>
-    <string name="suit_flame">Flame</string>
-    <string name="suit_flood">Flood</string>
-    <string name="suit_land">Land</string>
-    <string name="suit_leader">Leader</string>
-    <string name="suit_weapon">Weapon</string>
-    <string name="suit_weather">Weather</string>
-    <string name="suit_wild">Wild</string>
-    <string name="suit_wizard">Wizard</string>
+    <string name="effect_bonus">ELŐNYÖK</string>
+    <string name="effect_clear">Megszüntet</string>
+    <string name="effect_penalty">HÁTRÁNYOK</string>
+    <string name="effect_blank">Eltöröl</string>
+    <string name="suit_army">Sereg</string>
+    <string name="suit_artifact">Varázstárgy</string>
+    <string name="suit_beast">Szörnyeteg</string>
+    <string name="suit_flame">Láng</string>
+    <string name="suit_flood">Áradás</string>
+    <string name="suit_land">Föld</string>
+    <string name="suit_leader">Vezér</string>
+    <string name="suit_weapon">Fegyver</string>
+    <string name="suit_weather">Időjárás</string>
+    <string name="suit_wild">Vad</string>
+    <string name="suit_wizard">Varázsló</string>
     <string name="suit_building">Building</string>
     <string name="suit_outsider">Outsider</string>
     <string name="suit_undead">Undead</string>
