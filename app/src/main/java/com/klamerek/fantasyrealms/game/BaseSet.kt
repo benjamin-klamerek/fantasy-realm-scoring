@@ -532,13 +532,13 @@ val necromancer by lazy {
 }
 
 @Suppress("MagicNumber")
-val elementalEnchantress by lazy {
+val enchantress by lazy {
     CardDefinition(
         30,
-        R.string.elemental_enchantress,
+        R.string.enchantress,
         5,
         Suit.WIZARD,
-        R.string.elemental_enchantress_rules,
+        R.string.enchantress_rules,
         CardSet.BASE
     )
 }

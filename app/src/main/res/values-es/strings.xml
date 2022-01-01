@@ -87,7 +87,7 @@
     <string name="mirage">Espejismo</string>
     <string name="doppelganger">Doppelgänger</string>
     <string name="necromancer">Nigromante</string>
-    <string name="elemental_enchantress">Encantadora</string>
+    <string name="enchantress">Encantadora</string>
     <string name="collector">Recolector</string>
     <string name="beastmaster">Señor de las Bestias</string>
     <string name="warlock_lord">Brujo Maestro</string>
@@ -141,7 +141,7 @@
     <string name="mirage_rules">Puede copiar el nombre y tipo de cualquier Ejército, Tierra, Aire, Agua o Fuego de todo el juego. No recibes Bonus, Penalizaciones o Fuerza Base de la carta copiada.</string>
     <string name="doppelganger_rules">Puede copiar el nombre, Fuerza Base, Tipo y Penalización de cualquier carta de tu mano PERO NO EL BONUS</string>
     <string name="necromancer_rules">Bonus: Al final de la partida, puedes coger un Ejército, Líder, Mago o Bestia del descarte y ponerla en tu mano como una octava carta</string>
-    <string name="elemental_enchantress_rules">Bonus: +5 por cada Tierra, Aire, Agua y Fuego</string>
+    <string name="enchantress_rules">Bonus: +5 por cada Tierra, Aire, Agua y Fuego</string>
     <string name="collector_rules">Bonus: +10 si tienes 3 cartas diferentes del mismo tipo, +40 si tienes 4 cartas diferentes del mismo tipo, +100 si tienes 5 cartas diferentes del mismo tipo</string>
     <string name="beastmaster_rules">Bonus: +9 por cada Bestia; Ignora la Penalización de todas las Bestias</string>
     <string name="warlock_lord_rules">Penalización: -10 por cada Líder y otro Mago que tengas</string>

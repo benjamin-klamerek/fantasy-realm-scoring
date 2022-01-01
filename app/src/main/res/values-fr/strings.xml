@@ -87,7 +87,7 @@
     <string name="mirage">Mirage</string>
     <string name="doppelganger">Doppelgänger</string>
     <string name="necromancer">Nécromancien</string>
-    <string name="elemental_enchantress">Enchanteresse</string>
+    <string name="enchantress">Enchanteresse</string>
     <string name="collector">Collectionneur</string>
     <string name="beastmaster">Dresseur</string>
     <string name="warlock_lord">Démoniste</string>
@@ -142,7 +142,7 @@
     <string name="mirage_rules">Peut copier le nom et la famille de n\'importe quel Terrain, Armées, Climat, vague ou Flamme du jeu. N\'appliquez ni le bonus, ni le malus, de la force de base de la carte copiée</string>
     <string name="doppelganger_rules">Peut copier le nom, la force de base, la famille et le malus mais pas le bonus de n\'importe quelle autre carte en jeu</string>
     <string name="necromancer_rules">Bonus: A la fin de la partie, vous pouvez prendre une Armée, un Seigneur, un Sorcier ou une Créature de la défausse et l\'ajouter à votre main comme huitième carte.</string>
-    <string name="elemental_enchantress_rules">Bonus: +5 pour chaque Terrain, Climat, Vague et Flamme</string>
+    <string name="enchantress_rules">Bonus: +5 pour chaque Terrain, Climat, Vague et Flamme</string>
     <string name="collector_rules">Bonus: +10 si vous avez 3 cartes de la même famille, +40 si vous avez 4 cartes de la même famille, +100 si vous avez 5 cartes de la même famille</string>
     <string name="beastmaster_rules">Bonus: +9 pour chaque Créature. Efface les malus de toutes les Créatures</string>
     <string name="warlock_lord_rules">Malus: -10 pour chaque Seigneur et chaque autre Sorcier</string>

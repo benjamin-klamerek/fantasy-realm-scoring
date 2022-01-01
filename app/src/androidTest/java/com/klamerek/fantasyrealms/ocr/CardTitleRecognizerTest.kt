@@ -12,6 +12,7 @@ import com.klamerek.fantasyrealms.util.LocaleManager
 import com.klamerek.fantasyrealms.util.LocaleManager.english
 import com.klamerek.fantasyrealms.util.LocaleManager.french
 import com.klamerek.fantasyrealms.util.LocaleManager.german
+import com.klamerek.fantasyrealms.util.LocaleManager.hungarian
 import com.klamerek.fantasyrealms.util.LocaleManager.russian
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
@@ -177,6 +178,25 @@ class CardTitleRecognizerTest {
         assertThat(
             task.result, Matchers.containsInAnyOrder(
                 jester.id
+            )
+        )
+    }
+
+    @DisplayName("Card hungarian")
+    @Test
+    fun card_hungarian_jester() {
+        LocaleManager.saveLanguageInPreferences( InstrumentationRegistry.getInstrumentation().targetContext, hungarian)
+        val context = LocaleManager.updateContextWithPreferredLanguage(
+            InstrumentationRegistry.getInstrumentation().targetContext, hungarian
+        )
+        val bean = CardTitleRecognizer(context)
+        val task = bean.process(InputImage.fromBitmap(getBitmapFromTestAssets("cardHungarian.jpg"), 0))
+
+        Tasks.await(task)
+
+        assertThat(
+            task.result, Matchers.containsInAnyOrder(
+                empress.id
             )
         )
     }

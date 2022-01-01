@@ -436,12 +436,12 @@
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipelemental_enchantress"
+                android:id="@+id/chip_enchantress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
                 android:tag="30"
-                android:text="@string/elemental_enchantress"
+                android:text="@string/enchantress"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_wizard"
                 app:chipStrokeColor="@color/chip_stroke_color_wizard"

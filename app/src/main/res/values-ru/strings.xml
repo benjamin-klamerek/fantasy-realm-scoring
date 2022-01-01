@@ -86,7 +86,7 @@
     <string name="mirage">Мираж</string>
     <string name="doppelganger">Двойник</string>
     <string name="necromancer">Некромант</string>
-    <string name="elemental_enchantress">Чародейка</string>
+    <string name="enchantress">Чародейка</string>
     <string name="collector">Собиратель</string>
     <string name="beastmaster">Зверолов</string>
     <string name="warlock_lord">Чернокнижник</string>
@@ -145,7 +145,7 @@
     <string name="mirage_rules">Может копировать название и масть любого войска, земли, погоды, потопа или пламени в игре. Не получает бонуса, штрафа и основную силу скопированной карты.</string>
     <string name="doppelganger_rules">Может копировать название, основную силу, масть и штраф, НО НЕ БОНУС одной другой карты у вас в руке.</string>
     <string name="necromancer_rules">Бонус: В конце игры можете взять из стопки сброса одно войско, правителя, колдуна или зверя и добавить себе на руку в качестве восьмой карты.</string>
-    <string name="elemental_enchantress_rules">Бонус: +5 за каждую землю, погоду, потоп и пламя.</string>
+    <string name="enchantress_rules">Бонус: +5 за каждую землю, погоду, потоп и пламя.</string>
     <string name="collector_rules">Бонус: +10 за три разные карты одной масти, +40 за четыре разные карты одной масти, +100 за пять разных карт одной масти.</string>
     <string name="beastmaster_rules">Бонус: +9 за каждого зверя. ОТМЕНЯЕТ штрафы на всех зверях.</string>
     <string name="warlock_lord_rules">Штраф: -10 за каждого правителя и других колдунов.</string>

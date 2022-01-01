@@ -26,6 +26,8 @@
     <string name="language_label_russian" translatable="false">русский</string>
     <string name="language_label_german" translatable="false">Deutsch</string>
     <string name="language_label_spanish" translatable="false">Español</string>
+    <string name="language_label_hungarian" translatable="false">Magyar</string>
+    <string name="language_label_french" translatable="false">Français</string>
     <string name="display_card_number_label">Display card number:</string>
     <string name="display_chip_color_on_search_label">Display chip color on search:</string>
     <string name="buildings_outsiders_undead_label">Buildings, outsiders and undead:</string>
@@ -103,7 +105,7 @@
     <string name="mirage">Mirage</string>
     <string name="doppelganger">Doppelganger</string>
     <string name="necromancer">Necromancer</string>
-    <string name="elemental_enchantress">Elemental Enchantress</string>
+    <string name="enchantress">Enchantress</string>
     <string name="collector">Collector</string>
     <string name="beastmaster">Beastmaster</string>
     <string name="warlock_lord">Warlock Lord</string>
@@ -160,7 +162,7 @@
     <string name="shield_of_keth_rules">Bonus: +15 with any one Leader, +40 with both Leader and Sword of Keth</string>
     <string name="gem_of_order_rules">Bonus: +10 for 3-card run, +30 for 4-card run, +60 for 5-card run, +100 for 6-card run, +150 for 7-card run</string>
     <string name="warhorse_rules">Bonus: +14 with any Leader or Wizard</string>
-    <string name="unicorn_rules">Bonus: +30 with Princess, +15 with Empress, Queen, or Elemental Enchantress</string>
+    <string name="unicorn_rules">Bonus: +30 with Princess, +15 with Empress, Queen, or Enchantress</string>
     <string name="hydra_rules">Bonus: +28 with Swamp</string>
     <string name="dragon_rules">Penalty: -40 unless with at least one Wizard</string>
     <string name="basilisk_rules">Penalty: Blanks all Armies, Leaders, and other Beasts</string>
@@ -198,7 +200,7 @@
     <string name="mirage_rules">May take on the name and suit of any Army, Land, Weather, Flood or Flame. Does not take bonus or penalty.</string>
     <string name="doppelganger_rules">May duplicate the name, suit, base strength, and penalty but not bonus of any one other card in your hand</string>
     <string name="necromancer_rules">Bonus: At the end of the game, you may take one Army, Leader, Wizard, or Beast from the discard pile and add it to your hand as an eighth card.</string>
-    <string name="elemental_enchantress_rules">Bonus: +5 for each Land, Weather, Flood, and Flame</string>
+    <string name="enchantress_rules">Bonus: +5 for each Land, Weather, Flood, and Flame</string>
     <string name="collector_rules">Bonus: +10 if three different cards in same suit, +40 if four different cards, +100 if five different cards</string>
     <string name="beastmaster_rules">Bonus: +9 for each Beast; Clears the Penalty on all Beasts</string>
     <string name="warlock_lord_rules">Penalty: -10 for each Leader and other Wizard</string>
@@ -251,5 +253,4 @@
     <string name="wishing_ring_rules">ANY TIME: Look through the deck and place any card you wish on top. \n(You may do this immediately before you draw.) \nReshuffle the deck at the end of your turn.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
     <string name="phoenix_rules">BONUS: also counts as a Flame and Weather card. PENALTY: BLANKED with any Flood card. If this card is BLANKED for any reason, its base strength is reduced to 0 but it retains its suits.</string>
-    <string name="language_label_french" translatable="false">Français</string>
 </resources>
