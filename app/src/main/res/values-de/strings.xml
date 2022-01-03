@@ -86,7 +86,7 @@
     <string name="mirage">Spiegelung</string>
     <string name="doppelganger">Doppelgänger</string>
     <string name="necromancer">Totenbeschwörer</string>
-    <string name="elemental_enchantress">Magierin</string>
+    <string name="enchantress">Magierin</string>
     <string name="collector">Sammler</string>
     <string name="beastmaster">Herr der Bestien</string>
     <string name="warlock_lord">Hexenmeister</string>
@@ -154,7 +154,7 @@
     </string>
     <string name="necromancer_rules">BONUS: Du darfst am Spielende eine Armee, Anführer, Zauberer oder Bestie aus dem Ablagebereich nehmen und sie als 8. Karte Deiner Hand werten.
     </string>
-    <string name="elemental_enchantress_rules">BONUS: +5 für jedes Land, Wetter, Flut und/oder Flamme</string>
+    <string name="enchantress_rules">BONUS: +5 für jedes Land, Wetter, Flut und/oder Flamme</string>
     <string name="collector_rules">BONUS: +10 für drei unterschiedliche Karten der gleichen Farbe, +40 für vier unterschiedliche Karten der gleichen Farbe, +100
         für fünf unterschiedliche Karten der gleichen Farbe
     </string>

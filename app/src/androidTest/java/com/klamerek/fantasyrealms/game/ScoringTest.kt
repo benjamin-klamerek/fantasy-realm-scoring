@@ -87,7 +87,7 @@ class ScoringTest {
         val game = Game()
         game.add(warlockLord)
         game.add(beastmaster)
-        game.add(elementalEnchantress)
+        game.add(enchantress)
 
         game.calculate()
         Assertions.assertEquals(5 + 9 + 5, game.score())
@@ -134,7 +134,7 @@ class ScoringTest {
         val game = Game()
         game.add(forest)
         game.add(elvenArchers)
-        game.add(elementalEnchantress)
+        game.add(enchantress)
         game.add(king)
         game.add(fireElemental)
         game.add(worldTree)
@@ -237,7 +237,7 @@ class ScoringTest {
     @Test
     fun full_game_sample_9() {
         val game = Game()
-        game.add(elementalEnchantress)
+        game.add(enchantress)
         game.add(cavern)
         game.add(bellTower)
         game.add(worldTree)
@@ -258,7 +258,7 @@ class ScoringTest {
         game.add(smoke)
         game.add(whirlwind)
         game.add(wildfire)
-        game.add(elementalEnchantress)
+        game.add(enchantress)
         game.calculate()
         Assertions.assertEquals(137, game.score())
     }

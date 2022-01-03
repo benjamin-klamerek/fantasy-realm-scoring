@@ -90,7 +90,7 @@ object CardDefinitions {
             mirage,
             doppelganger,
             necromancer,
-            elementalEnchantress,
+            enchantress,
             collector,
             beastmaster,
             warlockLord
@@ -174,7 +174,7 @@ val allDefinitionsRussian by lazy {
         "BeMKUM NOTO" to greatFlood,
         "Ayx orHs" to fireElemental,
         "AMBCHb" to rainstorm,
-        "YapoaenKa" to elementalEnchantress,
+        "YapoaenKa" to enchantress,
         "3BeponOB" to beastmaster,
         "Ky3HMLa" to forge,
         "Aupukaő1b" to warDirigible,

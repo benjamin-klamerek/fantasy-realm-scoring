@@ -122,7 +122,7 @@ object AllRules {
                 if (it.containsHandCards(princess)) 30 else if (it.containsHandCards(empress) || it.containsHandCards(
                         queen
                     ) || it.containsHandCards(
-                        elementalEnchantress
+                        enchantress
                     )
                 ) 15 else 0
             }
@@ -464,7 +464,7 @@ object AllRules {
                 )
             ) { it.countHandCards(Suit.FLAME) * -5 }
         ),
-        elementalEnchantress to listOf(
+        enchantress to listOf(
             RuleAboutScore(listOf(Effect.BONUS))
             {
                 (it.countHandCards(Suit.LAND, Suit.WEATHER, Suit.FLOOD, Suit.FLAME)) * 5
