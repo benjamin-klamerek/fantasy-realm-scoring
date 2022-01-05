@@ -4,7 +4,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_list"
         tools:context=".screen.MainActivity"
         android:id="@+id/mainActConstraintLayout"
         android:textDirection="anyRtl">
@@ -18,6 +17,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintBottom_toTopOf="@+id/space2"
+            android:textColor="?android:attr/textColorPrimaryInverse"
             android:layout_marginBottom="20dp" />
 
     <Button
@@ -29,6 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintTop_toBottomOf="@+id/space2"
+            android:textColor="?android:attr/textColorPrimaryInverse"
             android:layout_marginTop="20dp" />
 
     <Space
@@ -50,18 +51,20 @@
             android:layout_marginBottom="10dp" />
 
     <TextView
-            android:text="Fantasy Realms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/titleLabel"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/space3"
-            app:layout_constraintBottom_toTopOf="@+id/space"
-            android:layout_marginBottom="70dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textIsSelectable="false"
-            android:textAllCaps="false" />
+        android:id="@+id/titleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="70dp"
+        android:text="Fantasy Realms"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textIsSelectable="false"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/space"
+        app:layout_constraintEnd_toStartOf="@+id/space3"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
             android:layout_width="103dp"

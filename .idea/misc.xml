@@ -3,13 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Benjamin/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/activity_list_item.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/Benjamin/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_36.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/drawable/ic_baseline_keyboard_arrow_up_36.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/drawable/ic_book.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/drawable/ic_potion.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/drawable/layout_corners_shape.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_cards_selection.xml" value="0.23809523809523808" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_hand_selection.xml" value="0.15" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_main.xml" value="0.21" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_player_selection.xml" value="0.20364583333333333" />
-        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_scan.xml" value="0.18" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_scan.xml" value="0.25" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/custom_spinner_list_item.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/dialog_new_player.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/hand_list_item.xml" value="0.33" />
         <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/layout/player_list_item.xml" value="0.2125" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/Benjamin/StudioProjects/fantasy-realm-scoring/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

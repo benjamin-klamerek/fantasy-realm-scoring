@@ -15,7 +15,6 @@
     <string name="add_card_button">Ajouter carte</string>
     <string name="scan_button">Scan</string>
     <string name="scan_help_label">Conseil: seuls les titres des cartes doivent être visibles</string>
-    <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>

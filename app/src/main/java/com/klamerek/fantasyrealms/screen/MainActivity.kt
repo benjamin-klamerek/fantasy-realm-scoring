@@ -45,11 +45,6 @@ class MainActivity : CustomActivity() {
             rotationAnimation.target = binding.bookIcon
             rotationAnimation.start()
 
-            val backgroundAnimation = binding.mainActConstraintLayout.background as AnimationDrawable
-            backgroundAnimation.setEnterFadeDuration(Constants.ANIMATION_ENTER_FADE_DURATION)
-            backgroundAnimation.setExitFadeDuration(Constants.ANIMATION_EXIT_FADE_DURATION)
-            backgroundAnimation.start()
-
             val bookColorAnimation = (binding.bookIcon.drawable as? AnimatedVectorDrawable)
             bookColorAnimation?.registerAnimationCallback(
                 object : Animatable2.AnimationCallback() {

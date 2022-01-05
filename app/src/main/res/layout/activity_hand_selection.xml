@@ -42,7 +42,7 @@
             android:clickable="true"
             android:text="@string/add_card_button"
             android:textAlignment="center"
-            android:textColor="@color/design_default_color_on_primary"
+            android:textColor="?android:attr/textColorPrimaryInverse"
             app:backgroundTint="@color/colorPrimary" />
 
         <Space
@@ -57,7 +57,7 @@
             android:clickable="true"
             android:text="@string/clear_button"
             android:textAlignment="center"
-            android:textColor="@color/design_default_color_on_primary"
+            android:textColor="?android:attr/textColorPrimaryInverse"
             app:backgroundTint="@color/colorPrimary" />
 
         <Space
@@ -88,7 +88,7 @@
             android:clickable="true"
             android:text="@string/scan_button"
             android:textAlignment="center"
-            android:textColor="@color/design_default_color_on_primary"
+            android:textColor="?android:attr/textColorPrimaryInverse"
             app:backgroundTint="@color/colorPrimary" />
 
         <Space
@@ -116,7 +116,8 @@
             android:layout_height="24dp"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"/>
 
         <TextView
             android:id="@+id/handSizeLabel"
@@ -125,7 +126,8 @@
             android:layout_weight="2"
             android:textAlignment="viewEnd"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

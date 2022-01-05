@@ -8,15 +8,16 @@
         android:id="@+id/settingsActConstraintLayout">
 
     <TextView
-            android:text="@string/disclaimer"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:id="@+id/disclaimerLabel"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/mainLinearLayout"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/disclaimerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:text="@string/disclaimer"
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/mainLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
             android:orientation="vertical"
@@ -40,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/languageLabel"
+                    android:textColor="?android:attr/textColorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -80,6 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/displayCardNumberLabel"
+                    android:textColor="?android:attr/textColorPrimary"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/displayChipColorOnSearchLabel"
+                android:textColor="?android:attr/textColorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -153,6 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/withBuildingsOutsidersUndeadLabel"
+                android:textColor="?android:attr/textColorPrimary"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -189,6 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/withCursedItemsLabel"
+                android:textColor="?android:attr/textColorPrimary"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -218,17 +224,17 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:id="@+id/doneButton"
-            app:layout_constraintStart_toStartOf="@+id/mainLinearLayout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:backgroundTint="@color/colorPrimary"
-            android:textColor="@color/design_default_color_on_primary"
-            app:layout_constraintTop_toBottomOf="@+id/mainLinearLayout"
-            android:text="@string/done"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@+id/mainLinearLayout" />
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="@string/done"
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/mainLinearLayout"
+        app:layout_constraintStart_toStartOf="@+id/mainLinearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/mainLinearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

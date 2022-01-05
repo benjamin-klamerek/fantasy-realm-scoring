@@ -16,7 +16,6 @@
     <string name="scan_button">Beolvasás</string>
     <string name="clear_button">Törlés</string>
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
-    <string name="effect_button">Hatás</string>
     <string name="base">Alaperő</string>
     <string name="done">Ment</string>
     <string name="language_label">Nyelv:</string>

@@ -40,7 +40,7 @@ class SettingsActivity : CustomActivity() {
 
         val initialValue = getCardScopeId()
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
+        val adapter = ArrayAdapter(this, R.layout.custom_spinner_list_item, languages)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.languageSpinner.adapter = adapter
 

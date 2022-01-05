@@ -16,9 +16,8 @@
     <string name="scan_button">Scan</string>
     <string name="clear_button">Clear</string>
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
-    <string name="effect_button">Effect</string>
     <string name="base">BASE</string>
-    <string name="disclaimer" translatable="false">V 0.17 \n
+    <string name="disclaimer" translatable="false">V 0.18 \n
         Found a bug ? \nTranslation missing and you want to contribute? \n\nContact me (link in play store)</string>
     <string name="done">Done</string>
     <string name="language_label">Language:</string>

@@ -15,7 +15,6 @@
     <string name="add_card_button">Añadir carta </string>
     <string name="scan_button">Escanear</string>
     <string name="scan_help_label">Consejo: solo los nombres de las cartas son obligatorios</string>
-    <string name="effect_button">Efecto</string>
     <string name="base">BASE</string>
     <string name="done">Hecho</string>
     <string name="language_label">Idioma:</string>
