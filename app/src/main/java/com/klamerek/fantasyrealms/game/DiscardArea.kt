@@ -10,6 +10,6 @@ class DiscardArea(private val displayId: Int, private val game: Game) : WithGame
     override fun displayScore(): Boolean = false
 
     companion object {
-        val instance: DiscardArea = DiscardArea(R.string.discard_area, Game())
+        val instance: DiscardArea = DiscardArea(R.string.discard_area, Game(true))
     }
 }

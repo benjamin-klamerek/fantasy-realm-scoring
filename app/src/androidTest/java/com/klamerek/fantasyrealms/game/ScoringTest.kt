@@ -716,4 +716,23 @@ class ScoringTest {
         Assertions.assertEquals(4, game.score())
     }
 
+    @DisplayName("Discard game effects are disabled")
+    @Test
+    fun discard_game_effects_are_disabled(){
+        val game = Game()
+        game.add(deathKnight)
+        game.calculate()
+
+        DiscardArea.instance.game().add(elvenLongbow)
+        DiscardArea.instance.game().add(swordOfKeth)
+        DiscardArea.instance.game().add(magicWand)
+        DiscardArea.instance.game().add(warDirigible)
+        DiscardArea.instance.game().add(demon)
+        DiscardArea.instance.game().calculate()
+
+        game.calculate()
+
+        Assertions.assertEquals(42, game.score())
+    }
+
 }

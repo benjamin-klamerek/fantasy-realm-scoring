@@ -10,7 +10,7 @@ import java.lang.Integer.max
  * List of cards (player hand) wth scoring calculation
  *
  */
-class Game {
+class Game(val noScoring : Boolean = false) {
 
     private val handCards = ArrayList<Card>()
     private val tableCards = ArrayList<Card>()
@@ -107,45 +107,48 @@ class Game {
     fun calculate() {
         handCards.forEach { card -> card.clear() }
 
-        applySpecificCardEffects()
+        if (! noScoring){
+            applySpecificCardEffects()
 
-        handCards.map { card -> identifyClearedRules(card) }.flatten()
-            .forEach { ruleToDeactivate ->
-                handCards.forEach { card ->
-                    card.rules()
-                        .filter { rule -> rule == ruleToDeactivate }
-                        .forEach { rule -> card.deactivate(rule) }
+            handCards.map { card -> identifyClearedRules(card) }.flatten()
+                .forEach { ruleToDeactivate ->
+                    handCards.forEach { card ->
+                        card.rules()
+                            .filter { rule -> rule == ruleToDeactivate }
+                            .forEach { rule -> card.deactivate(rule) }
+                    }
                 }
-            }
 
-        handCards.map { card -> identifyUnblankableCards(card) }.flatten()
-            .forEach { card -> card.addTemporaryRule(unblankable) }
+            handCards.map { card -> identifyUnblankableCards(card) }.flatten()
+                .forEach { card -> card.addTemporaryRule(unblankable) }
 
-        applyBlankingRules()
+            applyBlankingRules()
 
-        handCards.map { card -> identifyReduceBaseStrengthToZeroCards(card) }.flatten()
-            .forEach { card -> card.value(0) }
+            handCards.map { card -> identifyReduceBaseStrengthToZeroCards(card) }.flatten()
+                .forEach { card -> card.value(0) }
 
-        bonusScoreByCard.clear()
-        penaltyScoreByCard.clear()
-        bonusScoreByCard.putAll(cardsForScoring().map { card ->
-            card.definition to card.rules()
-                .asSequence()
-                .filter { rule -> card.isActivated(rule) }
-                .map { rule -> rule as? RuleAboutScore }
-                .filter { rule -> rule?.tags?.contains(Effect.BONUS) ?: false }
-                .map { rule -> rule?.logic?.invoke(this) }
-                .sumOf { any -> if (any is Int) any else 0 }
-        }.toMap())
-        penaltyScoreByCard.putAll(cardsForScoring().map { card ->
-            card.definition to card.rules()
-                .asSequence()
-                .filter { rule -> card.isActivated(rule) }
-                .map { rule -> rule as? RuleAboutScore }
-                .filter { rule -> rule?.tags?.contains(Effect.PENALTY) ?: false }
-                .map { rule -> rule?.logic?.invoke(this) }
-                .sumOf { any -> if (any is Int) any else 0 }
-        }.toMap())
+            bonusScoreByCard.clear()
+            penaltyScoreByCard.clear()
+            bonusScoreByCard.putAll(cardsForScoring().map { card ->
+                card.definition to card.rules()
+                    .asSequence()
+                    .filter { rule -> card.isActivated(rule) }
+                    .map { rule -> rule as? RuleAboutScore }
+                    .filter { rule -> rule?.tags?.contains(Effect.BONUS) ?: false }
+                    .map { rule -> rule?.logic?.invoke(this) }
+                    .sumOf { any -> if (any is Int) any else 0 }
+            }.toMap())
+            penaltyScoreByCard.putAll(cardsForScoring().map { card ->
+                card.definition to card.rules()
+                    .asSequence()
+                    .filter { rule -> card.isActivated(rule) }
+                    .map { rule -> rule as? RuleAboutScore }
+                    .filter { rule -> rule?.tags?.contains(Effect.PENALTY) ?: false }
+                    .map { rule -> rule?.logic?.invoke(this) }
+                    .sumOf { any -> if (any is Int) any else 0 }
+            }.toMap())
+        }
+
     }
 
     private fun applySpecificCardEffects() {
