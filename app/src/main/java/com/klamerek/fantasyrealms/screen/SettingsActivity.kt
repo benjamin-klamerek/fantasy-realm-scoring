@@ -1,9 +1,9 @@
 package com.klamerek.fantasyrealms.screen
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.widget.ArrayAdapter
 import com.klamerek.fantasyrealms.R
-import com.klamerek.fantasyrealms.Strings
 import com.klamerek.fantasyrealms.databinding.ActivitySettingsBinding
 import com.klamerek.fantasyrealms.game.CardDefinitions
 import com.klamerek.fantasyrealms.game.DiscardArea
@@ -30,6 +30,9 @@ class SettingsActivity : CustomActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //Needed to make clickable links effective
+        binding.disclaimerLabel.movementMethod = LinkMovementMethod.getInstance();
 
         binding.displayCardNumberCheckBox.isChecked = Preferences.getDisplayCardNumber(baseContext)
         binding.withBuildingsOutsidersUndeadCheckBox.isChecked =
