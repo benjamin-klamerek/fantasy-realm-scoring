@@ -8,9 +8,11 @@
             android:layout_height="match_parent" android:id="@+id/playerNameEditTextLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/player_name_label" android:id="@+id/playerNameEditText"
-                android:tag="playerNameEditText" android:textColor="@color/design_default_color_on_secondary"/>
+            android:id="@+id/playerNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/player_name_label"
+            android:tag="playerNameEditText"
+            android:textColor="?android:attr/textColorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
