@@ -1,7 +1,7 @@
 package com.klamerek.fantasyrealms.game
 
 import android.content.Context
-import com.klamerek.fantasyrealms.toInt
+import com.klamerek.fantasyrealms.*
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Preferences
 import java.lang.Integer.max
@@ -10,7 +10,7 @@ import java.lang.Integer.max
  * List of cards (player hand) wth scoring calculation
  *
  */
-class Game(val noScoring : Boolean = false) {
+class Game(val noScoring: Boolean = false) {
 
     private val handCards = ArrayList<Card>()
     private val tableCards = ArrayList<Card>()
@@ -32,7 +32,7 @@ class Game(val noScoring : Boolean = false) {
     }
 
     fun handCardsNotBlanked(): Collection<Card> {
-        return handCards.filter { card -> !card.blanked || card.definition == phoenix}
+        return handCards.filter { card -> !card.blanked || card.definition == phoenix }
     }
 
     fun add(cardDefinition: CardDefinition) {
@@ -64,6 +64,9 @@ class Game(val noScoring : Boolean = false) {
     fun isAllHandCardsOdd() = handCardsNotBlanked().all { it.isOdd() }
 
     fun countHandCards(vararg suit: Suit) = handCardsNotBlanked().count { it.isOneOf(*suit) }
+
+    fun countHandCardsByName(definition: CardDefinition) =
+        handCardsNotBlanked().count { it.hasSameNameThan(definition) }
 
     fun countHandCardsExcept(suit: Suit, cardDefinition: CardDefinition) =
         handCardsNotBlanked().filter { it.definition != cardDefinition }.count { it.isOneOf(suit) }
@@ -107,7 +110,7 @@ class Game(val noScoring : Boolean = false) {
     fun calculate() {
         handCards.forEach { card -> card.clear() }
 
-        if (! noScoring){
+        if (!noScoring) {
             applySpecificCardEffects()
 
             handCards.map { card -> identifyClearedRules(card) }.flatten()
@@ -132,20 +135,18 @@ class Game(val noScoring : Boolean = false) {
             bonusScoreByCard.putAll(cardsForScoring().map { card ->
                 card.definition to card.rules()
                     .asSequence()
-                    .filter { rule -> card.isActivated(rule) }
-                    .map { rule -> rule as? RuleAboutScore }
-                    .filter { rule -> rule?.tags?.contains(Effect.BONUS) ?: false }
-                    .map { rule -> rule?.logic?.invoke(this) }
-                    .sumOf { any -> if (any is Int) any else 0 }
+                    .activated(card)
+                    .asRuleAboutScore()
+                    .with(Effect.BONUS)
+                    .score(this)
             }.toMap())
             penaltyScoreByCard.putAll(cardsForScoring().map { card ->
                 card.definition to card.rules()
                     .asSequence()
-                    .filter { rule -> card.isActivated(rule) }
-                    .map { rule -> rule as? RuleAboutScore }
-                    .filter { rule -> rule?.tags?.contains(Effect.PENALTY) ?: false }
-                    .map { rule -> rule?.logic?.invoke(this) }
-                    .sumOf { any -> if (any is Int) any else 0 }
+                    .activated(card)
+                    .asRuleAboutScore()
+                    .with(Effect.PENALTY)
+                    .score(this)
             }.toMap())
         }
 
@@ -171,49 +172,49 @@ class Game(val noScoring : Boolean = false) {
 
     /**
      * Sensitive method. Apply BLANK rules on cards<br>
-     * - We apply each BLANK rule by priority order (introduced with Demon card)<br>
+     * - We apply each BLANK rule by priority order (introduced with Demon card and finish with self blank rules)<br>
+     * - Second ordering criteria is "if card is blanked by other cards"
      * - We take attention before applying the rule that the card is still active.<br>
      * - Some cards are UNBLANKABLE (like Angel).<br>
      */
     private fun applyBlankingRules() {
+        val cardsPotentiallyBlanked = handCards.map { card -> card.rules().activated(card)
+            .with(Effect.BLANK).asRuleAboutCard().listCards(this) }.flatten()
+
         handCards.map { card ->
             card.rules()
-                .filter { rule -> card.isActivated(rule) }
-                .filter { rule -> rule.tags.contains(Effect.BLANK) }
-                .map { rule -> rule as? RuleAboutCard }
+                .activated(card)
+                .with(Effect.BLANK)
+                .asRuleAboutCard()
                 .map { rule -> Pair(card, rule) }
         }.flatten()
-            .sortedByDescending { pair -> pair.second?.priority }
-            .forEach() { applyBlankingRules(it) }
+            .sortedWith(compareBy({ pair -> pair.second?.priority?.unaryMinus() },
+                { pair -> cardsPotentiallyBlanked.contains(pair.first) }))
+            .forEach() { if (!it.first.blanked) applyBlankingRule(it.second) }
     }
 
-    private fun applyBlankingRules(pair: Pair<Card, RuleAboutCard?>) {
-        if (!pair.first.blanked) {
-            pair.second?.logic?.invoke(this)
-                ?.filter { potentialCard -> !potentialCard.rules().contains(unblankable) }
-                .orEmpty().forEach { cardToBlank ->
+    private fun applyBlankingRule(rule: RuleAboutCard?) {
+        if (rule?.tags?.contains(Effect.BLANK) == true) {
+            rule.logic.invoke(this)
+                .filter { potentialCard -> !potentialCard.rules().contains(unblankable) }
+                .forEach { cardToBlank ->
                     cardToBlank.blanked = true
                 }
         }
     }
 
     private fun identifyClearedRules(card: Card): List<Rule<out Any>> =
-        card.rules().filter { rule -> card.isActivated(rule) }
-            .filter { rule -> rule.tags.contains(Effect.CLEAR) }
-            .map { rule -> rule as? RuleAboutRule }
-            .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
+        card.rules().activated(card).with(Effect.CLEAR)
+            .asRuleAboutRule().listRules(this)
 
     private fun identifyUnblankableCards(card: Card): List<Card> =
-        card.rules().filter { rule -> card.isActivated(rule) }
-            .filter { rule -> rule.tags.contains(Effect.UNBLANKABLE) }
-            .map { rule -> rule as? RuleAboutCard }
-            .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
+        card.rules().activated(card).with(Effect.UNBLANKABLE)
+            .asRuleAboutCard().listCards(this)
+
 
     private fun identifyReduceBaseStrengthToZeroCards(card: Card): List<Card> =
-        card.rules().filter { rule -> card.isActivated(rule) }
-            .filter { rule -> rule.tags.contains(Effect.REDUCE_BASE_STRENGTH_TO_ZERO) }
-            .map { rule -> rule as? RuleAboutCard }
-            .flatMap { rule -> rule?.logic?.invoke(this).orEmpty() }
+        card.rules().activated(card).with(Effect.REDUCE_BASE_STRENGTH_TO_ZERO)
+            .asRuleAboutCard().listCards(this)
 
 
     fun filterNotBlankedHandCards(scope: (Card) -> Boolean): List<Card> {
@@ -221,17 +222,11 @@ class Game(val noScoring : Boolean = false) {
     }
 
     fun identifyPenalties(scope: (Card) -> Boolean): List<Rule<out Any>> {
-        return identifyRule(scope, Effect.PENALTY)
+        return handCardsNotBlanked().filter(scope).rules().with(Effect.PENALTY)
     }
 
     fun identifyArmyPenalties(scope: (Card) -> Boolean): List<Rule<out Any>> {
-        return identifyRule(scope, Effect.PENALTY, Suit.ARMY)
-    }
-
-    private fun identifyRule(scope: (Card) -> Boolean, vararg tags: Tag): List<Rule<out Any>> {
-        return handCardsNotBlanked().filter(scope)
-            .flatMap { card -> card.rules() }
-            .filter { rule -> rule.tags.containsAll(tags.asList()) }
+        return handCardsNotBlanked().filter(scope).rules().with(Effect.PENALTY).with(Suit.ARMY)
     }
 
     fun handSizeExpected(context: Context): Int {
@@ -265,15 +260,16 @@ class Game(val noScoring : Boolean = false) {
 
     fun countCardWithAtLeastOnePenaltyNotCleared(): Int {
         return handCardsNotBlanked().count { card ->
-            card.rules()
-                .any { rule -> rule.tags.contains(Effect.PENALTY) && card.isActivated(rule) }
+            card.rules().activated(card).with(Effect.PENALTY).any()
         }
     }
 
     fun groupNotBlankedCardsBySuit(): Map<Suit, List<Card>> {
         return handCardsNotBlanked()
-            .flatMap { card -> listOf(card.suit()).plus(card.definition.additionalSuits).map { card to it }}
-            .groupBy ( { it.second }, { it.first })
+            .flatMap { card ->
+                listOf(card.suit()).plus(card.definition.additionalSuits).map { card to it }
+            }
+            .groupBy({ it.second }, { it.first })
     }
 
     fun applySelection(

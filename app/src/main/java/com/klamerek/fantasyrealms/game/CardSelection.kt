@@ -1,6 +1,7 @@
 package com.klamerek.fantasyrealms.game
 
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.with
 
 /**
  * Base class to model cards with selection logic (choosing another card to update)
@@ -25,7 +26,7 @@ abstract class CardSelection(val source: CardDefinition) {
     /**
      * Clear selection
      */
-    open fun clear(){
+    open fun clear() {
         cardSelected = null
     }
 
@@ -68,8 +69,8 @@ class DoppelgangerSelection : CardSelection(doppelganger) {
                         card.suit(it.suit)
                         card.value(it.value)
                         card.rules(
-                            AllRules.instance[it].orEmpty()
-                                .filter { rule -> rule.tags.contains(Effect.PENALTY) })
+                            AllRules.instance[it].orEmpty().with(Effect.PENALTY)
+                        )
                     }
             }
         }
@@ -89,7 +90,7 @@ class IslandSelection : CardSelection(island) {
                 game.handCards().filter { card -> card.definition == it }
                     .map { card ->
                         card.rules()
-                            .filter { rule -> rule.tags.contains(Effect.PENALTY) }
+                            .with(Effect.PENALTY)
                             .forEach { rule -> card.deactivate(rule) }
                     }
             }
