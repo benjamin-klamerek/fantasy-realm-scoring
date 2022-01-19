@@ -40,7 +40,7 @@
         android:clickable="true"
         android:text="@string/add_player_button"
         android:textAlignment="center"
-        android:textColor="@color/design_default_color_on_primary"
+        android:textColor="?android:attr/textColorPrimaryInverse"
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

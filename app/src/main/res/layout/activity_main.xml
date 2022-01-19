@@ -4,84 +4,128 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_list"
         tools:context=".screen.MainActivity"
         android:id="@+id/mainActConstraintLayout"
         android:textDirection="anyRtl">
 
-    <Button
-            android:text="@string/start_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/startButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintBottom_toTopOf="@+id/space2"
-            android:layout_marginBottom="20dp" />
-
-    <Button
-            android:text="@string/settings_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/settingsButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintTop_toBottomOf="@+id/space2"
-            android:layout_marginTop="20dp" />
-
-    <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/space2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/startButton"
-            android:id="@+id/space"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="10dp" />
-
     <TextView
-            android:text="Fantasy Realms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/titleLabel"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/space3"
-            app:layout_constraintBottom_toTopOf="@+id/space"
-            android:layout_marginBottom="70dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textIsSelectable="false"
-            android:textAllCaps="false" />
+        android:id="@+id/titleLabel"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/my_border"
+        android:text="Fantasy Realms Scoring"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textIsSelectable="false"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/space3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-            android:layout_width="103dp"
-            android:layout_height="109dp"
-            app:srcCompat="@drawable/ic_book_animated"
-            android:id="@+id/bookIcon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/space"
-            android:layout_marginBottom="30dp"
-            android:contentDescription="icon"
-            app:layout_constraintStart_toEndOf="@+id/space3"
-            android:rotation="20" />
+        android:id="@+id/castleIcon"
+        android:layout_width="252dp"
+        android:layout_height="253dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:srcCompat="@drawable/ic_castle"
+        app:tint="?android:attr/textColorPrimary" />
 
-    <Space
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleLabel">
+
+        <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/space3"
-            app:layout_constraintBottom_toTopOf="@+id/space"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_button"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_button"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/castleIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/swordIcon"
+            android:layout_width="75dp"
+            android:layout_height="109dp"
+            android:layout_weight="1"
+            android:padding="15dp"
+            app:srcCompat="@drawable/ic_swordbase"
+            app:tint="?android:attr/textColorPrimary" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/bookIcon"
+            android:layout_width="103dp"
+            android:layout_height="109dp"
+            app:srcCompat="@drawable/ic_book_animated" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

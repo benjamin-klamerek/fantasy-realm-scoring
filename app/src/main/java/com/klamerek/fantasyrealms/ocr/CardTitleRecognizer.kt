@@ -8,13 +8,11 @@ import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
-import com.klamerek.fantasyrealms.game.CardDefinition
-import com.klamerek.fantasyrealms.game.CardDefinitions
-import com.klamerek.fantasyrealms.game.allDefinitionsRussian
-import com.klamerek.fantasyrealms.game.empty
+import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.normalize
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.LocaleManager
+import com.klamerek.fantasyrealms.util.LocaleManager.french
 import com.klamerek.fantasyrealms.util.LocaleManager.russian
 import me.xdrop.fuzzywuzzy.FuzzySearch
 import java.util.*
@@ -28,9 +26,25 @@ import kotlin.math.abs
 class CardTitleRecognizer(context: Context) {
 
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-    private val cardByCleanedName = if (LocaleManager.getLanguage(context) == russian)
-        allDefinitionsRussian else
-        CardDefinitions.get(context).map { cleanText(it.name()) to it }.toMap()
+    private val cardByCleanedName = initCardByCleanedNameMap(context)
+
+    /**
+     * Init a map with card name => card definition
+     * Contains some adjustments like :
+     * - specific map for russian (because of the alphabet not yet handled by vision)
+     * - french card name updated with second edition of the game
+     */
+    private fun initCardByCleanedNameMap(context: Context) : Map<String, CardDefinition> {
+        var result = if (LocaleManager.getLanguage(context) == russian)
+            allDefinitionsRussian else
+            CardDefinitions.get(context).map { cleanText(it.name()) to it }.toMap()
+
+        if (LocaleManager.getLanguage(context) == french){
+            result = result.plus(Pair(cleanText("Cheval de Guerre"), warhorse))
+        }
+
+        return result
+    }
 
     /**
      * Put to lower case, remove everything which is not a letter and replace all accented characters per their base letter version<br>

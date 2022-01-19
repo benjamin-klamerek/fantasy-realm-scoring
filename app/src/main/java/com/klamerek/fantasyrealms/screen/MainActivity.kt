@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.Settings
@@ -41,14 +40,13 @@ class MainActivity : CustomActivity() {
 
         if (animationActivated) {
 
-            val rotationAnimation = AnimatorInflater.loadAnimator(baseContext, R.animator.rotate_picture) as ObjectAnimator
-            rotationAnimation.target = binding.bookIcon
-            rotationAnimation.start()
+            val rotationSwordAnimation = AnimatorInflater.loadAnimator(baseContext, R.animator.rotate_sword) as ObjectAnimator
+            rotationSwordAnimation.target = binding.swordIcon
+            rotationSwordAnimation.start()
 
-            val backgroundAnimation = binding.mainActConstraintLayout.background as AnimationDrawable
-            backgroundAnimation.setEnterFadeDuration(Constants.ANIMATION_ENTER_FADE_DURATION)
-            backgroundAnimation.setExitFadeDuration(Constants.ANIMATION_EXIT_FADE_DURATION)
-            backgroundAnimation.start()
+            val rotationBookAnimation = AnimatorInflater.loadAnimator(baseContext, R.animator.rotate_y_360) as ObjectAnimator
+            rotationBookAnimation.target = binding.bookIcon
+            rotationBookAnimation.start()
 
             val bookColorAnimation = (binding.bookIcon.drawable as? AnimatedVectorDrawable)
             bookColorAnimation?.registerAnimationCallback(

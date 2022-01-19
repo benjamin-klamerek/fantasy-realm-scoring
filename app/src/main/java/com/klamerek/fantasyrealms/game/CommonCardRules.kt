@@ -139,16 +139,17 @@ object AllRules {
             ) { if (it.noHandCardsOf(Suit.WIZARD)) -40 else 0 }
         ),
         basilisk to listOf(
-            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.ARMY), 200)
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.ARMY))
             { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.ARMY) } },
-            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.LEADER), 200)
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.LEADER))
             { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.LEADER) } },
-            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.BEAST), 200)
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.BEAST))
             {
                 it.filterNotBlankedHandCards { card ->
-                    (card.isOneOf(Suit.BEAST) && !card.hasSameNameThan(
-                        basilisk
-                    ))
+                    (card.isOneOf(Suit.BEAST) &&
+                            !(it.countHandCardsByName(basilisk) == 1 && card.hasSameNameThan(
+                                basilisk
+                            )))
                 }
             }
         ),
@@ -181,7 +182,7 @@ object AllRules {
             RuleAboutScore(listOf(Effect.BONUS)) { if (it.containsHandCards(rainstorm)) 30 else 0 }
         ),
         wildfire to listOf(
-            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK), 200)
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK))
             {
                 it.filterNotBlankedHandCards { card ->
                     !(card.isOneOf(Suit.FLAME) || card.isOneOf(Suit.WEATHER) || card.isOneOf(Suit.WIZARD) ||
@@ -219,14 +220,14 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.ARMY
-                ), 200
+                )
             ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.ARMY) } },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.LAND
-                ), 200
+                )
             ) {
                 it.filterNotBlankedHandCards { card ->
                     (card.isOneOf(Suit.LAND) && !card.hasSameNameThan(
@@ -239,7 +240,7 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.FLAME
-                ), 200
+                )
             ) {
                 it.filterNotBlankedHandCards { card ->
                     (card.isOneOf(Suit.FLAME) && !card.hasSameNameThan(
@@ -358,7 +359,7 @@ object AllRules {
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK
-                )
+                ), 50
             ) {
                 if (it.noHandCardsOf(Suit.FLOOD)) it.filterNotBlankedHandCards { card ->
                     card.hasSameNameThan(
@@ -375,7 +376,7 @@ object AllRules {
             }
         ),
         warDirigible to listOf(
-            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.ARMY))
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.ARMY), 50)
             {
                 if (it.noHandCardsOf(Suit.ARMY)) it.filterNotBlankedHandCards { card ->
                     card.hasSameNameThan(
@@ -406,7 +407,7 @@ object AllRules {
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK
-                ), 200
+                )
             ) {
                 it.filterNotBlankedHandCards { card ->
                     card.isOneOf(Suit.FLAME) && !card.hasSameNameThan(
@@ -428,7 +429,7 @@ object AllRules {
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK
-                )
+                ), 50
             ) {
                 if (it.noHandCardsOf(Suit.FLAME)) it.filterNotBlankedHandCards { card ->
                     card.hasSameNameThan(
@@ -442,7 +443,7 @@ object AllRules {
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK
-                ), 200
+                )
             ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.FLOOD) } },
             RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY)) { it.countHandCards(Suit.ARMY) * -5 },
             RuleAboutScore(
@@ -580,7 +581,7 @@ object AllRules {
                 it.handCardsNotBlanked().filter { card -> card.isOneOf(Suit.UNDEAD) }
                     .sumOf { card -> card.value() }
             },
-            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.LEADER), 200)
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK, Suit.LEADER))
             { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.LEADER) } }
         ),
         chapel to listOf(
@@ -624,21 +625,21 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.ARMY
-                ), 200
+                )
             ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.ARMY) } },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.BUILDING
-                ), 200
+                )
             ) { it.filterNotBlankedHandCards { card -> card.isOneOf(Suit.BUILDING) } },
             RuleAboutCard(
                 listOf(
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.LAND
-                ), 200
+                )
             ) {
                 it.filterNotBlankedHandCards { card ->
                     (card.isOneOf(Suit.LAND) && !card.hasSameNameThan(
@@ -651,7 +652,7 @@ object AllRules {
                     Effect.PENALTY,
                     Effect.BLANK,
                     Suit.FLAME
-                ), 200
+                )
             ) {
                 it.filterNotBlankedHandCards { card ->
                     (card.isOneOf(Suit.FLAME) && !card.hasSameNameThan(

@@ -1,234 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".screen.SettingsActivity"
-        android:id="@+id/settingsActConstraintLayout">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsActConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".screen.SettingsActivity">
 
     <TextView
-            android:text="@string/disclaimer"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:id="@+id/disclaimerLabel"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/mainLinearLayout"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/disclaimerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/disclaimer"
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorPrimary" />
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <ScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_weight="8">
+
+        <LinearLayout
             android:id="@+id/mainLinearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="100dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/languageLayout"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:id="@+id/languageLayout">
+                android:layout_height="60dp">
 
-            <TextView
-                    android:text="@string/language_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TextView
                     android:id="@+id/languageLabel"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    android:textSize="18sp" />
-
-            <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/language_label"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/languageLabel"
-                    app:layout_constraintEnd_toStartOf="@id/languageSpinner"
-                    android:id="@+id/spaceLanguage" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
+                <Space
+                    android:id="@+id/spaceLanguage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/languageSpinner"
+                    app:layout_constraintStart_toEndOf="@id/languageLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/languageSpinner"
                     android:layout_width="180dp"
                     android:layout_height="25dp"
-                    android:id="@+id/languageSpinner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginEnd="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/layout_corners_shape"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/displayCardNumberLayout"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:id="@+id/displayCardNumberLayout">
+                android:layout_height="60dp">
 
-            <TextView
-                    android:text="@string/display_card_number_label"
+                <TextView
+                    android:id="@+id/displayCardNumberLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/displayCardNumberLabel"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/display_card_number_label"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    android:textSize="18sp" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Space
+                <Space
+                    android:id="@+id/spaceDisplayCardNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/displayCardNumberLabel"
                     app:layout_constraintEnd_toStartOf="@id/displayCardNumberCheckBox"
-                    android:id="@+id/spaceDisplayCardNumber" />
+                    app:layout_constraintStart_toEndOf="@id/displayCardNumberLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
+                <CheckBox
+                    android:id="@+id/displayCardNumberCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/displayCardNumberCheckBox"
                     android:layout_marginEnd="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:id="@+id/colorChipModeLayout">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/colorChipModeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
 
-            <TextView
-                android:text="@string/display_chip_color_on_search_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/displayChipColorOnSearchLabel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/displayChipColorOnSearchLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/display_chip_color_on_search_label"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/displayChipColorOnSearchLabel"
-                app:layout_constraintEnd_toStartOf="@id/displayChipColorOnSearchCheckBox"
-                android:id="@+id/spaceColorChipMode" />
+                <Space
+                    android:id="@+id/spaceColorChipMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/displayChipColorOnSearchCheckBox"
+                    app:layout_constraintStart_toEndOf="@id/displayChipColorOnSearchLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/displayChipColorOnSearchCheckBox"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                <CheckBox
+                    android:id="@+id/displayChipColorOnSearchCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:id="@+id/withBuildingsOutsidersUndeadLayout">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/withBuildingsOutsidersUndeadLayout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
 
-            <TextView
-                android:text="@string/buildings_outsiders_undead_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/withBuildingsOutsidersUndeadLabel"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/withBuildingsOutsidersUndeadLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/buildings_outsiders_undead_label"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/withBuildingsOutsidersUndeadLabel"
-                app:layout_constraintEnd_toStartOf="@id/withBuildingsOutsidersUndeadCheckBox"
-                android:id="@+id/spaceWithBuildingsOutsidersUndead" />
+                <Space
+                    android:id="@+id/spaceWithBuildingsOutsidersUndead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/withBuildingsOutsidersUndeadCheckBox"
+                    app:layout_constraintStart_toEndOf="@id/withBuildingsOutsidersUndeadLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/withBuildingsOutsidersUndeadCheckBox"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <CheckBox
+                    android:id="@+id/withBuildingsOutsidersUndeadCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:id="@+id/withCursedItemsLayout">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/withCursedItemsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
 
-            <TextView
-                android:text="@string/cursed_items_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/withCursedItemsLabel"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/withCursedItemsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/cursed_items_label"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/withCursedItemsLabel"
-                app:layout_constraintEnd_toStartOf="@id/withCursedItemsCheckBox"
-                android:id="@+id/spaceWithCursedItems" />
+                <Space
+                    android:id="@+id/spaceWithCursedItems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/withCursedItemsCheckBox"
+                    app:layout_constraintStart_toEndOf="@id/withCursedItemsLabel"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/withCursedItemsCheckBox"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <CheckBox
+                    android:id="@+id/withCursedItemsCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/doneButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:id="@+id/doneButton"
-            app:layout_constraintStart_toStartOf="@+id/mainLinearLayout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:backgroundTint="@color/colorPrimary"
-            android:textColor="@color/design_default_color_on_primary"
-            app:layout_constraintTop_toBottomOf="@+id/mainLinearLayout"
             android:text="@string/done"
             android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@+id/mainLinearLayout" />
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            app:backgroundTint="@color/colorPrimary" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</LinearLayout>

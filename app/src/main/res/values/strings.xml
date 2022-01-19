@@ -16,10 +16,10 @@
     <string name="scan_button">Scan</string>
     <string name="clear_button">Clear</string>
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
-    <string name="effect_button">Effect</string>
     <string name="base">BASE</string>
-    <string name="disclaimer" translatable="false">V 0.17 \n
-        Found a bug ? \nTranslation missing and you want to contribute? \n\nContact me (link in play store)</string>
+    <string name="disclaimer" translatable="false">V 0.19 \n
+        Found a bug ? \nTranslation missing and you want to contribute? \n\nContact me (<a href="https://github.com/benjamin-klamerek/fantasy-realm-scoring">github</a> or <a href="mailto:benjamin.klamerek@gmail.com">mail</a>)
+        \n\n\n Icons made by Freepik and Smashicons from <a href="www.flaticon.com">www.flaticon.com</a></string>
     <string name="done">Done</string>
     <string name="language_label">Language:</string>
     <string name="language_label_english" translatable="false">English</string>

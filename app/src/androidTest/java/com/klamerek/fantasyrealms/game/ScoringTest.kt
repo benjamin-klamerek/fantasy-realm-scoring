@@ -449,7 +449,7 @@ class ScoringTest {
         game.add(elvenArchers)
         game.add(lightCavalry)
         game.calculate()
-        Assertions.assertEquals(128, game.score())
+        Assertions.assertEquals(128, game.score(), "Case 1")
 
         game.clear()
         game.add(bookOfChanges)
@@ -458,7 +458,7 @@ class ScoringTest {
         game.add(dwarvishInfantry)
         game.applySelection(bookOfChanges, dwarvishInfantry, Suit.FLOOD)
         game.calculate()
-        Assertions.assertEquals(56, game.score())
+        Assertions.assertEquals(56, game.score(), "Case 2")
 
         game.clear()
         game.add(bookOfChanges)
@@ -466,7 +466,17 @@ class ScoringTest {
         game.add(warDirigible)
         game.applySelection(bookOfChanges, warDirigible, Suit.FLOOD)
         game.calculate()
-        Assertions.assertEquals(61, game.score())
+        Assertions.assertEquals(61, game.score(), "Case 3")
+
+        game.clear()
+        game.add(bookOfChanges)
+        game.add(warship)
+        game.add(warDirigible)
+        game.add(lightCavalry)
+        game.add(airElemental)
+        game.applySelection(bookOfChanges, warship, Suit.FLOOD)
+        game.calculate()
+        Assertions.assertEquals(47, game.score(), "Case 4")
 
         game.clear()
         game.add(bookOfChanges)
@@ -476,7 +486,7 @@ class ScoringTest {
         game.add(airElemental)
         game.applySelection(bookOfChanges, warDirigible, Suit.FLOOD)
         game.calculate()
-        Assertions.assertEquals(47, game.score())
+        Assertions.assertEquals(24, game.score(), "Case 5")
     }
 
     @DisplayName("Dark queen example")
@@ -714,6 +724,89 @@ class ScoringTest {
         game.calculate()
 
         Assertions.assertEquals(4, game.score())
+    }
+
+    @DisplayName("Discard game effects are disabled")
+    @Test
+    fun discard_game_effects_are_disabled(){
+        val game = Game()
+        game.add(deathKnight)
+        game.calculate()
+
+        DiscardArea.instance.game().add(elvenLongbow)
+        DiscardArea.instance.game().add(swordOfKeth)
+        DiscardArea.instance.game().add(magicWand)
+        DiscardArea.instance.game().add(warDirigible)
+        DiscardArea.instance.game().add(demon)
+        DiscardArea.instance.game().calculate()
+
+        game.calculate()
+
+        Assertions.assertEquals(42, game.score())
+    }
+
+    @DisplayName("Basilik + doppelganger blank each other")
+    @Test
+    fun basilik_plus_doppelganger_bank_each_other(){
+        val game = Game()
+        game.add(basilisk)
+        game.add(doppelganger)
+        game.applySelection(doppelganger, basilisk)
+        game.calculate()
+
+        Assertions.assertEquals(0, game.score())
+    }
+
+    @DisplayName("Clearing and blanking order (great flood, wildfire and blizzard)")
+    @Test
+    fun clearing_and_blanking_order(){
+        val game = Game()
+        game.add(wildfire)
+        game.add(blizzard)
+        game.add(greatFlood)
+        game.calculate()
+
+        Assertions.assertEquals(65, game.score(), "Order1")
+
+        game.clear()
+        game.add(wildfire)
+        game.add(greatFlood)
+        game.add(blizzard)
+        game.calculate()
+
+        Assertions.assertEquals(65, game.score(), "Order2")
+
+        game.clear()
+        game.add(blizzard)
+        game.add(wildfire)
+        game.add(greatFlood)
+        game.calculate()
+
+        Assertions.assertEquals(65, game.score(), "Order3")
+
+        game.clear()
+        game.add(blizzard)
+        game.add(greatFlood)
+        game.add(wildfire)
+        game.calculate()
+
+        Assertions.assertEquals(65, game.score(), "Order4")
+
+        game.clear()
+        game.add(greatFlood)
+        game.add(blizzard)
+        game.add(wildfire)
+        game.calculate()
+
+        Assertions.assertEquals(65, game.score(), "Order5")
+
+        game.clear()
+        game.add(greatFlood)
+        game.add(wildfire)
+        game.add(blizzard)
+        game.calculate()
+
+        Assertions.assertEquals(65, game.score(), "Order6")
     }
 
 }

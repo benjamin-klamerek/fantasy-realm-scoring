@@ -15,7 +15,6 @@
     <string name="add_card_button">Добавить карту</string>
     <string name="scan_button">Scan</string>
     <string name="scan_help_label">Совет: обязательны только названия карт</string>
-    <string name="effect_button">Эффект</string>
     <string name="base">Основная сила</string>
     <string name="done">Готово</string>
     <string name="language_label">Язык:</string>

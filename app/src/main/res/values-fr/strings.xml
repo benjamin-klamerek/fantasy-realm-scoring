@@ -15,7 +15,6 @@
     <string name="add_card_button">Ajouter carte</string>
     <string name="scan_button">Scan</string>
     <string name="scan_help_label">Conseil: seuls les titres des cartes doivent être visibles</string>
-    <string name="effect_button">Effet</string>
     <string name="base">BASE</string>
     <string name="done">OK</string>
     <string name="language_label">Langue:</string>
@@ -48,7 +47,7 @@
     <string name="book_of_changes">Livre des Mutations</string>
     <string name="shield_of_keth">Bouclier de Keth</string>
     <string name="gem_of_order">Gemme de Loi</string>
-    <string name="warhorse">Cheval de Guerre</string>
+    <string name="warhorse">Destrier</string>
     <string name="unicorn">Licorne</string>
     <string name="hydra">Hydre</string>
     <string name="dragon">Dragon</string>
