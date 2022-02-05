@@ -63,7 +63,7 @@ class GameTest {
         game.add(leprechaun)
 
         Assertions.assertThat(
-            game.handSizeExpected(InstrumentationRegistry.getInstrumentation().targetContext)).isEqualTo(11)
+            game.handSizeExpected(InstrumentationRegistry.getInstrumentation().targetContext)).isEqualTo(9)
     }
 
 }

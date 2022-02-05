@@ -3,9 +3,7 @@ package com.klamerek.fantasyrealms.util
 object Constants {
 
     const val DEFAULT_HAND_SIZE = 7
-
-    const val ANIMATION_ENTER_FADE_DURATION = 2000
-    const val ANIMATION_EXIT_FADE_DURATION = 4000
+    const val MAX_HAND_SIZE = 9
 
     const val DIFFERENCE_LENGTH_IN_NAME_THRESHOLD = 4
     const val MATCHING_CARD_SCORE_THRESHOLD = 75
