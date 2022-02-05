@@ -6,8 +6,6 @@ Android scoring app for the game [FantasyRealms](https://boardgamegeek.com/board
 This app is a POC to learn android/kotlin.
 Tested with a Xiaomi red note 9 and many emulators.
 
-Icon made by Freepik from www.flaticon.com
-
 ### Main features
 - score calculation helper
 - handle many languages
@@ -29,3 +27,6 @@ Open "AVD manager" in IDE and redownload...
  ```  
    * Ensure that ```Google Play service``` is up to date in your emulator (also don't hesitate to clear cache)
    * OCR model are downloaded when needed by application but sometimes it can take a long time/number of retry to perform
+
+### About icons
+Icons made by Freepik and Smashicons from www.flaticon.com
