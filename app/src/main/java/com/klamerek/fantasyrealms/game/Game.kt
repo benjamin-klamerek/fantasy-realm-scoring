@@ -3,8 +3,10 @@ package com.klamerek.fantasyrealms.game
 import android.content.Context
 import com.klamerek.fantasyrealms.*
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Constants.MAX_HAND_SIZE
 import com.klamerek.fantasyrealms.util.Preferences
 import java.lang.Integer.max
+import kotlin.math.min
 
 /**
  * List of cards (player hand) wth scoring calculation
@@ -230,13 +232,13 @@ class Game(val noScoring: Boolean = false) {
     }
 
     fun handSizeExpected(context: Context): Int {
-        return Constants.DEFAULT_HAND_SIZE +
+        return min(MAX_HAND_SIZE, Constants.DEFAULT_HAND_SIZE +
                 Preferences.getBuildingsOutsidersUndead(context).toInt() +
                 handCards.any { card ->
                     card.definition == necromancer || card.definition == necromancerV2
                 }.toInt() +
                 handCards.any { card -> card.definition == genie }.toInt() +
-                handCards.any { card -> card.definition == leprechaun }.toInt()
+                handCards.any { card -> card.definition == leprechaun }.toInt())
     }
 
     fun actualHandSize(): Int {
