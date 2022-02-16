@@ -586,11 +586,7 @@ object AllRules {
         ),
         chapel to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countHandCards(Suit.WIZARD, Suit.OUTSIDER, Suit.UNDEAD, Suit.LEADER) == 2 &&
-                        (it.countHandCards(Suit.WIZARD) == 2 ||
-                                it.countHandCards(Suit.OUTSIDER) == 2 ||
-                                it.countHandCards(Suit.UNDEAD) == 2 ||
-                                it.countHandCards(Suit.LEADER) == 2)).toInt() * 40
+                (it.countHandCards(Suit.WIZARD, Suit.OUTSIDER, Suit.UNDEAD, Suit.LEADER) == 2).toInt() * 40
             }
         ),
         garden to listOf(

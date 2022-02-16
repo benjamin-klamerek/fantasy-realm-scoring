@@ -809,4 +809,16 @@ class ScoringTest {
         Assertions.assertEquals(65, game.score(), "Order6")
     }
 
+    @DisplayName("Chapel bonus is activated with one leader and one wizard")
+    @Test
+    fun chapel_bonus_is_activated_with_one_leader_and_one_wizard(){
+        val game = Game()
+        game.add(chapel)
+        game.add(king)
+        game.add(collector)
+        game.calculate()
+
+        Assertions.assertEquals(57, game.score())
+    }
+
 }
