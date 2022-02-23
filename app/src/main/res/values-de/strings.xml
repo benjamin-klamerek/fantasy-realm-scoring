@@ -207,7 +207,7 @@
     <string name="lantern">Laterne</string>
     <string name="portal">Portal</string>
     <string name="wishing_ring">Wunschring</string>
-    <string name="dungeon_rules">BONUS: +10 für jeweils den ersten Untoten, Bestie und Artefakt. \n+5 für jede weitere Karte dieser Farben sowie Totenbeschwörer, Kriegsherr, Dämon.</string>
+    <string name="dungeon_rules">BONUS: +10 für jeweils den ersten Untoten, Bestie und Artefakt. \n+5 für jede weitere Karte dieser Farben sowie Totenbeschwörer, Hexenmeister, Dämon.</string>
     <string name="castle_rules">BONUS: +10 für jeweils den ersten Anführer, Armee, Land und andere Gebäude. \n+5 jedes weitere Gebäude.</string>
     <string name="crypt_rules">BONUS: Die Summe der Basisstärken aller Untoten. STRAFE: BLOCKIERT alle Anführer.</string>
     <string name="chapel_rules">BONUS: +40 wenn Du insgesamt genau zwei Karten der folgenden Farben hast: Anführer, Zaubrer, Outsider und Undead.</string>
