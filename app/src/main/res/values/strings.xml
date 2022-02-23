@@ -125,7 +125,7 @@
     <string name="ghoul">Ghoul</string>
     <string name="specter">Specter</string>
     <string name="lich">Lich</string>
-    <string name="death_knight">Death knight</string>
+    <string name="death_knight">Death Knight</string>
     <string name="spyglass">Spyglass</string>
     <string name="sarcophagus">Sarcophagus</string>
     <string name="blindfold">Blindfold</string>
@@ -144,7 +144,7 @@
     <string name="treasure_chest">Treasure Chest</string>
     <string name="fishhook">Fishhook</string>
     <string name="repair_kit">Repair Kit</string>
-    <string name="hourglass">hourglass</string>
+    <string name="hourglass">Hourglass</string>
     <string name="gold_mirror">Gold Mirror</string>
     <string name="cauldron">Cauldron</string>
     <string name="lantern">Lantern</string>
