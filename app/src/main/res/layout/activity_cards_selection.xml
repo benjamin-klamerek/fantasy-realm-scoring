@@ -155,6 +155,7 @@
                 android:layout_height="wrap_content"
                 android:checkable="true"
                 android:tag="71"
+                android:text="@string/great_flood"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_flood"
                 app:chipStrokeColor="@color/chip_stroke_color_flood"

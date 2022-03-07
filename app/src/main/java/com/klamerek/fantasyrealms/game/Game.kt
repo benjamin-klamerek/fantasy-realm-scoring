@@ -105,8 +105,10 @@ class Game(val noScoring: Boolean = false) {
         return maxCount
     }
 
-    fun largestSuit(): Int {
-        return groupNotBlankedCardsBySuit().map { entry -> entry.value.size }.maxOrNull() ?: 0
+    fun largestSuitWithDifferentNames(): Int {
+        return groupNotBlankedCardsBySuit()
+            .map { entry -> entry.key to entry.value.distinct() }.toMap()
+            .map { it.value.size }.maxOrNull() ?: 0
     }
 
     fun calculate() {

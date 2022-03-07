@@ -32,7 +32,7 @@ enum class Effect(private val displayId: Int) : Tag {
 @Suppress("MagicNumber")
 enum class CardSet(val numberOfCards: Int) {
     BASE(53),
-    PROMO(1),
+    PROMO(2),
     CURSED_HOARD(47)
 }
 

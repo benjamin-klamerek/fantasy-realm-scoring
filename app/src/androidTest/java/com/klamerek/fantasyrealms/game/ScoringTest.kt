@@ -821,4 +821,20 @@ class ScoringTest {
         Assertions.assertEquals(57, game.score())
     }
 
+    @DisplayName("Doppelganger effect is not cumulative with Collector")
+    @Test
+    fun doppelganger_effect_is_not_cumulative_with_collector(){
+        val game = Game()
+        game.add(collector)
+        game.add(celestialKnights)
+        game.add(elvenArchers)
+        game.add(lightCavalry)
+        game.add(dwarvishInfantry)
+        game.add(doppelganger)
+        game.applySelection(doppelganger, elvenArchers)
+        game.calculate()
+
+        Assertions.assertEquals(108, game.score())
+    }
+
 }
