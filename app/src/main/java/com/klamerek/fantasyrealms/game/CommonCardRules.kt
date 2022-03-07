@@ -479,8 +479,9 @@ object AllRules {
                     5 to 100,
                     6 to 100,
                     7 to 100,
-                    8 to 100
-                )[it.largestSuit()] ?: 0
+                    8 to 100,
+                    9 to 100
+                )[it.largestSuitWithDifferentNames()] ?: 0
             }
         ),
         beastmaster to listOf(
