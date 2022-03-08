@@ -501,7 +501,7 @@ object AllRules {
             }
         ),
         genie to listOf(
-            RuleAboutScore(listOf(Effect.BONUS)) { (Player.all.size * 10) }
+            RuleAboutScore(listOf(Effect.BONUS)) { ((Player.all.size - 1) * 10) }
         ),
         judge to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) { it.countCardWithAtLeastOnePenaltyNotCleared() * 10 }
