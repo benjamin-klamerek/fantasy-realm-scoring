@@ -254,4 +254,5 @@
     <string name="lantern_rules">ERSETZT ZUG: Wähle eine Farbe. Ziehe solange vom Stapel, bis Du eine Karte dieser Farbe (Joker zählen nicht als diese Farbe) oder insgesamt 10 Karten gezogen hast. \nWenn Du eine Karte der Farbe gezogen hast, behalte sie und lege eine andere Karte aus Deiner Hand ab. Zeige die anderen gezogenen Karten und mische sie zurück in den Stapel.</string>
     <string name="portal_rules">JEDERZEIT: Lege in diesem Zug keine Karte ab. \n(Ab sofort hast Du eine zusätzliche Karte auf der Hand)</string>
     <string name="wishing_ring_rules">JEDERZEIT: Schau Dir die Karten des Nachziehstapels an und lege eine beliebige Karte als oberste auf den Stapel. (Du darfst dies auch direkt bevor Du eine Karte ziehst tun.) \n Mische den Stapel am Ende Deines Zugs.</string>
+    <string name="remove_already_selected_label">Bereits ausgewählte Karten entfernen:</string>
 </resources>
