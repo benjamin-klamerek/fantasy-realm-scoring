@@ -15,6 +15,15 @@
                     android:layout_height="match_parent" android:id="@+id/mainLinearLayout"
                     android:gravity="center_vertical"
             >
+
+                <TextView
+                    android:id="@+id/cardNumberLabel"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="bold" />
+
                 <com.google.android.material.chip.Chip
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/cardNameLabel"
@@ -34,8 +43,9 @@
                     android:textColor="?android:attr/textColorPrimaryInverse"
                     app:backgroundTint="@color/colorPrimary"
                     app:icon="@drawable/ic_potion"
+                    app:iconSize="45dp"
                     app:iconTint="?android:attr/textColorPrimaryInverse"
-                    app:iconSize="45dp" />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                         android:layout_width="40dp"
@@ -44,11 +54,13 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="?android:attr/textColorPrimary"/>
+
                 <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/cardDetailButton"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_36"/>
+                    android:id="@+id/cardDetailButton"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_36"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
