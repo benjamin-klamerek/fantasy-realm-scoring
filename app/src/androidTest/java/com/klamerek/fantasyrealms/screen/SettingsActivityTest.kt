@@ -108,6 +108,28 @@ class SettingsActivityTest {
         Assertions.assertThat(results[0]).isNotEqualTo(results[1])
     }
 
+    @Test
+    fun remove_already_selected_linked_with_preference() {
+        val results = ArrayList<Boolean>()
+        repeat(2) {
+            scenario = ActivityScenario.launch(SettingsActivity::class.java)
+            val initialValue =
+                Preferences.getRemoveAlreadySelected(InstrumentationRegistry.getInstrumentation().targetContext)
+            onView(withId(R.id.removeAlreadySelectedCheckBox)).perform(click())
+
+            onView(withId(R.id.doneButton)).perform(click())
+
+            sleep(500)
+
+            val newValue =
+                Preferences.getRemoveAlreadySelected(InstrumentationRegistry.getInstrumentation().targetContext)
+            results.add(newValue)
+            Assertions.assertThat(initialValue).isNotEqualTo(newValue)
+        }
+        Assertions.assertThat(results).hasSize(2)
+        Assertions.assertThat(results[0]).isNotEqualTo(results[1])
+    }
+
     private fun <T> withMyValue(name: String): Matcher<T>? {
         return object : BaseMatcher<T>() {
             override fun matches(item: Any): Boolean {

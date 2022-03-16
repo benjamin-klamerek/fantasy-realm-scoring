@@ -148,4 +148,5 @@
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
     <string name="clear_button">Supprimer</string>
     <string name="discard_area">Défausse</string>
+    <string name="remove_already_selected_label">Retirer cartes déjà sélectionnées:</string>
 </resources>

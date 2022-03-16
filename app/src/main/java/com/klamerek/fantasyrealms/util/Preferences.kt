@@ -12,6 +12,21 @@ object Preferences {
         )
     }
 
+    fun getRemoveAlreadySelected(context: Context): Boolean {
+        return sharedPreferences(context).getBoolean(
+            context.getString(R.string.remove_already_selected),
+            true
+        )
+    }
+
+    fun saveRemoveAlreadySelectedInPreferences(context: Context, accept: Boolean) {
+        val sharedPref = sharedPreferences(context)
+        with(sharedPref.edit()) {
+            putBoolean(context.getString(R.string.remove_already_selected), accept)
+            apply()
+        }
+    }
+
     fun getDisplayCardNumber(context: Context): Boolean {
         return sharedPreferences(context).getBoolean(
             context.getString(R.string.display_card_number),

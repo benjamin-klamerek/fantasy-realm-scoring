@@ -35,6 +35,7 @@ class SettingsActivity : CustomActivity() {
         binding.disclaimerLabel.movementMethod = LinkMovementMethod.getInstance();
 
         binding.displayCardNumberCheckBox.isChecked = Preferences.getDisplayCardNumber(baseContext)
+        binding.removeAlreadySelectedCheckBox.isChecked = Preferences.getRemoveAlreadySelected(baseContext)
         binding.withBuildingsOutsidersUndeadCheckBox.isChecked =
             Preferences.getBuildingsOutsidersUndead(baseContext)
         binding.withCursedItemsCheckBox.isChecked = Preferences.getCursedItems(baseContext)
@@ -66,6 +67,10 @@ class SettingsActivity : CustomActivity() {
             Preferences.saveDisplayChipColorOnSearchInPreferences(
                 baseContext,
                 binding.displayChipColorOnSearchCheckBox.isChecked
+            )
+            Preferences.saveRemoveAlreadySelectedInPreferences(
+                baseContext,
+                binding.removeAlreadySelectedCheckBox.isChecked
             )
             removeCardOutOfScope(initialValue)
             finish()

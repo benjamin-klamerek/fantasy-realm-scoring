@@ -196,7 +196,7 @@ class HandSelectionAdapter(private val withGame: WithGame, private val displayCa
     override fun getItemCount(): Int = withGame.game().cards().size
 
     override fun onBindViewHolder(holder: HandHolder, position: Int) {
-        holder.bindCard(withGame.game().cards().elementAt(position))
+        holder.bindCard(position, withGame.game().cards().elementAt(position))
     }
 
     class HandHolder(
@@ -207,13 +207,14 @@ class HandSelectionAdapter(private val withGame: WithGame, private val displayCa
 
         private var view: HandListItemBinding = v
 
-        fun bindCard(card: Card) {
-            updateMainPart(card)
+        fun bindCard(position: Int, card: Card) {
+            updateMainPart(position, card)
             updateDetailPart(card)
         }
 
         @SuppressLint("SetTextI18n")
-        private fun updateMainPart(card: Card) {
+        private fun updateMainPart(position: Int, card: Card) {
+            view.cardNumberLabel.text = ((position + 1).toString())
             view.cardNameLabel.text =
                 if (displayCardNumber) card.definition.nameWithId()
                 else card.definition.name()

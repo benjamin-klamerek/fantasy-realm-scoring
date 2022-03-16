@@ -336,7 +336,7 @@ class ScoringTest {
         val game = Game()
         game.add(genie)
         game.calculate()
-        Assertions.assertEquals(-10, game.score())
+        Assertions.assertEquals(-20, game.score())
     }
 
     @DisplayName("Judge with and without penalty")

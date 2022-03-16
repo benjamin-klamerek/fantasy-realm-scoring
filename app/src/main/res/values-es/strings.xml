@@ -194,4 +194,5 @@
     <string name="wishing_ring">Anillo de deseos</string>
     <string name="phoenix_rules">BONUS: Cuenta también como Aire y Fuego. PENALIZACIÓN: ANULADA con cualquier carta de Agua. Si esta carta es ANULADA por cualquier razón, su fuerza base se reduce a cero pero conserva sus tipos.</string>
     <string name="phoenix">Fénix</string>
+    <string name="remove_already_selected_label">Eliminar tarjetas ya seleccionadas:</string>
 </resources>

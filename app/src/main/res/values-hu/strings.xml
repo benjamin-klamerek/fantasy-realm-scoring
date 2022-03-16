@@ -154,4 +154,5 @@
     <string name="collector_rules">ELŐNYÖK: +10, ha 3 másik kártya azonos típusú. +40, ha 4 másik kártya azonos típusú. +100, ha 5 másik kártya azonos típusú.</string>
     <string name="beastmaster_rules">ELŐNYÖK: +9 minden Szörnyeteg után. Megszünteti minden Szörnyeteg hátrányát.</string>
     <string name="warlock_lord_rules">Hátrányok: -10 minden Vezér és másik Varázsló után.</string>
+    <string name="remove_already_selected_label">Távolítsa el a már kiválasztott kártyákat:</string>
 </resources>

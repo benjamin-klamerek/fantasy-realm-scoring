@@ -9,9 +9,7 @@ import android.view.View
 import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
-import com.klamerek.fantasyrealms.game.CardDefinitions
-import com.klamerek.fantasyrealms.game.CardSet
-import com.klamerek.fantasyrealms.game.Suit
+import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.revertChipColorState
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Preferences
@@ -111,6 +109,20 @@ class CardsSelectionActivity : CustomActivity() {
         if (input.selectionMode != Constants.CARD_LIST_SELECTION_MODE_DEFAULT) {
             showOnlyPotentialCandidates()
             cardChips().forEach { chip -> chip.setOnClickListener(onlyOneCardSelected()) }
+        } else {
+            if (Preferences.getRemoveAlreadySelected(baseContext)){
+                displayOnlyRemainingCards()
+            }
+        }
+    }
+
+    private fun displayOnlyRemainingCards() {
+        val alreadySelected = DiscardArea.instance.game().cards().map { it.definition.id }
+            .plus(Player.all.flatMap { it.game().cards().map { card -> card.definition.id } })
+            .minus(input.cardsSelected.toSet())
+        cardChips().forEach { chip ->
+            chip.visibility = if (alreadySelected.contains(Integer.valueOf(chip.tag.toString())))
+                View.GONE else View.VISIBLE
         }
     }
 
