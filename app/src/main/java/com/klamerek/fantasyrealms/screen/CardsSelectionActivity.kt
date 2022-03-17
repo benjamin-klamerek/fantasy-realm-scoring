@@ -3,7 +3,6 @@ package com.klamerek.fantasyrealms.screen
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.children
@@ -36,7 +35,7 @@ class CardsSelectionActivity : CustomActivity() {
         checkSelectedCards()
         checkSelectedSuits()
 
-        adaptCardListDisplay()
+        adaptChipListeners()
         adaptSuitListDisplay()
         updateMainButtonStatus()
 
@@ -65,7 +64,7 @@ class CardsSelectionActivity : CustomActivity() {
     }
 
     private fun invertSelectionColorMode(context: Context) {
-        if (Preferences.getDisplayChipColorOnSearch(context)){
+        if (Preferences.getDisplayChipColorOnSearch(context)) {
             cardChips().plus(suitChips()).forEach { chip ->
                 run {
                     chip.chipBackgroundColor = chip.chipBackgroundColor?.revertChipColorState()
@@ -78,9 +77,24 @@ class CardsSelectionActivity : CustomActivity() {
 
     private fun updateVisibleChips(context: Context) {
         val activeDefinitions = CardDefinitions.get(context).map { it.id.toString() }
+        val alreadySelected = DiscardArea.instance.game().cards().map { it.definition.id }
+            .plus(Player.all.flatMap { it.game().cards().map { card -> card.definition.id } })
+            .minus(input.cardsSelected.toSet())
+
+        val isChipVisible = { tag: String ->
+            var visible = activeDefinitions.contains(tag)
+            if (Preferences.getRemoveAlreadySelected(baseContext)) {
+                visible = visible && !alreadySelected.contains(Integer.valueOf(tag))
+            }
+            if (input.selectionMode != Constants.CARD_LIST_SELECTION_MODE_DEFAULT) {
+                visible = visible && input.cardsScope.contains(Integer.valueOf(tag))
+            }
+            visible
+        }
+
         cardChips().forEach { chip ->
             chip.visibility =
-                if (activeDefinitions.contains(chip.tag.toString())) View.VISIBLE else View.GONE
+                if (isChipVisible(chip.tag.toString())) View.VISIBLE else View.GONE
         }
 
         suitChips().forEach { chip ->
@@ -88,6 +102,12 @@ class CardsSelectionActivity : CustomActivity() {
                 CardSet.CURSED_HOARD -> if (Preferences.getBuildingsOutsidersUndead(context)) View.VISIBLE else View.GONE
                 else -> View.VISIBLE
             }
+        }
+    }
+
+    private fun adaptChipListeners() {
+        if (input.selectionMode != Constants.CARD_LIST_SELECTION_MODE_DEFAULT) {
+            cardChips().forEach { chip -> chip.setOnClickListener(onlyOneCardSelected()) }
         }
     }
 
@@ -103,27 +123,6 @@ class CardsSelectionActivity : CustomActivity() {
         binding.suitScrollView.visibility = if (suitActivated) View.VISIBLE else View.GONE
         binding.divider.visibility = if (suitActivated) View.VISIBLE else View.GONE
         suitChips().forEach { chip -> chip.setOnClickListener(onlyOneSuitSelected()) }
-    }
-
-    private fun adaptCardListDisplay() {
-        if (input.selectionMode != Constants.CARD_LIST_SELECTION_MODE_DEFAULT) {
-            showOnlyPotentialCandidates()
-            cardChips().forEach { chip -> chip.setOnClickListener(onlyOneCardSelected()) }
-        } else {
-            if (Preferences.getRemoveAlreadySelected(baseContext)){
-                displayOnlyRemainingCards()
-            }
-        }
-    }
-
-    private fun displayOnlyRemainingCards() {
-        val alreadySelected = DiscardArea.instance.game().cards().map { it.definition.id }
-            .plus(Player.all.flatMap { it.game().cards().map { card -> card.definition.id } })
-            .minus(input.cardsSelected.toSet())
-        cardChips().forEach { chip ->
-            chip.visibility = if (alreadySelected.contains(Integer.valueOf(chip.tag.toString())))
-                View.GONE else View.VISIBLE
-        }
     }
 
     private fun updateMainLabel() {
@@ -155,13 +154,6 @@ class CardsSelectionActivity : CustomActivity() {
                     cardChips().count { chip -> chip.isChecked } == 1 &&
                             suitChips().count { chip -> chip.isChecked } == 1
 
-        }
-    }
-
-    private fun showOnlyPotentialCandidates() {
-        cardChips().forEach { chip ->
-            chip.visibility =
-                if (input.cardsScope.contains(Integer.valueOf(chip.tag.toString()))) View.VISIBLE else View.GONE
         }
     }
 
