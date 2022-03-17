@@ -20,6 +20,7 @@
                     android:id="@+id/cardNumberLabel"
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="bold" />
@@ -48,19 +49,14 @@
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/scoreLabel"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:textColor="?android:attr/textColorPrimary"/>
-
-                <ImageButton
-                    android:id="@+id/cardDetailButton"
-                    android:layout_width="50dp"
+                    android:id="@+id/scoreLabel"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_36"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="bold" />
+
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
