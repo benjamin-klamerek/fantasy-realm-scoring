@@ -87,7 +87,7 @@ class CardsSelectionActivity : CustomActivity() {
                 visible = visible && !alreadySelected.contains(Integer.valueOf(tag))
             }
             if (input.selectionMode != Constants.CARD_LIST_SELECTION_MODE_DEFAULT) {
-                visible = visible && input.cardsScope.contains(Integer.valueOf(tag))
+                visible = input.cardsScope.contains(Integer.valueOf(tag))
             }
             visible
         }
