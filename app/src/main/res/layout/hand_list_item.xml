@@ -69,22 +69,25 @@
                         android:id="@+id/detailBaseConstraintLayout">
 
                     <TextView
-                            android:text="@string/base"
+                        android:id="@+id/baseLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="@string/base"
                         android:textColor="?android:attr/textColorPrimary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:id="@+id/baseLabel"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                            android:textStyle="bold" android:layout_marginStart="10dp"/>
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/baseValueLabel"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="50dp"
+                        android:layout_marginEnd="5dp"
                         android:textAlignment="center"
-                        android:textStyle="bold"
                         android:textColor="?android:attr/textColorPrimary"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -104,7 +107,7 @@
                         android:id="@+id/bonusLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="30dp"
                         android:text="@string/effect_bonus"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textStyle="bold"
@@ -116,7 +119,7 @@
                         android:id="@+id/bonusValueLabel"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="50dp"
+                        android:layout_marginEnd="5dp"
                         android:textAlignment="center"
                         android:textColor="@android:color/holo_green_dark"
                         android:textStyle="bold"
@@ -137,25 +140,28 @@
                         android:id="@+id/detailPenaltyConstraintLayout">
 
                     <TextView
-                            android:text="@string/effect_penalty"
+                        android:id="@+id/penaltyLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="@string/effect_penalty"
                         android:textColor="?android:attr/textColorPrimary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:id="@+id/penaltyLabel"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                            android:textStyle="bold" android:layout_marginStart="10dp"/>
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/penaltyValueLabel"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginEnd="50dp"
-                            android:textAlignment="center"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/holo_red_dark" />
+                        android:id="@+id/penaltyValueLabel"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                     <Space
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
