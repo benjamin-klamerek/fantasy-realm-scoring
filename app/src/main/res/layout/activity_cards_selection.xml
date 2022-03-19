@@ -21,6 +21,7 @@
         android:id="@+id/cardScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:layout_weight="6">
 
         <com.google.android.material.chip.ChipGroup
@@ -1267,6 +1268,7 @@
         android:id="@+id/suitScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:layout_weight="8">
 
         <com.google.android.material.chip.ChipGroup
