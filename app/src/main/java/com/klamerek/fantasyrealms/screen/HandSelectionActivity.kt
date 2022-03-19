@@ -231,16 +231,13 @@ class HandSelectionAdapter(private val withGame: WithGame, private val displayCa
             view.effectButton.setOnClickListener {
                 EventBus.getDefault().post(RequestCardEffectSelectionEvent(card.definition.id))
             }
-            view.cardDetailButton.visibility =
-                if (withGame.displayScore()) View.VISIBLE else View.GONE
-            view.cardDetailButton.setOnClickListener {
+            view.cardNameLabel.setOnClickListener {
                 view.detailLinearLayout.visibility =
                     if (view.detailLinearLayout.visibility == View.GONE) View.VISIBLE else View.GONE
-                view.cardDetailButton.setImageResource(
-                    if (view.detailLinearLayout.visibility == View.GONE)
-                        R.drawable.ic_baseline_keyboard_arrow_down_36 else
-                        R.drawable.ic_baseline_keyboard_arrow_up_36
-                )
+            }
+            view.mainLinearLayout.setOnClickListener {
+                view.detailLinearLayout.visibility =
+                    if (view.detailLinearLayout.visibility == View.GONE) View.VISIBLE else View.GONE
             }
         }
 

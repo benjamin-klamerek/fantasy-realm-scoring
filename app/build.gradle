@@ -13,8 +13,8 @@ android {
         applicationId "com.klamerek.fantasyrealms"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 24
-        versionName "0.24"
+        versionCode 25
+        versionName "0.25"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
