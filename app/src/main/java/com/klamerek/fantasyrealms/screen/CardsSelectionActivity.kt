@@ -58,7 +58,7 @@ class CardsSelectionActivity : CustomActivity() {
                 .mapNotNull { chip -> chip.tag.toString() }.toMutableList()
             closingIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, answer)
             setResult(Constants.RESULT_OK, closingIntent)
-            finish()
+            finishAfterTransition()
         }
 
     }

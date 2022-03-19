@@ -73,7 +73,7 @@ class ScanActivity : CustomActivity() {
         answer.cardsSelected.addAll(cardDetected.indexes)
         closingIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, answer)
         setResult(Constants.RESULT_OK, closingIntent)
-        finish()
+        finishAfterTransition()
     }
 
     private fun manageCameraPermission() {
@@ -184,7 +184,7 @@ class ScanActivity : CustomActivity() {
                     "Permissions not granted by the user.",
                     Toast.LENGTH_SHORT
                 ).show()
-                finish()
+                finishAfterTransition()
             }
         }
     }
