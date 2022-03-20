@@ -18,6 +18,9 @@ object Constants {
     const val CARD_LIST_SELECTION_MODE_ONE_CARD = 1
     const val CARD_LIST_SELECTION_MODE_ONE_CARD_AND_SUIT = 2
 
+    const val CARD_LIST_SOURCE_MANUAL = 0
+    const val CARD_LIST_SOURCE_SCAN = 1
+
     /**
      * -1 means discard area, superior to zero indicates a player
      */

@@ -1,9 +1,11 @@
 package com.klamerek.fantasyrealms.screen
 
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +49,7 @@ class HandSelectionActivity : CustomActivity() {
             val request = CardsSelectionExchange()
             request.cardsSelected.addAll(withGame.game().cards().map { card -> card.definition.id })
             handSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, request)
-            startActivityForResult(handSelectionIntent, Constants.SELECT_CARDS)
+            startActivityForResult(handSelectionIntent, Constants.SELECT_CARDS, prepareTransitionAnimation().toBundle())
         }
         binding.scanButton.setOnClickListener {
             val handSelectionIntent = Intent(this, ScanActivity::class.java)
@@ -79,6 +81,21 @@ class HandSelectionActivity : CustomActivity() {
         withGame.game().calculate()
         refreshGameSessionLabels()
         adapter.notifyDataSetChanged()
+    }
+
+    private fun prepareTransitionAnimation(): ActivityOptions {
+        val transitionComponents = ArrayList<Pair<View?, String?>>()
+        for (index in 0 until adapter.itemCount) {
+            val viewHolder: RecyclerView.ViewHolder? =
+                binding.handView.findViewHolderForAdapterPosition(index)
+            if (viewHolder != null && viewHolder is HandSelectionAdapter.HandHolder) {
+                transitionComponents.add(viewHolder.getTransitionComponent())
+            }
+        }
+        return ActivityOptions.makeSceneTransitionAnimation(
+            this,
+            *transitionComponents.toTypedArray()
+        )
     }
 
     private fun findOrCreateGameSession(): WithGame {
@@ -122,9 +139,12 @@ class HandSelectionActivity : CustomActivity() {
         if (resultCode == Constants.RESULT_OK && requestCode == Constants.SELECT_CARDS) {
             val answer =
                 data?.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as? CardsSelectionExchange
-            withGame.game()
-                .update(answer?.cardsSelected?.mapNotNull { index -> allCardsById[index] }
-                    .orEmpty())
+            val cardList = answer?.cardsSelected?.mapNotNull { index -> allCardsById[index] }.orEmpty()
+            if (answer?.source == Constants.CARD_LIST_SOURCE_MANUAL){
+                withGame.game().update(cardList)
+            }else{
+                withGame.game().addAll(cardList)
+            }
         } else if (resultCode == Constants.RESULT_OK && requestCode == Constants.SELECT_RULE_EFFECT) {
             val answer =
                 data?.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as? CardsSelectionExchange
@@ -212,12 +232,20 @@ class HandSelectionAdapter(private val withGame: WithGame, private val displayCa
             updateDetailPart(card)
         }
 
+        fun getTransitionComponent(): android.util.Pair<View?, String?> {
+            return android.util.Pair.create<View?, String?>(
+                view.cardNameLabel,
+                view.cardNameLabel.transitionName
+            );
+        }
+
         @SuppressLint("SetTextI18n")
         private fun updateMainPart(position: Int, card: Card) {
             view.cardNumberLabel.text = ((position + 1).toString())
             view.cardNameLabel.text =
                 if (displayCardNumber) card.definition.nameWithId()
                 else card.definition.name()
+            view.cardNameLabel.transitionName = card.transitionName()
             view.cardNameLabel.setChipBackgroundColorResource(card.suit().color)
             view.cardNameLabel.paintFlags =
                 if (card.blanked && withGame.displayScore()) Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG else 0
