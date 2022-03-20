@@ -29,9 +29,19 @@ class HandSelectionActivity : CustomActivity() {
     private lateinit var withGame: WithGame
     private lateinit var binding: ActivityHandSelectionBinding
 
+    private var cancelOnResumeAnimation = false
+
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!isActivityTransitionRunning && !cancelOnResumeAnimation) {
+            binding.handView.scheduleLayoutAnimation();
+        }
+        cancelOnResumeAnimation = false
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -49,7 +59,11 @@ class HandSelectionActivity : CustomActivity() {
             val request = CardsSelectionExchange()
             request.cardsSelected.addAll(withGame.game().cards().map { card -> card.definition.id })
             handSelectionIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, request)
-            startActivityForResult(handSelectionIntent, Constants.SELECT_CARDS, prepareTransitionAnimation().toBundle())
+            startActivityForResult(
+                handSelectionIntent,
+                Constants.SELECT_CARDS,
+                prepareTransitionAnimation().toBundle()
+            )
         }
         binding.scanButton.setOnClickListener {
             val handSelectionIntent = Intent(this, ScanActivity::class.java)
@@ -92,6 +106,7 @@ class HandSelectionActivity : CustomActivity() {
                 transitionComponents.add(viewHolder.getTransitionComponent())
             }
         }
+        cancelOnResumeAnimation = true
         return ActivityOptions.makeSceneTransitionAnimation(
             this,
             *transitionComponents.toTypedArray()
@@ -139,10 +154,11 @@ class HandSelectionActivity : CustomActivity() {
         if (resultCode == Constants.RESULT_OK && requestCode == Constants.SELECT_CARDS) {
             val answer =
                 data?.getSerializableExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID) as? CardsSelectionExchange
-            val cardList = answer?.cardsSelected?.mapNotNull { index -> allCardsById[index] }.orEmpty()
-            if (answer?.source == Constants.CARD_LIST_SOURCE_MANUAL){
+            val cardList =
+                answer?.cardsSelected?.mapNotNull { index -> allCardsById[index] }.orEmpty()
+            if (answer?.source == Constants.CARD_LIST_SOURCE_MANUAL) {
                 withGame.game().update(cardList)
-            }else{
+            } else {
                 withGame.game().addAll(cardList)
             }
         } else if (resultCode == Constants.RESULT_OK && requestCode == Constants.SELECT_RULE_EFFECT) {
