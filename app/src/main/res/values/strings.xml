@@ -28,6 +28,7 @@
     <string name="language_label_spanish" translatable="false">Español</string>
     <string name="language_label_hungarian" translatable="false">Magyar</string>
     <string name="language_label_french" translatable="false">Français</string>
+    <string name="language_label_polish" translatable="false">Polski</string>
     <string name="display_card_number_label">Display card number:</string>
     <string name="remove_already_selected_label">Remove cards already selected:</string>
     <string name="display_chip_color_on_search_label">Display chip color on search:</string>
