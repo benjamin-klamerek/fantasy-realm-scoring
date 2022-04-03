@@ -99,6 +99,7 @@ class PlayerSelectionActivity : CustomActivity() {
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
+        binding.playersView.scheduleLayoutAnimation();
         binding.discardItem.scoreLabel.text = "" + DiscardArea.instance.game().actualHandSize() + " card(s)"
     }
 

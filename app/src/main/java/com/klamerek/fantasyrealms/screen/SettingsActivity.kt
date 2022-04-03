@@ -73,7 +73,7 @@ class SettingsActivity : CustomActivity() {
                 binding.removeAlreadySelectedCheckBox.isChecked
             )
             removeCardOutOfScope(initialValue)
-            finish()
+            finishAfterTransition()
         }
 
         binding.languageSpinner.setSelection(

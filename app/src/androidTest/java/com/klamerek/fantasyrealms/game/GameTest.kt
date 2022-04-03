@@ -38,7 +38,7 @@ class GameTest {
         game.add(necromancer)
         game.add(candle)
 
-        game.update(listOf(candle, collector, dragon))
+        game.addAll(listOf(candle, collector, dragon))
 
 
         org.junit.jupiter.api.Assertions.assertAll(

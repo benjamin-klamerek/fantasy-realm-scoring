@@ -11,6 +11,7 @@ import com.klamerek.fantasyrealms.databinding.ActivityCardsSelectionBinding
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.revertChipColorState
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Constants.CARD_LIST_SOURCE_MANUAL
 import com.klamerek.fantasyrealms.util.Preferences
 import java.io.Serializable
 
@@ -50,6 +51,7 @@ class CardsSelectionActivity : CustomActivity() {
         binding.addCardsButton.setOnClickListener {
             val closingIntent = Intent()
             val answer = CardsSelectionExchange()
+            answer.source = CARD_LIST_SOURCE_MANUAL
             answer.cardInitiator = input.cardInitiator
             answer.cardsSelected = cardChips().filter { chip -> chip.isChecked }
                 .map { chip -> chip.tag }.mapNotNull { tag -> Integer.valueOf(tag.toString()) }
@@ -58,7 +60,7 @@ class CardsSelectionActivity : CustomActivity() {
                 .mapNotNull { chip -> chip.tag.toString() }.toMutableList()
             closingIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, answer)
             setResult(Constants.RESULT_OK, closingIntent)
-            finish()
+            finishAfterTransition()
         }
 
     }
@@ -181,6 +183,7 @@ class CardsSelectionActivity : CustomActivity() {
  * @property cardsScope                 indicates which cards must be accessible for selection
  */
 class CardsSelectionExchange : Serializable {
+    var source: Int = Constants.CARD_LIST_SOURCE_MANUAL
     var selectionMode: Int = Constants.CARD_LIST_SELECTION_MODE_DEFAULT
     var label: String? = null
     var cardInitiator: Int? = null

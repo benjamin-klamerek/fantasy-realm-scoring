@@ -17,6 +17,7 @@ import com.google.mlkit.vision.common.InputImage
 import com.klamerek.fantasyrealms.databinding.ActivityScanBinding
 import com.klamerek.fantasyrealms.ocr.CardTitleRecognizer
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Constants.CARD_LIST_SOURCE_SCAN
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.nio.ByteBuffer
@@ -70,10 +71,11 @@ class ScanActivity : CustomActivity() {
         binding.cameraPreview.visibility = View.VISIBLE
         val closingIntent = Intent()
         val answer = CardsSelectionExchange()
+        answer.source = CARD_LIST_SOURCE_SCAN
         answer.cardsSelected.addAll(cardDetected.indexes)
         closingIntent.putExtra(Constants.CARD_SELECTION_DATA_EXCHANGE_SESSION_ID, answer)
         setResult(Constants.RESULT_OK, closingIntent)
-        finish()
+        finishAfterTransition()
     }
 
     private fun manageCameraPermission() {
@@ -184,7 +186,7 @@ class ScanActivity : CustomActivity() {
                     "Permissions not granted by the user.",
                     Toast.LENGTH_SHORT
                 ).show()
-                finish()
+                finishAfterTransition()
             }
         }
     }

@@ -85,5 +85,9 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
         return name().hashCode()
     }
 
+    fun transitionName(): String {
+        return "transition_chip_" + definition.id
+    }
+
 
 }

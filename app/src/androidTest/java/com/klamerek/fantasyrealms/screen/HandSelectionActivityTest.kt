@@ -288,10 +288,6 @@ class HandSelectionActivityTest {
         onView(withId(R.id.playerNameLabel)).check(matches(withText("TEST - Score : 73")))
         onView(withId(R.id.handSizeLabel)).check(matches(withText("4/7")))
 
-        onView(withId(R.id.handView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<HandSelectionAdapter.HandHolder>(0, ImageButtonClick(R.id.cardDetailButton))
-        )
-
         onView(withId(R.id.handView)).check(
             matches(
                 RecycleViewMatcher.childOfViewAtPosition(R.id.baseValueLabel, 0, withText("4"))

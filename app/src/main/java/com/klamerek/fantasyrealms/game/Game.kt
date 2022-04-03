@@ -51,6 +51,19 @@ class Game(val noScoring: Boolean = false) {
     }
 
     fun update(cardDefinitions: List<CardDefinition>) {
+        val cardsToRemove = ArrayList<CardDefinition>()
+        listOf(handCards, tableCards).forEach {
+            it.forEach { card ->
+                if (!cardDefinitions.contains(card.definition)) {
+                    cardsToRemove.add(card.definition)
+                }
+            }
+        }
+        cardsToRemove.forEach { remove(it) }
+        addAll(cardDefinitions)
+    }
+
+    fun addAll(cardDefinitions: List<CardDefinition>) {
         cardDefinitions.forEach { definition -> add(definition) }
     }
 
@@ -182,8 +195,10 @@ class Game(val noScoring: Boolean = false) {
      * - Some cards are UNBLANKABLE (like Angel).<br>
      */
     private fun applyBlankingRules() {
-        val cardsPotentiallyBlanked = handCards.map { card -> card.rules().activated(card)
-            .with(Effect.BLANK).asRuleAboutCard().listCards(this) }.flatten()
+        val cardsPotentiallyBlanked = handCards.map { card ->
+            card.rules().activated(card)
+                .with(Effect.BLANK).asRuleAboutCard().listCards(this)
+        }.flatten()
 
         handCards.map { card ->
             card.rules()
@@ -192,8 +207,10 @@ class Game(val noScoring: Boolean = false) {
                 .asRuleAboutCard()
                 .map { rule -> Pair(card, rule) }
         }.flatten()
-            .sortedWith(compareBy({ pair -> pair.second?.priority?.unaryMinus() },
-                { pair -> cardsPotentiallyBlanked.contains(pair.first) }))
+            .sortedWith(
+                compareBy({ pair -> pair.second?.priority?.unaryMinus() },
+                    { pair -> cardsPotentiallyBlanked.contains(pair.first) })
+            )
             .forEach() { if (!it.first.blanked) applyBlankingRule(it.second) }
     }
 
@@ -234,13 +251,15 @@ class Game(val noScoring: Boolean = false) {
     }
 
     fun handSizeExpected(context: Context): Int {
-        return min(MAX_HAND_SIZE, Constants.DEFAULT_HAND_SIZE +
-                Preferences.getBuildingsOutsidersUndead(context).toInt() +
-                handCards.any { card ->
-                    card.definition == necromancer || card.definition == necromancerV2
-                }.toInt() +
-                handCards.any { card -> card.definition == genie }.toInt() +
-                handCards.any { card -> card.definition == leprechaun }.toInt())
+        return min(
+            MAX_HAND_SIZE, Constants.DEFAULT_HAND_SIZE +
+                    Preferences.getBuildingsOutsidersUndead(context).toInt() +
+                    handCards.any { card ->
+                        card.definition == necromancer || card.definition == necromancerV2
+                    }.toInt() +
+                    handCards.any { card -> card.definition == genie }.toInt() +
+                    handCards.any { card -> card.definition == leprechaun }.toInt()
+        )
     }
 
     fun actualHandSize(): Int {
