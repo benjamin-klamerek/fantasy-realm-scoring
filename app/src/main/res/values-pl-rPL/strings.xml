@@ -45,7 +45,7 @@
     <string name="suit_undead">Nieumarły</string>
     <string name="suit_cursed_item">Przeklęty przedmiot</string>
     <string name="rangers">Zwiadowcy</string>
-    <string name="elven_archers">Elfi Łócznik</string>
+    <string name="elven_archers">Elfi Łócznicy</string>
     <string name="dwarvish_infantry">Krasnoludzka piechota</string>
     <string name="light_cavalry">Lekka konnica</string>
     <string name="celestial_knights">Rycerze</string>
@@ -83,7 +83,7 @@
     <string name="elven_longbow">Elfi długi łuk</string>
     <string name="sword_of_keth">Miech Ketha</string>
     <string name="warship">Okręt</string>
-    <string name="war_dirigible">Wojenny sterowiec</string>
+    <string name="war_dirigible">Sterowiec wojenny</string>
     <string name="air_elemental">Żywiołak powietrza</string>
     <string name="rainstorm">Burza</string>
     <string name="whirlwind">Tornado</string>
