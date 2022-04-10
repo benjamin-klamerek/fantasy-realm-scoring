@@ -120,6 +120,8 @@ class PlayerSelectionActivityTest {
                 })
         )
 
+        sleep(500)
+
         intended(hasComponent(HandSelectionActivity::class.java.name))
     }
 
