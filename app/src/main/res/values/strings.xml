@@ -212,7 +212,7 @@
     <string name="chapel_rules">BONUS: +40 if you have exactly two cards from among these suits: Leader, Wizard, Outsider, and Undead.</string>
     <string name="garden_rules">BONUS: +11 for each Leader and Beast. BLANKED by any Undead, Necromancer, or Demon.</string>
     <string name="genie_rules">BONUS: +10 per other player, At the end of the game, look through the draw deck and put one card in your hand. (Resolves after Leprechaun.)</string>
-    <string name="judge_rules">BONUS: +10 for each card that contains a card with a Penalty not CLEARED.</string>
+    <string name="judge_rules">BONUS: +10 for each card that contains a Penalty not CLEARED.</string>
     <string name="angel_rules">Prevent one other card from being BLANKED. This card can never be BLANKED.</string>
     <string name="leprechaun_rules">BONUS: Draw the top card from the deck at the end of the game and add it to your hand. (Resolves before Genie.)</string>
     <string name="demon_rules">PENALTY: For every non-Outsider card : If that card is the only card you have in that suit, then that card is BLANKED. This takes place before any other BLANKING.</string>
