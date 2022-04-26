@@ -211,9 +211,14 @@ object AllRules {
                 ) * 15
             }
         ),
-        swamp to listOf(RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY, Suit.FLAME)) {
-            (it.countHandCards(Suit.ARMY, Suit.FLAME)) * -3
-        }),
+        swamp to listOf(
+            RuleAboutScore(listOf(Effect.PENALTY, Suit.FLAME)) {
+                (it.countHandCards(Suit.FLAME)) * -3
+            },
+            RuleAboutScore(listOf(Effect.PENALTY, Suit.ARMY)) {
+                (it.countHandCards(Suit.ARMY)) * -3
+            }
+        ),
         greatFlood to listOf(
             RuleAboutCard(
                 listOf(
@@ -587,7 +592,12 @@ object AllRules {
         ),
         chapel to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (it.countHandCards(Suit.WIZARD, Suit.OUTSIDER, Suit.UNDEAD, Suit.LEADER) == 2).toInt() * 40
+                (it.countHandCards(
+                    Suit.WIZARD,
+                    Suit.OUTSIDER,
+                    Suit.UNDEAD,
+                    Suit.LEADER
+                ) == 2).toInt() * 40
             }
         ),
         garden to listOf(
