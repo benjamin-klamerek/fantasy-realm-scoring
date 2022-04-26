@@ -13,6 +13,7 @@
     <string name="hand_size">"%1$d/%2$d"</string>
     <string name="new_player_default_value">New player</string>
     <string name="add_card_button">Add card</string>
+    <string name="x_cards">%1$d card(s)</string>
     <string name="scan_button">Scan</string>
     <string name="clear_button">Clear</string>
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
