@@ -6,6 +6,10 @@ import com.klamerek.fantasyrealms.R
 
 object Preferences {
 
+    const val SCAN_MODE_DEFAULT = "Default"
+    private const val SCAN_MODE_ON_THE_FLY = "On the fly (beta)"
+    val scanModes = listOf(SCAN_MODE_DEFAULT, SCAN_MODE_ON_THE_FLY)
+
     fun sharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(
             context.getString(R.string.preference_file_key), Context.MODE_PRIVATE
@@ -86,5 +90,21 @@ object Preferences {
             false
         )
     }
+
+    fun saveScanModeInPreferences(context: Context, mode: String) {
+        val sharedPref = sharedPreferences(context)
+        with(sharedPref.edit()) {
+            putString(context.getString(R.string.scan_mode), mode)
+            apply()
+        }
+    }
+
+    fun getScanMode(context: Context): String {
+        return sharedPreferences(context).getString(
+            context.getString(R.string.scan_mode),
+            SCAN_MODE_DEFAULT
+        )!!
+    }
+
 
 }

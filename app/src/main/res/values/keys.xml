@@ -2,6 +2,7 @@
 <resources>
     <string name="preference_file_key" translatable="false">com.klamerek.preference_file_key</string>
     <string name="saved_language" translatable="false">saved_language</string>
+    <string name="scan_mode" translatable="false">scan_mode</string>
     <string name="display_card_number" translatable="false">display_card_number</string>
     <string name="remove_already_selected" translatable="false">remove_already_selected</string>
     <string name="cursed_items" translatable="false">cursed_items</string>
