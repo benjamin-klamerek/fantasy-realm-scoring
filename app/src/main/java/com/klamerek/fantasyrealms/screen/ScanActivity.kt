@@ -1,28 +1,26 @@
 package com.klamerek.fantasyrealms.screen
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.common.InputImage
 import com.klamerek.fantasyrealms.databinding.ActivityScanBinding
 import com.klamerek.fantasyrealms.ocr.CardTitleRecognizer
+import com.klamerek.fantasyrealms.util.Camera.TAG
+import com.klamerek.fantasyrealms.util.CameraUseCase
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Constants.CARD_LIST_SOURCE_SCAN
+import com.klamerek.fantasyrealms.util.manageCameraPermission
+import com.klamerek.fantasyrealms.util.onRequestPermissionsResultDelegator
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.nio.ByteBuffer
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 
 /**
@@ -30,17 +28,15 @@ import java.util.concurrent.Executors
  * After scanning, activity is closed and result given back to the caller.
  *
  */
-class ScanActivity : CustomActivity() {
+class ScanActivity : CustomActivity(), CameraUseCase {
 
-    private var imageCapture: ImageCapture? = null
-    private lateinit var cameraExecutor: ExecutorService
+    private lateinit var imageCapture: ImageCapture
     private lateinit var recognizer: CardTitleRecognizer
     private lateinit var binding: ActivityScanBinding
 
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
-        cameraExecutor.shutdown()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +46,10 @@ class ScanActivity : CustomActivity() {
         val view = binding.root
         setContentView(view)
 
-        manageCameraPermission()
+        manageCameraPermission(this)
+        imageCapture = ImageCapture.Builder().build()
 
         recognizer = CardTitleRecognizer(baseContext)
-        cameraExecutor = Executors.newSingleThreadExecutor()
         binding.cameraCaptureButton.setOnClickListener {
             binding.scanProgressBar.visibility = View.VISIBLE
             binding.scanningLabel.visibility = View.VISIBLE
@@ -78,13 +74,27 @@ class ScanActivity : CustomActivity() {
         finishAfterTransition()
     }
 
-    private fun manageCameraPermission() {
-        if (allPermissionsGranted()) {
-            startCamera()
-        } else {
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
-        }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        onRequestPermissionsResultDelegator(requestCode, this)
     }
+
+    private fun scan() {
+        imageCapture.takePicture(
+            ContextCompat.getMainExecutor(this),
+            MyImageCapturedCallback(recognizer)
+        )
+    }
+
+    override fun getActivity(): ComponentActivity = this
+
+    override fun getCameraPreview(): Preview.SurfaceProvider = binding.cameraPreview.surfaceProvider
+
+    override fun getMainCameraUseCase(): UseCase = imageCapture
 
     class MyImageCapturedCallback(private val recognizer: CardTitleRecognizer) :
         ImageCapture.OnImageCapturedCallback() {
@@ -124,77 +134,5 @@ class ScanActivity : CustomActivity() {
         }
     }
 
-    private fun scan() {
-        val imageCapture = imageCapture ?: return
-        imageCapture.takePicture(
-            ContextCompat.getMainExecutor(this),
-            MyImageCapturedCallback(recognizer)
-        )
-    }
-
-    @Suppress("TooGenericExceptionCaught")
-    private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
-        cameraProviderFuture.addListener({
-            // Used to bind the lifecycle of cameras to the lifecycle owner
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            // Preview
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.cameraPreview.surfaceProvider)
-                }
-
-            imageCapture = ImageCapture.Builder().build()
-
-            // Select back camera as a default
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-            try {
-                // Unbind use cases before rebinding
-                cameraProvider.unbindAll()
-
-                // Bind use cases to camera
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
-
-            } catch (exc: Exception) {
-                Log.e(TAG, "Use case binding failed", exc)
-            }
-
-        }, ContextCompat.getMainExecutor(this))
-    }
-
-    private fun allPermissionsGranted() =
-        REQUIRED_PERMISSIONS.all {
-            ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-        }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
-                startCamera()
-            } else {
-                Toast.makeText(
-                    this,
-                    "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                finishAfterTransition()
-            }
-        }
-    }
-
-    companion object {
-        private const val TAG = "CameraXBasic"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-    }
 
 }

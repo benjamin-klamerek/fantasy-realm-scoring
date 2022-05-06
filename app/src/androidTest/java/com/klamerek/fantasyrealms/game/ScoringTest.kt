@@ -691,7 +691,7 @@ class ScoringTest {
 
     @DisplayName("Phoenix counts also as Flame and Weather (elemental case)")
     @Test
-    fun phoenix_counts_also_as_flame_and_weather_elemental_case(){
+    fun phoenix_counts_also_as_flame_and_weather_elemental_case() {
         val game = Game()
         game.add(phoenix)
         game.add(airElemental)
@@ -703,7 +703,7 @@ class ScoringTest {
 
     @DisplayName("Phoenix counts also as Flame and Weather (collector and blank effect)")
     @Test
-    fun phoenix_counts_also_as_flame_and_weather_collector_and_blank(){
+    fun phoenix_counts_also_as_flame_and_weather_collector_and_blank() {
         val game = Game()
         game.add(phoenix)
         game.add(collector)
@@ -712,12 +712,12 @@ class ScoringTest {
         game.add(smoke)
         game.calculate()
 
-        Assertions.assertEquals(0 + 7 + 8 + 30 + 27 + 40 -10, game.score())
+        Assertions.assertEquals(0 + 7 + 8 + 30 + 27 + 40 - 10, game.score())
     }
 
     @DisplayName("Phoenix is blanked with water elemental")
     @Test
-    fun phoenix_is_blanked_with_water_elemental(){
+    fun phoenix_is_blanked_with_water_elemental() {
         val game = Game()
         game.add(phoenix)
         game.add(waterElemental)
@@ -728,7 +728,7 @@ class ScoringTest {
 
     @DisplayName("Discard game effects are disabled")
     @Test
-    fun discard_game_effects_are_disabled(){
+    fun discard_game_effects_are_disabled() {
         val game = Game()
         game.add(deathKnight)
         game.calculate()
@@ -747,7 +747,7 @@ class ScoringTest {
 
     @DisplayName("Basilik + doppelganger blank each other")
     @Test
-    fun basilik_plus_doppelganger_bank_each_other(){
+    fun basilik_plus_doppelganger_bank_each_other() {
         val game = Game()
         game.add(basilisk)
         game.add(doppelganger)
@@ -759,7 +759,7 @@ class ScoringTest {
 
     @DisplayName("Clearing and blanking order (great flood, wildfire and blizzard)")
     @Test
-    fun clearing_and_blanking_order(){
+    fun clearing_and_blanking_order() {
         val game = Game()
         game.add(wildfire)
         game.add(blizzard)
@@ -811,7 +811,7 @@ class ScoringTest {
 
     @DisplayName("Chapel bonus is activated with one leader and one wizard")
     @Test
-    fun chapel_bonus_is_activated_with_one_leader_and_one_wizard(){
+    fun chapel_bonus_is_activated_with_one_leader_and_one_wizard() {
         val game = Game()
         game.add(chapel)
         game.add(king)
@@ -823,7 +823,7 @@ class ScoringTest {
 
     @DisplayName("Doppelganger effect is not cumulative with Collector")
     @Test
-    fun doppelganger_effect_is_not_cumulative_with_collector(){
+    fun doppelganger_effect_is_not_cumulative_with_collector() {
         val game = Game()
         game.add(collector)
         game.add(celestialKnights)
@@ -835,6 +835,19 @@ class ScoringTest {
         game.calculate()
 
         Assertions.assertEquals(108, game.score())
+    }
+
+    @DisplayName("Ranger only remove word Army, not whole malus (bug with Swamp)")
+    @Test
+    fun ranger_only_remove_word_army_not_whole_malus() {
+        val game = Game()
+        game.add(swamp)
+        game.add(celestialKnights)
+        game.add(fireElemental)
+        game.add(rangers)
+        game.calculate()
+
+        Assertions.assertEquals(36, game.score())
     }
 
 }

@@ -19,6 +19,7 @@ import com.klamerek.fantasyrealms.databinding.HandListItemBinding
 import com.klamerek.fantasyrealms.game.*
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Preferences
+import com.klamerek.fantasyrealms.util.Preferences.SCAN_MODE_DEFAULT
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -66,7 +67,11 @@ class HandSelectionActivity : CustomActivity() {
             )
         }
         binding.scanButton.setOnClickListener {
-            val handSelectionIntent = Intent(this, ScanActivity::class.java)
+            val handSelectionIntent = Intent(
+                this,
+                if (Preferences.getScanMode(this) == SCAN_MODE_DEFAULT)
+                    ScanActivity::class.java else OnTheFlyScanActivity::class.java
+            )
             startActivityForResult(handSelectionIntent, Constants.SELECT_CARDS)
         }
         binding.clearButton.setOnClickListener {

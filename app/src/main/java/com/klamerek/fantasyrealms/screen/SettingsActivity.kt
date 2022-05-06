@@ -22,6 +22,8 @@ import com.klamerek.fantasyrealms.util.Preferences
  */
 class SettingsActivity : CustomActivity() {
 
+
+
     private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,14 +46,27 @@ class SettingsActivity : CustomActivity() {
 
         val initialValue = getCardScopeId()
 
-        val adapter = ArrayAdapter(this, R.layout.custom_spinner_list_item, languages)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.languageSpinner.adapter = adapter
+        val languageAdapter = ArrayAdapter(this, R.layout.custom_spinner_list_item, languages)
+        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.languageSpinner.adapter = languageAdapter
+
+        val scanModeAdapter = ArrayAdapter(this, R.layout.custom_spinner_list_item, Preferences.scanModes)
+        scanModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.scanModeSpinner.adapter = scanModeAdapter
 
         binding.doneButton.setOnClickListener {
             val language =
                 binding.languageSpinner.adapter.getItem(binding.languageSpinner.selectedItemPosition) as Language
             LocaleManager.saveLanguageInPreferences(baseContext, language)
+
+            Preferences.saveScanModeInPreferences(
+                baseContext,
+                binding.scanModeSpinner.adapter.getItem(binding.scanModeSpinner.selectedItemPosition).toString()
+            )
+            Preferences.saveDisplayCardNumberInPreferences(
+                baseContext,
+                binding.displayCardNumberCheckBox.isChecked
+            )
             Preferences.saveDisplayCardNumberInPreferences(
                 baseContext,
                 binding.displayCardNumberCheckBox.isChecked
@@ -79,6 +94,12 @@ class SettingsActivity : CustomActivity() {
         binding.languageSpinner.setSelection(
             (binding.languageSpinner.adapter as ArrayAdapter<Language>).getPosition(
                 getLanguage(this)
+            )
+        )
+
+        binding.scanModeSpinner.setSelection(
+            (binding.scanModeSpinner.adapter as ArrayAdapter<String>).getPosition(
+                Preferences.getScanMode(baseContext)
             )
         )
 

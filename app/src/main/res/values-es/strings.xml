@@ -12,6 +12,7 @@
     <string name="player_name_with_score">"%1$s - Score : %2$d"</string>
     <string name="hand_size">"%1$d/%2$d"</string>
     <string name="new_player_default_value">Nuevo jugador</string>
+    <string name="x_cards">%1$d tarjetas</string>
     <string name="add_card_button">Añadir carta </string>
     <string name="scan_button">Escanear</string>
     <string name="scan_help_label">Consejo: solo los nombres de las cartas son obligatorios</string>

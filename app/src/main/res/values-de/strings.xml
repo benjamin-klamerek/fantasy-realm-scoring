@@ -12,6 +12,7 @@
     <string name="player_name_with_score">"%1$s - Punkte : %2$d"</string>
     <string name="hand_size">"%1$d/%2$d"</string>
     <string name="new_player_default_value">Neuer Spieler</string>
+    <string name="x_cards">%1$d karten</string>
     <string name="add_card_button">Karte hinzufügen</string>
     <string name="scan_button">Einscannen</string>
     <string name="scan_help_label">Tipp: Nur die Kartennamen sind notwendig</string>
