@@ -3,7 +3,6 @@ package com.klamerek.fantasyrealms.screen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
@@ -84,9 +83,9 @@ class OnTheFlyScanActivity : CustomActivity(), CameraUseCase {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
+    override fun onSaveInstanceState(outState: Bundle) {
         outState.putStringArrayList(cardDetectedSaveKey, cardsDetected)
+        super.onSaveInstanceState(outState)
     }
 
     @SuppressLint("NotifyDataSetChanged")
