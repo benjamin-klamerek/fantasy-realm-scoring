@@ -63,12 +63,12 @@
     <string name="dragon">Drak</string>
     <string name="basilisk">Bazilišek</string>
     <string name="candle">Svíčka</string>
-    <string name="fire_elemental">Ohnivý elementál</string>
+    <string name="fire_elemental">elementál ohně</string>
     <string name="forge">Kovárna</string>
     <string name="lightning">Blesk</string>
     <string name="wildfire">Požár</string>
     <string name="fountain_of_life">Fontána života</string>
-    <string name="water_elemental">Vodní elementál</string>
+    <string name="water_elemental">Elementál vody</string>
     <string name="island">Ostrov</string>
     <string name="swamp">Bažina</string>
     <string name="great_flood">Stoletá voda</string>
