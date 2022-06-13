@@ -16,6 +16,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import com.klamerek.fantasyrealms.R
 import com.klamerek.fantasyrealms.assertion.RecyclerViewSize
+import com.klamerek.fantasyrealms.game.*
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 import org.junit.jupiter.api.AfterEach
@@ -123,6 +124,32 @@ class PlayerSelectionActivityTest {
         sleep(500)
 
         intended(hasComponent(HandSelectionActivity::class.java.name))
+    }
+
+    @Test
+    fun clear(){
+        addPlayer("ME")
+        addPlayer("ME2")
+
+        Player.all[0].game().add(rangers)
+        Player.all[0].game().score()
+        Player.all[1].game().add(phoenix)
+        Player.all[1].game().score()
+
+        scenario.onActivity {
+            it.updatePlayer(PlayerUpdateEvent(0, "ME"))
+            it.updatePlayer(PlayerUpdateEvent(1, "ME2"))
+        }
+
+        sleep(500)
+        onView(allOf(withId(R.id.scoreLabel), withText("5"), hasSibling(withText("ME")))).check(matches(isDisplayed()))
+        onView(allOf(withId(R.id.scoreLabel), withText("14"), hasSibling(withText("ME2")))).check(matches(isDisplayed()))
+
+        onView(withId(R.id.clearButton)).perform(click())
+
+        sleep(500)
+        onView(allOf(withId(R.id.scoreLabel), withText("0"), hasSibling(withText("ME")))).check(matches(isDisplayed()))
+        onView(allOf(withId(R.id.scoreLabel), withText("0"), hasSibling(withText("ME2")))).check(matches(isDisplayed()))
     }
 
 }

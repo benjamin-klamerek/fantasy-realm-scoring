@@ -100,7 +100,8 @@ class PlayerSelectionActivity : CustomActivity() {
         super.onResume()
         adapter.notifyDataSetChanged()
         binding.playersView.scheduleLayoutAnimation();
-        binding.discardItem.scoreLabel.text = "" + DiscardArea.instance.game().actualHandSize() + " card(s)"
+        binding.discardItem.scoreLabel.text =
+            "" + DiscardArea.instance.game().actualHandSize() + " card(s)"
     }
 
     override fun onDestroy() {
@@ -154,6 +155,9 @@ class PlayerSelectionActivity : CustomActivity() {
         binding.discardItem.editButton.setOnClickListener {
             EventBus.getDefault().post(DiscardAreaEditEvent())
         }
+        binding.clearButton.setOnClickListener {
+            EventBus.getDefault().post(ClearAllScoresEvent())
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -189,6 +193,15 @@ class PlayerSelectionActivity : CustomActivity() {
     fun removeAllPlayers(event: AllPlayersDeletionEvent) {
         runOnUiThread {
             Player.all.clear()
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    @Subscribe
+    fun clearPlayers(event: ClearAllScoresEvent) {
+        runOnUiThread {
+            Player.all.forEach { it.game().clear() }
             adapter.notifyDataSetChanged()
         }
     }
@@ -269,3 +282,5 @@ class AllPlayersDeletionEvent
 class PlayerEditEvent(val player: Player)
 
 class DiscardAreaEditEvent
+
+class ClearAllScoresEvent
