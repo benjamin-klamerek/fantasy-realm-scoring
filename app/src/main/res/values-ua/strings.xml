@@ -96,7 +96,7 @@
     <string name="warlock_lord">Бойовий маг</string>
     <string name="jester">Блазень</string>
     <!-- Card rules -->
-    <string name="rangers_rules">БОНУС: +10 за кожну карту Землі. СКАСОВУЄ слово Войскі з усіх ШТРАФів.
+    <string name="rangers_rules">БОНУС: +10 за кожну карту Землі. СКАСОВУЄ слово Військо з усіх ШТРАФів.
     </string>
     <string name="elven_archers_rules">БОНУС: +5, якщо на руці немає жодної карти погоди.</string>
     <string name="dwarvish_infantry_rules">ШТРАФ: -2 за кожну іншу карту війська.</string>
