@@ -8,7 +8,7 @@
     <string name="delete_button">Видалити</string>
     <string name="settings_button">Налаштування</string>
     <string name="add_player_button">Додати гравця</string>
-    <string name="player_name_label">Ім'я' :</string>
+    <string name="player_name_label">Ім'я :</string>
     <string name="player_name_with_score">"%1$s - ПО : %2$d"</string>
     <string name="hand_size">"%1$d/%2$d"</string>
     <string name="new_player_default_value">Додати гравця</string>
@@ -156,5 +156,4 @@
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
     <string name="clear_button">Очистити</string>
     <string name="discard_area">Відмовитись</string>
-    <string name="remove_already_selected_label">Видалити вже вибрані карти:</string>
 </resources>
