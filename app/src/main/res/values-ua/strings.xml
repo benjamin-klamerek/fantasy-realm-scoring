@@ -17,7 +17,7 @@
     <string name="scan_button">Сканувати</string>
     <string name="scan_help_label">Порада: назва карти обов\'язково повинна бути видна</string>
     <string name="base">Основна сила</string>
-    <string name="done">Готово</string>
+    <string name="done">Зберегти</string>
     <string name="language_label">Мова:</string>
     <string name="display_card_number_label">Відобразити номер карти</string>
     <string name="remove_already_selected_label">Не показувати вже вибрані карти \nу інших гравців</string>
@@ -111,15 +111,15 @@
     </string>
     <string name="warhorse_rules">БОНУС: +14 разом з будь-якою картою правителя АБО чарівника.</string>
     <string name="unicorn_rules">БОНУС: +30 разом з "Принцесою" АБО +15 разом з "Імператоркою", "Королевою" або "Заклиначкою".</string>
-    <string name="hydra_rules">БОНУС: +28 вместе с болотом.</string>
-    <string name="dragon_rules">ШТРАФ: -40, если у вас нет ни одного колдуна.</string>
-    <string name="basilisk_rules">ШТРАФ: БЛОКИРУЕТ все войска, правителей и других зверей.</string>
-    <string name="candle_rules">БОНУС: +100 вместе с книгой перемен, колокольней и будь-яким колдуном.</string>
-    <string name="fire_elemental_rules">БОНУС: +15 за каждое другое пламя.</string>
-    <string name="forge_rules">БОНУС: +9 за каждое оружие и артефакт.</string>
-    <string name="lightning_rules">БОНУС: +30 вместе с ливнем.</string>
+    <string name="hydra_rules">БОНУС: +28 разом з "Болотом".</string>
+    <string name="dragon_rules">ШТРАФ: -40, якщо на руці немає жодної карти чарівника.</string>
+    <string name="basilisk_rules">ШТРАФ: ОЧИЩАЄ всі карти війська, правителів та інші карти звірюк.</string>
+    <string name="candle_rules">БОНУС: +100 разом з "Книгою змін", "Дзвіницею" та будь-якою картою чарівника.</string>
+    <string name="fire_elemental_rules">БОНУС: +15 за кожну іншу карту полум\'я.</string>
+    <string name="forge_rules">БОНУС: +9 за кожну карту зброї та артефакту.</string>
+    <string name="lightning_rules">БОНУС: +30 разом зі "Зливою".</string>
     <string name="wildfire_rules">БЛОКИРУЕТ все карты, кроме пламени, колдунов, погоды, оружия, артефактов, горы, великого потопа, острова, единорога и дракона.</string>
-    <string name="fountain_of_life_rules">БОНУС: Прибавьте основную силу любого оружия, потопа, пламени, земли АБО погоды.</string>
+    <string name="fountain_of_life_rules">БОНУС: Додайте основну силу будь-якої з карт зброї, повені, полум\'я, землі чи погоди на вашій руці.</string>
     <string name="water_elemental_rules">БОНУС: +15 за каждый потоп.</string>
     <string name="island_rules">ОТМЕНЯЕТ ШТРАФ на любом потопе АБО пламени.</string>
     <string name="swamp_rules">ШТРАФ: -3 за каждую армию и пламя.</string>
@@ -147,13 +147,13 @@
     <string name="blizzard_rules">ШТРАФ: БЛОКИРУЕТ все потопы. -5 за каждое войско, правителя, зверя и пламя.</string>
     <string name="shapeshifter_rules">Може копіювати назву та масть будь якої карти артефакта, правителя, чаклуна, зброї або звірюки у грі. Не отримує БОНУСу, ШТРАФу чи основу силу скопійованої карти.</string>
     <string name="mirage_rules">Може копіювати назву та масть будь якої карти війська, землі, погоди, потопу або полум\'я у грі. Не отримує БОНУСу, ШТРАФу чи основу силу скопійованої карти.</string>
-    <string name="doppelganger_rules">Может копировать название, основную силу, масть и ШТРАФ, НО НЕ БОНУС одной другой карты у вас в руке.</string>
-    <string name="necromancer_rules">БОНУС: В конце игры можете взять из стопки сброса одно войско, правителя, колдуна АБО зверя и добавить себе на руку в качестве восьмой карты.</string>
+    <string name="doppelganger_rules">Може копіювати назву, основну силу, масть і штраф, АЛЕ НЕ БОНУС будь-якої карти на вашій руці.</string>
+    <string name="necromancer_rules">БОНУС: Наприкінці гри можете вибрати зі скиду карту війська, правителя, чарівника або звірюки та додати її на руку як восьму карту.</string>
     <string name="enchantress_rules">БОНУС: +5 за каждую землю, погоду, потоп и пламя.</string>
     <string name="collector_rules">БОНУС: +10 за три разные карты одной масти, +40 за четыре разные карты одной масти, +100 за пять разных карт одной масти.</string>
     <string name="beastmaster_rules">БОНУС: +9 за каждого зверя. ОТМЕНЯЕТ ШТРАФы на всех зверях.</string>
     <string name="warlock_lord_rules">ШТРАФ: -10 за каждого правителя и других колдунов.</string>
-    <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
+    <string name="jester_rules">БОНУС: +3 за кожну іншу карту з непарним значенням основної сили АБО +50, якщо кожна карта на руці має непарне значення.</string>
     <string name="clear_button">Очистити</string>
     <string name="discard_area">Ігнорувати карти</string>
 </resources>
