@@ -24,7 +24,8 @@
         <activity android:name=".screen.ScanActivity" />
         <activity android:name=".screen.HandSelectionActivity" />
         <activity android:name=".screen.PlayerSelectionActivity" />
-        <activity android:name=".screen.MainActivity">
+        <activity android:name=".screen.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
