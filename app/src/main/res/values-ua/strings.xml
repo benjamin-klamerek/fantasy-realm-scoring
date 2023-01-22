@@ -8,14 +8,14 @@
     <string name="delete_button">Видалити</string>
     <string name="settings_button">Налаштування</string>
     <string name="add_player_button">Додати гравця</string>
-    <string name="player_name_label">Ім'я :</string>
+    <string name="player_name_label">Ім\'я :</string>
     <string name="player_name_with_score">"%1$s - ПО : %2$d"</string>
     <string name="hand_size">"%1$d/%2$d"</string>
     <string name="new_player_default_value">Додати гравця</string>
     <string name="x_cards">%1$d карт(у)</string>
     <string name="add_card_button">Додати карту</string>
     <string name="scan_button">Сканувати</string>
-    <string name="scan_help_label">Порада: назва карти обов'язково повинна бути видна</string>
+    <string name="scan_help_label">Порада: назва карти обов\'язково повинна бути видна</string>
     <string name="base">Основна сила</string>
     <string name="done">Готово</string>
     <string name="language_label">Мова:</string>
@@ -32,7 +32,7 @@
     <string name="suit_army">Військо</string>
     <string name="suit_artifact">Артефакт</string>
     <string name="suit_beast">Звірюка</string>
-    <string name="suit_flame">Полум'я</string>
+    <string name="suit_flame">Полум\'я</string>
     <string name="suit_flood">Повінь</string>
     <string name="suit_land">Земля</string>
     <string name="suit_leader">Правитель</string>
