@@ -20,7 +20,7 @@
     <string name="done">Готово</string>
     <string name="language_label">Мова:</string>
     <string name="display_card_number_label">Відобразити номер карти</string>
-    <string name="remove_already_selected_label">Видалити вже вибрані карти</string>
+    <string name="remove_already_selected_label">Не показувати вже вибрані карти у інших гравців</string>
     <string name="display_chip_color_on_search_label">Поміняти місцями колір кнопок невибрані/вибрані</string>
     <string name="buildings_outsiders_undead_label">Будівлі, аутсайдери та нежить (доповнення)</string>
     <string name="cursed_items_label">Прокляті речі (доповнення)</string>
@@ -155,5 +155,5 @@
     <string name="warlock_lord_rules">ШТРАФ: -10 за каждого правителя и других колдунов.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
     <string name="clear_button">Очистити</string>
-    <string name="discard_area">Відмовитись</string>
+    <string name="discard_area">Вилучити карти з гри</string>
 </resources>
