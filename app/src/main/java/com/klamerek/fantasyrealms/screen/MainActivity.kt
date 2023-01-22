@@ -61,6 +61,7 @@ class MainActivity : CustomActivity() {
 
     }
 
+    @Deprecated(message = "Have to migrate onActivityResult usage")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         recreate()

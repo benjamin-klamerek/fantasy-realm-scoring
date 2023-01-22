@@ -45,7 +45,7 @@ class HandSelectionActivity : CustomActivity() {
         cancelOnResumeAnimation = false
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "UnsafeOptInUsageError")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
@@ -153,6 +153,7 @@ class HandSelectionActivity : CustomActivity() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
+    @Deprecated(message = "Have to migrate onActivityResult usage")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val allCardsById = CardDefinitions.getAllById()
