@@ -121,7 +121,7 @@
     <string name="wildfire_rules">БЛОКИРУЕТ все карты, кроме пламени, колдунов, погоды, оружия, артефактов, горы, великого потопа, острова, единорога и дракона.</string>
     <string name="fountain_of_life_rules">БОНУС: Додайте основну силу будь-якої з карт зброї, повені, полум\'я, землі чи погоди на вашій руці.</string>
     <string name="water_elemental_rules">БОНУС: +15 за каждый потоп.</string>
-    <string name="island_rules">ОТМЕНЯЕТ ШТРАФ на любом потопе АБО пламени.</string>
+    <string name="island_rules">СКАСОВУЄ ШТРАФ на будь-якій карті повені АБО полум\'я.</string>
     <string name="swamp_rules">ШТРАФ: -3 за каждую армию и пламя.</string>
     <string name="great_flood_rules">ШТРАФ: БЛОКИРУЕТ все войска, все земли, кроме горы, и всё пламя, кроме молнии.</string>
     <string name="earth_elemental_rules">БОНУС: +15 за каждую другую землю.</string>
