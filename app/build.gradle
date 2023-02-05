@@ -6,28 +6,33 @@ apply plugin: 'jacoco'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
+        testInstrumentationRunnerArguments runnerBuilder: 'de.mannodermaus.junit5.AndroidJUnit5Builder'
         applicationId "com.klamerek.fantasyrealms"
         minSdkVersion 26
-        targetSdkVersion 30
-        versionCode 31
-        versionName "0.31"
+        targetSdkVersion 33
+        versionCode 32
+        versionName "0.32"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-
     packagingOptions {
-        exclude "META-INF/LICENSE*"
+        jniLibs {
+            excludes += ['META-INF/LICENSE*']
+        }
+        resources {
+            excludes += ['META-INF/LICENSE*']
+        }
     }
+
 
     buildFeatures {
         viewBinding true
@@ -63,6 +68,7 @@ android {
         unitTests.all {
             jacoco {
                 includeNoLocationClasses = true
+                excludes = ['jdk.internal.*']
             }
         }
         unitTests.returnDefaultValues = true
@@ -77,6 +83,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'com.klamerek.fantasyrealms'
 }
 
 dependencies {
