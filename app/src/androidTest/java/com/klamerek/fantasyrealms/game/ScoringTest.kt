@@ -850,4 +850,16 @@ class ScoringTest {
         Assertions.assertEquals(36, game.score())
     }
 
+    @DisplayName("Dark queen doubles effect with phoenix")
+    @Test
+    fun dark_queen_doubles_effect_with_phoenix() {
+        DiscardArea.instance.game().add(phoenix)
+
+        val game = Game()
+        game.add(darkQueen)
+        game.calculate()
+
+        Assertions.assertEquals(10, game.score())
+    }
+
 }
