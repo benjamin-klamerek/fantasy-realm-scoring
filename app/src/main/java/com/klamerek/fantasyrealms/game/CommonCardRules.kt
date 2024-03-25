@@ -522,11 +522,11 @@ object AllRules {
         ),
         darkQueen to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
-                (DiscardArea.instance.game().countHandCards(
-                    Suit.LAND,
+                (DiscardArea.instance.game().countHandCardsExcept(
+                    listOf(Suit.LAND,
                     Suit.FLOOD,
                     Suit.FLAME,
-                    Suit.WEATHER
+                    Suit.WEATHER), phoenix
                 ) + DiscardArea.instance.game().containsHandCards(unicorn).toInt()) * 5
             }
         ),
