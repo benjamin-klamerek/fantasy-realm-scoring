@@ -86,6 +86,9 @@ class Game(val noScoring: Boolean = false) {
     fun countHandCardsExcept(suit: Suit, cardDefinition: CardDefinition) =
         handCardsNotBlanked().filter { it.definition != cardDefinition }.count { it.isOneOf(suit) }
 
+    fun countHandCardsExcept(suits: List<Suit>, cardDefinition: CardDefinition) =
+        handCardsNotBlanked().filter { it.definition != cardDefinition }.count { it.isOneOf(*suits.toTypedArray()) }
+
     fun countTableCards(vararg suit: Suit) = tableCards.count { it.isOneOf(*suit) }
 
     fun noHandCardsOf(suit: Suit) = countHandCards(suit) == 0

@@ -7,7 +7,7 @@ import com.klamerek.fantasyrealms.R
 object Preferences {
 
     const val SCAN_MODE_DEFAULT = "Default"
-    private const val SCAN_MODE_ON_THE_FLY = "On the fly (beta)"
+    private const val SCAN_MODE_ON_THE_FLY = "On the fly"
     val scanModes = listOf(SCAN_MODE_DEFAULT, SCAN_MODE_ON_THE_FLY)
 
     fun sharedPreferences(context: Context): SharedPreferences {
