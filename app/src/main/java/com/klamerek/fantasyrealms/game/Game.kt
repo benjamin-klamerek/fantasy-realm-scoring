@@ -12,7 +12,10 @@ import kotlin.math.min
  * List of cards (player hand) wth scoring calculation
  *
  */
-class Game(val noScoring: Boolean = false) {
+class Game(
+    val deluxeEdition: Boolean,
+    val noScoring: Boolean = false
+) {
 
     private val handCards = ArrayList<Card>()
     private val tableCards = ArrayList<Card>()
@@ -86,14 +89,16 @@ class Game(val noScoring: Boolean = false) {
     fun countHandCardsExcept(suit: Suit, cardDefinition: CardDefinition) =
         handCardsNotBlanked().filter { it.definition != cardDefinition }.count { it.isOneOf(suit) }
 
-    fun countHandCardsExcept(suits: List<Suit>, cardDefinition: CardDefinition) =
-        handCardsNotBlanked().filter { it.definition != cardDefinition }.count { it.isOneOf(*suits.toTypedArray()) }
+    fun countHandCardsExcept(suits: List<Suit>, vararg cardDefinitions: CardDefinition) =
+        handCardsNotBlanked().filter { it.definition !in cardDefinitions }.count { it.isOneOf(*suits.toTypedArray()) }
 
     fun countTableCards(vararg suit: Suit) = tableCards.count { it.isOneOf(*suit) }
 
     fun noHandCardsOf(suit: Suit) = countHandCards(suit) == 0
 
     fun atLeastOneHandCardOf(suit: Suit) = countHandCards(suit) > 0
+
+    fun atLeastOneHandCardOfExcept(suit: Suit, except: CardDefinition) = countHandCardsExcept(suit, except) > 0
 
 
     /**
@@ -169,7 +174,6 @@ class Game(val noScoring: Boolean = false) {
                     .score(this)
             }.toMap())
         }
-
     }
 
     private fun applySpecificCardEffects() {
@@ -220,14 +224,15 @@ class Game(val noScoring: Boolean = false) {
     private fun applyBlankingRule(rule: RuleAboutCard?) {
         if (rule?.tags?.contains(Effect.BLANK) == true) {
             rule.logic.invoke(this)
-                .filter { potentialCard -> !potentialCard.rules().contains(unblankable) }
-                .forEach { cardToBlank ->
+                .filter { potentialCard ->
+                    potentialCard.rules().none { it is RuleAboutEffect && it.logic.invoke(this) == Effect.UNBLANKABLE }
+                }.forEach { cardToBlank ->
                     cardToBlank.blanked = true
                 }
         }
     }
 
-    private fun identifyClearedRules(card: Card): List<Rule<out Any>> =
+    private fun identifyClearedRules(card: Card): List<Rule<*>> =
         card.rules().activated(card).with(Effect.CLEAR)
             .asRuleAboutRule().listRules(this)
 
@@ -245,11 +250,11 @@ class Game(val noScoring: Boolean = false) {
         return this.handCardsNotBlanked().filter(scope)
     }
 
-    fun identifyPenalties(scope: (Card) -> Boolean): List<Rule<out Any>> {
+    fun identifyPenalties(scope: (Card) -> Boolean): List<Rule<*>> {
         return handCardsNotBlanked().filter(scope).rules().with(Effect.PENALTY)
     }
 
-    fun identifyArmyPenalties(scope: (Card) -> Boolean): List<Rule<out Any>> {
+    fun identifyArmyPenalties(scope: (Card) -> Boolean): List<Rule<*>> {
         return handCardsNotBlanked().filter(scope).rules().with(Effect.PENALTY).with(Suit.ARMY)
     }
 

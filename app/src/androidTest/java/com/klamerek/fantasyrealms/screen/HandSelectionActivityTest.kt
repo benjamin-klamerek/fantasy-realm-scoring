@@ -2,7 +2,6 @@ package com.klamerek.fantasyrealms.screen
 
 import android.app.Instrumentation
 import android.content.Intent
-import android.os.SystemClock
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -23,7 +22,6 @@ import com.klamerek.fantasyrealms.matcher.RecycleViewMatcher
 import com.klamerek.fantasyrealms.util.Constants
 import com.klamerek.fantasyrealms.util.Preferences
 import com.klamerek.fantasyrealms.viewaction.ButtonClick
-import com.klamerek.fantasyrealms.viewaction.ImageButtonClick
 import org.greenrobot.eventbus.EventBus
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -36,7 +34,7 @@ class HandSelectionActivityTest {
     private lateinit var scenario: ActivityScenario<HandSelectionActivity>
 
     private fun initPlayer(playerName: String, actualHand: List<CardDefinition>): ActivityScenario<HandSelectionActivity> {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         actualHand.forEach { game.add(it) }
         Player.all.clear()
         Player.all.add(Player(playerName, game))
@@ -77,12 +75,12 @@ class HandSelectionActivityTest {
 
     @Test
     fun select_specific_player() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(basilisk)
         Player.all.clear()
-        Player.all.add(Player("PLAYER 1", Game()))
+        Player.all.add(Player("PLAYER 1", Game(deluxeEdition = false)))
         Player.all.add(Player("PLAYER 2", game))
-        Player.all.add(Player("PLAYER 3", Game()))
+        Player.all.add(Player("PLAYER 3", Game(deluxeEdition = false)))
 
         val handSelectionIntent = Intent(
             InstrumentationRegistry.getInstrumentation().targetContext,

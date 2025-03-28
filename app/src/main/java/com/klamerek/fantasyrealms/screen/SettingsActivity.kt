@@ -34,7 +34,7 @@ class SettingsActivity : CustomActivity() {
         setContentView(view)
 
         //Needed to make clickable links effective
-        binding.disclaimerLabel.movementMethod = LinkMovementMethod.getInstance();
+        binding.disclaimerLabel.movementMethod = LinkMovementMethod.getInstance()
 
         binding.displayCardNumberCheckBox.isChecked = Preferences.getDisplayCardNumber(baseContext)
         binding.removeAlreadySelectedCheckBox.isChecked = Preferences.getRemoveAlreadySelected(baseContext)
@@ -43,6 +43,7 @@ class SettingsActivity : CustomActivity() {
         binding.withCursedItemsCheckBox.isChecked = Preferences.getCursedItems(baseContext)
         binding.displayChipColorOnSearchCheckBox.isChecked =
             Preferences.getDisplayChipColorOnSearch(baseContext)
+        binding.deluxeEditionCheckBox.isChecked = Preferences.getDeluxeEdition(baseContext)
 
         val initialValue = getCardScopeId()
 
@@ -87,6 +88,10 @@ class SettingsActivity : CustomActivity() {
                 baseContext,
                 binding.removeAlreadySelectedCheckBox.isChecked
             )
+            Preferences.saveDeluxeEditionInPreferences(
+                baseContext,
+                binding.deluxeEditionCheckBox.isChecked
+            )
             removeCardOutOfScope(initialValue)
             finishAfterTransition()
         }
@@ -121,6 +126,7 @@ class SettingsActivity : CustomActivity() {
 
     private fun getCardScopeId() =
         binding.withBuildingsOutsidersUndeadCheckBox.isChecked.toInt().toString() +
-                binding.withCursedItemsCheckBox.isChecked.toInt().toString()
+                binding.withCursedItemsCheckBox.isChecked.toInt().toString() +
+                binding.deluxeEditionCheckBox.isChecked.toInt().toString()
 
 }

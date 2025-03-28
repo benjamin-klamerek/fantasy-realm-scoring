@@ -17,8 +17,8 @@ open class Rule<T>(val tags: List<Tag>, val priority: Int = 100, val logic: (Gam
  * Rule about effect (like UNBLANKABLE)
  *
  */
-class RuleAboutEffect(tags: List<Tag>, priority: Int = 100, logic: (Game) -> Effect) :
-    Rule<Effect>(tags, priority, logic)
+class RuleAboutEffect(tags: List<Tag>, priority: Int = 100, logic: (Game) -> Effect?) :
+    Rule<Effect?>(tags, priority, logic)
 
 val unblankable by lazy {
     RuleAboutEffect(listOf(Effect.BONUS, Effect.UNBLANKABLE)) { Effect.UNBLANKABLE }
@@ -34,8 +34,8 @@ class RuleAboutScore(tags: List<Tag>, priority: Int = 100, logic: (Game) -> Int)
 /**
  * Rule about rule (like deactivate other rules)
  */
-class RuleAboutRule(tags: List<Tag>, priority: Int = 100, logic: (Game) -> List<Rule<out Any>>) :
-    Rule<List<Rule<out Any>>>(tags, priority, logic)
+class RuleAboutRule(tags: List<Tag>, priority: Int = 100, logic: (Game) -> List<Rule<*>>) :
+    Rule<List<Rule<*>>>(tags, priority, logic)
 
 /**
  * Rule about cards (like blank some cards)
@@ -187,6 +187,19 @@ object AllRules {
                 it.filterNotBlankedHandCards { card ->
                     !(card.isOneOf(Suit.FLAME) || card.isOneOf(Suit.WEATHER) || card.isOneOf(Suit.WIZARD) ||
                             card.isOneOf(Suit.WEAPON) || card.isOneOf(Suit.ARTIFACT) ||
+                            card.hasSameNameThan(greatFlood) ||
+                            card.hasSameNameThan(island) ||
+                            card.hasSameNameThan(mountain) ||
+                            card.hasSameNameThan(unicorn) ||
+                            card.hasSameNameThan(dragon))
+                }
+            }
+        ),
+        wildfireDeluxeEdition to listOf(
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK)) {
+                it.filterNotBlankedHandCards { card ->
+                    !(card.isOneOf(Suit.FLAME) || card.isOneOf(Suit.WEATHER) || card.isOneOf(Suit.WIZARD) ||
+                            card.isOneOf(Suit.WEAPON) || card.isOneOf(Suit.ARTIFACT) || card.isOneOf(Suit.OUTSIDER) ||
                             card.hasSameNameThan(greatFlood) ||
                             card.hasSameNameThan(island) ||
                             card.hasSameNameThan(mountain) ||
@@ -391,7 +404,7 @@ object AllRules {
             },
             RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK))
             {
-                if (it.atLeastOneHandCardOf(Suit.WEATHER)) it.filterNotBlankedHandCards { card ->
+                if (it.atLeastOneHandCardOfExcept(Suit.WEATHER, phoenixDeluxeEdition)) it.filterNotBlankedHandCards { card ->
                     card.hasSameNameThan(
                         warDirigible
                     )
@@ -526,7 +539,7 @@ object AllRules {
                     listOf(Suit.LAND,
                     Suit.FLOOD,
                     Suit.FLAME,
-                    Suit.WEATHER), phoenix
+                    Suit.WEATHER), phoenix, phoenixDeluxeEdition
                 ) + DiscardArea.instance.game().containsHandCards(unicorn).toInt()) * 5
             }
         ),
@@ -714,8 +727,16 @@ object AllRules {
                     )
                 } else emptyList()
             }
+        ),
+        phoenixDeluxeEdition to listOf(
+            RuleAboutCard(listOf(Effect.PENALTY, Effect.BLANK)) {
+                if (it.atLeastOneHandCardOf(Suit.FLOOD)) it.filterNotBlankedHandCards { card ->
+                    card.hasSameNameThan(phoenixDeluxeEdition)
+                } else emptyList()
+            },
+            RuleAboutEffect(listOf(Effect.BONUS, Effect.UNBLANKABLE)) {
+                if (!it.atLeastOneHandCardOf(Suit.FLOOD)) Effect.UNBLANKABLE else null
+            }
         )
-
     )
-
 }

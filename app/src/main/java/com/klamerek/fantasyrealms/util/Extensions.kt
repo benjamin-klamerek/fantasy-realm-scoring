@@ -39,49 +39,49 @@ fun ColorStateList.revertChipColorState(): ColorStateList {
 
 // All collections methods - START
 
-fun Iterable<Card>.rules(): List<Rule<out Any>> {
+fun Iterable<Card>.rules(): List<Rule<*>> {
     return flatMap {
         return@flatMap (it.rules())
     }
 }
 
-fun Iterable<Rule<out Any>>.asRuleAboutRule(): List<RuleAboutRule?> {
+fun Iterable<Rule<*>>.asRuleAboutRule(): List<RuleAboutRule?> {
     return map {
         return@map (it as? RuleAboutRule)
     }
 }
 
-fun Iterable<Rule<out Any>>.asRuleAboutCard(): List<RuleAboutCard?> {
+fun Iterable<Rule<*>>.asRuleAboutCard(): List<RuleAboutCard?> {
     return map {
         return@map (it as? RuleAboutCard)
     }
 }
 
-fun Sequence<Rule<out Any>>.asRuleAboutScore(): Sequence<RuleAboutScore?> {
+fun Sequence<Rule<*>>.asRuleAboutScore(): Sequence<RuleAboutScore?> {
     return map {
         return@map (it as? RuleAboutScore)
     }
 }
 
-fun Iterable<Rule<out Any>>.activated(card: Card): List<Rule<out Any>> {
+fun Iterable<Rule<*>>.activated(card: Card): List<Rule<*>> {
     return filter {
         return@filter (card.isActivated(it))
     }
 }
 
-fun Sequence<Rule<out Any>>.activated(card: Card): Sequence<Rule<out Any>> {
+fun Sequence<Rule<*>>.activated(card: Card): Sequence<Rule<*>> {
     return filter {
         return@filter (card.isActivated(it))
     }
 }
 
-fun <T : Rule<out Any>?> Iterable<T>.with(tag: Tag): List<T> {
+fun <T : Rule<*>?> Iterable<T>.with(tag: Tag): List<T> {
     return filter {
         return@filter (it?.tags?.contains(tag) == true)
     }
 }
 
-fun <T : Rule<out Any>?> Sequence<T>.with(tag: Tag): Sequence<T> {
+fun <T : Rule<*>?> Sequence<T>.with(tag: Tag): Sequence<T> {
     return filter {
         return@filter (it?.tags?.contains(tag) == true)
     }
@@ -96,11 +96,9 @@ fun <T : RuleAboutCard?> Iterable<T>.listCards(game: Game): List<Card> {
     return flatMap { rule -> rule?.logic?.invoke(game).orEmpty() }
 }
 
-fun <T : RuleAboutRule?> Iterable<T>.listRules(game: Game): List<Rule<out Any>> {
+fun <T : RuleAboutRule?> Iterable<T>.listRules(game: Game): List<Rule<*>> {
     return flatMap { rule -> rule?.logic?.invoke(game).orEmpty() }
 }
 
 
 // All collections methods - END
-
-

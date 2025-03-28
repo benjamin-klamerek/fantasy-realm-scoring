@@ -7,15 +7,15 @@ package com.klamerek.fantasyrealms.game
  * @property definition card definition
  * @property rules      rules assigned to this card
  */
-class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>>) {
+class Card(val definition: CardDefinition, private val rules: List<Rule<*>>) {
 
     private var simulatedName: String? = null
     private var simulatedValue: Int? = null
     private var simulatedSuit: Suit? = null
-    private var simulatedRules: List<Rule<out Any>>? = null
+    private var simulatedRules: List<Rule<*>>? = null
     var blanked: Boolean = false
-    private val ruleDeactivated: ArrayList<Rule<out Any>> = ArrayList()
-    private val temporaryRules: ArrayList<Rule<out Any>> = ArrayList()
+    private val ruleDeactivated: ArrayList<Rule<*>> = ArrayList()
+    private val temporaryRules: ArrayList<Rule<*>> = ArrayList()
 
     fun clear() {
         temporaryRules.clear()
@@ -31,11 +31,11 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
         simulatedRules = null
     }
 
-    fun addTemporaryRule(rule: Rule<out Any>) = temporaryRules.add(rule)
+    fun addTemporaryRule(rule: Rule<*>) = temporaryRules.add(rule)
 
-    fun deactivate(rule: Rule<out Any>) = ruleDeactivated.add(rule)
+    fun deactivate(rule: Rule<*>) = ruleDeactivated.add(rule)
 
-    fun isActivated(rule: Rule<out Any>): Boolean = !ruleDeactivated.contains(rule)
+    fun isActivated(rule: Rule<*>): Boolean = !ruleDeactivated.contains(rule)
 
     fun isOneOf(vararg suit: Suit) = suit.contains(this.suit()) ||
             definition.additionalSuits.any { suit.contains(it) }
@@ -50,7 +50,7 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
 
     fun isOdd(): Boolean = value() % 2 == 1
 
-    fun rules(): List<Rule<out Any>> = listOf(simulatedRules ?: rules, temporaryRules).flatten()
+    fun rules(): List<Rule<*>> = listOf(simulatedRules ?: rules, temporaryRules).flatten()
 
     fun name(name: String) {
         this.simulatedName = name
@@ -64,7 +64,7 @@ class Card(val definition: CardDefinition, private val rules: List<Rule<out Any>
         this.simulatedSuit = suit
     }
 
-    fun rules(rules: List<Rule<out Any>>) {
+    fun rules(rules: List<Rule<*>>) {
         this.simulatedRules = rules
     }
 

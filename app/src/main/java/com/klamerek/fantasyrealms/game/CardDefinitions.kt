@@ -17,13 +17,17 @@ object CardDefinitions {
      * Warning, this method gives ALL card definitions (meaning that you can see many times the same card if it has many versions)
      */
     fun getAll(): List<CardDefinition> {
-        return getBaseCards().plus(getCardsV2()).plus(getCursedHoardNewCards()).plus(getCursedItems()).plus(getPromo())
+        return getBaseCards()
+            .plus(getCardsV2()).plus(getCursedHoardNewCards()).plus(getCursedItems())
+            .plus(getPromo())
+            .plus(getDeluxeEditionChangedCards())
     }
 
     fun get(context: Context): List<CardDefinition> {
         val buildingsOutsidersUndead = Preferences.getBuildingsOutsidersUndead(context)
         val cursedItems = Preferences.getCursedItems(context)
-        return get(buildingsOutsidersUndead, cursedItems)
+        val deluxeEdition = Preferences.getDeluxeEdition(context)
+        return get(buildingsOutsidersUndead, cursedItems, deluxeEdition)
     }
 
     private fun getCardsV2(): List<CardDefinition> {
@@ -148,21 +152,39 @@ object CardDefinitions {
                 wishing_ring)
     }
 
-    fun get(buildingsOutsidersUndead: Boolean, cursedItems: Boolean): List<CardDefinition> {
-        val cardV2Names = getCardsV2().map { it.name() }.toList()
-        val baseCards = if (buildingsOutsidersUndead)
-            getBaseCards().minus(getBaseCards().filter { cardV2Names.contains(it.name()) }.toSet())
-                .plus(getCardsV2()) else getBaseCards()
+    fun getDeluxeEditionChangedCards(): List<CardDefinition> = listOf(
+        wildfireDeluxeEdition,
+        phoenixDeluxeEdition
+    )
 
-        val newBaseCardsFromExpansion: List<CardDefinition> =
-            if (buildingsOutsidersUndead) getCursedHoardNewCards() else emptyList()
+    fun get(buildingsOutsidersUndead: Boolean, cursedItems: Boolean, deluxeEdition: Boolean): List<CardDefinition> {
+        val phoenixJester = true // Possibility to add a setting in the future
 
-        val cursedItemsDefinitions: List<CardDefinition> =
-            if (cursedItems) getCursedItems() else emptyList()
+        val cards = getBaseCards().toMutableList()
 
-        return newBaseCardsFromExpansion.plus(baseCards).plus(cursedItemsDefinitions).plus(getPromo())
+        if (phoenixJester) cards += getPromo()
+
+        if (buildingsOutsidersUndead) {
+            val cardV2Names = getCardsV2().map { it.name() }
+            cards.removeAll { it.name() in cardV2Names }
+            cards += getCardsV2()
+            cards += getCursedHoardNewCards()
+        }
+
+        if (cursedItems) cards += getCursedItems()
+
+        if (deluxeEdition) {
+            cards.removeAll { it.name() == wildfireDeluxeEdition.name() }
+            cards += wildfireDeluxeEdition
+
+            if (phoenixJester) {
+                cards.removeAll { it.name() == phoenixDeluxeEdition.name() }
+                cards += phoenixDeluxeEdition
+            }
+        }
+
+        return cards
     }
-
 }
 
 /**

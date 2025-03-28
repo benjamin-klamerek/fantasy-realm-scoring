@@ -11,7 +11,7 @@ class GameTest {
     @DisplayName("Same card cannot be added twice")
     @Test
     fun same_card_cannot_be_added_twice() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(necromancer)
         game.add(necromancer)
 
@@ -21,7 +21,7 @@ class GameTest {
     @DisplayName("Remove card")
     @Test
     fun remove_card() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(necromancer)
         game.add(doppelganger)
         game.add(candle)
@@ -34,7 +34,7 @@ class GameTest {
     @DisplayName("Update card list")
     @Test
     fun update_card_list() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(necromancer)
         game.add(candle)
 
@@ -56,7 +56,7 @@ class GameTest {
         Preferences.saveBuildingsOutsidersUndeadInPreferences(
             InstrumentationRegistry.getInstrumentation().targetContext, true)
 
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(necromancer)
         game.add(necromancerV2)
         game.add(genie)

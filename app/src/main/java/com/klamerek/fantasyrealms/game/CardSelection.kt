@@ -120,7 +120,8 @@ class ShapeShifterSelection : CardSelection(shapeshifter) {
     override fun candidates(game: Game): List<CardDefinition> =
         CardDefinitions.get(
             buildingsOutsidersUndead = false,
-            cursedItems = false
+            cursedItems = false,
+            deluxeEdition = game.deluxeEdition
         ).filter { definition ->
             definition.isOneOf(
                 Suit.ARTIFACT,
@@ -150,7 +151,8 @@ class ShapeShifterV2Selection : CardSelection(shapeshifterV2) {
     override fun candidates(game: Game): List<CardDefinition> =
         CardDefinitions.get(
             buildingsOutsidersUndead = true,
-            cursedItems = false
+            cursedItems = false,
+            deluxeEdition = game.deluxeEdition
         ).filter { definition ->
             definition.isOneOf(
                 Suit.ARTIFACT,
@@ -181,7 +183,8 @@ class MirageSelection : CardSelection(mirage) {
     override fun candidates(game: Game): List<CardDefinition> =
         CardDefinitions.get(
             buildingsOutsidersUndead = false,
-            cursedItems = false
+            cursedItems = false,
+            deluxeEdition = game.deluxeEdition
         ).filter { definition ->
             definition.isOneOf(
                 Suit.ARMY,
@@ -211,7 +214,8 @@ class MirageV2Selection : CardSelection(mirageV2) {
     override fun candidates(game: Game): List<CardDefinition> =
         CardDefinitions.get(
             buildingsOutsidersUndead = true,
-            cursedItems = false
+            cursedItems = false,
+            deluxeEdition = game.deluxeEdition
         ).filter { definition ->
             definition.isOneOf(
                 Suit.ARMY,
@@ -253,8 +257,5 @@ class BookOfChangesSelection : CardAndSuitSelection(bookOfChanges) {
 
     override fun candidates(game: Game): List<CardDefinition> =
         game.handCards().map { card -> card.definition }
-            .filter { definition -> definition != bookOfChanges }
-
+            .filter { definition -> definition != bookOfChanges && definition != phoenixDeluxeEdition }
 }
-
-

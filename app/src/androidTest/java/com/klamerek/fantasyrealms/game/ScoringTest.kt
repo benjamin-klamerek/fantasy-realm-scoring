@@ -16,7 +16,7 @@ class ScoringTest {
     @DisplayName("worst hand")
     @Test
     fun worst_hand() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(necromancer)
         game.add(warlockLord)
         game.add(king)
@@ -36,7 +36,7 @@ class ScoringTest {
     @DisplayName("best hand")
     @Test
     fun best_hand() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(bellTower)
         game.add(candle)
         game.add(necromancer)
@@ -55,7 +55,7 @@ class ScoringTest {
     @DisplayName("gem of order is effective (100 points)")
     @Test
     fun gem_of_order_is_effective() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(gemOfOrder)
         game.add(airElemental)
         game.add(necromancer)
@@ -72,7 +72,7 @@ class ScoringTest {
     @DisplayName("Unicorn and princess")
     @Test
     fun unicorn_with_princess() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(unicorn)
         game.add(princess)
         game.add(queen)
@@ -84,7 +84,7 @@ class ScoringTest {
     @DisplayName("WarlockLord rule")
     @Test
     fun warlockLord_rule() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(warlockLord)
         game.add(beastmaster)
         game.add(enchantress)
@@ -96,7 +96,7 @@ class ScoringTest {
     @DisplayName("mirage combo with shapeshifter")
     @Test
     fun mirage_combo_with_shapeshifter() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(shieldOfKeth)
         game.add(basilisk)
         game.add(protectionRune)
@@ -115,7 +115,7 @@ class ScoringTest {
     @DisplayName("full game sample 1")
     @Test
     fun full_game_sample_1() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(collector)
         game.add(unicorn)
         game.add(bellTower)
@@ -131,7 +131,7 @@ class ScoringTest {
     @DisplayName("full game sample 2")
     @Test
     fun full_game_sample_2() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(forest)
         game.add(elvenArchers)
         game.add(enchantress)
@@ -146,7 +146,7 @@ class ScoringTest {
     @DisplayName("full game sample 3")
     @Test
     fun full_game_sample_3() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(forge)
         game.add(blizzard)
         game.add(unicorn)
@@ -161,7 +161,7 @@ class ScoringTest {
     @DisplayName("full game sample 4")
     @Test
     fun full_game_sample_4() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(dragon)
         game.add(fireElemental)
         game.add(blizzard)
@@ -176,7 +176,7 @@ class ScoringTest {
     @DisplayName("full game sample 5")
     @Test
     fun full_game_sample_5() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(warlockLord)
         game.add(warhorse)
         game.add(fountainOfLife)
@@ -191,7 +191,7 @@ class ScoringTest {
     @DisplayName("full game sample 6")
     @Test
     fun full_game_sample_6() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(candle)
         game.add(protectionRune)
         game.add(elvenLongbow)
@@ -206,7 +206,7 @@ class ScoringTest {
     @DisplayName("full game sample 7")
     @Test
     fun full_game_sample_7() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(mountain)
         game.add(cavern)
         game.add(wildfire)
@@ -221,7 +221,7 @@ class ScoringTest {
     @DisplayName("full game sample 8")
     @Test
     fun full_game_sample_8() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(dragon)
         game.add(unicorn)
         game.add(basilisk)
@@ -236,7 +236,7 @@ class ScoringTest {
     @DisplayName("full game sample 9")
     @Test
     fun full_game_sample_9() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(enchantress)
         game.add(cavern)
         game.add(bellTower)
@@ -251,7 +251,7 @@ class ScoringTest {
     @DisplayName("full game sample 10")
     @Test
     fun full_game_sample_10() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(mountain)
         game.add(greatFlood)
         game.add(rainstorm)
@@ -266,7 +266,7 @@ class ScoringTest {
     @DisplayName("fountain of life take only one card (the best one)")
     @Test
     fun fountain_of_life_take_only_one_card() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(fountainOfLife)
         game.add(swamp)
         game.add(greatFlood)
@@ -279,7 +279,7 @@ class ScoringTest {
     @DisplayName("Dwarvish infantry applies on OTHER armies")
     @Test
     fun dwarvish_infantry_applies_on_OTHER_armies() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(dwarvishInfantry)
         game.add(worldTree)
         game.add(unicorn)
@@ -294,7 +294,7 @@ class ScoringTest {
     @DisplayName("Jester with all cards as odd")
     @Test
     fun jester_with_all_cards_as_odd() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(forge)
         game.add(unicorn)
         game.add(jester)
@@ -306,7 +306,7 @@ class ScoringTest {
     @DisplayName("Jester with one card not odd")
     @Test
     fun jester_with_one_card_not_odd() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(forge)
         game.add(unicorn)
         game.add(jester)
@@ -319,7 +319,7 @@ class ScoringTest {
     @DisplayName("Elven archers with weather")
     @Test
     fun elven_archers_with_weather() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(elvenArchers)
         game.add(rainstorm)
         game.calculate()
@@ -329,11 +329,11 @@ class ScoringTest {
     @DisplayName("Genie with 4 players")
     @Test
     fun genie_with_4_players() {
-        Player.all.add(Player("1", Game()))
-        Player.all.add(Player("2", Game()))
-        Player.all.add(Player("3", Game()))
-        Player.all.add(Player("4", Game()))
-        val game = Game()
+        Player.all.add(Player("1", Game(deluxeEdition = false)))
+        Player.all.add(Player("2", Game(deluxeEdition = false)))
+        Player.all.add(Player("3", Game(deluxeEdition = false)))
+        Player.all.add(Player("4", Game(deluxeEdition = false)))
+        val game = Game(deluxeEdition = false)
         game.add(genie)
         game.calculate()
         Assertions.assertEquals(-20, game.score())
@@ -342,7 +342,7 @@ class ScoringTest {
     @DisplayName("Judge with and without penalty")
     @Test
     fun judge_with_and_without_penalty() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(judge)
         game.add(celestialKnights)
         game.add(lightCavalry)
@@ -357,7 +357,7 @@ class ScoringTest {
     @DisplayName("Angel is unblankable")
     @Test
     fun angel_is_unblankable() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(angel)
         game.add(wildfire)
         game.calculate()
@@ -367,7 +367,7 @@ class ScoringTest {
     @DisplayName("Angel selection is unblankable")
     @Test
     fun angel_selection() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(angel)
         game.add(wildfire)
         game.add(celestialKnights)
@@ -379,7 +379,7 @@ class ScoringTest {
     @DisplayName("Angel selection is unblankable 2")
     @Test
     fun angel_selection_2() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(angel)
         game.add(basilisk)
         game.add(queen)
@@ -391,7 +391,7 @@ class ScoringTest {
     @DisplayName("Demon with wildfire")
     @Test
     fun demon_with_wildfire() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(wildfire)
         game.add(demon)
         game.calculate()
@@ -401,7 +401,7 @@ class ScoringTest {
     @DisplayName("Demon applies after warship clearing penalties")
     @Test
     fun demon_applies_after_warship_clearing_penalties() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(warship)
         game.add(demon)
         game.add(waterElemental)
@@ -415,7 +415,7 @@ class ScoringTest {
     @DisplayName("Demon with wild cards")
     @Test
     fun demon_with_wild_cards() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(demon)
         game.add(garden)
         game.add(earthElemental)
@@ -430,7 +430,7 @@ class ScoringTest {
     @DisplayName("Indirect blanking case (Great flood -> candle -> smoke)")
     @Test
     fun indirect_blanking_case_with_greatflood_candle_smoke() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(smoke)
         game.add(candle)
         game.add(greatFlood)
@@ -441,7 +441,7 @@ class ScoringTest {
     @DisplayName("Some specific cases with Warship and Book of changes")
     @Test
     fun some_specific_cases_with_Warship_and_book_of_changes() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(demon)
         game.add(warship)
         game.add(greatFlood)
@@ -496,7 +496,7 @@ class ScoringTest {
         DiscardArea.instance.game().add(cavern)
         DiscardArea.instance.game().add(shieldOfKeth)
 
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(darkQueen)
         game.calculate()
 
@@ -511,7 +511,7 @@ class ScoringTest {
         DiscardArea.instance.game().add(darkQueen)
         DiscardArea.instance.game().add(king)
 
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(ghoul)
         game.calculate()
 
@@ -526,7 +526,7 @@ class ScoringTest {
         DiscardArea.instance.game().add(darkQueen)
         DiscardArea.instance.game().add(demon)
 
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(specter)
         game.calculate()
 
@@ -536,7 +536,7 @@ class ScoringTest {
     @DisplayName("Lich example")
     @Test
     fun lich_example() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(lich)
         game.add(necromancer)
         game.add(darkQueen)
@@ -548,7 +548,7 @@ class ScoringTest {
     @DisplayName("Lich UNBLANKABLE")
     @Test
     fun lich_unblankable() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(lich)
         game.add(wildfire)
         game.add(darkQueen)
@@ -565,7 +565,7 @@ class ScoringTest {
         DiscardArea.instance.game().add(darkQueen)
         DiscardArea.instance.game().add(demon)
 
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(deathKnight)
         game.calculate()
 
@@ -575,7 +575,7 @@ class ScoringTest {
     @DisplayName("Dungeon example")
     @Test
     fun dungeon_example() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(dungeon)
         game.add(darkQueen)
         game.add(unicorn)
@@ -588,7 +588,7 @@ class ScoringTest {
     @DisplayName("Castle example")
     @Test
     fun castle_example() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(castle)
         game.add(dungeon)
         game.add(king)
@@ -601,7 +601,7 @@ class ScoringTest {
     @DisplayName("Crypt example")
     @Test
     fun crypt_example() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(crypt)
         game.add(darkQueen)
         game.add(ghoul)
@@ -615,7 +615,7 @@ class ScoringTest {
     @DisplayName("Chapel not activated because too many cards")
     @Test
     fun chapel_not_activated_because_too_many_cards() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(chapel)
         game.add(king)
         game.add(queen)
@@ -628,7 +628,7 @@ class ScoringTest {
     @DisplayName("Chapel activated")
     @Test
     fun chapel_activated() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(chapel)
         game.add(king)
         game.add(queen)
@@ -640,7 +640,7 @@ class ScoringTest {
     @DisplayName("Garden example")
     @Test
     fun garden_activated() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(garden)
         game.add(king)
         game.add(queen)
@@ -653,7 +653,7 @@ class ScoringTest {
     @DisplayName("Garden blanked")
     @Test
     fun garden_blanked() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(garden)
         game.add(king)
         game.add(queen)
@@ -667,7 +667,7 @@ class ScoringTest {
     @DisplayName("Fountain of life v2 example")
     @Test
     fun fountain_of_life_v2_example() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(fountainOfLifeV2)
         game.add(rainstorm)
         game.add(whirlwind)
@@ -679,7 +679,7 @@ class ScoringTest {
     @DisplayName("Count OTHER cards with book of change")
     @Test
     fun count_OTHER_cards_with_book_of_change() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(whirlwind)
         game.add(airElemental)
         game.add(bookOfChanges)
@@ -692,7 +692,7 @@ class ScoringTest {
     @DisplayName("Phoenix counts also as Flame and Weather (elemental case)")
     @Test
     fun phoenix_counts_also_as_flame_and_weather_elemental_case() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(phoenix)
         game.add(airElemental)
         game.add(fireElemental)
@@ -704,7 +704,7 @@ class ScoringTest {
     @DisplayName("Phoenix counts also as Flame and Weather (collector and blank effect)")
     @Test
     fun phoenix_counts_also_as_flame_and_weather_collector_and_blank() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(phoenix)
         game.add(collector)
         game.add(rainstorm)
@@ -718,7 +718,7 @@ class ScoringTest {
     @DisplayName("Phoenix is blanked with water elemental")
     @Test
     fun phoenix_is_blanked_with_water_elemental() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(phoenix)
         game.add(waterElemental)
         game.calculate()
@@ -729,7 +729,7 @@ class ScoringTest {
     @DisplayName("Discard game effects are disabled")
     @Test
     fun discard_game_effects_are_disabled() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(deathKnight)
         game.calculate()
 
@@ -748,7 +748,7 @@ class ScoringTest {
     @DisplayName("Basilik + doppelganger blank each other")
     @Test
     fun basilik_plus_doppelganger_bank_each_other() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(basilisk)
         game.add(doppelganger)
         game.applySelection(doppelganger, basilisk)
@@ -760,7 +760,7 @@ class ScoringTest {
     @DisplayName("Clearing and blanking order (great flood, wildfire and blizzard)")
     @Test
     fun clearing_and_blanking_order() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(wildfire)
         game.add(blizzard)
         game.add(greatFlood)
@@ -812,7 +812,7 @@ class ScoringTest {
     @DisplayName("Chapel bonus is activated with one leader and one wizard")
     @Test
     fun chapel_bonus_is_activated_with_one_leader_and_one_wizard() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(chapel)
         game.add(king)
         game.add(collector)
@@ -824,7 +824,7 @@ class ScoringTest {
     @DisplayName("Doppelganger effect is not cumulative with Collector")
     @Test
     fun doppelganger_effect_is_not_cumulative_with_collector() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(collector)
         game.add(celestialKnights)
         game.add(elvenArchers)
@@ -840,7 +840,7 @@ class ScoringTest {
     @DisplayName("Ranger only remove word Army, not whole malus (bug with Swamp)")
     @Test
     fun ranger_only_remove_word_army_not_whole_malus() {
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(swamp)
         game.add(celestialKnights)
         game.add(fireElemental)
@@ -855,11 +855,89 @@ class ScoringTest {
     fun dark_queen_doubles_effect_with_phoenix() {
         DiscardArea.instance.game().add(phoenix)
 
-        val game = Game()
+        val game = Game(deluxeEdition = false)
         game.add(darkQueen)
         game.calculate()
 
         Assertions.assertEquals(10, game.score())
     }
 
+    @DisplayName("Deluxe Edition Wildfire")
+    @Test
+    fun deluxe_edition_wildfire() {
+        val baseGame = Game(deluxeEdition = false)
+        baseGame.add(wildfire)
+        baseGame.add(leprechaun)
+        baseGame.calculate()
+        Assertions.assertEquals(40, baseGame.score(), "Wildfire should blank Leprechaun (OUTSIDER) in the base game")
+
+        val deluxeEdition = Game(deluxeEdition = true)
+        deluxeEdition.add(wildfireDeluxeEdition)
+        deluxeEdition.add(leprechaun)
+        deluxeEdition.calculate()
+        Assertions.assertEquals(40 + 20, deluxeEdition.score(), "Wildfire should not blank Leprechaun (OUTSIDER) in the Deluxe Edition")
+    }
+
+    @DisplayName("Phoenix Deluxe Edition blanked with Flood")
+    @Test
+    fun phoenix_deluxe_edition_blanked_with_flood() {
+        val game = Game(deluxeEdition = true)
+        game.add(phoenixDeluxeEdition)
+        game.add(island)
+        game.calculate()
+        Assertions.assertEquals(14, game.score())
+    }
+
+    @DisplayName("Phoenix Deluxe Edition penalty cleared")
+    @Test
+    fun phoenix_deluxe_edition_penalty_cleared() {
+        val game = Game(deluxeEdition = true)
+        game.add(phoenixDeluxeEdition)
+        game.add(island)
+        game.applySelection(island, phoenixDeluxeEdition)
+        game.calculate()
+        Assertions.assertEquals(14 + 14, game.score())
+    }
+
+    @DisplayName("Phoenix Deluxe Edition may not be blanked by another card")
+    @Test
+    fun phoenix_deluxe_edition_may_not_be_blanked_by_another_card() {
+        val game = Game(deluxeEdition = true)
+        game.add(phoenixDeluxeEdition)
+        game.add(demon)
+        game.calculate()
+        Assertions.assertEquals(14 + 45, game.score())
+    }
+
+    @DisplayName("Phoenix Deluxe Edition may not blank any other card")
+    @Test
+    fun phoenix_deluxe_edition_may_not_blank_any_other_card() {
+        val game = Game(deluxeEdition = true)
+        game.add(phoenixDeluxeEdition)
+        game.add(warDirigible)
+        game.add(celestialKnights)
+        game.calculate()
+        Assertions.assertEquals(14 + 35 + 12, game.score())
+    }
+
+    @DisplayName("Phoenix Deluxe Edition also counts as flame and weather")
+    @Test
+    fun phoenix_deluxe_edition_counts_as_flame_and_weather() {
+        val game = Game(deluxeEdition = true)
+        game.add(phoenixDeluxeEdition)
+        game.add(enchantress)
+        game.calculate()
+        Assertions.assertEquals(14 + (5 + 5), game.score())
+    }
+
+    @DisplayName("Phoenix Deluxe Edition does not count as flame or weather in discard area")
+    @Test
+    fun phoenix_deluxe_edition_does_not_count_as_flame_or_weather_in_discard() {
+        DiscardArea.instance.game().add(phoenixDeluxeEdition)
+        val game = Game(deluxeEdition = true)
+        game.add(darkQueen)
+        game.add(ghoul)
+        game.calculate()
+        Assertions.assertEquals((10 + 0) + (8 + 4), game.score())
+    }
 }

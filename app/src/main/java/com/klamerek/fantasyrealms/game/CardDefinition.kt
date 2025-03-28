@@ -33,7 +33,8 @@ enum class Effect(private val displayId: Int) : Tag {
 enum class CardSet(val numberOfCards: Int) {
     BASE(53),
     PROMO(2),
-    CURSED_HOARD(47)
+    CURSED_HOARD(47),
+    DELUXE_EDITION(2)
 }
 
 enum class CardPosition {
@@ -118,6 +119,3 @@ open class CardDefinition(
         return id
     }
 }
-
-
-

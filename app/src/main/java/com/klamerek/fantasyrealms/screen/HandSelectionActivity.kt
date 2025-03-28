@@ -125,7 +125,12 @@ class HandSelectionActivity : CustomActivity() {
                 DiscardArea.instance
             }
             Player.all.isEmpty() -> {
-                Player.all.add(Player(Player.generateNextPlayerName(), Game()))
+                Player.all.add(
+                    Player(
+                        Player.generateNextPlayerName(),
+                        Game(deluxeEdition = Preferences.getDeluxeEdition(baseContext))
+                    )
+                )
                 Player.all[0]
             }
             Player.all.size <= index -> {

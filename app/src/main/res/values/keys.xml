@@ -8,4 +8,5 @@
     <string name="cursed_items" translatable="false">cursed_items</string>
     <string name="buildings_outsiders_undead" translatable="false">buildings_outsiders_undead</string>
     <string name="display_chip_color_on_search" translatable="false">display_chip_color_on_search</string>
+    <string name="deluxe_edition" translatable="false">deluxe_edition</string>
 </resources>

@@ -25,6 +25,7 @@ import com.klamerek.fantasyrealms.game.Game
 import com.klamerek.fantasyrealms.game.Player
 import com.klamerek.fantasyrealms.screen.PlayerSelectionActivity.Companion.playerNameDialog
 import com.klamerek.fantasyrealms.util.Constants
+import com.klamerek.fantasyrealms.util.Preferences
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -164,7 +165,7 @@ class PlayerSelectionActivity : CustomActivity() {
     @Subscribe
     fun addPlayer(event: PlayerCreationEvent) {
         runOnUiThread {
-            Player.all.add(Player(event.name, Game()))
+            Player.all.add(Player(event.name, Game(deluxeEdition = Preferences.getDeluxeEdition(baseContext))))
             adapter.notifyDataSetChanged()
         }
     }

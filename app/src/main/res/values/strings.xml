@@ -18,9 +18,7 @@
     <string name="clear_button">Clear</string>
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
     <string name="base">BASE</string>
-    <string name="disclaimer" translatable="false">V 0.34 \n
-        (Scan may not work with non latin alphabet)\nNot compatible with deluxe edition\nFound a bug ? \nWant to contribute ? \nContact me (<a href="https://github.com/benjamin-klamerek/fantasy-realm-scoring">github</a> or <a href="mailto:benjamin.klamerek@gmail.com">mail</a>)
-        \n\n\n Icons made by Freepik and Smashicons from <a href="www.flaticon.com">www.flaticon.com</a></string>
+    <string name="disclaimer" translatable="false">v0.34\n(Scan may not work with non latin alphabet)\nFound a bug? Want to contribute? Contact me: <a href="https://github.com/benjamin-klamerek/fantasy-realm-scoring">github</a> or <a href="mailto:benjamin.klamerek@gmail.com">email</a>\n\nIcons made by Freepik and Smashicons from <a href="www.flaticon.com">www.flaticon.com</a></string>
     <string name="done">Done</string>
     <string name="scan_mode_label" translatable="false">Scan mode:</string>
     <string name="language_label">Language:</string>
@@ -36,6 +34,7 @@
     <string name="display_card_number_label">Display card number:</string>
     <string name="remove_already_selected_label">Remove cards already selected:</string>
     <string name="display_chip_color_on_search_label">Display chip color on search:</string>
+    <string name="deluxe_edition_label">Deluxe Edition:</string>
     <string name="buildings_outsiders_undead_label">Buildings, outsiders and undead:</string>
     <string name="cursed_items_label">Cursed items:</string>
     <string name="discard_area">Discard area</string>
@@ -177,6 +176,7 @@
     <string name="forge_rules">Bonus: +9 for each Weapon and Artifact</string>
     <string name="lightning_rules">Bonus: +30 with Rainstorm</string>
     <string name="wildfire_rules">Blanks all cards except Flames, Weather, Wizards, Weapons, Artifacts, Great Flood, Island, Mountain, Unicorn, Dragon</string>
+    <string name="wildfire_rules_deluxe_edition">Blanks all cards except Artifacts, Flames, Outsiders, Weapons, Weather, Wizards, Great Flood, Island, Mountain, Unicorn, Dragon</string>
     <string name="fountain_of_life_rules">Bonus: Add the base strength of any Weapon, Flood, Flame, Land, or Weather in your hand</string>
     <string name="water_elemental_rules">Bonus: +15 for each other Flood</string>
     <string name="island_rules">Clears the Penalty on any one Flood or Flame</string>
@@ -259,4 +259,5 @@
     <string name="wishing_ring_rules">ANY TIME: Look through the deck and place any card you wish on top. \n(You may do this immediately before you draw.) \nReshuffle the deck at the end of your turn.</string>
     <string name="jester_rules">BONUS: +3 for each other card with an odd base strength value OR +50 if entire hand has odd base strength values.</string>
     <string name="phoenix_rules">BONUS: also counts as a Flame and Weather card. PENALTY: BLANKED with any Flood card. If this card is BLANKED for any reason, its base strength is reduced to 0 but it retains its suits.</string>
+    <string name="phoenix_rules_deluxe_edition">BONUS: also counts as a Flame and Weather card. PENALTY: BLANKED with any Flood. Phoenix is immune to the Book of Changes and may not Blank or be Blanked by any other card.</string>
 </resources>

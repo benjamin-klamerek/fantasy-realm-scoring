@@ -76,6 +76,21 @@ object Preferences {
         }
     }
 
+    fun getDeluxeEdition(context: Context): Boolean {
+        return sharedPreferences(context).getBoolean(
+            context.getString(R.string.deluxe_edition),
+            false
+        )
+    }
+
+    fun saveDeluxeEditionInPreferences(context: Context, activate: Boolean) {
+        val sharedPref = sharedPreferences(context)
+        with(sharedPref.edit()) {
+            putBoolean(context.getString(R.string.deluxe_edition), activate)
+            apply()
+        }
+    }
+
     fun saveDisplayChipColorOnSearchInPreferences(context: Context, activate: Boolean) {
         val sharedPref = sharedPreferences(context)
         with(sharedPref.edit()) {

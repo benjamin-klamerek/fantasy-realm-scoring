@@ -278,6 +278,19 @@
                 app:chipStrokeWidth="2dp" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chipwildfireDeluxeEdition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="1016"
+                android:transitionName="transition_chip_1016"
+                android:text="@string/wildfire"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_flame"
+                app:chipStrokeColor="@color/chip_stroke_color_flame"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
                 android:id="@+id/chipcandle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -635,6 +648,19 @@
                 android:checkable="true"
                 android:tag="667"
                 android:transitionName="transition_chip_667"
+                android:text="@string/phoenix"
+                android:textColor="@color/chip_revert_color_activated"
+                app:chipBackgroundColor="@color/chip_background_beast"
+                app:chipStrokeColor="@color/chip_stroke_color_beast"
+                app:chipStrokeWidth="2dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/phoenixDeluxeEdition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="1667"
+                android:transitionName="transition_chip_1667"
                 android:text="@string/phoenix"
                 android:textColor="@color/chip_revert_color_activated"
                 app:chipBackgroundColor="@color/chip_background_beast"
