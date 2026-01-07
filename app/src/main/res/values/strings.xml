@@ -18,7 +18,7 @@
     <string name="clear_button">Clear</string>
     <string name="scan_help_label">Tip: only card titles are mandatory</string>
     <string name="base">BASE</string>
-    <string name="disclaimer" translatable="false">V 0.34 \n
+    <string name="disclaimer" translatable="false">V 0.35 BETA \n
         (Scan may not work with non latin alphabet)\nNot compatible with deluxe edition\nFound a bug ? \nWant to contribute ? \nContact me (<a href="https://github.com/benjamin-klamerek/fantasy-realm-scoring">github</a> or <a href="mailto:benjamin.klamerek@gmail.com">mail</a>)
         \n\n\n Icons made by Freepik and Smashicons from <a href="www.flaticon.com">www.flaticon.com</a></string>
     <string name="done">Done</string>
@@ -35,7 +35,7 @@
     <string name="language_label_ukrainian" translatable="false">Українська</string>
     <string name="display_card_number_label">Display card number:</string>
     <string name="remove_already_selected_label">Remove cards already selected:</string>
-    <string name="display_chip_color_on_search_label">Display chip color on search:</string>
+    <string name="display_chip_color_on_search_label">Display fulfilled cards:</string>
     <string name="buildings_outsiders_undead_label">Buildings, outsiders and undead:</string>
     <string name="cursed_items_label">Cursed items:</string>
     <string name="discard_area">Discard area</string>

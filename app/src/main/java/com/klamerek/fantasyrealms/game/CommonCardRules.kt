@@ -102,11 +102,25 @@ object AllRules {
                 )
             ) { if (it.atLeastOneHandCardOf(Suit.LEADER) && it.containsHandCards(swordOfKeth)) 25 else 0 }
         ),
+        /*
         gemOfOrder to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
                 mapOf(3 to 10, 4 to 30, 5 to 60, 6 to 100, 7 to 150, 8 to 150)[it.longestSuite()]
                     ?: 0
             }
+        ),
+         */
+        gemOfOrder to listOf(
+          RuleAboutScore(listOf(Effect.BONUS)) {
+            val streets = it.countStreetsWithSideCards()
+            val map = mapOf(3 to 10, 4 to 30, 5 to 60, 6 to 100, 7 to 150)
+            var score = 0
+            for(street in streets) {
+                val streetScore: Int = map[street] ?: 0
+                score += streetScore
+            }
+              score
+          }
         ),
         warhorse to listOf(
             RuleAboutScore(listOf(Effect.BONUS)) {
